@@ -1115,6 +1115,7 @@ a {
   align-items: center;
   justify-content: center;
   gap: 8px;
+  margin-bottom: 18px;
   border-radius: 7px;
   background: #263f3a;
   color: #fffdf8;

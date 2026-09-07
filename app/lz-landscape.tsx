@@ -1013,6 +1013,16 @@ export function LzLandscape() {
             </span>
           </div>
 
+          <a
+            className="paper-link"
+            href={selectedPaper.url}
+            target="_blank"
+            rel="noreferrer"
+          >
+            Read on arXiv
+            <ExternalLink aria-hidden="true" />
+          </a>
+
           <section
             className="citation-lineage"
             aria-labelledby="citation-lineage-title"
@@ -1050,16 +1060,6 @@ export function LzLandscape() {
               <span key={tag}>{tag}</span>
             ))}
           </div>
-
-          <a
-            className="paper-link"
-            href={selectedPaper.url}
-            target="_blank"
-            rel="noreferrer"
-          >
-            Read on arXiv
-            <ExternalLink aria-hidden="true" />
-          </a>
 
           <p className="screening-note">
             Metadata comes from arXiv. Summaries and placement are
