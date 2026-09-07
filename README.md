@@ -20,8 +20,9 @@ outgoing paper links come from arXiv.
 The site is a static export hosted by GitHub Pages. A scheduled GitHub Action
 queries arXiv daily, uses the OpenAI Responses API only for schema-constrained
 semantic suggestions, validates the result, and opens a pull request. A human
-merge publishes the update. Existing paper coordinates stay fixed during daily
-updates so the map does not jump around.
+merge publishes the update. Committed coordinates remain fixed semantic anchors;
+the browser applies a deterministic, non-animated spacing pass so nearby papers
+and island labels remain legible at each screen size.
 
 The full rationale, data contract, trust boundaries, stable-layout policy, and
 failure behavior are in [docs/architecture.md](docs/architecture.md).

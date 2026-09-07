@@ -18,22 +18,26 @@ import {
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import landscape from '@/data/landscape.json';
+import { createStaticMapLayout } from '@/lib/static-map-layout';
 
 type Island = (typeof landscape.islands)[number];
 type Paper = (typeof landscape.papers)[number];
 type ViewMode = 'map' | 'list';
 type MapPoint = { x: number; y: number };
-type LabelClearZone = {
+type LabelGeometry = {
   id: string;
-  left: number;
-  right: number;
-  top: number;
-  bottom: number;
+  width: number;
+  height: number;
+};
+type PaperGeometry = {
+  id: string;
+  diameter: number;
 };
 type MapGeometry = {
   width: number;
   height: number;
-  labelClearZones: LabelClearZone[];
+  labels: LabelGeometry[];
+  papers: PaperGeometry[];
 };
 
 type ModelContext = {
@@ -56,27 +60,19 @@ declare global {
   }
 }
 
-const islandById = new Map(landscape.islands.map((island) => [island.id, island]));
-
-const NODE_DIAMETER_PX: Record<Paper['role'], number> = {
-  observation: 48,
-  explanation: 34,
-  constraint: 34,
-  diagnostic: 34,
-  adjacent: 34,
-};
+const islandById = new Map(
+  landscape.islands.map((island) => [island.id, island]),
+);
 
 const NODE_HALO_PX: Record<Paper['role'], number> = {
-  observation: 12,
-  explanation: 5,
-  constraint: 5,
-  diagnostic: 5,
-  adjacent: 5,
+  observation: 4,
+  explanation: 4,
+  constraint: 4,
+  diagnostic: 4,
+  adjacent: 4,
 };
 
-const NODE_ACTIVE_SCALE = 1.12;
-const LABEL_GAP_PX = 4;
-const POSITION_EPSILON = 0.02;
+const NODE_ACTIVE_SCALE = 1.1;
 
 function roundMapValue(value: number) {
   return Math.round(value * 1000) / 1000;
@@ -87,99 +83,25 @@ function sameMapGeometry(previous: MapGeometry | null, next: MapGeometry) {
     !previous ||
     previous.width !== next.width ||
     previous.height !== next.height ||
-    previous.labelClearZones.length !== next.labelClearZones.length
+    previous.labels.length !== next.labels.length ||
+    previous.papers.length !== next.papers.length
   ) {
     return false;
   }
 
-  return previous.labelClearZones.every((zone, index) => {
-    const nextZone = next.labelClearZones[index];
+  const labelsMatch = previous.labels.every((label, index) => {
+    const nextLabel = next.labels[index];
     return (
-      zone.id === nextZone.id &&
-      zone.left === nextZone.left &&
-      zone.right === nextZone.right &&
-      zone.top === nextZone.top &&
-      zone.bottom === nextZone.bottom
+      label.id === nextLabel.id &&
+      label.width === nextLabel.width &&
+      label.height === nextLabel.height
     );
   });
-}
-
-function clamp(value: number, minimum: number, maximum: number) {
-  return Math.min(maximum, Math.max(minimum, value));
-}
-
-function uniqueValues(values: number[]) {
-  return [...new Set(values.map((value) => roundMapValue(value)))];
-}
-
-function paperMapPosition(
-  paper: Paper,
-  geometry: MapGeometry | null,
-): MapPoint {
-  const semanticPosition = { x: paper.x, y: paper.y };
-  if (!geometry || geometry.width <= 0 || geometry.height <= 0) {
-    return semanticPosition;
-  }
-
-  const visualRadius =
-    (NODE_DIAMETER_PX[paper.role] / 2 + NODE_HALO_PX[paper.role]) *
-      NODE_ACTIVE_SCALE +
-    LABEL_GAP_PX;
-  const clearanceX = (visualRadius / geometry.width) * 100;
-  const clearanceY = (visualRadius / geometry.height) * 100;
-  const expandedZones = geometry.labelClearZones.map((zone) => ({
-    left: zone.left - clearanceX,
-    right: zone.right + clearanceX,
-    top: zone.top - clearanceY,
-    bottom: zone.bottom + clearanceY,
-  }));
-  const isClear = (point: MapPoint) =>
-    expandedZones.every(
-      (zone) =>
-        point.x <= zone.left ||
-        point.x >= zone.right ||
-        point.y <= zone.top ||
-        point.y >= zone.bottom,
-    );
-
-  if (isClear(semanticPosition)) return semanticPosition;
-
-  const minimumX = clearanceX;
-  const maximumX = 100 - clearanceX;
-  const minimumY = clearanceY;
-  const maximumY = 100 - clearanceY;
-  const xCandidates = uniqueValues([
-    clamp(paper.x, minimumX, maximumX),
-    ...expandedZones.flatMap((zone) => [
-      clamp(zone.left - POSITION_EPSILON, minimumX, maximumX),
-      clamp(zone.right + POSITION_EPSILON, minimumX, maximumX),
-    ]),
-  ]);
-  const yCandidates = uniqueValues([
-    clamp(paper.y, minimumY, maximumY),
-    ...expandedZones.flatMap((zone) => [
-      clamp(zone.top - POSITION_EPSILON, minimumY, maximumY),
-      clamp(zone.bottom + POSITION_EPSILON, minimumY, maximumY),
-    ]),
-  ]);
-
-  let closestPoint: MapPoint | null = null;
-  let closestDistance = Number.POSITIVE_INFINITY;
-  for (const x of xCandidates) {
-    for (const y of yCandidates) {
-      const candidate = { x, y };
-      if (!isClear(candidate)) continue;
-      const horizontalDistance = ((x - paper.x) / 100) * geometry.width;
-      const verticalDistance = ((y - paper.y) / 100) * geometry.height;
-      const distance = horizontalDistance ** 2 + verticalDistance ** 2;
-      if (distance < closestDistance) {
-        closestPoint = candidate;
-        closestDistance = distance;
-      }
-    }
-  }
-
-  return closestPoint ?? semanticPosition;
+  const papersMatch = previous.papers.every((paper, index) => {
+    const nextPaper = next.papers[index];
+    return paper.id === nextPaper.id && paper.diameter === nextPaper.diameter;
+  });
+  return labelsMatch && papersMatch;
 }
 
 function dateLabel(value: string) {
@@ -236,37 +158,41 @@ export function LzLandscape() {
     const labels = Array.from(
       canvas.querySelectorAll<HTMLElement>('[data-island-label]'),
     );
+    const paperNodes = Array.from(
+      canvas.querySelectorAll<HTMLElement>('[data-paper-node]'),
+    );
     const measureMap = () => {
-      const canvasBounds = canvas.getBoundingClientRect();
       const width = canvas.clientWidth;
       const height = canvas.clientHeight;
-      if (!canvasBounds.width || !canvasBounds.height || !width || !height) {
-        return;
-      }
+      if (!width || !height) return;
 
-      const labelClearZones = labels.flatMap((label) => {
+      const labelGeometry = labels.flatMap((label) => {
         const id = label.dataset.islandLabel;
         if (!id) return [];
-        const bounds = label.getBoundingClientRect();
         return [
           {
             id,
-            left: roundMapValue(
-              ((bounds.left - canvasBounds.left) / canvasBounds.width) * 100,
-            ),
-            right: roundMapValue(
-              ((bounds.right - canvasBounds.left) / canvasBounds.width) * 100,
-            ),
-            top: roundMapValue(
-              ((bounds.top - canvasBounds.top) / canvasBounds.height) * 100,
-            ),
-            bottom: roundMapValue(
-              ((bounds.bottom - canvasBounds.top) / canvasBounds.height) * 100,
-            ),
+            width: roundMapValue(label.offsetWidth),
+            height: roundMapValue(label.offsetHeight),
           },
         ];
       });
-      const nextGeometry = { width, height, labelClearZones };
+      const paperGeometry = paperNodes.flatMap((paperNode) => {
+        const id = paperNode.dataset.paperNode;
+        if (!id) return [];
+        return [
+          {
+            id,
+            diameter: roundMapValue(paperNode.offsetWidth),
+          },
+        ];
+      });
+      const nextGeometry = {
+        width,
+        height,
+        labels: labelGeometry,
+        papers: paperGeometry,
+      };
       setMapGeometry((previous) =>
         sameMapGeometry(previous, nextGeometry) ? previous : nextGeometry,
       );
@@ -276,6 +202,7 @@ export function LzLandscape() {
     const observer = new ResizeObserver(measureMap);
     observer.observe(canvas);
     for (const label of labels) observer.observe(label);
+    for (const paperNode of paperNodes) observer.observe(paperNode);
 
     let isCurrent = true;
     void document.fonts.ready.then(() => {
@@ -325,10 +252,7 @@ export function LzLandscape() {
               },
               island: {
                 type: 'string',
-                enum: [
-                  'all',
-                  ...landscape.islands.map((island) => island.id),
-                ],
+                enum: ['all', ...landscape.islands.map((island) => island.id)],
                 description: 'Optional idea-island ID.',
               },
             },
@@ -341,7 +265,8 @@ export function LzLandscape() {
             }
             const values = input as Record<string, unknown>;
             const nextQuery = values.query === undefined ? '' : values.query;
-            const nextIsland = values.island === undefined ? 'all' : values.island;
+            const nextIsland =
+              values.island === undefined ? 'all' : values.island;
             if (typeof nextQuery !== 'string' || nextQuery.length > 160) {
               throw new Error(
                 'query must be a string no longer than 160 characters.',
@@ -351,7 +276,9 @@ export function LzLandscape() {
               typeof nextIsland !== 'string' ||
               !allowedIslands.has(nextIsland)
             ) {
-              throw new Error('island must be one of the published island IDs.');
+              throw new Error(
+                'island must be one of the published island IDs.',
+              );
             }
             const matches = filterPapers(nextQuery, nextIsland);
             setQuery(nextQuery);
@@ -429,16 +356,96 @@ export function LzLandscape() {
     [activeIsland, query],
   );
 
-  const paperPositions = useMemo(
-    () =>
-      new Map(
-        landscape.papers.map((paper) => [
-          paper.id,
-          paperMapPosition(paper, mapGeometry),
+  const staticLayout = useMemo(() => {
+    const paperPositions = new Map<string, MapPoint>(
+      landscape.papers.map((paper) => [paper.id, { x: paper.x, y: paper.y }]),
+    );
+    const labelPositions = new Map<string, MapPoint>(
+      landscape.islands.map((island) => [
+        island.id,
+        {
+          x: island.x + island.width * 0.1,
+          y: island.y + island.height * 0.1,
+        },
+      ]),
+    );
+    if (!mapGeometry?.width || !mapGeometry.height) {
+      return { papers: paperPositions, labels: labelPositions };
+    }
+
+    const labelGeometryById = new Map(
+      mapGeometry.labels.map((label) => [label.id, label]),
+    );
+    const paperGeometryById = new Map(
+      mapGeometry.papers.map((paper) => [paper.id, paper]),
+    );
+    const relaxedLayout = createStaticMapLayout(
+      mapGeometry.width,
+      mapGeometry.height,
+      landscape.papers.map((paper) => ({
+        id: paper.id,
+        x: (paper.x / 100) * mapGeometry.width,
+        y: (paper.y / 100) * mapGeometry.height,
+        radius:
+          ((paperGeometryById.get(paper.id)?.diameter ??
+            (paper.role === 'observation' ? 44 : 32)) /
+            2) *
+            NODE_ACTIVE_SCALE +
+          NODE_HALO_PX[paper.role],
+        mobility: paper.role === 'observation' ? 0.38 : 1,
+        anchorStrength: paper.role === 'observation' ? 0.085 : 0.042,
+        maxDisplacement:
+          paper.role === 'observation'
+            ? Math.min(30, mapGeometry.width * 0.075)
+            : Math.min(62, Math.max(46, mapGeometry.width * 0.14)),
+      })),
+      landscape.islands.flatMap((island) => {
+        const geometry = labelGeometryById.get(island.id);
+        if (!geometry) return [];
+        return [
+          {
+            id: island.id,
+            x:
+              ((island.x + island.width * 0.1) / 100) * mapGeometry.width +
+              geometry.width / 2,
+            y:
+              ((island.y + island.height * 0.1) / 100) * mapGeometry.height +
+              geometry.height / 2,
+            width: geometry.width,
+            height: geometry.height,
+            maxDisplacement: Math.min(
+              34,
+              Math.max(20, mapGeometry.width * 0.065),
+            ),
+          },
+        ];
+      }),
+    );
+
+    return {
+      papers: new Map(
+        [...relaxedLayout.papers].map(([id, point]) => [
+          id,
+          {
+            x: roundMapValue((point.x / mapGeometry.width) * 100),
+            y: roundMapValue((point.y / mapGeometry.height) * 100),
+          },
         ]),
       ),
-    [mapGeometry],
-  );
+      labels: new Map(
+        [...relaxedLayout.labels].map(([id, point]) => [
+          id,
+          {
+            x: roundMapValue((point.x / mapGeometry.width) * 100),
+            y: roundMapValue((point.y / mapGeometry.height) * 100),
+          },
+        ]),
+      ),
+    };
+  }, [mapGeometry]);
+
+  const paperPositions = staticLayout.papers;
+  const labelPositions = staticLayout.labels;
 
   const visibleIds = new Set(visiblePapers.map((paper) => paper.id));
   const selectedPaper =
@@ -462,7 +469,11 @@ export function LzLandscape() {
     setSelectedId(id);
     const url = new URL(window.location.href);
     url.searchParams.set('paper', id);
-    window.history.replaceState(null, '', `${url.pathname}${url.search}${url.hash}`);
+    window.history.replaceState(
+      null,
+      '',
+      `${url.pathname}${url.search}${url.hash}`,
+    );
   }
 
   function chooseIsland(id: string) {
@@ -499,7 +510,8 @@ export function LzLandscape() {
           <a
             href="#method"
             onClick={() => {
-              const method = document.querySelector<HTMLDetailsElement>('#method');
+              const method =
+                document.querySelector<HTMLDetailsElement>('#method');
               if (method) method.open = true;
             }}
           >
@@ -594,9 +606,11 @@ export function LzLandscape() {
               island labels, and neutral summaries.
             </p>
             <p>
-              Existing circles stay fixed during daily updates. Every proposed
-              addition is reviewed in a pull request before it appears here.
-              Distance expresses shared ideas, not evidence or consensus.
+              The layout settles deterministically around the curated idea
+              coordinates, with small local adjustments when papers are added.
+              Every proposed addition is reviewed in a pull request before it
+              appears here. Distance expresses shared ideas, not evidence or
+              consensus.
             </p>
           </details>
         </aside>
@@ -719,7 +733,7 @@ export function LzLandscape() {
                   return (
                     <div
                       className={`island ${hasVisiblePaper ? '' : 'is-dimmed'}`}
-                      key={island.id}
+                      key={`island-${island.id}`}
                       style={
                         {
                           '--island-color': island.color,
@@ -730,16 +744,38 @@ export function LzLandscape() {
                         } as React.CSSProperties
                       }
                     >
-                      <div className="island-ring island-ring--outer" />
                       <div className="island-ring island-ring--inner" />
                       <div className="island-fill" />
-                      <div
-                        className="island-label"
-                        data-island-label={island.id}
-                      >
-                        <span>{island.label}</span>
-                        <small>{island.kicker}</small>
-                      </div>
+                    </div>
+                  );
+                })}
+
+                {landscape.islands.map((island) => {
+                  const hasVisiblePaper = landscape.papers.some(
+                    (paper) =>
+                      visibleIds.has(paper.id) &&
+                      paper.islands.includes(island.id),
+                  );
+                  const position = labelPositions.get(island.id) ?? {
+                    x: island.x + island.width * 0.1,
+                    y: island.y + island.height * 0.1,
+                  };
+                  return (
+                    <div
+                      className={`island-label ${mapGeometry ? '' : 'is-measuring'} ${hasVisiblePaper ? '' : 'is-dimmed'}`}
+                      data-island-label={island.id}
+                      aria-hidden={!mapGeometry || !hasVisiblePaper}
+                      key={`label-${island.id}`}
+                      style={
+                        {
+                          '--island-color': island.color,
+                          left: `${position.x}%`,
+                          top: `${position.y}%`,
+                        } as React.CSSProperties
+                      }
+                    >
+                      <span>{island.label}</span>
+                      <small>{island.kicker}</small>
                     </div>
                   );
                 })}
@@ -749,11 +785,20 @@ export function LzLandscape() {
                   const isVisible = visibleIds.has(paper.id);
                   const isSelected = selectedPaper.id === paper.id;
                   const position = paperPositions.get(paper.id) ?? paper;
+                  const tooltipEdgeThreshold = mapGeometry?.width
+                    ? (120 / mapGeometry.width) * 100
+                    : 18;
+                  const tooltipEdgeClass =
+                    position.x < tooltipEdgeThreshold
+                      ? 'paper-node--tooltip-right'
+                      : position.x > 100 - tooltipEdgeThreshold
+                        ? 'paper-node--tooltip-left'
+                        : '';
                   return (
                     <button
                       type="button"
                       key={paper.id}
-                      className={`paper-node paper-node--${paper.role} ${isSelected ? 'is-selected' : ''} ${isVisible ? '' : 'is-hidden'}`}
+                      className={`paper-node paper-node--${paper.role} ${tooltipEdgeClass} ${isSelected ? 'is-selected' : ''} ${isVisible ? '' : 'is-hidden'}`}
                       style={
                         {
                           '--node-color': island.color,
@@ -762,6 +807,7 @@ export function LzLandscape() {
                         } as React.CSSProperties
                       }
                       onClick={() => selectPaper(paper.id)}
+                      data-paper-node={paper.id}
                       aria-label={`Open ${paper.title}`}
                       aria-pressed={isSelected}
                     >
@@ -796,7 +842,9 @@ export function LzLandscape() {
                     <button
                       type="button"
                       key={paper.id}
-                      className={selectedPaper.id === paper.id ? 'is-selected' : ''}
+                      className={
+                        selectedPaper.id === paper.id ? 'is-selected' : ''
+                      }
                       onClick={() => selectPaper(paper.id)}
                     >
                       <span

@@ -76,18 +76,25 @@ separate, discussed atlas revision.
 ## Stable layout
 
 Researchers should be able to build a mental map over time. For that reason,
-the browser does not recalculate a random force layout on every visit, and the
-daily job does not globally reorganize the atlas.
+the browser never runs a random or continuously moving force layout, and the
+daily job does not rewrite existing semantic coordinates.
 
 Each island has a fixed region. A new paper is attracted mostly toward its
 primary island and partly toward any secondary islands. A hash of the arXiv ID
 provides deterministic jitter; collision checks find the first unoccupied
-position. Existing coordinates remain pinned. A global re-layout is an explicit
-new atlas version reviewed like any other editorial change.
+position. Existing coordinates remain pinned as semantic anchors. At display
+time, a deterministic relaxation pass gives papers and labels a small amount of
+repulsion while attracting them back toward those anchors. Only the settled
+positions are rendered: there is no visible animation, and filtering does not
+reflow the map. Viewport and font metrics can produce small responsive
+adjustments, and adding a paper can cause local spacing changes without altering
+the committed atlas. A global change to the semantic coordinates remains an
+explicit new atlas version reviewed like any other editorial change.
 
 The current contour shapes are restrained visual regions rather than inferred
-statistical confidence areas. Circle size is intentionally uniform because
-citation counts are especially misleading for papers only days old.
+statistical confidence areas. Follow-up circle size is intentionally uniform;
+the experimental anchor is slightly larger. Citation counts are especially
+misleading for papers only days old and do not affect the display.
 
 ## Daily lifecycle
 
