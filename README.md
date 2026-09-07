@@ -3,6 +3,8 @@
 An island-like literature map for papers responding to the LUX-ZEPLIN high-
 recoil candidate announced on 1 September 2026.
 
+**Live site:** [davidcyncynates.github.io/lz-paper-map](https://davidcyncynates.github.io/lz-paper-map/)
+
 The first edition contains the LZ experimental paper and 21 response papers
 available through the 7 September arXiv listing. Nearby circles share mechanisms
 or phenomenology; the islands name the main families of ideas. Search, filters,
@@ -46,20 +48,22 @@ pnpm build
 
 The static site is written to `dist/client`.
 
-## Publish on GitHub Pages
+## Deployment and automation setup
 
-1. Create an empty GitHub repository and push this folder to its `main` branch.
-2. In **Settings → Pages**, choose **GitHub Actions** as the source.
-3. In **Settings → Actions → General**, enable GitHub Actions to create pull
-   requests for the repository.
-4. In **Settings → Secrets and variables → Actions**, add a repository secret
+Pushes to `main` are validated and published automatically at the live address
+above. The Pages workflow also supports forks published either as project sites
+or root user/organization Pages sites.
+
+To enable daily update proposals, the repository owner must complete two
+security-sensitive settings:
+
+1. In **Settings → Actions → General**, allow GitHub Actions to create pull
+   requests for this repository.
+2. In **Settings → Secrets and variables → Actions**, add a repository secret
    named `OPENAI_API_KEY`.
-5. Optionally set an Actions variable named `OPENAI_MODEL`; it defaults to
-   `gpt-5-mini`.
-6. Run **Deploy GitHub Pages** once, or push a commit to `main`.
 
-The Pages workflow automatically handles both a project address such as
-`https://name.github.io/repository/` and a root user/organization Pages site.
+An optional Actions variable named `OPENAI_MODEL` selects the model and defaults
+to `gpt-5-mini`.
 
 The daily scan runs at 05:17 UTC. It never publishes directly: it opens or
 updates the `automation/arxiv-daily` pull request for review. If there are no
