@@ -244,7 +244,6 @@ a {
   border-left: 1px solid rgba(70, 77, 73, 0.15);
 }
 
-.intro .eyebrow,
 .nav-label {
   margin: 0 0 10px;
   color: #7d8179;
@@ -254,27 +253,10 @@ a {
   text-transform: uppercase;
 }
 
-.intro h1 {
-  max-width: 210px;
-  margin: 0;
-  font-family: var(--font-serif-display);
-  font-size: clamp(30px, 2.3vw, 38px);
-  font-weight: 500;
-  line-height: 0.98;
-  letter-spacing: -0.04em;
-}
-
-.intro > p:last-child {
-  margin: 15px 0 0;
-  color: #636b68;
-  font-size: 12.5px;
-  line-height: 1.55;
-}
-
 .search-field {
   position: relative;
   display: block;
-  margin: 24px 0 25px;
+  margin: 0 0 25px;
 }
 
 .search-field > svg {
@@ -1240,13 +1222,8 @@ a {
     border-bottom: 1px solid rgba(70, 77, 73, 0.15);
   }
 
-  .intro h1 {
-    max-width: 420px;
-    font-size: 34px;
-  }
-
   .search-field {
-    margin-block: 18px 16px;
+    margin-block: 0 16px;
   }
 
   .island-nav {

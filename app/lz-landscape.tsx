@@ -692,14 +692,6 @@ export function LzLandscape() {
 
       <section className="workspace" id="top">
         <aside className="sidebar" aria-label="Map controls">
-          <div className="intro">
-            <p className="eyebrow">The landscape · September 2026</p>
-            <h1>
-              A living map of papers responding to LZ&apos;s isolated 248 keV
-              nuclear-recoil candidate.
-            </h1>
-          </div>
-
           <label className="search-field" htmlFor="paper-search">
             <span className="sr-only">Search papers</span>
             <Search aria-hidden="true" />
