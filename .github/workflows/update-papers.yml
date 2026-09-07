@@ -1,0 +1,74 @@
+name: Scan arXiv for LZ papers
+
+on:
+  schedule:
+    - cron: '17 5 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: lz-paper-scan
+  cancel-in-progress: false
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - name: Check out the default branch
+        uses: actions/checkout@v4
+
+      - name: Check for a pending review
+        id: pending_review
+        shell: bash
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          count="$(gh pr list --head automation/arxiv-daily --state open --json number --jq 'length')"
+          if [[ "${count}" -gt 0 ]]; then
+            echo "should_scan=false" >> "${GITHUB_OUTPUT}"
+            echo "A review pull request is already open; today's scan is paused." >> "${GITHUB_STEP_SUMMARY}"
+          else
+            echo "should_scan=true" >> "${GITHUB_OUTPUT}"
+          fi
+
+      - name: Set up Python
+        if: steps.pending_review.outputs.should_scan == 'true'
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Scan, screen, and place new papers
+        if: steps.pending_review.outputs.should_scan == 'true'
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          OPENAI_MODEL: ${{ vars.OPENAI_MODEL || 'gpt-5-mini' }}
+        run: python scripts/update_papers.py
+
+      - name: Validate the resulting catalog
+        if: steps.pending_review.outputs.should_scan == 'true'
+        run: python scripts/update_papers.py --validate-only
+
+      - name: Open or refresh the review pull request
+        if: steps.pending_review.outputs.should_scan == 'true'
+        uses: peter-evans/create-pull-request@v7
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: automation/arxiv-daily
+          delete-branch: true
+          add-paths: |
+            data/landscape.json
+            data/candidates.json
+            data/runs/*.json
+          commit-message: 'data: refresh LZ paper landscape'
+          title: 'Daily arXiv review: LZ paper landscape'
+          body: |
+            This pull request contains the latest deterministic arXiv scan and
+            schema-constrained machine suggestions. Bibliographic fields come
+            from arXiv. Please review new inclusions, summaries, island
+            assignments, and links before merging.
+
+            The public site changes only after this pull request is merged.
