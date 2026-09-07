@@ -363,13 +363,6 @@ a {
   margin-top: 7px;
 }
 
-.reading-key .key-arrow {
-  width: 16px;
-  height: 16px;
-  color: #526861;
-  stroke-width: 1.5;
-}
-
 .method-summary {
   margin-top: 18px;
   padding-top: 16px;
@@ -526,24 +519,6 @@ a {
 .map-contours pattern path {
   stroke: rgba(55, 76, 69, 0.026);
   stroke-width: 0.11;
-}
-
-.citation-line {
-  fill: none;
-  stroke: rgba(49, 76, 67, 0.3);
-  stroke-width: 0.72;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  vector-effect: non-scaling-stroke;
-}
-
-.citation-arrowhead {
-  fill: none;
-  stroke: rgba(49, 76, 67, 0.72);
-  stroke-width: 1;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  vector-effect: non-scaling-stroke;
 }
 
 .island {
@@ -1181,6 +1156,25 @@ a {
 
   .map-panel {
     padding-inline: 14px;
+  }
+}
+
+@media (min-width: 961px) {
+  .workspace {
+    height: calc(100vh - 68px);
+    height: calc(100dvh - 68px);
+    min-height: 0;
+  }
+
+  .sidebar,
+  .paper-detail {
+    overflow-y: auto;
+  }
+
+  .map-panel,
+  .map-viewport,
+  .paper-list {
+    min-height: 0;
   }
 }
 

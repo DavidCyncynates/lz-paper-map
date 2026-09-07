@@ -5,9 +5,9 @@
 The LZ Paper Map is a small, reviewable research atlas. It treats the September
 2026 LZ result as one isolated high-recoil candidate event, not as a confirmed
 dark-matter signal or a broad excess. Each circle is a paper; distance encodes
-shared physical ideas. Any line is a verified citation arrow pointing from the
-citing paper to the cited paper; labels distinguish interpretations,
-constraints, diagnostics, adjacent work, and the experimental result.
+shared physical ideas. Labels distinguish interpretations, constraints,
+diagnostics, adjacent work, and the experimental result. Citation lineage is
+kept in the selected paper's detail panel rather than overlaid on the map.
 
 The public map is static. This makes it fast, inexpensive, easy to archive, and
 compatible with GitHub Pages. All potentially contentious semantic changes are
@@ -103,12 +103,10 @@ blob. Follow-up circle size is intentionally uniform, while the experimental
 anchor is slightly larger. Citation counts are especially misleading for papers
 only days old and do not affect the display.
 
-Citation arrows show both incoming and outgoing relationships for the selected
-paper. A midpoint arrow keeps direction visible without colliding with either
-paper circle. When more than eight connected papers are visible, the map omits
-the lines rather than drawing a starburst. The detail panel always lists the
-complete “cites” and “cited by” relationships among mapped papers, providing the
-semantic fallback for keyboard, touch, and crowded cases.
+The detail panel lists the complete “cites” and “cited by” relationships among
+mapped papers. Keeping citation lineage out of the spatial canvas avoids
+confusing citation structure with conceptual distance and keeps dense papers
+from producing a starburst of lines.
 
 ## Daily lifecycle
 
@@ -141,9 +139,9 @@ structured review.
 
 The map supports title, author, concept, and arXiv-ID search; idea filtering;
 map and list views; keyboard-focusable paper nodes; shareable `?paper=` links;
-machine-summary labeling; directional citation arrows; selectable “cites” and
-“cited by” lists; and direct links to each arXiv record. The list view preserves
-access when spatial browsing is not useful or the screen is narrow.
+machine-summary labeling; selectable “cites” and “cited by” lists; and direct
+links to each arXiv record. The list view preserves access when spatial browsing
+is not useful or the screen is narrow.
 
 Distance means conceptual overlap, not evidential strength, consensus, paper
 quality, or probability that an explanation is correct. Inclusion is neither

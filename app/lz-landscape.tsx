@@ -2,7 +2,6 @@
 
 import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import {
-  ArrowRight,
   ArrowUpRight,
   BookOpenText,
   CalendarDays,
@@ -128,7 +127,6 @@ function roleLabel(role: Paper['role']) {
 const MAX_TOOLTIP_AUTHORS = 4;
 const MAX_TOOLTIP_AUTHOR_CHARACTERS = 80;
 const MAX_VISIBLE_CITATION_ROWS = 5;
-const MAX_MAP_CITATION_CONNECTIONS = 8;
 
 function tooltipAuthorLabel(authors: readonly string[]) {
   const names = authors.map((author) => author.trim()).filter(Boolean);
@@ -562,8 +560,6 @@ export function LzLandscape() {
     landscape.papers.find((paper) => paper.id === selectedId) ??
     landscape.papers[0];
   const selectedIsland = islandById.get(selectedPaper.primaryIsland);
-  const selectedPosition =
-    paperPositions.get(selectedPaper.id) ?? selectedPaper;
   const selectedCites = selectedPaper.cites.flatMap((paperId) => {
     const paper = paperById.get(paperId);
     return paper ? [paper] : [];
@@ -571,49 +567,6 @@ export function LzLandscape() {
   const selectedCitedBy = landscape.papers.filter((paper) =>
     paper.cites.includes(selectedPaper.id),
   );
-  const citationConnections = (() => {
-    const connections = new Map<
-      string,
-      { paper: Paper; outgoing: boolean; incoming: boolean }
-    >();
-
-    for (const paper of selectedCites) {
-      connections.set(paper.id, {
-        paper,
-        outgoing: true,
-        incoming: false,
-      });
-    }
-    for (const paper of selectedCitedBy) {
-      const connection = connections.get(paper.id);
-      if (connection) {
-        connection.incoming = true;
-      } else {
-        connections.set(paper.id, {
-          paper,
-          outgoing: false,
-          incoming: true,
-        });
-      }
-    }
-
-    return [...connections.values()];
-  })();
-  const visibleCitationConnections = citationConnections.filter(({ paper }) =>
-    visibleIds.has(paper.id),
-  );
-  const citationMapIsDense =
-    visibleCitationConnections.length > MAX_MAP_CITATION_CONNECTIONS;
-  const mapCitationConnections = citationMapIsDense
-    ? []
-    : visibleCitationConnections;
-  const citationMapStatus = !citationConnections.length
-    ? 'No citations to other mapped papers.'
-    : !visibleCitationConnections.length
-      ? 'Citation lineage is listed at right; connected papers are filtered out.'
-      : citationMapIsDense
-        ? 'Citation lineage is listed at right; too many links for a clear map.'
-        : 'Arrows run from citing papers to cited papers.';
 
   useEffect(() => {
     if (!focusDetailAfterCitation.current) return;
@@ -750,10 +703,6 @@ export function LzLandscape() {
               <span className="key-node" />
               <span>Interpretation or follow-up</span>
             </div>
-            <div>
-              <ArrowRight className="key-arrow" aria-hidden="true" />
-              <span>Citing paper → cited paper</span>
-            </div>
           </div>
 
           <details className="method-summary" id="method">
@@ -861,65 +810,8 @@ export function LzLandscape() {
                     >
                       <path d="M 3.2 0 L 0 0 0 4.8" fill="none" />
                     </pattern>
-                    <marker
-                      id="citation-arrow"
-                      viewBox="0 0 8 8"
-                      refX="4"
-                      refY="4"
-                      markerWidth="8"
-                      markerHeight="8"
-                      orient="auto"
-                    >
-                      <path
-                        className="citation-arrowhead"
-                        d="M 1 1 L 6 4 L 1 7"
-                      />
-                    </marker>
-                    <marker
-                      id="citation-arrow-both"
-                      viewBox="0 0 10 8"
-                      refX="5"
-                      refY="4"
-                      markerWidth="10"
-                      markerHeight="8"
-                      orient="auto"
-                    >
-                      <path
-                        className="citation-arrowhead"
-                        d="M 0.5 1 L 3.5 4 L 0.5 7 M 9.5 1 L 6.5 4 L 9.5 7"
-                      />
-                    </marker>
                   </defs>
                   <rect width="100" height="100" fill="url(#grid)" />
-                  {mapCitationConnections.map((connection) => {
-                    const connectedPosition =
-                      paperPositions.get(connection.paper.id) ??
-                      connection.paper;
-                    const isIncomingOnly =
-                      connection.incoming && !connection.outgoing;
-                    const sourcePosition = isIncomingOnly
-                      ? connectedPosition
-                      : selectedPosition;
-                    const targetPosition = isIncomingOnly
-                      ? selectedPosition
-                      : connectedPosition;
-                    const midpoint = {
-                      x: (sourcePosition.x + targetPosition.x) / 2,
-                      y: (sourcePosition.y + targetPosition.y) / 2,
-                    };
-                    return (
-                      <polyline
-                        key={connection.paper.id}
-                        className="citation-line"
-                        points={`${sourcePosition.x},${sourcePosition.y} ${midpoint.x},${midpoint.y} ${targetPosition.x},${targetPosition.y}`}
-                        markerMid={
-                          connection.incoming && connection.outgoing
-                            ? 'url(#citation-arrow-both)'
-                            : 'url(#citation-arrow)'
-                        }
-                      />
-                    );
-                  })}
                 </svg>
 
                 {landscape.islands.map((island) => {
@@ -1089,7 +981,7 @@ export function LzLandscape() {
             <span>Distance expresses shared ideas—not evidence strength.</span>
             <span>
               {viewMode === 'map'
-                ? citationMapStatus
+                ? 'Citation lineage is listed in the paper details.'
                 : 'Select a paper to inspect it.'}
             </span>
           </footer>
