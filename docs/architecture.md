@@ -5,7 +5,8 @@
 The LZ Paper Map is a small, reviewable research atlas. It treats the September
 2026 LZ result as one isolated high-recoil candidate event, not as a confirmed
 dark-matter signal or a broad excess. Each circle is a paper; distance encodes
-shared physical ideas, while line style and labels distinguish interpretations,
+shared physical ideas. Any line is a verified citation arrow pointing from the
+citing paper to the cited paper; labels distinguish interpretations,
 constraints, diagnostics, adjacent work, and the experimental result.
 
 The public map is static. This makes it fast, inexpensive, easy to archive, and
@@ -39,7 +40,10 @@ the generated asset folder so GitHub Pages can mount the artifact at that path.
 
 - arXiv is authoritative for identifiers, titles, authors, dates, and links.
 - The model may suggest only relevance, role, existing island membership, tags,
-  a neutral summary, a short inclusion rationale, and related-paper IDs.
+  a neutral summary, and a short inclusion rationale.
+- Citation edges are checked separately against arXiv paper reference lists.
+  References to the official LZ preprint are normalized to its mapped arXiv ID.
+  The model never infers citations from abstracts, dates, or proximity.
 - Titles and abstracts are passed to the model as explicitly untrusted quoted
   data. The model has no tools and cannot write to the repository.
 - Model output must satisfy a strict JSON schema. Invalid output fails the run.
@@ -55,7 +59,9 @@ the generated asset folder so GitHub Pages can mount the artifact at that path.
 `data/landscape.json` is the single source of truth for this first, small
 corpus. Every paper stores canonical arXiv metadata, a role, one primary island,
 up to two secondary islands, tags, machine-assisted explanatory text, stable
-coordinates, and a short list of related paper IDs.
+coordinates, and the mapped paper IDs that its reference list cites. Reverse
+“cited by” lists are derived from those directional citations rather than stored
+separately.
 
 The first atlas uses nine fixed islands:
 
@@ -97,6 +103,13 @@ blob. Follow-up circle size is intentionally uniform, while the experimental
 anchor is slightly larger. Citation counts are especially misleading for papers
 only days old and do not affect the display.
 
+Citation arrows show both incoming and outgoing relationships for the selected
+paper. A midpoint arrow keeps direction visible without colliding with either
+paper circle. When more than eight connected papers are visible, the map omits
+the lines rather than drawing a starburst. The detail panel always lists the
+complete “cites” and “cited by” relationships among mapped papers, providing the
+semantic fallback for keyboard, touch, and crowded cases.
+
 ## Daily lifecycle
 
 At 05:17 UTC, the scheduled workflow:
@@ -106,7 +119,7 @@ At 05:17 UTC, the scheduled workflow:
 3. refreshes source metadata for known IDs and detects new arXiv revisions;
 4. sends genuinely new or revised, deterministically relevant records to the
    OpenAI Responses API using strict structured output;
-5. validates taxonomy references, URLs, coordinates, roles, and relationships;
+5. validates taxonomy references, URLs, coordinates, roles, and citation IDs;
 6. writes an auditable run manifest; and
 7. opens or updates one pull request for human review.
 
@@ -128,8 +141,9 @@ structured review.
 
 The map supports title, author, concept, and arXiv-ID search; idea filtering;
 map and list views; keyboard-focusable paper nodes; shareable `?paper=` links;
-machine-summary labeling; and direct links to each arXiv record. The list view
-preserves access when spatial browsing is not useful or the screen is narrow.
+machine-summary labeling; directional citation arrows; selectable “cites” and
+“cited by” lists; and direct links to each arXiv record. The list view preserves
+access when spatial browsing is not useful or the screen is narrow.
 
 Distance means conceptual overlap, not evidential strength, consensus, paper
 quality, or probability that an explanation is correct. Inclusion is neither
@@ -142,10 +156,11 @@ query endpoint, prompt version, model and response IDs, and result counts. The
 candidate log preserves rejected and uncertain suggestions. Git history then
 records exactly what a reviewer accepted.
 
-The next useful upgrades are typed edges (supports, constrains, distinguishes),
-manual field locks, a contribution/correction form backed by GitHub Issues,
-periodic refreshes of all known arXiv versions, and embeddings for suggesting
-related papers. None is required for the first public version.
+The next useful upgrades are deterministic reference-list refreshes, manual
+field locks, a contribution/correction form backed by GitHub Issues, periodic
+refreshes of all known arXiv versions, and embeddings for suggesting conceptual
+neighbors without drawing them as citation edges. None is required for the
+first public version.
 
 ## Precedents and primary references
 

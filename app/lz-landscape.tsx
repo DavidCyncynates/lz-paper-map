@@ -2,6 +2,7 @@
 
 import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import {
+  ArrowRight,
   ArrowUpRight,
   BookOpenText,
   CalendarDays,
@@ -63,6 +64,7 @@ declare global {
 const islandById = new Map(
   landscape.islands.map((island) => [island.id, island]),
 );
+const paperById = new Map(landscape.papers.map((paper) => [paper.id, paper]));
 
 const NODE_HALO_PX: Record<Paper['role'], number> = {
   observation: 4,
@@ -125,6 +127,8 @@ function roleLabel(role: Paper['role']) {
 
 const MAX_TOOLTIP_AUTHORS = 4;
 const MAX_TOOLTIP_AUTHOR_CHARACTERS = 80;
+const MAX_VISIBLE_CITATION_ROWS = 5;
+const MAX_MAP_CITATION_CONNECTIONS = 8;
 
 function tooltipAuthorLabel(authors: readonly string[]) {
   const names = authors.map((author) => author.trim()).filter(Boolean);
@@ -164,6 +168,85 @@ function filterPapers(query: string, islandId: string) {
   });
 }
 
+type CitationGroupProps = {
+  title: string;
+  papers: Paper[];
+  relationship: 'cites' | 'cited-by';
+  onSelect: (id: string) => void;
+};
+
+function CitationRows({
+  papers,
+  relationship,
+  onSelect,
+}: Omit<CitationGroupProps, 'title'>) {
+  return (
+    <ul className="citation-list">
+      {papers.map((paper) => {
+        const authorLabel = tooltipAuthorLabel(paper.authors);
+        const relationshipLabel =
+          relationship === 'cites'
+            ? 'cited by this paper'
+            : 'which cites this paper';
+        return (
+          <li key={paper.id}>
+            <button
+              type="button"
+              onClick={() => onSelect(paper.id)}
+              aria-label={`Select ${paper.title}, ${relationshipLabel}`}
+            >
+              <small>
+                {authorLabel ? `${authorLabel} · ` : ''}
+                {paper.published.slice(0, 4)}
+              </small>
+              <span>{paper.title}</span>
+            </button>
+          </li>
+        );
+      })}
+    </ul>
+  );
+}
+
+function CitationGroup({
+  title,
+  papers,
+  relationship,
+  onSelect,
+}: CitationGroupProps) {
+  const visiblePapers = papers.slice(0, MAX_VISIBLE_CITATION_ROWS);
+  const remainingPapers = papers.slice(MAX_VISIBLE_CITATION_ROWS);
+  return (
+    <section className="citation-group">
+      <div className="citation-group-heading">
+        <h4>{title}</h4>
+        <span>{papers.length}</span>
+      </div>
+      {papers.length ? (
+        <>
+          <CitationRows
+            papers={visiblePapers}
+            relationship={relationship}
+            onSelect={onSelect}
+          />
+          {remainingPapers.length > 0 && (
+            <details className="citation-more">
+              <summary>Show {remainingPapers.length} more</summary>
+              <CitationRows
+                papers={remainingPapers}
+                relationship={relationship}
+                onSelect={onSelect}
+              />
+            </details>
+          )}
+        </>
+      ) : (
+        <p className="citation-empty">None among papers currently mapped.</p>
+      )}
+    </section>
+  );
+}
+
 export function LzLandscape() {
   const [query, setQuery] = useState('');
   const [activeIsland, setActiveIsland] = useState('all');
@@ -172,6 +255,8 @@ export function LzLandscape() {
   const [viewMode, setViewMode] = useState<ViewMode>('map');
   const [mapGeometry, setMapGeometry] = useState<MapGeometry | null>(null);
   const mapCanvasRef = useRef<HTMLDivElement>(null);
+  const detailTitleRef = useRef<HTMLHeadingElement>(null);
+  const focusDetailAfterCitation = useRef(false);
 
   useLayoutEffect(() => {
     if (viewMode !== 'map') return;
@@ -479,14 +564,62 @@ export function LzLandscape() {
   const selectedIsland = islandById.get(selectedPaper.primaryIsland);
   const selectedPosition =
     paperPositions.get(selectedPaper.id) ?? selectedPaper;
-  const selectedRelatedIds = [
-    ...new Set([
-      ...selectedPaper.related,
-      ...landscape.papers
-        .filter((paper) => paper.related.includes(selectedPaper.id))
-        .map((paper) => paper.id),
-    ]),
-  ];
+  const selectedCites = selectedPaper.cites.flatMap((paperId) => {
+    const paper = paperById.get(paperId);
+    return paper ? [paper] : [];
+  });
+  const selectedCitedBy = landscape.papers.filter((paper) =>
+    paper.cites.includes(selectedPaper.id),
+  );
+  const citationConnections = (() => {
+    const connections = new Map<
+      string,
+      { paper: Paper; outgoing: boolean; incoming: boolean }
+    >();
+
+    for (const paper of selectedCites) {
+      connections.set(paper.id, {
+        paper,
+        outgoing: true,
+        incoming: false,
+      });
+    }
+    for (const paper of selectedCitedBy) {
+      const connection = connections.get(paper.id);
+      if (connection) {
+        connection.incoming = true;
+      } else {
+        connections.set(paper.id, {
+          paper,
+          outgoing: false,
+          incoming: true,
+        });
+      }
+    }
+
+    return [...connections.values()];
+  })();
+  const visibleCitationConnections = citationConnections.filter(({ paper }) =>
+    visibleIds.has(paper.id),
+  );
+  const citationMapIsDense =
+    visibleCitationConnections.length > MAX_MAP_CITATION_CONNECTIONS;
+  const mapCitationConnections = citationMapIsDense
+    ? []
+    : visibleCitationConnections;
+  const citationMapStatus = !citationConnections.length
+    ? 'No citations to other mapped papers.'
+    : !visibleCitationConnections.length
+      ? 'Citation lineage is listed at right; connected papers are filtered out.'
+      : citationMapIsDense
+        ? 'Citation lineage is listed at right; too many links for a clear map.'
+        : 'Arrows run from citing papers to cited papers.';
+
+  useEffect(() => {
+    if (!focusDetailAfterCitation.current) return;
+    focusDetailAfterCitation.current = false;
+    detailTitleRef.current?.focus();
+  }, [selectedPaper.id]);
 
   function selectPaper(id: string) {
     setSelectedId(id);
@@ -503,6 +636,13 @@ export function LzLandscape() {
     setActiveIsland(id);
     const firstMatch = filterPapers(query, id)[0];
     if (firstMatch) selectPaper(firstMatch.id);
+  }
+
+  function selectCitationPaper(id: string) {
+    focusDetailAfterCitation.current = true;
+    setQuery('');
+    setActiveIsland('all');
+    selectPaper(id);
   }
 
   function resetMap() {
@@ -618,6 +758,10 @@ export function LzLandscape() {
               <span className="key-node" />
               <span>Interpretation or follow-up</span>
             </div>
+            <div>
+              <ArrowRight className="key-arrow" aria-hidden="true" />
+              <span>Citing paper → cited paper</span>
+            </div>
           </div>
 
           <details className="method-summary" id="method">
@@ -625,7 +769,8 @@ export function LzLandscape() {
             <p>
               arXiv supplies titles, authors, dates, IDs, and links. A
               schema-constrained OpenAI call proposes only relevance, existing
-              island labels, and neutral summaries.
+              island labels, and neutral summaries. Citation lineage is checked
+              separately against paper reference lists.
             </p>
             <p>
               The layout settles deterministically around the curated idea
@@ -724,23 +869,62 @@ export function LzLandscape() {
                     >
                       <path d="M 3.2 0 L 0 0 0 4.8" fill="none" />
                     </pattern>
+                    <marker
+                      id="citation-arrow"
+                      viewBox="0 0 8 8"
+                      refX="4"
+                      refY="4"
+                      markerWidth="8"
+                      markerHeight="8"
+                      orient="auto"
+                    >
+                      <path
+                        className="citation-arrowhead"
+                        d="M 1 1 L 6 4 L 1 7"
+                      />
+                    </marker>
+                    <marker
+                      id="citation-arrow-both"
+                      viewBox="0 0 10 8"
+                      refX="5"
+                      refY="4"
+                      markerWidth="10"
+                      markerHeight="8"
+                      orient="auto"
+                    >
+                      <path
+                        className="citation-arrowhead"
+                        d="M 0.5 1 L 3.5 4 L 0.5 7 M 9.5 1 L 6.5 4 L 9.5 7"
+                      />
+                    </marker>
                   </defs>
                   <rect width="100" height="100" fill="url(#grid)" />
-                  {selectedRelatedIds.map((relatedId) => {
-                    const related = landscape.papers.find(
-                      (paper) => paper.id === relatedId,
-                    );
-                    if (!related || !visibleIds.has(related.id)) return null;
-                    const relatedPosition =
-                      paperPositions.get(related.id) ?? related;
+                  {mapCitationConnections.map((connection) => {
+                    const connectedPosition =
+                      paperPositions.get(connection.paper.id) ??
+                      connection.paper;
+                    const isIncomingOnly =
+                      connection.incoming && !connection.outgoing;
+                    const sourcePosition = isIncomingOnly
+                      ? connectedPosition
+                      : selectedPosition;
+                    const targetPosition = isIncomingOnly
+                      ? selectedPosition
+                      : connectedPosition;
+                    const midpoint = {
+                      x: (sourcePosition.x + targetPosition.x) / 2,
+                      y: (sourcePosition.y + targetPosition.y) / 2,
+                    };
                     return (
-                      <line
-                        key={related.id}
-                        className="relation-line"
-                        x1={selectedPosition.x}
-                        y1={selectedPosition.y}
-                        x2={relatedPosition.x}
-                        y2={relatedPosition.y}
+                      <polyline
+                        key={connection.paper.id}
+                        className="citation-line"
+                        points={`${sourcePosition.x},${sourcePosition.y} ${midpoint.x},${midpoint.y} ${targetPosition.x},${targetPosition.y}`}
+                        markerMid={
+                          connection.incoming && connection.outgoing
+                            ? 'url(#citation-arrow-both)'
+                            : 'url(#citation-arrow)'
+                        }
                       />
                     );
                   })}
@@ -913,7 +1097,7 @@ export function LzLandscape() {
             <span>Distance expresses shared ideas—not evidence strength.</span>
             <span>
               {viewMode === 'map'
-                ? 'Select a circle to reveal its closest links.'
+                ? citationMapStatus
                 : 'Select a paper to inspect it.'}
             </span>
           </footer>
@@ -929,7 +1113,9 @@ export function LzLandscape() {
             <span className="paper-kind">{roleLabel(selectedPaper.role)}</span>
           </div>
 
-          <h2>{selectedPaper.title}</h2>
+          <h2 ref={detailTitleRef} tabIndex={-1}>
+            {selectedPaper.title}
+          </h2>
           <p className="authors">{selectedPaper.authors.join(', ')}</p>
 
           <div className="paper-facts">
@@ -942,6 +1128,25 @@ export function LzLandscape() {
               arXiv:{selectedPaper.arxivId}
             </span>
           </div>
+
+          <section
+            className="citation-lineage"
+            aria-labelledby="citation-lineage-title"
+          >
+            <h3 id="citation-lineage-title">Citation lineage</h3>
+            <CitationGroup
+              title="Cites on this map"
+              papers={selectedCites}
+              relationship="cites"
+              onSelect={selectCitationPaper}
+            />
+            <CitationGroup
+              title="Cited by on this map"
+              papers={selectedCitedBy}
+              relationship="cited-by"
+              onSelect={selectCitationPaper}
+            />
+          </section>
 
           <div className="takeaway-card">
             <Sparkles aria-hidden="true" />

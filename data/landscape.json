@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "title": "LZ high-recoil literature landscape",
   "updatedAt": "2026-09-07",
   "lastSuccessfulScan": "2026-09-07T09:00:00Z",
@@ -9,6 +9,12 @@
     "systematicUncertaintyKev": 23,
     "globalSignificanceSigma": 2.6,
     "exposureTonneYears": 2.84
+  },
+  "citationData": {
+    "source": "arXiv reference lists",
+    "checkedAt": "2026-09-07",
+    "scope": "Citations between papers in this map",
+    "note": "References to the official LZ preprint are normalized to arXiv:2609.02823."
   },
   "islands": [
     {
@@ -128,7 +134,7 @@
       "url": "https://arxiv.org/abs/2609.02823",
       "x": 50,
       "y": 51,
-      "related": ["2609.01475", "2609.01592", "2609.04185", "2609.04186", "2609.04673"]
+      "cites": []
     },
     {
       "id": "2609.01475",
@@ -140,13 +146,18 @@
       "role": "explanation",
       "primaryIsland": "endothermic",
       "islands": ["endothermic"],
-      "tags": ["endothermic DM", "terrestrial upscattering", "CRESST", "heavy dark matter"],
+      "tags": [
+        "endothermic DM",
+        "terrestrial upscattering",
+        "CRESST",
+        "heavy dark matter"
+      ],
       "summary": "Heavy halo dark matter scatters into a more massive state. A splitting near 350 keV suppresses lower-energy events, and the preferred region could be tested by a planned CRESST upgrade.",
       "takeaway": "A generic endothermic explanation that shifts the recoil toward LZ's high-energy window.",
       "url": "https://arxiv.org/abs/2609.01475",
       "x": 56,
       "y": 45,
-      "related": ["2609.02608", "2609.04181", "2609.01583", "2609.04673"]
+      "cites": ["2609.02823"]
     },
     {
       "id": "2609.01504",
@@ -164,7 +175,7 @@
       "url": "https://arxiv.org/abs/2609.01504",
       "x": 66,
       "y": 17,
-      "related": ["2609.01583", "2609.01590", "2609.01892", "2609.04163"]
+      "cites": ["2609.02775", "2609.02823"]
     },
     {
       "id": "2609.01583",
@@ -176,13 +187,18 @@
       "role": "explanation",
       "primaryIsland": "higgsino",
       "islands": ["higgsino", "endothermic"],
-      "tags": ["Higgsino", "off-diagonal Z", "thermal relic", "350 keV splitting"],
+      "tags": [
+        "Higgsino",
+        "off-diagonal Z",
+        "thermal relic",
+        "350 keV splitting"
+      ],
       "summary": "A nearly pure, roughly 1 TeV Higgsino up-scatters through an off-diagonal Z coupling. The mass and interaction rate are largely fixed, leaving the neutral-state splitting to place the recoil.",
       "takeaway": "A predictive Higgsino interpretation with less freedom than a generic inelastic model.",
       "url": "https://arxiv.org/abs/2609.01583",
       "x": 72,
       "y": 15,
-      "related": ["2609.01504", "2609.01590", "2609.02775", "2609.04163"]
+      "cites": ["2609.02823"]
     },
     {
       "id": "2609.01590",
@@ -200,7 +216,7 @@
       "url": "https://arxiv.org/abs/2609.01590",
       "x": 79,
       "y": 18,
-      "related": ["2609.01504", "2609.01583", "2609.02868", "2609.02994"]
+      "cites": ["2609.02823"]
     },
     {
       "id": "2609.01592",
@@ -212,13 +228,18 @@
       "role": "explanation",
       "primaryIsland": "absorption",
       "islands": ["absorption", "constraints"],
-      "tags": ["fermionic DM", "absorption", "neutral current", "KamLAND tension"],
+      "tags": [
+        "fermionic DM",
+        "absorption",
+        "neutral current",
+        "KamLAND tension"
+      ],
       "summary": "Absorption of a roughly 247 MeV fermionic dark-matter particle on xenon converts its rest mass into a nearly monoenergetic recoil. The required benchmark is reported to be in strong tension with a KamLAND recast.",
       "takeaway": "A distinct absorption mechanism that naturally lands at 248 keV but faces an important external constraint.",
       "url": "https://arxiv.org/abs/2609.01592",
       "x": 23,
       "y": 27,
-      "related": ["2609.02823", "2609.02775", "2609.04185"]
+      "cites": ["2609.02823"]
     },
     {
       "id": "2609.01892",
@@ -236,7 +257,7 @@
       "url": "https://arxiv.org/abs/2609.01892",
       "x": 66,
       "y": 26,
-      "related": ["2609.01504", "2609.02807", "2609.04163"]
+      "cites": ["2609.02823"]
     },
     {
       "id": "2609.02505",
@@ -248,13 +269,25 @@
       "role": "explanation",
       "primaryIsland": "higgsino",
       "islands": ["higgsino", "endothermic"],
-      "tags": ["scalar doublet", "electroweak DM", "annual modulation", "off-diagonal Z"],
+      "tags": [
+        "scalar doublet",
+        "electroweak DM",
+        "annual modulation",
+        "off-diagonal Z"
+      ],
       "summary": "An electroweak scalar doublet with a roughly 350 keV splitting produces the recoil through a fixed off-diagonal Z interaction and predicts pronounced annual modulation.",
       "takeaway": "A non-Higgsino electroweak doublet with a sharp, testable seasonal prediction.",
       "url": "https://arxiv.org/abs/2609.02505",
       "x": 73,
       "y": 27,
-      "related": ["2609.04144", "2609.04181", "2609.02807"]
+      "cites": [
+        "2609.01475",
+        "2609.01504",
+        "2609.01583",
+        "2609.01590",
+        "2609.01592",
+        "2609.02823"
+      ]
     },
     {
       "id": "2609.02608",
@@ -266,13 +299,24 @@
       "role": "explanation",
       "primaryIsland": "endothermic",
       "islands": ["endothermic", "higgsino", "elastic"],
-      "tags": ["pseudo-Dirac DM", "Higgsino", "relic density", "indirect detection"],
+      "tags": [
+        "pseudo-Dirac DM",
+        "Higgsino",
+        "relic density",
+        "indirect detection"
+      ],
       "summary": "A broad comparison finds ordinary elastic spin-independent scattering poorly suited to the isolated recoil, while spin-dependent and endothermic interactions remain viable. It develops pseudo-Dirac and thermal-Higgsino benchmarks.",
       "takeaway": "A bridge between operator-level fits and concrete particle models with cosmological constraints.",
       "url": "https://arxiv.org/abs/2609.02608",
       "x": 63,
       "y": 45,
-      "related": ["2609.01475", "2609.01583", "2609.04181", "2609.04186"]
+      "cites": [
+        "2609.01590",
+        "2609.01592",
+        "2609.02775",
+        "2609.02807",
+        "2609.02823"
+      ]
     },
     {
       "id": "2609.02775",
@@ -290,7 +334,14 @@
       "url": "https://arxiv.org/abs/2609.02775",
       "x": 55,
       "y": 81,
-      "related": ["2609.01504", "2609.01583", "2609.04163", "2609.04175"]
+      "cites": [
+        "2609.01475",
+        "2609.01504",
+        "2609.01583",
+        "2609.01590",
+        "2609.01592",
+        "2609.02823"
+      ]
     },
     {
       "id": "2609.02807",
@@ -308,7 +359,21 @@
       "url": "https://arxiv.org/abs/2609.02807",
       "x": 81,
       "y": 28,
-      "related": ["2609.01892", "2609.02505", "2609.04144"]
+      "cites": [
+        "2609.01475",
+        "2609.01504",
+        "2609.01583",
+        "2609.01590",
+        "2609.01592",
+        "2609.01892",
+        "2609.02608",
+        "2609.02775",
+        "2609.02823",
+        "2609.02994",
+        "2609.04144",
+        "2609.04175",
+        "2609.04181"
+      ]
     },
     {
       "id": "2609.02868",
@@ -320,19 +385,35 @@
       "role": "explanation",
       "primaryIsland": "endothermic",
       "islands": ["endothermic", "multimessenger"],
-      "tags": ["dark photon", "inelastic transition", "gamma-ray excess", "Sommerfeld enhancement"],
+      "tags": [
+        "dark photon",
+        "inelastic transition",
+        "gamma-ray excess",
+        "Sommerfeld enhancement"
+      ],
       "summary": "A 420 GeV dark photon up-scatters to a heavier vector partner through a scalar mediator. The same sector is arranged to retain a proposed explanation of a Galactic halo gamma-ray excess.",
       "takeaway": "Links the LZ recoil to a second anomaly using inelastic dark-photon dark matter.",
       "url": "https://arxiv.org/abs/2609.02868",
       "x": 69,
       "y": 53,
-      "related": ["2609.01590", "2609.02994", "2609.02608", "2609.05204"]
+      "cites": [
+        "2609.01475",
+        "2609.01583",
+        "2609.01590",
+        "2609.01592",
+        "2609.02823"
+      ]
     },
     {
       "id": "2609.02994",
       "arxivId": "2609.02994",
       "title": "Sub-TeV Singlino Dark Matter in light from Sagittarius A* and LUX-ZEPLIN Nuclear-Recoil Event",
-      "authors": ["Utpal Chattopadhyay", "Debottam Das", "Rahul Puri", "Joydeep Roy"],
+      "authors": [
+        "Utpal Chattopadhyay",
+        "Debottam Das",
+        "Rahul Puri",
+        "Joydeep Roy"
+      ],
       "published": "2026-09-02",
       "updated": "2026-09-02",
       "role": "adjacent",
@@ -344,7 +425,7 @@
       "url": "https://arxiv.org/abs/2609.02994",
       "x": 24,
       "y": 52,
-      "related": ["2609.01590", "2609.02868"]
+      "cites": ["2609.01583", "2609.01590", "2609.01592", "2609.02823"]
     },
     {
       "id": "2609.04144",
@@ -356,13 +437,31 @@
       "role": "explanation",
       "primaryIsland": "higgsino",
       "islands": ["higgsino", "endothermic"],
-      "tags": ["electroweak multiplets", "inelastic DM", "Z exchange", "thermal relic"],
+      "tags": [
+        "electroweak multiplets",
+        "inelastic DM",
+        "Z exchange",
+        "thermal relic"
+      ],
       "summary": "Coupled Majorana and Dirac electroweak multiplets generate a neutral-state splitting and off-diagonal Z interaction. Matching one event selects representation-dependent thermal benchmarks and correlated low-energy signals.",
       "takeaway": "Generalizes the electroweak mechanism beyond a single representation and exposes correlated predictions.",
       "url": "https://arxiv.org/abs/2609.04144",
       "x": 87,
       "y": 24,
-      "related": ["2609.02505", "2609.02807", "2609.01583"]
+      "cites": [
+        "2609.01475",
+        "2609.01504",
+        "2609.01583",
+        "2609.01590",
+        "2609.01592",
+        "2609.01892",
+        "2609.02505",
+        "2609.02608",
+        "2609.02775",
+        "2609.02807",
+        "2609.02823",
+        "2609.02868"
+      ]
     },
     {
       "id": "2609.04163",
@@ -374,31 +473,71 @@
       "role": "explanation",
       "primaryIsland": "higgsino",
       "islands": ["higgsino", "endothermic", "constraints"],
-      "tags": ["Higgsino", "bino–wino cancellation", "high-scale gauginos", "solar capture"],
+      "tags": [
+        "Higgsino",
+        "bino–wino cancellation",
+        "high-scale gauginos",
+        "solar capture"
+      ],
       "summary": "A GUT-scale bino–wino cancellation yields the required Higgsino splitting with a wino near 120 TeV. The construction also discusses the newly raised solar-capture constraints.",
       "takeaway": "A UV-level response to how a Higgsino could acquire the required small splitting.",
       "url": "https://arxiv.org/abs/2609.04163",
       "x": 86,
       "y": 34,
-      "related": ["2609.01504", "2609.01583", "2609.01892", "2609.02775"]
+      "cites": [
+        "2609.01475",
+        "2609.01504",
+        "2609.01583",
+        "2609.01590",
+        "2609.01592",
+        "2609.01892",
+        "2609.02608",
+        "2609.02775",
+        "2609.02807",
+        "2609.02823",
+        "2609.02868"
+      ]
     },
     {
       "id": "2609.04175",
       "arxivId": "2609.04175",
       "title": "Confronting the Higgsino Interpretation of the LZ Event with the High-Energy Sideband",
-      "authors": ["Nicholas L. Rodd", "Benjamin R. Safdi", "Tracy R. Slatyer", "Weishuang Linda Xu"],
+      "authors": [
+        "Nicholas L. Rodd",
+        "Benjamin R. Safdi",
+        "Tracy R. Slatyer",
+        "Weishuang Linda Xu"
+      ],
       "published": "2026-09-03",
       "updated": "2026-09-03",
       "role": "constraint",
       "primaryIsland": "constraints",
       "islands": ["constraints", "higgsino", "endothermic"],
-      "tags": ["high-energy sideband", "Higgsino tension", "acceptance", "nonthermal DM"],
+      "tags": [
+        "high-energy sideband",
+        "Higgsino tension",
+        "acceptance",
+        "nonthermal DM"
+      ],
       "summary": "The authors argue that a full-density thermal Higgsino should also populate an empty higher-energy sideband. The strength of the tension depends on acceptance information that is not yet public.",
       "takeaway": "A second major challenge to the thermal-Higgsino reading, focused on LZ's own sideband.",
       "url": "https://arxiv.org/abs/2609.04175",
       "x": 62,
       "y": 79,
-      "related": ["2609.02775", "2609.01583", "2609.04163", "2609.04673"]
+      "cites": [
+        "2609.01475",
+        "2609.01504",
+        "2609.01583",
+        "2609.01590",
+        "2609.01592",
+        "2609.01892",
+        "2609.02505",
+        "2609.02608",
+        "2609.02775",
+        "2609.02807",
+        "2609.02823",
+        "2609.02868"
+      ]
     },
     {
       "id": "2609.04181",
@@ -410,13 +549,27 @@
       "role": "explanation",
       "primaryIsland": "endothermic",
       "islands": ["endothermic", "constraints"],
-      "tags": ["annual modulation", "kinematic edge", "endothermic DM", "halo tail"],
+      "tags": [
+        "annual modulation",
+        "kinematic edge",
+        "endothermic DM",
+        "halo tail"
+      ],
       "summary": "Generic endothermic dark matter near the halo's kinematic edge can fit the event and should modulate annually by more than 50%, reaching nearly 100% in some regions.",
       "takeaway": "Turns the fragile halo-tail dependence into a strong seasonal test.",
       "url": "https://arxiv.org/abs/2609.04181",
       "x": 59,
       "y": 55,
-      "related": ["2609.01475", "2609.02505", "2609.02608", "2609.05291"]
+      "cites": [
+        "2609.01475",
+        "2609.01504",
+        "2609.01583",
+        "2609.01592",
+        "2609.02505",
+        "2609.02608",
+        "2609.02775",
+        "2609.02823"
+      ]
     },
     {
       "id": "2609.04185",
@@ -428,13 +581,24 @@
       "role": "explanation",
       "primaryIsland": "neutrino",
       "islands": ["neutrino"],
-      "tags": ["atmospheric neutrino", "upscattering", "sterile state", "scalar mediator"],
+      "tags": [
+        "atmospheric neutrino",
+        "upscattering",
+        "sterile state",
+        "scalar mediator"
+      ],
       "summary": "Instead of halo dark matter, an atmospheric neutrino up-scatters on a nucleus to create a new massive state. The kinematic threshold removes lower-energy recoils while leaving an isolated high-energy event.",
       "takeaway": "The incoming particle is an atmospheric neutrino rather than Galactic dark matter.",
       "url": "https://arxiv.org/abs/2609.04185",
       "x": 20,
       "y": 81,
-      "related": ["2609.02823", "2609.01592"]
+      "cites": [
+        "2609.01592",
+        "2609.02608",
+        "2609.02807",
+        "2609.02823",
+        "2609.02868"
+      ]
     },
     {
       "id": "2609.04186",
@@ -446,13 +610,30 @@
       "role": "explanation",
       "primaryIsland": "elastic",
       "islands": ["elastic"],
-      "tags": ["axion portal", "pseudoscalar", "elastic scattering", "thermal freeze-out"],
+      "tags": [
+        "axion portal",
+        "pseudoscalar",
+        "elastic scattering",
+        "thermal freeze-out"
+      ],
       "summary": "A momentum-dependent pseudoscalar interaction produces elastic nuclear recoils without relying on an inelastic state change. A light pseudoscalar mediator embeds the operator in an axion-portal model.",
       "takeaway": "Shows how elastic scattering can still favor high recoil when the interaction is momentum suppressed at low energy.",
       "url": "https://arxiv.org/abs/2609.04186",
       "x": 42,
       "y": 83,
-      "related": ["2609.02608", "2609.02823"]
+      "cites": [
+        "2609.01475",
+        "2609.01504",
+        "2609.01583",
+        "2609.01590",
+        "2609.01592",
+        "2609.01892",
+        "2609.02608",
+        "2609.02775",
+        "2609.02807",
+        "2609.02823",
+        "2609.02868"
+      ]
     },
     {
       "id": "2609.04673",
@@ -470,7 +651,19 @@
       "url": "https://arxiv.org/abs/2609.04673",
       "x": 81,
       "y": 68,
-      "related": ["2609.01475", "2609.04175", "2609.05204", "2609.05291"]
+      "cites": [
+        "2609.01475",
+        "2609.01583",
+        "2609.01590",
+        "2609.01592",
+        "2609.01892",
+        "2609.02505",
+        "2609.02608",
+        "2609.02775",
+        "2609.02807",
+        "2609.02823",
+        "2609.02868"
+      ]
     },
     {
       "id": "2609.05204",
@@ -482,13 +675,28 @@
       "role": "explanation",
       "primaryIsland": "exothermic",
       "islands": ["exothermic", "endothermic", "constraints"],
-      "tags": ["exothermic DM", "dark photon", "freeze-in", "argon and germanium"],
+      "tags": [
+        "exothermic DM",
+        "dark photon",
+        "freeze-in",
+        "argon and germanium"
+      ],
       "summary": "A heavier dark state down-scatters and releases a 0.5–1 MeV splitting, allowing 30–200 GeV dark matter to make a high-energy recoil. The model predicts still-higher-energy events in argon and germanium.",
       "takeaway": "A concrete dark-photon realization of down-scattering with multi-target predictions.",
       "url": "https://arxiv.org/abs/2609.05204",
       "x": 89,
       "y": 74,
-      "related": ["2609.04673", "2609.02868", "2609.05291"]
+      "cites": [
+        "2609.01504",
+        "2609.01583",
+        "2609.01590",
+        "2609.01592",
+        "2609.01892",
+        "2609.02608",
+        "2609.02775",
+        "2609.02823",
+        "2609.04175"
+      ]
     },
     {
       "id": "2609.05291",
@@ -500,13 +708,37 @@
       "role": "diagnostic",
       "primaryIsland": "constraints",
       "islands": ["constraints", "endothermic", "exothermic"],
-      "tags": ["xenon excitation", "inelastic nucleus", "diagnostic signal", "future exposure"],
+      "tags": [
+        "xenon excitation",
+        "inelastic nucleus",
+        "diagnostic signal",
+        "future exposure"
+      ],
       "summary": "The authors calculate accompanying xenon nuclear-excitation signals for high-recoil models. Expected rates are generally at or below roughly ten percent of the elastic rate, so much larger exposures are needed.",
       "takeaway": "Not a competing cause, but a possible future way to diagnose high-recoil dark-matter models.",
       "url": "https://arxiv.org/abs/2609.05291",
       "x": 70,
       "y": 87,
-      "related": ["2609.04181", "2609.04673", "2609.05204"]
+      "cites": [
+        "2609.01475",
+        "2609.01504",
+        "2609.01583",
+        "2609.01590",
+        "2609.01592",
+        "2609.01892",
+        "2609.02505",
+        "2609.02608",
+        "2609.02807",
+        "2609.02823",
+        "2609.02868",
+        "2609.02994",
+        "2609.04144",
+        "2609.04163",
+        "2609.04175",
+        "2609.04181",
+        "2609.04185",
+        "2609.04186"
+      ]
     }
   ]
 }
