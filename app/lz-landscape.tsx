@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import {
   ArrowUpRight,
   BookOpenText,
@@ -22,6 +22,19 @@ import landscape from '@/data/landscape.json';
 type Island = (typeof landscape.islands)[number];
 type Paper = (typeof landscape.papers)[number];
 type ViewMode = 'map' | 'list';
+type MapPoint = { x: number; y: number };
+type LabelClearZone = {
+  id: string;
+  left: number;
+  right: number;
+  top: number;
+  bottom: number;
+};
+type MapGeometry = {
+  width: number;
+  height: number;
+  labelClearZones: LabelClearZone[];
+};
 
 type ModelContext = {
   registerTool: (
@@ -44,6 +57,130 @@ declare global {
 }
 
 const islandById = new Map(landscape.islands.map((island) => [island.id, island]));
+
+const NODE_DIAMETER_PX: Record<Paper['role'], number> = {
+  observation: 48,
+  explanation: 34,
+  constraint: 34,
+  diagnostic: 34,
+  adjacent: 34,
+};
+
+const NODE_HALO_PX: Record<Paper['role'], number> = {
+  observation: 12,
+  explanation: 5,
+  constraint: 5,
+  diagnostic: 5,
+  adjacent: 5,
+};
+
+const NODE_ACTIVE_SCALE = 1.12;
+const LABEL_GAP_PX = 4;
+const POSITION_EPSILON = 0.02;
+
+function roundMapValue(value: number) {
+  return Math.round(value * 1000) / 1000;
+}
+
+function sameMapGeometry(previous: MapGeometry | null, next: MapGeometry) {
+  if (
+    !previous ||
+    previous.width !== next.width ||
+    previous.height !== next.height ||
+    previous.labelClearZones.length !== next.labelClearZones.length
+  ) {
+    return false;
+  }
+
+  return previous.labelClearZones.every((zone, index) => {
+    const nextZone = next.labelClearZones[index];
+    return (
+      zone.id === nextZone.id &&
+      zone.left === nextZone.left &&
+      zone.right === nextZone.right &&
+      zone.top === nextZone.top &&
+      zone.bottom === nextZone.bottom
+    );
+  });
+}
+
+function clamp(value: number, minimum: number, maximum: number) {
+  return Math.min(maximum, Math.max(minimum, value));
+}
+
+function uniqueValues(values: number[]) {
+  return [...new Set(values.map((value) => roundMapValue(value)))];
+}
+
+function paperMapPosition(
+  paper: Paper,
+  geometry: MapGeometry | null,
+): MapPoint {
+  const semanticPosition = { x: paper.x, y: paper.y };
+  if (!geometry || geometry.width <= 0 || geometry.height <= 0) {
+    return semanticPosition;
+  }
+
+  const visualRadius =
+    (NODE_DIAMETER_PX[paper.role] / 2 + NODE_HALO_PX[paper.role]) *
+      NODE_ACTIVE_SCALE +
+    LABEL_GAP_PX;
+  const clearanceX = (visualRadius / geometry.width) * 100;
+  const clearanceY = (visualRadius / geometry.height) * 100;
+  const expandedZones = geometry.labelClearZones.map((zone) => ({
+    left: zone.left - clearanceX,
+    right: zone.right + clearanceX,
+    top: zone.top - clearanceY,
+    bottom: zone.bottom + clearanceY,
+  }));
+  const isClear = (point: MapPoint) =>
+    expandedZones.every(
+      (zone) =>
+        point.x <= zone.left ||
+        point.x >= zone.right ||
+        point.y <= zone.top ||
+        point.y >= zone.bottom,
+    );
+
+  if (isClear(semanticPosition)) return semanticPosition;
+
+  const minimumX = clearanceX;
+  const maximumX = 100 - clearanceX;
+  const minimumY = clearanceY;
+  const maximumY = 100 - clearanceY;
+  const xCandidates = uniqueValues([
+    clamp(paper.x, minimumX, maximumX),
+    ...expandedZones.flatMap((zone) => [
+      clamp(zone.left - POSITION_EPSILON, minimumX, maximumX),
+      clamp(zone.right + POSITION_EPSILON, minimumX, maximumX),
+    ]),
+  ]);
+  const yCandidates = uniqueValues([
+    clamp(paper.y, minimumY, maximumY),
+    ...expandedZones.flatMap((zone) => [
+      clamp(zone.top - POSITION_EPSILON, minimumY, maximumY),
+      clamp(zone.bottom + POSITION_EPSILON, minimumY, maximumY),
+    ]),
+  ]);
+
+  let closestPoint: MapPoint | null = null;
+  let closestDistance = Number.POSITIVE_INFINITY;
+  for (const x of xCandidates) {
+    for (const y of yCandidates) {
+      const candidate = { x, y };
+      if (!isClear(candidate)) continue;
+      const horizontalDistance = ((x - paper.x) / 100) * geometry.width;
+      const verticalDistance = ((y - paper.y) / 100) * geometry.height;
+      const distance = horizontalDistance ** 2 + verticalDistance ** 2;
+      if (distance < closestDistance) {
+        closestPoint = candidate;
+        closestDistance = distance;
+      }
+    }
+  }
+
+  return closestPoint ?? semanticPosition;
+}
 
 function dateLabel(value: string) {
   return new Intl.DateTimeFormat('en', {
@@ -88,6 +225,67 @@ export function LzLandscape() {
   const [selectedId, setSelectedId] = useState(landscape.papers[0].id);
   const [zoom, setZoom] = useState(1);
   const [viewMode, setViewMode] = useState<ViewMode>('map');
+  const [mapGeometry, setMapGeometry] = useState<MapGeometry | null>(null);
+  const mapCanvasRef = useRef<HTMLDivElement>(null);
+
+  useLayoutEffect(() => {
+    if (viewMode !== 'map') return;
+    const canvas = mapCanvasRef.current;
+    if (!canvas) return;
+
+    const labels = Array.from(
+      canvas.querySelectorAll<HTMLElement>('[data-island-label]'),
+    );
+    const measureMap = () => {
+      const canvasBounds = canvas.getBoundingClientRect();
+      const width = canvas.clientWidth;
+      const height = canvas.clientHeight;
+      if (!canvasBounds.width || !canvasBounds.height || !width || !height) {
+        return;
+      }
+
+      const labelClearZones = labels.flatMap((label) => {
+        const id = label.dataset.islandLabel;
+        if (!id) return [];
+        const bounds = label.getBoundingClientRect();
+        return [
+          {
+            id,
+            left: roundMapValue(
+              ((bounds.left - canvasBounds.left) / canvasBounds.width) * 100,
+            ),
+            right: roundMapValue(
+              ((bounds.right - canvasBounds.left) / canvasBounds.width) * 100,
+            ),
+            top: roundMapValue(
+              ((bounds.top - canvasBounds.top) / canvasBounds.height) * 100,
+            ),
+            bottom: roundMapValue(
+              ((bounds.bottom - canvasBounds.top) / canvasBounds.height) * 100,
+            ),
+          },
+        ];
+      });
+      const nextGeometry = { width, height, labelClearZones };
+      setMapGeometry((previous) =>
+        sameMapGeometry(previous, nextGeometry) ? previous : nextGeometry,
+      );
+    };
+
+    measureMap();
+    const observer = new ResizeObserver(measureMap);
+    observer.observe(canvas);
+    for (const label of labels) observer.observe(label);
+
+    let isCurrent = true;
+    void document.fonts.ready.then(() => {
+      if (isCurrent) measureMap();
+    });
+    return () => {
+      isCurrent = false;
+      observer.disconnect();
+    };
+  }, [viewMode]);
 
   useEffect(() => {
     const paperId = new URLSearchParams(window.location.search).get('paper');
@@ -231,6 +429,17 @@ export function LzLandscape() {
     [activeIsland, query],
   );
 
+  const paperPositions = useMemo(
+    () =>
+      new Map(
+        landscape.papers.map((paper) => [
+          paper.id,
+          paperMapPosition(paper, mapGeometry),
+        ]),
+      ),
+    [mapGeometry],
+  );
+
   const visibleIds = new Set(visiblePapers.map((paper) => paper.id));
   const selectedPaper =
     visiblePapers.find((paper) => paper.id === selectedId) ??
@@ -238,6 +447,8 @@ export function LzLandscape() {
     landscape.papers.find((paper) => paper.id === selectedId) ??
     landscape.papers[0];
   const selectedIsland = islandById.get(selectedPaper.primaryIsland);
+  const selectedPosition =
+    paperPositions.get(selectedPaper.id) ?? selectedPaper;
   const selectedRelatedIds = [
     ...new Set([
       ...selectedPaper.related,
@@ -459,6 +670,7 @@ export function LzLandscape() {
             <div className="map-viewport">
               <div
                 className="map-canvas"
+                ref={mapCanvasRef}
                 style={{ transform: `scale(${zoom})` }}
               >
                 <svg
@@ -483,14 +695,16 @@ export function LzLandscape() {
                       (paper) => paper.id === relatedId,
                     );
                     if (!related || !visibleIds.has(related.id)) return null;
+                    const relatedPosition =
+                      paperPositions.get(related.id) ?? related;
                     return (
                       <line
                         key={related.id}
                         className="relation-line"
-                        x1={selectedPaper.x}
-                        y1={selectedPaper.y}
-                        x2={related.x}
-                        y2={related.y}
+                        x1={selectedPosition.x}
+                        y1={selectedPosition.y}
+                        x2={relatedPosition.x}
+                        y2={relatedPosition.y}
                       />
                     );
                   })}
@@ -519,7 +733,10 @@ export function LzLandscape() {
                       <div className="island-ring island-ring--outer" />
                       <div className="island-ring island-ring--inner" />
                       <div className="island-fill" />
-                      <div className="island-label">
+                      <div
+                        className="island-label"
+                        data-island-label={island.id}
+                      >
                         <span>{island.label}</span>
                         <small>{island.kicker}</small>
                       </div>
@@ -531,6 +748,7 @@ export function LzLandscape() {
                   const island = islandById.get(paper.primaryIsland) as Island;
                   const isVisible = visibleIds.has(paper.id);
                   const isSelected = selectedPaper.id === paper.id;
+                  const position = paperPositions.get(paper.id) ?? paper;
                   return (
                     <button
                       type="button"
@@ -539,8 +757,8 @@ export function LzLandscape() {
                       style={
                         {
                           '--node-color': island.color,
-                          left: `${paper.x}%`,
-                          top: `${paper.y}%`,
+                          left: `${position.x}%`,
+                          top: `${position.y}%`,
                         } as React.CSSProperties
                       }
                       onClick={() => selectPaper(paper.id)}

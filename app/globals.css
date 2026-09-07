@@ -578,12 +578,16 @@ a {
 
 .island-label {
   position: absolute;
-  z-index: 2;
+  z-index: 6;
   left: 10%;
   top: 10%;
   display: grid;
   gap: 2px;
+  padding: 3px 5px 4px;
+  border-radius: 5px;
+  background: rgba(246, 246, 239, 0.76);
   color: color-mix(in srgb, var(--island-color), #27312e 22%);
+  box-shadow: 0 0 0 3px rgba(246, 246, 239, 0.24);
   pointer-events: none;
 }
 
