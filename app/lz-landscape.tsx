@@ -123,6 +123,29 @@ function roleLabel(role: Paper['role']) {
   return labels[role];
 }
 
+const MAX_TOOLTIP_AUTHORS = 4;
+const MAX_TOOLTIP_AUTHOR_CHARACTERS = 80;
+
+function tooltipAuthorLabel(authors: readonly string[]) {
+  const names = authors.map((author) => author.trim()).filter(Boolean);
+  const collaboration = names.find((author) =>
+    /\b(?:collaboration|consortium)\b/i.test(author),
+  );
+  if (collaboration) return collaboration;
+  if (!names.length) return null;
+  if (names.length === 1) return names[0];
+
+  const fullAuthorList = names.join(', ');
+  if (
+    names.length === 2 ||
+    (names.length <= MAX_TOOLTIP_AUTHORS &&
+      fullAuthorList.length <= MAX_TOOLTIP_AUTHOR_CHARACTERS)
+  ) {
+    return fullAuthorList;
+  }
+  return `${names[0]} et al.`;
+}
+
 function filterPapers(query: string, islandId: string) {
   const normalized = query.trim().toLowerCase();
   return landscape.papers.filter((paper) => {
@@ -725,6 +748,7 @@ export function LzLandscape() {
                 </svg>
 
                 {landscape.islands.map((island) => {
+                  if (island.id === 'observation') return null;
                   const hasVisiblePaper = landscape.papers.some(
                     (paper) =>
                       visibleIds.has(paper.id) &&
@@ -734,6 +758,7 @@ export function LzLandscape() {
                     <div
                       className={`island ${hasVisiblePaper ? '' : 'is-dimmed'}`}
                       key={`island-${island.id}`}
+                      aria-hidden="true"
                       style={
                         {
                           '--island-color': island.color,
@@ -744,7 +769,6 @@ export function LzLandscape() {
                         } as React.CSSProperties
                       }
                     >
-                      <div className="island-ring island-ring--inner" />
                       <div className="island-fill" />
                     </div>
                   );
@@ -794,11 +818,20 @@ export function LzLandscape() {
                       : position.x > 100 - tooltipEdgeThreshold
                         ? 'paper-node--tooltip-left'
                         : '';
+                  const tooltipVerticalThreshold = mapGeometry?.height
+                    ? (130 / mapGeometry.height) * 100
+                    : 24;
+                  const tooltipVerticalClass =
+                    position.y < tooltipVerticalThreshold
+                      ? 'paper-node--tooltip-below'
+                      : '';
+                  const authorLabel = tooltipAuthorLabel(paper.authors);
+                  const tooltipAuthorId = `paper-authors-${paper.id}`;
                   return (
                     <button
                       type="button"
                       key={paper.id}
-                      className={`paper-node paper-node--${paper.role} ${tooltipEdgeClass} ${isSelected ? 'is-selected' : ''} ${isVisible ? '' : 'is-hidden'}`}
+                      className={`paper-node paper-node--${paper.role} ${tooltipEdgeClass} ${tooltipVerticalClass} ${isSelected ? 'is-selected' : ''} ${isVisible ? '' : 'is-hidden'}`}
                       style={
                         {
                           '--node-color': island.color,
@@ -809,6 +842,9 @@ export function LzLandscape() {
                       onClick={() => selectPaper(paper.id)}
                       data-paper-node={paper.id}
                       aria-label={`Open ${paper.title}`}
+                      aria-describedby={
+                        authorLabel ? tooltipAuthorId : undefined
+                      }
                       aria-pressed={isSelected}
                     >
                       <span>
@@ -818,7 +854,9 @@ export function LzLandscape() {
                       </span>
                       <span className="node-tooltip">
                         <strong>{paper.title}</strong>
-                        <small>{paper.authors[0]}</small>
+                        {authorLabel && (
+                          <small id={tooltipAuthorId}>{authorLabel}</small>
+                        )}
                       </span>
                     </button>
                   );

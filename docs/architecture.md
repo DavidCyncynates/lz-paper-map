@@ -91,10 +91,11 @@ adjustments, and adding a paper can cause local spacing changes without altering
 the committed atlas. A global change to the semantic coordinates remains an
 explicit new atlas version reviewed like any other editorial change.
 
-The current contour shapes are restrained visual regions rather than inferred
-statistical confidence areas. Follow-up circle size is intentionally uniform;
-the experimental anchor is slightly larger. Citation counts are especially
-misleading for papers only days old and do not affect the display.
+The shaded island blobs are restrained visual regions rather than inferred
+statistical confidence areas; the experimental anchor does not need a separate
+blob. Follow-up circle size is intentionally uniform, while the experimental
+anchor is slightly larger. Citation counts are especially misleading for papers
+only days old and do not affect the display.
 
 ## Daily lifecycle
 

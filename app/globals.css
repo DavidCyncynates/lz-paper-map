@@ -558,28 +558,20 @@ a {
   filter: grayscale(0.6);
 }
 
-.island-ring,
 .island-fill {
   position: absolute;
+  inset: -1%;
   border-radius: 48% 52% 56% 44% / 49% 43% 57% 51%;
+  background: radial-gradient(
+    ellipse at 48% 48%,
+    color-mix(in srgb, var(--island-color), transparent 86%) 0%,
+    color-mix(in srgb, var(--island-color), transparent 91%) 68%,
+    transparent 100%
+  );
   transform: rotate(-2deg);
 }
 
-.island-ring--inner {
-  inset: -3%;
-  border: 1px solid color-mix(in srgb, var(--island-color), transparent 72%);
-  border-radius: 54% 46% 48% 52% / 43% 52% 48% 57%;
-  transform: rotate(2deg);
-}
-
-.island-fill {
-  inset: 0;
-  border: 1px solid color-mix(in srgb, var(--island-color), transparent 64%);
-  background: color-mix(in srgb, var(--island-color), transparent 92%);
-}
-
-.island:nth-of-type(even) .island-fill,
-.island:nth-of-type(even) .island-ring {
+.island:nth-of-type(even) .island-fill {
   border-radius: 58% 42% 49% 51% / 45% 58% 42% 55%;
 }
 
@@ -744,6 +736,20 @@ a {
   transform-origin: right bottom;
 }
 
+.paper-node--tooltip-below .node-tooltip {
+  top: calc(100% + 12px);
+  bottom: auto;
+  transform-origin: center top;
+}
+
+.paper-node--tooltip-below.paper-node--tooltip-right .node-tooltip {
+  transform-origin: left top;
+}
+
+.paper-node--tooltip-below.paper-node--tooltip-left .node-tooltip {
+  transform-origin: right top;
+}
+
 .paper-node:hover .node-tooltip,
 .paper-node:focus-visible .node-tooltip {
   display: grid;
@@ -760,6 +766,8 @@ a {
   color: #7a7f79;
   font-size: 9px;
   font-weight: 500;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
 }
 
 .empty-map,
