@@ -579,10 +579,17 @@ def append_step_summary(lines: list[str]) -> None:
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser(
+        description="Validate the LZ Paper Map catalog."
+    )
     parser.add_argument("--validate-only", action="store_true")
-    parser.add_argument("--feed-file", help="Use a saved Atom feed instead of the network")
     args = parser.parse_args()
+
+    if not args.validate_only:
+        parser.error(
+            "The legacy API-based update mode is retired. "
+            "Run this script with --validate-only."
+        )
 
     landscape = load_json(LANDSCAPE_PATH)
     candidate_store = load_json(CANDIDATES_PATH, {"schemaVersion": 1, "items": []})
@@ -591,7 +598,7 @@ def main() -> int:
         print(f"Validated {len(landscape['papers'])} papers and {len(landscape['islands'])} islands.")
         return 0
 
-    records = [record for record in fetch_arxiv(args.feed_file) if deterministic_relevance(record)]
+    records = [record for record in fetch_arxiv(None) if deterministic_relevance(record)]
     existing_by_id = {paper["id"]: paper for paper in landscape["papers"]}
     revised_records = [
         {**record, "previousUpdated": existing_by_id[record["id"]].get("updated")}

@@ -16,19 +16,16 @@ ordinary version-controlled data changes.
 ## System shape
 
 ```text
-arXiv Atom API
+public arXiv listings, abstract pages, HTML, and PDFs
       │
       ▼
-deterministic fetch, normalization, and relevance pre-filter
+local scheduled Codex review in an isolated worktree
       │
       ▼
-OpenAI structured output: relevance, role, existing idea IDs, neutral summary
+reference verification + schema checks + stable placement
       │
       ▼
-schema checks + stable placement for new circles
-      │
-      ▼
-daily review pull request ── human merge ── GitHub Pages deployment
+review pull request ── human merge ── GitHub Pages deployment
 ```
 
 There is no database or production server. The browser reads the committed
@@ -39,20 +36,20 @@ the generated asset folder so GitHub Pages can mount the artifact at that path.
 ## Trust boundaries
 
 - arXiv is authoritative for identifiers, titles, authors, dates, and links.
-- The model may suggest only relevance, role, existing island membership, tags,
-  a neutral summary, and a short inclusion rationale.
+- The scheduled task may propose only relevance, role, existing island
+  membership, tags, a neutral summary, and a short inclusion rationale.
 - Citation edges are checked separately against arXiv paper reference lists.
   References to the official LZ preprint are normalized to its mapped arXiv ID.
   The model never infers citations from abstracts, dates, or proximity.
-- Titles and abstracts are passed to the model as explicitly untrusted quoted
-  data. The model has no tools and cannot write to the repository.
-- Model output must satisfy a strict JSON schema. Invalid output fails the run.
-- Existing papers are never deleted or moved by the daily script.
-- A high-confidence threshold is required for a proposed inclusion. Uncertain
-  results stay in the candidate log for review.
-- A safety cap stops the run if the search suddenly produces an implausibly
-  large number of new candidates.
-- The API key exists only as the `OPENAI_API_KEY` GitHub Actions secret.
+- Titles, abstracts, and paper contents are untrusted source material, never
+  instructions for the scheduled task.
+- Proposed catalog data must satisfy the repository schema. Invalid data fails
+  the run.
+- Existing papers are never deleted or moved by the scheduled task.
+- Only clearly and directly relevant papers are proposed for inclusion.
+  Ambiguous results stay in the candidate log for review.
+- The scheduled workflow uses neither an OpenAI developer API key nor the arXiv
+  Atom API.
 
 ## Catalog and taxonomy
 
@@ -75,7 +72,7 @@ The first atlas uses nine fixed islands:
 8. elastic momentum-dependent portals; and
 9. constraints and discriminants.
 
-The taxonomy is deliberately human-owned. A daily model call cannot create,
+The taxonomy is deliberately human-owned. The scheduled task cannot create,
 rename, split, or delete an island. A proposed taxonomy change should be a
 separate, discussed atlas revision.
 
@@ -83,7 +80,7 @@ separate, discussed atlas revision.
 
 Researchers should be able to build a mental map over time. For that reason,
 the browser never runs a random or continuously moving force layout, and the
-daily job does not rewrite existing semantic coordinates.
+scheduled task does not rewrite existing semantic coordinates.
 
 Each island has a fixed region. A new paper is attracted mostly toward its
 primary island and partly toward any secondary islands. A hash of the arXiv ID
@@ -110,30 +107,33 @@ from producing a starburst of lines.
 
 ## Daily lifecycle
 
-At 05:17 UTC, the scheduled workflow:
+At 23:00 US Eastern, Sunday through Thursday, the scheduled task:
 
-1. makes one arXiv API query for LUX-ZEPLIN and event-specific phrases;
-2. normalizes and deduplicates results;
-3. refreshes source metadata for known IDs and detects new arXiv revisions;
-4. sends genuinely new or revised, deterministically relevant records to the
-   OpenAI Responses API using strict structured output;
-5. validates taxonomy references, URLs, coordinates, roles, and citation IDs;
-6. writes an auditable run manifest; and
-7. opens or updates one pull request for human review.
+1. inspects arXiv's public new-listing and search pages for LUX-ZEPLIN and
+   event-specific phrases, with an overlap window for delayed or missed runs;
+2. deduplicates results by versionless arXiv ID and checks known abstract pages
+   for new revisions;
+3. conservatively screens genuinely new or revised records for relevance to the
+   isolated 248 keV candidate;
+4. verifies outgoing citations from each affected paper's current arXiv HTML
+   reference list or PDF reference section;
+5. on Sundays, reconciles the reference lists of every mapped paper to repair
+   older omissions as well as changes associated with new revisions;
+6. validates taxonomy references, URLs, coordinates, roles, and citation IDs;
+7. writes a concise source audit when data changes; and
+8. opens a new pull request for human review.
 
-Revised interpretation papers can receive refreshed summaries and idea
-memberships, but retain their coordinates. A revision to the experimental anchor
-is never summarized automatically: it creates a mandatory-review entry so a
-human can update the event facts, summary, and takeaway while its role, island,
-and coordinates stay locked. If arXiv or OpenAI is unavailable, the previous
-site remains untouched. A merge to `main` triggers a fresh static build and
-GitHub Pages deployment. When a review pull request remains open, later scans
-pause. This prevents repeated model calls and avoids overwriting reviewer edits
-or newer corrections on `main`.
+Existing human-reviewed summaries, island memberships, and coordinates remain
+fixed. When a revision makes one of those fields questionable, the task flags it
+for human review instead of silently rewriting it. A revision to the
+experimental anchor always creates a mandatory-review entry. If arXiv is
+unavailable, the previous site remains untouched. A merge to `main` triggers a
+fresh static build and GitHub Pages deployment. When a maintenance pull request
+remains open, later scans pause to avoid overwriting reviewer edits or newer
+corrections on `main`.
 
-Excluded and uncertain candidates retain their source update date. They are not
-re-screened unchanged, but a later arXiv revision makes them eligible for a new
-structured review.
+Uncertain candidates retain their source update date for human review. A later
+arXiv revision may make them eligible for a new assessment.
 
 ## Research interface
 
@@ -150,15 +150,14 @@ endorsement nor peer review.
 ## Reproducibility and review
 
 Every meaningful scan writes a manifest under `data/runs/` with its timestamp,
-query endpoint, prompt version, model and response IDs, and result counts. The
-candidate log preserves rejected and uncertain suggestions. Git history then
-records exactly what a reviewer accepted.
+public source pages, changed records, citation evidence, and validation results.
+The candidate log preserves uncertain suggestions. Git history then records
+exactly what a reviewer accepted.
 
-The next useful upgrades are deterministic reference-list refreshes, manual
-field locks, a contribution/correction form backed by GitHub Issues, periodic
-refreshes of all known arXiv versions, and embeddings for suggesting conceptual
-neighbors without drawing them as citation edges. None is required for the
-first public version.
+The next useful upgrades are manual field locks, a contribution/correction form
+backed by GitHub Issues, and embeddings for suggesting conceptual neighbors
+without drawing them as citation edges. None is required for the first public
+version.
 
 ## Precedents and primary references
 
@@ -168,7 +167,6 @@ first public version.
   regions and an explicit explanation of what proximity means.
 - [Connected Papers](https://www.connectedpapers.com/about) for later
   citation-based relatedness.
-- [arXiv API manual](https://info.arxiv.org/help/api/user-manual.html) and
-  [terms of use](https://info.arxiv.org/help/api/tou.html).
-- [OpenAI Structured Outputs](https://developers.openai.com/api/docs/guides/structured-outputs).
+- [arXiv announcement schedule](https://info.arxiv.org/help/availability.html).
+- [Codex scheduled tasks](https://learn.chatgpt.com/docs/automations).
 - [GitHub Pages custom workflows](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages).

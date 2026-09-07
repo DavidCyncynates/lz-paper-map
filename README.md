@@ -17,12 +17,13 @@ outgoing paper links come from arXiv.
 
 ## Architecture
 
-The site is a static export hosted by GitHub Pages. A scheduled GitHub Action
-queries arXiv daily, uses the OpenAI Responses API only for schema-constrained
-semantic suggestions, validates the result, and opens a pull request. A human
-merge publishes the update. Committed coordinates remain fixed semantic anchors;
-the browser applies a deterministic, non-animated spacing pass so nearby papers
-and island labels remain legible at each screen size.
+The site is a static export hosted by GitHub Pages. A local Codex scheduled task
+reviews arXiv's public web pages after each announcement, validates any proposed
+catalog changes, and opens a pull request. It uses the signed-in Codex account,
+not an OpenAI developer API key or the arXiv API. A human merge publishes the
+update. Committed coordinates remain fixed semantic anchors; the browser applies
+a deterministic, non-animated spacing pass so nearby papers and island labels
+remain legible at each screen size.
 
 The full rationale, data contract, trust boundaries, stable-layout policy, and
 failure behavior are in [docs/architecture.md](docs/architecture.md).
@@ -49,42 +50,46 @@ pnpm build
 
 The static site is written to `dist/client`.
 
-## Deployment and automation setup
+## Deployment and scheduled maintenance
 
 Pushes to `main` are validated and published automatically at the live address
 above. The Pages workflow also supports forks published either as project sites
 or root user/organization Pages sites.
 
-To enable daily update proposals, the repository owner must complete two
-security-sensitive settings:
+The literature review runs as a standalone Codex desktop task at 23:00 US
+Eastern, Sunday through Thursday: three hours after arXiv's nominal 20:00
+announcement. `America/New_York` is the scheduling timezone so daylight-saving
+changes do not shift that relationship. The computer must be awake and the
+Codex app must be running.
 
-1. In **Settings → Actions → General**, allow GitHub Actions to create pull
-   requests for this repository.
-2. In **Settings → Secrets and variables → Actions**, add a repository secret
-   named `OPENAI_API_KEY`.
+The task is instructed to use a dedicated worktree and public arXiv listing,
+abstract, HTML, and PDF pages. It checks for new papers and revisions, verifies
+outgoing citations from reference lists, and derives “cited by” relationships
+from those verified outgoing citations. On Sundays it reconciles the full
+mapped citation graph, which also repairs older omissions. It never calls the
+OpenAI developer API or arXiv Atom API.
 
-An optional Actions variable named `OPENAI_MODEL` selects the model and defaults
-to `gpt-5-mini`.
+The task never publishes directly. A substantive change is proposed on a
+`codex/arxiv-daily-*` branch and pull request for human review; a no-change run
+does nothing. If an earlier maintenance pull request is still open, the next run
+pauses instead of competing with it. The first few runs should be reviewed
+closely before considering any more permissive publication policy.
 
-The daily scan runs at 05:17 UTC. It never publishes directly: it opens or
-updates the `automation/arxiv-daily` pull request for review. If there are no
-changes, it does nothing. While that review pull request is open, later scans
-pause rather than overwrite reviewer edits or newer corrections on `main`.
-
-GitHub automatically disables scheduled workflows in public repositories after
-60 days without repository activity. If the project has been quiet for that
-long, re-enable the workflow from the Actions tab; use an external scheduler if
-uninterrupted monitoring is essential.
+The local task needs unattended access to public arXiv pages and to this GitHub
+repository. Before the first run, verify those permissions and an authenticated
+GitHub CLI session, then test one run manually. Without them, research or pull
+request creation will stop safely and require attention.
 
 ## Editing the atlas
 
 The public catalog is [data/landscape.json](data/landscape.json). Island IDs are
 stable editorial concepts. To make a manual correction, edit the record, run
-the validation command, and commit the change. To test ingestion without a
-network call, pass a saved Atom feed with `--feed-file path/to/feed.xml`.
+the validation command, and commit the change. The legacy update script remains
+available as a validator, but its network/API update mode is disabled; the
+scheduled task runs it only with `--validate-only`.
 
 Successful scans that change data add an audit record under `data/runs/`.
-Screened candidates, including uncertain or excluded records, are retained in
+Uncertain candidates that need human judgment are retained in
 `data/candidates.json`.
 
-Thank you to arXiv for use of its open-access interoperability.
+Thank you to arXiv for its public open-access literature pages.
