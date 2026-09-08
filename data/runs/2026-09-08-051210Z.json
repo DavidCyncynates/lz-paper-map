@@ -1,0 +1,99 @@
+{
+  "schemaVersion": 1,
+  "runId": "2026-09-08-051210Z",
+  "runAt": "2026-09-08T05:12:10Z",
+  "scanWindow": {
+    "previousSuccessfulScan": "2026-09-07T09:00:00Z",
+    "overlapStart": "2026-08-31T09:00:00Z"
+  },
+  "listingSources": [
+    "https://arxiv.org/list/hep-ph/new",
+    "https://arxiv.org/list/hep-ex/new",
+    "https://arxiv.org/list/astro-ph/new"
+  ],
+  "searchSources": [
+    "https://arxiv.org/search/?query=%22LUX-ZEPLIN%22&searchtype=all&abstracts=show&order=-announced_date_first&size=200",
+    "https://arxiv.org/search/?query=LZ+248+keV&searchtype=all&abstracts=show&order=-announced_date_first&size=100",
+    "https://arxiv.org/search/?query=LZ+high+recoil&searchtype=all&abstracts=show&order=-announced_date_first&size=100",
+    "https://arxiv.org/search/?query=LZ+nuclear-recoil+candidate&searchtype=all&abstracts=show&order=-announced_date_first&size=100",
+    "https://arxiv.org/search/?query=Search+for+dark+matter+particle+interactions+in+an+extended+nuclear+recoil+energy+window&searchtype=all&abstracts=show&order=-announced_date_first&size=100"
+  ],
+  "discovery": {
+    "newPapers": [],
+    "ambiguousCandidates": []
+  },
+  "revisions": [
+    {
+      "id": "2609.01504",
+      "previousUpdated": "2026-09-01",
+      "updated": "2026-09-03",
+      "source": "https://arxiv.org/abs/2609.01504",
+      "assessment": "v2 emphasizes halo-tail uncertainty and the solar-capture constraint; existing editorial fields remain accurate"
+    },
+    {
+      "id": "2609.02807",
+      "previousUpdated": "2026-09-02",
+      "updated": "2026-09-04",
+      "source": "https://arxiv.org/abs/2609.02807",
+      "assessment": "v2 revises scattering normalization and numerical benchmarks; existing neutral summary remains accurate"
+    },
+    {
+      "id": "2609.02868",
+      "previousUpdated": "2026-09-02",
+      "updated": "2026-09-03",
+      "source": "https://arxiv.org/abs/2609.02868",
+      "assessment": "v2 metadata and current abstract verified; existing editorial fields remain accurate"
+    }
+  ],
+  "citationReconciliation": {
+    "scope": "all 22 mapped papers",
+    "changes": [],
+    "uncertain": [],
+    "referenceSources": [
+      "https://arxiv.org/html/2609.02823",
+      "https://arxiv.org/html/2609.01475",
+      "https://arxiv.org/pdf/2609.01504",
+      "https://arxiv.org/html/2609.01583",
+      "https://arxiv.org/html/2609.01590",
+      "https://arxiv.org/html/2609.01592",
+      "https://arxiv.org/html/2609.01892",
+      "https://arxiv.org/html/2609.02505",
+      "https://arxiv.org/html/2609.02608",
+      "https://arxiv.org/html/2609.02775",
+      "https://arxiv.org/html/2609.02807",
+      "https://arxiv.org/html/2609.02868",
+      "https://arxiv.org/html/2609.02994",
+      "https://arxiv.org/html/2609.04144",
+      "https://arxiv.org/html/2609.04163",
+      "https://arxiv.org/html/2609.04175",
+      "https://arxiv.org/html/2609.04181",
+      "https://arxiv.org/html/2609.04185",
+      "https://arxiv.org/html/2609.04186",
+      "https://arxiv.org/html/2609.04673",
+      "https://arxiv.org/html/2609.05204",
+      "https://arxiv.org/html/2609.05291"
+    ]
+  },
+  "validation": [
+    {
+      "command": "python3 scripts/update_papers.py --validate-only",
+      "status": "passed"
+    },
+    {
+      "command": "pnpm typecheck",
+      "status": "passed"
+    },
+    {
+      "command": "pnpm lint",
+      "status": "passed"
+    },
+    {
+      "command": "pnpm build",
+      "status": "passed"
+    },
+    {
+      "command": "git diff --check",
+      "status": "passed"
+    }
+  ]
+}

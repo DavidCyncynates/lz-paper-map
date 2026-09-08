@@ -1,8 +1,8 @@
 {
   "schemaVersion": 2,
   "title": "LZ high-recoil literature landscape",
-  "updatedAt": "2026-09-07",
-  "lastSuccessfulScan": "2026-09-07T09:00:00Z",
+  "updatedAt": "2026-09-08",
+  "lastSuccessfulScan": "2026-09-08T05:12:10Z",
   "event": {
     "energyKev": 248,
     "statisticalUncertaintyKev": 23,
@@ -12,7 +12,7 @@
   },
   "citationData": {
     "source": "arXiv reference lists",
-    "checkedAt": "2026-09-07",
+    "checkedAt": "2026-09-08",
     "scope": "Citations between papers in this map",
     "note": "References to the official LZ preprint are normalized to arXiv:2609.02823."
   },
@@ -165,7 +165,7 @@
       "title": "Higgsino Above the Sea of Fog",
       "authors": ["JiJi Fan", "Matthew Reece"],
       "published": "2026-09-01",
-      "updated": "2026-09-01",
+      "updated": "2026-09-03",
       "role": "explanation",
       "primaryIsland": "higgsino",
       "islands": ["higgsino", "endothermic"],
@@ -349,7 +349,7 @@
       "title": "A Peccei-Quinn Origin for Inelastic Electroweak Dark Matter after LUX-ZEPLIN",
       "authors": ["Luca Visinelli"],
       "published": "2026-09-02",
-      "updated": "2026-09-02",
+      "updated": "2026-09-04",
       "role": "explanation",
       "primaryIsland": "higgsino",
       "islands": ["higgsino", "endothermic"],
@@ -381,7 +381,7 @@
       "title": "Inelastic Dark Photon Dark Matter for the LUX-ZEPLIN High-Recoil Event and the Galactic Halo Gamma-Ray Excess",
       "authors": ["Kimiko Yamashita"],
       "published": "2026-09-02",
-      "updated": "2026-09-02",
+      "updated": "2026-09-03",
       "role": "explanation",
       "primaryIsland": "endothermic",
       "islands": ["endothermic", "multimessenger"],
