@@ -56,11 +56,11 @@ Pushes to `main` are validated and published automatically at the live address
 above. The Pages workflow also supports forks published either as project sites
 or root user/organization Pages sites.
 
-The literature review runs as a standalone Codex desktop task at 23:00 US
-Eastern, Sunday through Thursday: three hours after arXiv's nominal 20:00
-announcement. `America/New_York` is the scheduling timezone so daylight-saving
-changes do not shift that relationship. The computer must be awake and the
-Codex app must be running.
+The literature review runs as a standalone Codex desktop task every day at
+12:00 in `Europe/Rome`. This leaves a generous buffer after arXiv's nominal
+20:00 US Eastern announcement, including during the brief periods when European
+and US daylight-saving transitions do not align. The computer must be awake and
+the Codex app must be running.
 
 The task is instructed to use a dedicated worktree and public arXiv listing,
 abstract, HTML, and PDF pages. It checks for new papers and revisions, verifies

@@ -107,7 +107,7 @@ from producing a starburst of lines.
 
 ## Daily lifecycle
 
-At 23:00 US Eastern, Sunday through Thursday, the scheduled task:
+At 12:00 Europe/Rome every day, the scheduled task:
 
 1. inspects arXiv's public new-listing and search pages for LUX-ZEPLIN and
    event-specific phrases, with an overlap window for delayed or missed runs;
