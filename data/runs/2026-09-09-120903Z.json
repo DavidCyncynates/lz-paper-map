@@ -1,0 +1,139 @@
+{
+  "schemaVersion": 1,
+  "runId": "2026-09-09-120903Z",
+  "runAt": "2026-09-09T12:09:03Z",
+  "runType": "targeted-manual-correction",
+  "coverageComplete": false,
+  "catalogTimestampAdvanced": false,
+  "coverageNote": "This targeted follow-up verified a reported omission; it was not a complete discovery scan, so lastSuccessfulScan remains unchanged.",
+  "scanWindow": {
+    "previousSuccessfulScan": "2026-09-09T10:31:08Z",
+    "overlapStart": "2026-09-02T10:31:08Z"
+  },
+  "listingSources": [
+    "https://arxiv.org/list/hep-ph/new",
+    "https://arxiv.org/list/hep-ex/new",
+    "https://arxiv.org/list/astro-ph/new"
+  ],
+  "searchSources": [
+    "https://arxiv.org/search/?query=%22LUX-ZEPLIN%22&searchtype=all&abstracts=show&order=-announced_date_first&size=200",
+    "https://arxiv.org/search/?query=LZ+248+keV&searchtype=all&abstracts=show&order=-announced_date_first&size=100",
+    "https://arxiv.org/search/?query=LZ+high+recoil&searchtype=all&abstracts=show&order=-announced_date_first&size=100",
+    "https://arxiv.org/search/?query=LZ+nuclear-recoil+candidate&searchtype=all&abstracts=show&order=-announced_date_first&size=100",
+    "https://arxiv.org/search/?query=Search+for+dark+matter+particle+interactions+in+an+extended+nuclear+recoil+energy+window&searchtype=all&abstracts=show&order=-announced_date_first&size=100"
+  ],
+  "discovery": {
+    "newPapers": [
+      {
+        "id": "2609.09107",
+        "source": "https://arxiv.org/abs/2609.09107",
+        "relevance": "The authors model the specific LZ event with magnetic inelastic dark baryons and propose a coincident-photon discriminator.",
+        "role": "explanation",
+        "islands": [
+          "endothermic",
+          "constraints"
+        ],
+        "cites": [
+          "2609.01475",
+          "2609.01504",
+          "2609.01583",
+          "2609.01590",
+          "2609.01592",
+          "2609.01892",
+          "2609.02505",
+          "2609.02608",
+          "2609.02775",
+          "2609.02807",
+          "2609.02823",
+          "2609.02868",
+          "2609.02994",
+          "2609.04144",
+          "2609.04163",
+          "2609.04175",
+          "2609.04181",
+          "2609.04185",
+          "2609.04186",
+          "2609.04673",
+          "2609.05204",
+          "2609.05291"
+        ],
+        "referenceSource": "https://arxiv.org/html/2609.09107",
+        "referenceCount": 144
+      }
+    ],
+    "screenedOut": [
+      {
+        "id": "2609.06494",
+        "source": "https://arxiv.org/abs/2609.06494",
+        "reason": "Generic dark-matter model constrained by standard LZ results; it does not address the isolated 248 keV candidate."
+      }
+    ],
+    "uncertainCandidates": []
+  },
+  "revisions": {
+    "submissionHistoriesChecked": 47,
+    "changed": [],
+    "questionableEditorialFields": []
+  },
+  "citations": {
+    "checkedPapers": [
+      "2609.09107"
+    ],
+    "changes": [
+      {
+        "id": "2609.09107",
+        "added": [
+          "2609.01475",
+          "2609.01504",
+          "2609.01583",
+          "2609.01590",
+          "2609.01592",
+          "2609.01892",
+          "2609.02505",
+          "2609.02608",
+          "2609.02775",
+          "2609.02807",
+          "2609.02823",
+          "2609.02868",
+          "2609.02994",
+          "2609.04144",
+          "2609.04163",
+          "2609.04175",
+          "2609.04181",
+          "2609.04185",
+          "2609.04186",
+          "2609.04673",
+          "2609.05204",
+          "2609.05291"
+        ],
+        "removed": [],
+        "source": "https://arxiv.org/html/2609.09107",
+        "referenceCount": 144
+      }
+    ],
+    "uncertain": []
+  },
+  "validation": [
+    {
+      "command": "python3 scripts/update_papers.py --validate-only",
+      "status": "passed"
+    },
+    {
+      "command": "pnpm typecheck",
+      "status": "passed"
+    },
+    {
+      "command": "pnpm lint",
+      "status": "passed"
+    },
+    {
+      "command": "pnpm build",
+      "status": "passed",
+      "note": "The local static prerender build required loopback socket permission."
+    },
+    {
+      "command": "git diff --check",
+      "status": "passed"
+    }
+  ]
+}

@@ -6,6 +6,8 @@ export type PaperLayoutAnchor = LayoutPoint & {
   mobility?: number;
   anchorStrength?: number;
   maxDisplacement?: number;
+  clusterId?: string;
+  clusterStrength?: number;
 };
 
 export type LabelLayoutAnchor = LayoutPoint & {
@@ -29,6 +31,7 @@ type PaperBody = PaperLayoutAnchor & {
   mobility: number;
   anchorStrength: number;
   maxDisplacement: number;
+  clusterStrength: number;
 };
 
 type LabelBody = LabelLayoutAnchor & {
@@ -46,6 +49,7 @@ const ITERATIONS = 180;
 const COLLISION_CLEANUP_ITERATIONS = 36;
 const EDGE_GAP_PX = 5;
 const MAX_STEP_PX = 5;
+const DEFAULT_CLUSTER_STRENGTH = 0.022;
 
 type LayoutSpacing = {
   paperGap: number;
@@ -300,6 +304,57 @@ function addCollisionDisplacements(
 }
 
 /**
+ * Pulls only the outlying papers in each idea cluster toward its current
+ * centroid. Paper collision forces provide the opposing pressure, producing a
+ * compact, still layout without collapsing the nodes onto one another.
+ */
+function addClusterTension(
+  papers: PaperBody[],
+  displacement: Map<string, LayoutPoint>,
+  alpha: number,
+  spacing: LayoutSpacing,
+) {
+  const clusters = new Map<string, PaperBody[]>();
+  for (const paper of papers) {
+    if (!paper.clusterId || paper.clusterStrength <= 0) continue;
+    const members = clusters.get(paper.clusterId) ?? [];
+    members.push(paper);
+    clusters.set(paper.clusterId, members);
+  }
+
+  for (const clusterId of [...clusters.keys()].sort()) {
+    const members = clusters.get(clusterId) as PaperBody[];
+    if (members.length < 2) continue;
+
+    const centroid = members.reduce(
+      (sum, paper) => ({ x: sum.x + paper.x, y: sum.y + paper.y }),
+      { x: 0, y: 0 },
+    );
+    centroid.x /= members.length;
+    centroid.y /= members.length;
+    const averageRadius =
+      members.reduce((sum, paper) => sum + paper.radius, 0) / members.length;
+    const targetRadius = Math.max(
+      averageRadius * 2.4 + spacing.paperGap,
+      Math.sqrt(members.length) * (averageRadius + spacing.paperGap * 0.6),
+    );
+
+    for (const paper of members) {
+      const horizontalDistance = centroid.x - paper.x;
+      const verticalDistance = centroid.y - paper.y;
+      const distance = Math.hypot(horizontalDistance, verticalDistance);
+      const excessDistance = distance - targetRadius;
+      if (excessDistance <= 0 || distance < 0.001) continue;
+
+      const movement = displacement.get(paper.id) as LayoutPoint;
+      const correction = excessDistance * paper.clusterStrength * alpha;
+      movement.x += (horizontalDistance / distance) * correction;
+      movement.y += (verticalDistance / distance) * correction;
+    }
+  }
+}
+
+/**
  * Runs a deterministic force-relaxation pass and returns only the final state.
  * The browser never animates the simulation, so the map remains visually still.
  */
@@ -318,6 +373,12 @@ export function createStaticMapLayout(
       mobility: paper.mobility ?? 1,
       anchorStrength: paper.anchorStrength ?? 0.042,
       maxDisplacement: paper.maxDisplacement ?? Number.POSITIVE_INFINITY,
+      clusterId: paper.clusterId,
+      clusterStrength: Math.max(
+        0,
+        paper.clusterStrength ??
+          (paper.clusterId ? DEFAULT_CLUSTER_STRENGTH : 0),
+      ),
     }))
     .sort((first, second) => first.id.localeCompare(second.id));
   const labels: LabelBody[] = labelAnchors
@@ -359,6 +420,8 @@ export function createStaticMapLayout(
       movement.x += (body.anchorX - body.x) * body.anchorStrength;
       movement.y += (body.anchorY - body.y) * body.anchorStrength;
     }
+
+    addClusterTension(papers, displacement, alpha, spacing);
 
     addCollisionDisplacements(
       papers,

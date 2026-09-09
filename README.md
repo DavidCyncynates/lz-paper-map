@@ -5,9 +5,9 @@ recoil candidate announced on 1 September 2026.
 
 **Live site:** [davidcyncynates.github.io/lz-paper-map](https://davidcyncynates.github.io/lz-paper-map/)
 
-The first edition contains the LZ experimental paper and 21 response papers
-available through the 7 September arXiv listing. Nearby circles share mechanisms
-or phenomenology; the islands name the main families of ideas. Search, filters,
+The atlas contains the LZ experimental paper and the response literature found
+through the latest reviewed arXiv scan. Nearby dots share mechanisms or
+phenomenology; the islands name the main families of ideas. Search, filters,
 map/list views, paper details, and shareable paper links are built in.
 
 This is a literature-navigation aid, not a statement of scientific consensus.
@@ -22,8 +22,11 @@ reviews arXiv's public web pages after each announcement, validates any proposed
 catalog changes, and opens a pull request. It uses the signed-in Codex account,
 not an OpenAI developer API key or the arXiv API. A human merge publishes the
 update. Committed coordinates remain fixed semantic anchors; the browser applies
-a deterministic, non-animated spacing pass so nearby papers and island labels
-remain legible at each screen size.
+a deterministic, non-animated layout pass: paper dots repel, weak primary-island
+tension keeps idea families compact, and labels repel every other map element.
+Each shaded island is then drawn as a smoothed envelope around its settled
+primary papers. The canvas can be scrolled, dragged, and zoomed without changing
+the underlying semantic layout.
 
 The full rationale, data contract, trust boundaries, stable-layout policy, and
 failure behavior are in [docs/architecture.md](docs/architecture.md).
@@ -63,11 +66,14 @@ and US daylight-saving transitions do not align. The computer must be awake and
 the Codex app must be running.
 
 The task is instructed to use a dedicated worktree and public arXiv listing,
-abstract, HTML, and PDF pages. It checks for new papers and revisions, verifies
-outgoing citations from reference lists, and derives “cited by” relationships
-from those verified outgoing citations. On Sundays it reconciles the full
-mapped citation graph, which also repairs older omissions. It never calls the
-OpenAI developer API or arXiv Atom API.
+abstract, HTML, and PDF pages. Its discovery pass enumerates the relevant
+listings, reads plausible abstracts even when their titles do not name LZ, and
+adds broad phrase, citation-neighbor, and author searches. It checks for new
+papers and revisions, verifies outgoing citations from reference lists, and
+derives “cited by” relationships from those verified outgoing citations. On
+Sundays it reconciles the full mapped citation graph, which also repairs older
+omissions. It never calls the OpenAI developer API or arXiv Atom API, and an
+incomplete discovery lane cannot advance the successful-scan timestamp.
 
 The task never publishes directly. A substantive change is proposed on a
 `codex/arxiv-daily-*` branch and pull request for human review; a no-change run

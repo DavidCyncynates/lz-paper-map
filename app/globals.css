@@ -387,17 +387,19 @@ a {
 }
 
 .key-node {
-  width: 12px;
-  height: 12px;
-  border: 2px solid #61796b;
+  width: 9px;
+  height: 9px;
+  border: 1px solid #455a50;
   border-radius: 50%;
-  background: #f9f7f1;
+  background: #61796b;
 }
 
 .key-node--source {
+  width: 15px;
+  height: 15px;
   border-color: #354a62;
   background: #354a62;
-  box-shadow: 0 0 0 3px rgba(53, 74, 98, 0.13);
+  box-shadow: 0 0 0 2px rgba(53, 74, 98, 0.13);
 }
 
 .map-panel {
@@ -487,7 +489,6 @@ a {
 .paper-list {
   min-height: 545px;
   position: relative;
-  overflow: hidden;
   border: 1px solid rgba(82, 94, 87, 0.2);
   border-radius: 10px;
   background:
@@ -502,10 +503,48 @@ a {
     0 14px 38px rgba(54, 61, 56, 0.04);
 }
 
+.map-viewport {
+  overflow: auto;
+  cursor: grab;
+  overscroll-behavior: contain;
+  scrollbar-color: rgba(87, 101, 94, 0.34) transparent;
+  scrollbar-width: thin;
+  touch-action: pan-x pan-y;
+}
+
+.map-viewport:focus-visible {
+  outline: 2px solid rgba(59, 83, 75, 0.55);
+  outline-offset: 2px;
+}
+
+.map-viewport.is-panning {
+  cursor: grabbing;
+  user-select: none;
+}
+
+.map-viewport::-webkit-scrollbar {
+  width: 9px;
+  height: 9px;
+}
+
+.map-viewport::-webkit-scrollbar-thumb {
+  border: 2px solid transparent;
+  border-radius: 999px;
+  background: rgba(87, 101, 94, 0.3);
+  background-clip: padding-box;
+}
+
+.map-stage {
+  position: relative;
+  min-width: 100%;
+  min-height: 100%;
+}
+
 .map-canvas {
   position: absolute;
-  inset: 0;
-  transform-origin: 50% 50%;
+  left: 50%;
+  top: 50%;
+  transform-origin: center;
   transition: transform 220ms ease;
 }
 
@@ -518,37 +557,19 @@ a {
 
 .map-contours pattern path {
   stroke: rgba(55, 76, 69, 0.026);
-  stroke-width: 0.11;
+  stroke-width: 0.7;
 }
 
-.island {
-  --island-color: #677e68;
-  position: absolute;
+.island-shape {
+  filter: blur(5px);
   transition:
     opacity 180ms ease,
     filter 180ms ease;
 }
 
-.island.is-dimmed {
-  opacity: 0.16;
-  filter: grayscale(0.6);
-}
-
-.island-fill {
-  position: absolute;
-  inset: -1%;
-  border-radius: 48% 52% 56% 44% / 49% 43% 57% 51%;
-  background: radial-gradient(
-    ellipse at 48% 48%,
-    color-mix(in srgb, var(--island-color), transparent 86%) 0%,
-    color-mix(in srgb, var(--island-color), transparent 91%) 68%,
-    transparent 100%
-  );
-  transform: rotate(-2deg);
-}
-
-.island:nth-of-type(even) .island-fill {
-  border-radius: 58% 42% 49% 51% / 45% 58% 42% 55%;
+.island-shape.is-dimmed {
+  opacity: 0.13;
+  filter: grayscale(0.6) blur(5px);
 }
 
 .island-label {
@@ -591,20 +612,17 @@ a {
   --node-color: #61796b;
   position: absolute;
   z-index: 5;
-  width: 32px;
-  height: 32px;
+  width: 16px;
+  height: 16px;
   display: grid;
   place-items: center;
   padding: 0;
-  border: 1.5px solid var(--node-color);
+  border: 1.5px solid color-mix(in srgb, var(--node-color), #17231f 27%);
   border-radius: 50%;
-  background: rgba(250, 249, 244, 0.92);
-  color: color-mix(in srgb, var(--node-color), #1e2724 24%);
-  box-shadow: 0 1px 3px rgba(42, 53, 48, 0.1);
+  background: var(--node-color);
+  color: #fffdf7;
+  box-shadow: 0 1px 2px rgba(42, 53, 48, 0.18);
   cursor: pointer;
-  font-family: var(--font-mono-ui);
-  font-size: 8px;
-  font-weight: 650;
   transform: translate(-50%, -50%);
   transition:
     opacity 180ms ease,
@@ -613,59 +631,75 @@ a {
     background 150ms ease;
 }
 
+.paper-node::before {
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  content: '';
+}
+
 .paper-node--constraint {
   border-style: dashed;
+  border-color: rgba(255, 253, 247, 0.92);
 }
 
 .paper-node--diagnostic {
   border-style: double;
   border-width: 3px;
+  border-color: rgba(255, 253, 247, 0.92);
 }
 
 .paper-node--adjacent {
-  border-color: color-mix(in srgb, var(--node-color), transparent 28%);
-  background: rgba(250, 249, 244, 0.76);
+  border-style: dotted;
+  border-color: color-mix(in srgb, var(--node-color), #fffdf7 72%);
+  background: color-mix(in srgb, var(--node-color), #ecece4 22%);
 }
 
 .paper-node--observation {
-  width: 44px;
-  height: 44px;
+  width: 28px;
+  height: 28px;
   border-width: 0;
   background: var(--node-color);
   color: #fffdf7;
   box-shadow:
-    0 2px 8px rgba(40, 52, 63, 0.18),
-    0 0 0 3px color-mix(in srgb, var(--node-color), transparent 84%);
+    0 2px 6px rgba(40, 52, 63, 0.2),
+    0 0 0 2px color-mix(in srgb, var(--node-color), transparent 84%);
   font-family: var(--font-sans-ui);
-  font-size: 10.5px;
+  font-size: 8.5px;
   letter-spacing: 0.04em;
+}
+
+.paper-node-monogram {
+  position: relative;
+  z-index: 1;
+  font-weight: 700;
 }
 
 .paper-node:hover,
 .paper-node:focus-visible,
 .paper-node.is-selected {
   z-index: 10;
-  background: color-mix(in srgb, var(--node-color), white 86%);
+  background: color-mix(in srgb, var(--node-color), white 10%);
 }
 
 .paper-node:hover {
   box-shadow:
-    0 2px 7px rgba(42, 53, 48, 0.13),
-    0 0 0 3px color-mix(in srgb, var(--node-color), transparent 82%);
-  transform: translate(-50%, -50%) scale(1.06);
+    0 2px 5px rgba(42, 53, 48, 0.18),
+    0 0 0 3px color-mix(in srgb, var(--node-color), transparent 80%);
+  transform: translate(-50%, -50%) scale(1.12);
 }
 
 .paper-node:focus-visible {
   outline: 2px solid #243b3a;
   outline-offset: 3px;
   box-shadow: 0 2px 7px rgba(42, 53, 48, 0.13);
-  transform: translate(-50%, -50%) scale(1.06);
+  transform: translate(-50%, -50%) scale(1.12);
 }
 
 .paper-node.is-selected {
   box-shadow:
-    0 2px 8px rgba(42, 53, 48, 0.15),
-    0 0 0 4px color-mix(in srgb, var(--node-color), transparent 66%);
+    0 2px 6px rgba(42, 53, 48, 0.18),
+    0 0 0 3px color-mix(in srgb, var(--node-color), transparent 62%);
   transform: translate(-50%, -50%) scale(1.1);
 }
 
@@ -1194,6 +1228,13 @@ a {
   .screening-note {
     margin-top: 20px;
   }
+
+  .map-viewport,
+  .paper-list {
+    height: clamp(420px, 68vh, 620px);
+    height: clamp(420px, 68dvh, 620px);
+    min-height: 0;
+  }
 }
 
 @media (max-width: 680px) {
@@ -1252,7 +1293,9 @@ a {
 
   .map-viewport,
   .paper-list {
-    min-height: 470px;
+    height: clamp(380px, 72vh, 560px);
+    height: clamp(380px, 72dvh, 560px);
+    min-height: 0;
   }
 
   .map-toolbar {
@@ -1276,15 +1319,14 @@ a {
   }
 
   .paper-node {
-    width: 30px;
-    height: 30px;
-    font-size: 7.5px;
+    width: 16px;
+    height: 16px;
   }
 
   .paper-node--observation {
-    width: 40px;
-    height: 40px;
-    font-size: 10px;
+    width: 28px;
+    height: 28px;
+    font-size: 8.5px;
   }
 
   .paper-detail {
