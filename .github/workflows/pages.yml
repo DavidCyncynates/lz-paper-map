@@ -62,6 +62,9 @@ jobs:
           pnpm typecheck
           pnpm lint
 
+      - name: Test hierarchical map layout
+        run: pnpm test:layout
+
       - name: Configure Pages
         uses: actions/configure-pages@v5
 

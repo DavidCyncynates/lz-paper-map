@@ -120,6 +120,7 @@
   "papers": [
     {
       "id": "2609.02823",
+      "layoutRank": 0,
       "arxivId": "2609.02823",
       "title": "Search for dark matter particle interactions in an extended nuclear recoil energy window with the LUX-ZEPLIN (LZ) experiment",
       "authors": ["LZ Collaboration"],
@@ -138,6 +139,7 @@
     },
     {
       "id": "2609.01475",
+      "layoutRank": 1,
       "arxivId": "2609.01475",
       "title": "Inelastic Dark Matter Signature at High Recoil Energy in LUX-ZEPLIN and CRESST",
       "authors": ["Liangliang Su", "Jin Min Yang", "Wen-Na Yang"],
@@ -161,6 +163,7 @@
     },
     {
       "id": "2609.01504",
+      "layoutRank": 2,
       "arxivId": "2609.01504",
       "title": "Higgsino Above the Sea of Fog",
       "authors": ["JiJi Fan", "Matthew Reece"],
@@ -182,6 +185,7 @@
     },
     {
       "id": "2609.01583",
+      "layoutRank": 3,
       "arxivId": "2609.01583",
       "title": "Higgsino Dark Matter Interpretation of the LUX-ZEPLIN 248 keV Nuclear-Recoil Event",
       "authors": ["Katherine Freese", "Dionysios P. Theodosopoulos"],
@@ -205,6 +209,7 @@
     },
     {
       "id": "2609.01590",
+      "layoutRank": 4,
       "arxivId": "2609.01590",
       "title": "TeV Higgsino Dark Matter from LZ Nuclear Recoil to Fermi-LAT Gamma Rays",
       "authors": ["Lei Wu", "Yang Zhang", "Bin Zhu"],
@@ -223,6 +228,7 @@
     },
     {
       "id": "2609.01592",
+      "layoutRank": 5,
       "arxivId": "2609.01592",
       "title": "Fermionic Dark Matter Absorption and the High-Energy Event in LUX-ZEPLIN",
       "authors": ["Yuanchao Lou", "Chih-Ting Lu"],
@@ -246,6 +252,7 @@
     },
     {
       "id": "2609.01892",
+      "layoutRank": 6,
       "arxivId": "2609.01892",
       "title": "A PQ-Symmetric High-Scale SUSY Interpretation of the LZ High-Energy Recoil",
       "authors": ["Wen Yin"],
@@ -264,6 +271,7 @@
     },
     {
       "id": "2609.02505",
+      "layoutRank": 7,
       "arxivId": "2609.02505",
       "title": "Dark Matter as the Z₂ Partner of the Standard Model Higgs Boson",
       "authors": ["Yasunori Nomura"],
@@ -295,6 +303,7 @@
     },
     {
       "id": "2609.02608",
+      "layoutRank": 8,
       "arxivId": "2609.02608",
       "title": "Dark Matter at the Kinematic Edge: Interpreting the 248 keV LZ Nuclear-Recoil Candidate",
       "authors": ["Mattia Di Mauro"],
@@ -324,6 +333,7 @@
     },
     {
       "id": "2609.02775",
+      "layoutRank": 9,
       "arxivId": "2609.02775",
       "title": "Strong Constraints on Higgsino Dark Matter from Solar Capture",
       "authors": ["Maxim Pospelov", "Harikrishnan Ramani"],
@@ -349,6 +359,7 @@
     },
     {
       "id": "2609.02807",
+      "layoutRank": 10,
       "arxivId": "2609.02807",
       "title": "A Peccei-Quinn Origin for Inelastic Electroweak Dark Matter after LUX-ZEPLIN",
       "authors": ["Luca Visinelli"],
@@ -381,6 +392,7 @@
     },
     {
       "id": "2609.02868",
+      "layoutRank": 11,
       "arxivId": "2609.02868",
       "title": "Inelastic Dark Photon Dark Matter for the LUX-ZEPLIN High-Recoil Event and the Galactic Halo Gamma-Ray Excess",
       "authors": ["Kimiko Yamashita"],
@@ -410,6 +422,7 @@
     },
     {
       "id": "2609.02994",
+      "layoutRank": 12,
       "arxivId": "2609.02994",
       "title": "Sub-TeV Singlino Dark Matter in light from Sagittarius A* and LUX-ZEPLIN Nuclear-Recoil Event",
       "authors": [
@@ -433,6 +446,7 @@
     },
     {
       "id": "2609.04144",
+      "layoutRank": 13,
       "arxivId": "2609.04144",
       "title": "Inelastic Signatures of Electroweak Dark Matter",
       "authors": ["Juri Smirnov", "Spencer Griffith", "John F. Beacom"],
@@ -477,6 +491,7 @@
     },
     {
       "id": "2609.04163",
+      "layoutRank": 14,
       "arxivId": "2609.04163",
       "title": "TeV Higgsino Interpretation of the LZ High-Recoil Event with Intermediate-Scale Electroweak Gauginos",
       "authors": ["Xiaokang Du", "Fei Wang"],
@@ -512,6 +527,7 @@
     },
     {
       "id": "2609.04175",
+      "layoutRank": 15,
       "arxivId": "2609.04175",
       "title": "Confronting the Higgsino Interpretation of the LZ Event with the High-Energy Sideband",
       "authors": [
@@ -553,6 +569,7 @@
     },
     {
       "id": "2609.04181",
+      "layoutRank": 16,
       "arxivId": "2609.04181",
       "title": "Seasonal dark matter from the LUX-ZEPLIN high-energy event",
       "authors": ["Christopher McCabe"],
@@ -585,6 +602,7 @@
     },
     {
       "id": "2609.04185",
+      "layoutRank": 17,
       "arxivId": "2609.04185",
       "title": "Atmospheric neutrino up-scattering explanation of LZ 2026 excess",
       "authors": ["Sk Jeesun", "Anirban Majumdar"],
@@ -614,6 +632,7 @@
     },
     {
       "id": "2609.04186",
+      "layoutRank": 18,
       "arxivId": "2609.04186",
       "title": "Axion Portal Dark Matter and the LUX-ZEPLIN High-Recoil Event",
       "authors": ["James Unwin"],
@@ -649,6 +668,7 @@
     },
     {
       "id": "2609.04673",
+      "layoutRank": 19,
       "arxivId": "2609.04673",
       "title": "Exothermic and Endothermic Inelastic Dark Matter Interpretations at LZ: Sideband Constraints and Future Prospects",
       "authors": ["James B. Dent", "Jayden L. Newstead"],
@@ -679,6 +699,7 @@
     },
     {
       "id": "2609.05204",
+      "layoutRank": 20,
       "arxivId": "2609.05204",
       "title": "Exothermic Dark Matter at LZ",
       "authors": ["Carlos Henrique de Lima"],
@@ -719,6 +740,7 @@
     },
     {
       "id": "2609.05291",
+      "layoutRank": 21,
       "arxivId": "2609.05291",
       "title": "Inelastic from the Other Side: Xenon Excitation Signals in Light of the LZ High-Recoil Event",
       "authors": ["Guanhua Gu", "Lingfeng Li", "Shao-Song Tang", "Yongheng Xu"],
@@ -761,6 +783,7 @@
     },
     {
       "id": "2609.06153",
+      "layoutRank": 22,
       "arxivId": "2609.06153",
       "title": "Exothermic dark matter and the 248 keV nuclear recoil in LUX-ZEPLIN",
       "authors": [
@@ -799,6 +822,7 @@
     },
     {
       "id": "2609.06171",
+      "layoutRank": 23,
       "arxivId": "2609.06171",
       "title": "Inelastic dark matter and baryon flavor symmetry in light of LUX-ZEPLIN (LZ) experiment",
       "authors": [
@@ -845,6 +869,7 @@
     },
     {
       "id": "2609.06571",
+      "layoutRank": 24,
       "arxivId": "2609.06571",
       "title": "The Inert Doublet Model of Dark Matter and the LUX-ZEPLIN High-Recoil Event",
       "authors": [
@@ -893,6 +918,7 @@
     },
     {
       "id": "2609.06640",
+      "layoutRank": 25,
       "arxivId": "2609.06640",
       "title": "Multi-Messenger and Paleo-Detector Probes of the LZ Dark Matter Signal",
       "authors": [
@@ -945,6 +971,7 @@
     },
     {
       "id": "2609.06750",
+      "layoutRank": 26,
       "arxivId": "2609.06750",
       "title": "GUT-induced FCC signatures of the LUX-ZEPLIN event",
       "authors": [
@@ -994,6 +1021,7 @@
     },
     {
       "id": "2609.06756",
+      "layoutRank": 27,
       "arxivId": "2609.06756",
       "title": "LZ Nuclear-Recoil Excess from Boosted Light Magnetic Dipole-dipole Dark Matter",
       "authors": [
@@ -1044,6 +1072,7 @@
     },
     {
       "id": "2609.06760",
+      "layoutRank": 28,
       "arxivId": "2609.06760",
       "title": "Solar Capture Tests of Inelastic Dark Matter after the LZ High-Recoil Event",
       "authors": [
@@ -1085,6 +1114,7 @@
     },
     {
       "id": "2609.06825",
+      "layoutRank": 29,
       "arxivId": "2609.06825",
       "title": "Inelastic Self-interacting Dark Matter and LUX-ZEPLIN 248 keV Event in a Dirac Modular Inverse Seesaw",
       "authors": [
@@ -1132,6 +1162,7 @@
     },
     {
       "id": "2609.06890",
+      "layoutRank": 30,
       "arxivId": "2609.06890",
       "title": "High-Energy Nuclear Recoils from Boosted Dark Matter for the LZ 248-keV Event: Beyond the Halo-Dependent High-Velocity Tail",
       "authors": [
@@ -1182,6 +1213,7 @@
     },
     {
       "id": "2609.06909",
+      "layoutRank": 31,
       "arxivId": "2609.06909",
       "title": "Inelastic B-L scalar dark matter and the LUX-ZEPLIN event",
       "authors": [
@@ -1230,6 +1262,7 @@
     },
     {
       "id": "2609.07138",
+      "layoutRank": 32,
       "arxivId": "2609.07138",
       "title": "A Dark-Dimension Origin of Geometric Inelastic Dark Matter: The LUX-ZEPLIN High-Recoil Event and Multi-Target Tests",
       "authors": [
@@ -1267,6 +1300,7 @@
     },
     {
       "id": "2609.07225",
+      "layoutRank": 33,
       "arxivId": "2609.07225",
       "title": "Pseudo-Dirac Inelastic Dark Matter in the Leptophobic U(1)_B Model: Confronting the LUX-ZEPLIN High-Recoil Event with Collider Searches",
       "authors": [
@@ -1317,6 +1351,7 @@
     },
     {
       "id": "2609.07451",
+      "layoutRank": 34,
       "arxivId": "2609.07451",
       "title": "LZ nuclear recoil event from inelastic singlet-doublet scalar dark matter",
       "authors": [
@@ -1369,6 +1404,7 @@
     },
     {
       "id": "2609.07742",
+      "layoutRank": 35,
       "arxivId": "2609.07742",
       "title": "Boosted dark particles and the LZ nuclear recoil event",
       "authors": [
@@ -1423,6 +1459,7 @@
     },
     {
       "id": "2609.07800",
+      "layoutRank": 36,
       "arxivId": "2609.07800",
       "title": "Inelastic Singlet-Doublet Fermion Dark Matter in light of the 248 keV LZ event",
       "authors": [
@@ -1476,6 +1513,7 @@
     },
     {
       "id": "2609.07807",
+      "layoutRank": 37,
       "arxivId": "2609.07807",
       "title": "Not so good νs for Higgsino dark matter as LZ excess: stringent limits from Super-Kamiokande and IceCube",
       "authors": [
@@ -1537,6 +1575,7 @@
     },
     {
       "id": "2609.07811",
+      "layoutRank": 38,
       "arxivId": "2609.07811",
       "title": "Higgsino Dark Matter Interpretation of the LZ High-Recoil Event in the GNMSSM with TeV-Scale Gauginos",
       "authors": [
@@ -1588,6 +1627,7 @@
     },
     {
       "id": "2609.08712",
+      "layoutRank": 39,
       "arxivId": "2609.08712",
       "title": "From LUX-ZEPLIN to Colliders: Probing Higgsino Dark Matter",
       "authors": [
@@ -1640,6 +1680,7 @@
     },
     {
       "id": "2609.08893",
+      "layoutRank": 40,
       "arxivId": "2609.08893",
       "title": "ALP-mediated inelastic dark matter and the LUX-ZEPLIN high-recoil candidate event LZ230616",
       "authors": [
@@ -1694,6 +1735,7 @@
     },
     {
       "id": "2609.08993",
+      "layoutRank": 41,
       "arxivId": "2609.08993",
       "title": "A Vector-Like Lepton Interpretation of the High-Energy Nuclear Recoil Candidate in LUX-ZEPLIN",
       "authors": [
@@ -1734,6 +1776,7 @@
     },
     {
       "id": "2609.09015",
+      "layoutRank": 42,
       "arxivId": "2609.09015",
       "title": "Endothermic dark matter with a light dark photon and the LUX--ZEPLIN high-energy nuclear-recoil candidate",
       "authors": [
@@ -1787,6 +1830,7 @@
     },
     {
       "id": "2609.09037",
+      "layoutRank": 43,
       "arxivId": "2609.09037",
       "title": "Neutron disappearance and the LZ nuclear recoil event",
       "authors": [
@@ -1824,6 +1868,7 @@
     },
     {
       "id": "2609.09107",
+      "layoutRank": 44,
       "arxivId": "2609.09107",
       "title": "For Whom the Xenon Recoils: Magnetic Inelastic Dark Baryons",
       "authors": [
@@ -1879,6 +1924,7 @@
     },
     {
       "id": "2609.09136",
+      "layoutRank": 45,
       "arxivId": "2609.09136",
       "title": "A Warped Extra Dimensional Candidate for the LZ 248 keV Event",
       "authors": [
@@ -1924,6 +1970,7 @@
     },
     {
       "id": "2609.09138",
+      "layoutRank": 46,
       "arxivId": "2609.09138",
       "title": "Mixing-suppressed inelastic dark matter: a minimal model for the LZ 248 keV event",
       "authors": [

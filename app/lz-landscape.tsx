@@ -20,8 +20,11 @@ import {
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import landscape from '@/data/landscape.json';
-import { createSmoothedIslandPath } from '@/lib/island-shapes';
-import { createStaticMapLayout } from '@/lib/static-map-layout';
+import {
+  createHierarchicalMapLayout,
+  type HierarchicalIslandLayout,
+  type HierarchicalLayoutDiagnostics,
+} from '@/lib/hierarchical-map-layout';
 
 type Island = (typeof landscape.islands)[number];
 type Paper = (typeof landscape.papers)[number];
@@ -41,6 +44,13 @@ type MapGeometry = {
   height: number;
   labels: LabelGeometry[];
   papers: PaperGeometry[];
+};
+type HierarchicalLayoutAttempt = {
+  papers: Map<string, MapPoint>;
+  labels: Map<string, MapPoint>;
+  islands: Map<string, HierarchicalIslandLayout>;
+  diagnostics: HierarchicalLayoutDiagnostics;
+  errorMessage: string | null;
 };
 type PanGesture = {
   pointerId: number;
@@ -95,22 +105,31 @@ function motionSafeScrollBehavior(preferred: ScrollBehavior): ScrollBehavior {
 }
 const FOLLOW_UP_DIAMETER_PX = 16;
 const OBSERVATION_DIAMETER_PX = 28;
-const ISLAND_PADDING_PX = 30;
+const ISLAND_PADDING_PX = 24;
+const OBSERVATION_PACKING_PADDING_PX = 12;
+const ISLAND_GAP_PX = 16;
 
 const NODE_HALO_PX: Record<Paper['role'], number> = {
-  observation: 4,
-  explanation: 2,
-  constraint: 3,
-  diagnostic: 3,
-  adjacent: 2,
+  observation: 5,
+  explanation: 5,
+  constraint: 5,
+  diagnostic: 5,
+  adjacent: 5,
 };
 
-const NODE_ACTIVE_SCALE = 1.08;
+const NODE_ACTIVE_SCALE = 1.12;
 
 function islandLabelAnchor(island: Island): MapPoint {
   return {
     x: island.x + island.width * 0.5,
     y: island.y + island.height * 0.28,
+  };
+}
+
+function islandPackingAnchor(island: Island): MapPoint {
+  return {
+    x: island.x + island.width * 0.5,
+    y: island.y + island.height * 0.5,
   };
 }
 
@@ -291,11 +310,14 @@ export function LzLandscape() {
   const [zoom, setZoom] = useState(1);
   const [viewMode, setViewMode] = useState<ViewMode>('map');
   const [mapGeometry, setMapGeometry] = useState<MapGeometry | null>(null);
+  const [mapFontsReady, setMapFontsReady] = useState(false);
   const [isPanning, setIsPanning] = useState(false);
   const [tooltipPlacement, setTooltipPlacement] =
     useState<TooltipPlacement | null>(null);
   const mapViewportRef = useRef<HTMLElement>(null);
   const mapCanvasRef = useRef<HTMLDivElement>(null);
+  const mapFallbackButtonRef = useRef<HTMLButtonElement>(null);
+  const listViewButtonRef = useRef<HTMLButtonElement>(null);
   const panGestureRef = useRef<PanGesture | null>(null);
   const revealedPaperRef = useRef<string | null>(null);
   const detailTitleRef = useRef<HTMLHeadingElement>(null);
@@ -370,7 +392,10 @@ export function LzLandscape() {
 
     let isCurrent = true;
     void document.fonts.ready.then(() => {
-      if (isCurrent) measureMap();
+      if (isCurrent) {
+        measureMap();
+        setMapFontsReady(true);
+      }
     });
     return () => {
       isCurrent = false;
@@ -520,158 +545,164 @@ export function LzLandscape() {
     [activeIsland, query],
   );
 
-  const staticLayout = useMemo(() => {
-    const paperPositions = new Map<string, MapPoint>(
-      landscape.papers.map((paper) => [paper.id, { x: paper.x, y: paper.y }]),
-    );
-    const labelPositions = new Map<string, MapPoint>(
-      landscape.islands.map((island) => [island.id, islandLabelAnchor(island)]),
-    );
-    if (!mapGeometry?.width || !mapGeometry.height) {
-      return { papers: paperPositions, labels: labelPositions };
-    }
-
-    const labelGeometryById = new Map(
-      mapGeometry.labels.map((label) => [label.id, label]),
-    );
-    const paperGeometryById = new Map(
-      mapGeometry.papers.map((paper) => [paper.id, paper]),
-    );
-    const relaxedLayout = createStaticMapLayout(
-      mapGeometry.width,
-      mapGeometry.height,
-      landscape.papers.map((paper) => ({
-        id: paper.id,
-        x: (paper.x / 100) * mapGeometry.width,
-        y: (paper.y / 100) * mapGeometry.height,
-        radius:
-          ((paperGeometryById.get(paper.id)?.diameter ??
-            (paper.role === 'observation'
-              ? OBSERVATION_DIAMETER_PX
-              : FOLLOW_UP_DIAMETER_PX)) /
-            2) *
-            NODE_ACTIVE_SCALE +
-          NODE_HALO_PX[paper.role],
-        mobility: paper.role === 'observation' ? 0.38 : 1,
-        anchorStrength: paper.role === 'observation' ? 0.085 : 0.042,
-        maxDisplacement:
-          paper.role === 'observation'
-            ? Math.min(30, mapGeometry.width * 0.075)
-            : Math.min(62, Math.max(46, mapGeometry.width * 0.14)),
-        clusterId:
-          paper.role === 'observation' ? undefined : paper.primaryIsland,
-      })),
-      landscape.islands.flatMap((island) => {
-        const geometry = labelGeometryById.get(island.id);
-        if (!geometry) return [];
-        return [
-          {
-            id: island.id,
-            x: (islandLabelAnchor(island).x / 100) * mapGeometry.width,
-            y: (islandLabelAnchor(island).y / 100) * mapGeometry.height,
-            width: geometry.width,
-            height: geometry.height,
-            maxDisplacement: Math.min(
-              48,
-              Math.max(28, mapGeometry.width * 0.075),
-            ),
-          },
-        ];
-      }),
-    );
-
-    return {
-      papers: new Map(
-        [...relaxedLayout.papers].map(([id, point]) => [
-          id,
-          {
-            x: roundMapValue((point.x / mapGeometry.width) * 100),
-            y: roundMapValue((point.y / mapGeometry.height) * 100),
-          },
-        ]),
-      ),
-      labels: new Map(
-        [...relaxedLayout.labels].map(([id, point]) => [
-          id,
-          {
-            x: roundMapValue((point.x / mapGeometry.width) * 100),
-            y: roundMapValue((point.y / mapGeometry.height) * 100),
-          },
-        ]),
-      ),
-    };
-  }, [mapGeometry]);
-
-  const paperPositions = staticLayout.papers;
-  const labelPositions = staticLayout.labels;
-
-  const islandPaths = useMemo(() => {
+  const hierarchicalLayout = useMemo<HierarchicalLayoutAttempt>(() => {
     const width = mapGeometry?.width ?? MAP_WORLD_WIDTH;
     const height = mapGeometry?.height ?? MAP_WORLD_HEIGHT;
-    const paperGeometryById = new Map(
-      mapGeometry?.papers.map((paper) => [paper.id, paper]) ?? [],
-    );
     const labelGeometryById = new Map(
       mapGeometry?.labels.map((label) => [label.id, label]) ?? [],
     );
-
-    return new Map(
-      landscape.islands.flatMap((island) => {
-        if (island.id === 'observation') return [];
-        const points = landscape.papers
-          .filter((paper) => paper.primaryIsland === island.id)
-          .map((paper) => {
-            const position = paperPositions.get(paper.id) ?? paper;
-            return {
-              x: (position.x / 100) * width,
-              y: (position.y / 100) * height,
-              radius:
-                (paperGeometryById.get(paper.id)?.diameter ??
-                  FOLLOW_UP_DIAMETER_PX) / 2,
-            };
-          });
-        const labelPosition =
-          labelPositions.get(island.id) ?? islandLabelAnchor(island);
-        const labelGeometry = labelGeometryById.get(island.id) ?? {
-          width: 120,
-          height: 30,
-        };
-        const labelX = (labelPosition.x / 100) * width;
-        const labelY = (labelPosition.y / 100) * height;
-        const halfLabelWidth = labelGeometry.width / 2;
-        const halfLabelHeight = labelGeometry.height / 2;
-        points.push(
-          {
-            x: labelX - halfLabelWidth,
-            y: labelY - halfLabelHeight,
-            radius: 0,
-          },
-          {
-            x: labelX + halfLabelWidth,
-            y: labelY - halfLabelHeight,
-            radius: 0,
-          },
-          {
-            x: labelX + halfLabelWidth,
-            y: labelY + halfLabelHeight,
-            radius: 0,
-          },
-          {
-            x: labelX - halfLabelWidth,
-            y: labelY + halfLabelHeight,
-            radius: 0,
-          },
-        );
-        const path = createSmoothedIslandPath(points, {
-          padding: ISLAND_PADDING_PX,
-          samplesPerPoint: 14,
-          smoothing: 0.7,
-          precision: 1,
-        });
-        return path ? [[island.id, path] as const] : [];
-      }),
+    const paperGeometryById = new Map(
+      mapGeometry?.papers.map((paper) => [paper.id, paper]) ?? [],
     );
-  }, [labelPositions, mapGeometry, paperPositions]);
+    const paperAnchors = landscape.papers.map((paper) => ({
+      id: paper.id,
+      islandId: paper.primaryIsland,
+      stabilityRank: paper.layoutRank,
+      x: (paper.x / 100) * width,
+      y: (paper.y / 100) * height,
+      radius:
+        ((paperGeometryById.get(paper.id)?.diameter ??
+          (paper.role === 'observation'
+            ? OBSERVATION_DIAMETER_PX
+            : FOLLOW_UP_DIAMETER_PX)) /
+          2 +
+          NODE_HALO_PX[paper.role]) *
+        NODE_ACTIVE_SCALE,
+    }));
+    const labelAnchors = landscape.islands.map((island) => {
+      const geometry = labelGeometryById.get(island.id) ?? {
+        width: 120,
+        height: 32,
+      };
+      const anchor = islandLabelAnchor(island);
+      return {
+        id: island.id,
+        islandId: island.id,
+        x: (anchor.x / 100) * width,
+        y: (anchor.y / 100) * height,
+        width: geometry.width,
+        height: geometry.height,
+      };
+    });
+    const islandAnchors = landscape.islands.map((island) => {
+      const anchor = islandPackingAnchor(island);
+      return {
+        id: island.id,
+        x: (anchor.x / 100) * width,
+        y: (anchor.y / 100) * height,
+        observation: island.id === 'observation',
+      };
+    });
+
+    try {
+      const packedLayout = createHierarchicalMapLayout(
+        width,
+        height,
+        paperAnchors,
+        labelAnchors,
+        islandAnchors,
+        {
+          islandPadding: ISLAND_PADDING_PX,
+          observationPadding: OBSERVATION_PACKING_PADDING_PX,
+          outerGap: ISLAND_GAP_PX,
+        },
+      );
+
+      return {
+        papers: new Map(
+          [...packedLayout.papers].map(([id, point]) => [
+            id,
+            {
+              x: roundMapValue((point.x / width) * 100),
+              y: roundMapValue((point.y / height) * 100),
+            },
+          ]),
+        ),
+        labels: new Map(
+          [...packedLayout.labels].map(([id, point]) => [
+            id,
+            {
+              x: roundMapValue((point.x / width) * 100),
+              y: roundMapValue((point.y / height) * 100),
+            },
+          ]),
+        ),
+        islands: packedLayout.islands,
+        diagnostics: packedLayout.diagnostics,
+        errorMessage: null,
+      };
+    } catch (error) {
+      return {
+        papers: new Map(
+          landscape.papers.map((paper) => [
+            paper.id,
+            { x: paper.x, y: paper.y },
+          ]),
+        ),
+        labels: new Map(
+          landscape.islands.map((island) => [
+            island.id,
+            islandLabelAnchor(island),
+          ]),
+        ),
+        islands: new Map<string, HierarchicalIslandLayout>(),
+        diagnostics: {
+          converged: false,
+          exactEnclosures: false,
+          maxInnerOverlap: Number.MAX_SAFE_INTEGER,
+          maxOuterOverlap: Number.MAX_SAFE_INTEGER,
+          maxCanvasOverflow: Number.MAX_SAFE_INTEGER,
+          maxObservationDrift: 0,
+        },
+        errorMessage:
+          error instanceof Error ? error.message : 'Unknown layout error.',
+      };
+    }
+  }, [mapGeometry]);
+
+  const paperPositions = hierarchicalLayout.papers;
+  const labelPositions = hierarchicalLayout.labels;
+  const islandCircles = hierarchicalLayout.islands;
+  const mapLayoutReady =
+    mapFontsReady &&
+    mapGeometry !== null &&
+    hierarchicalLayout.diagnostics.converged;
+  const mapLayoutUnavailable =
+    mapFontsReady &&
+    mapGeometry !== null &&
+    !hierarchicalLayout.diagnostics.converged;
+
+  useEffect(() => {
+    if (!mapLayoutUnavailable) return;
+    console.error(
+      hierarchicalLayout.errorMessage ??
+        'The measured map geometry could not be packed without overlap.',
+      hierarchicalLayout.diagnostics,
+    );
+    const frame = requestAnimationFrame(() => {
+      const viewport = mapViewportRef.current;
+      const gesture = panGestureRef.current;
+      if (viewport) {
+        viewport.scrollTo({
+          left: Math.max(0, (viewport.scrollWidth - viewport.clientWidth) / 2),
+          top: Math.max(0, (viewport.scrollHeight - viewport.clientHeight) / 2),
+        });
+        if (gesture && viewport.hasPointerCapture(gesture.pointerId)) {
+          viewport.releasePointerCapture(gesture.pointerId);
+        }
+      }
+      panGestureRef.current = null;
+      setIsPanning(false);
+      if (
+        document.activeElement &&
+        (document.activeElement === viewport ||
+          mapCanvasRef.current?.contains(document.activeElement))
+      ) {
+        mapFallbackButtonRef.current?.focus();
+      }
+    });
+    return () => cancelAnimationFrame(frame);
+  }, [hierarchicalLayout, mapLayoutUnavailable]);
 
   const visibleIds = new Set(visiblePapers.map((paper) => paper.id));
   const visiblePrimaryIslandIds = new Set(
@@ -697,7 +728,7 @@ export function LzLandscape() {
       return;
     }
     if (
-      !mapGeometry ||
+      !mapLayoutReady ||
       visiblePapers.length === 0 ||
       revealedPaperRef.current === selectedPaper.id
     ) {
@@ -741,7 +772,7 @@ export function LzLandscape() {
     });
     return () => cancelAnimationFrame(frame);
   }, [
-    mapGeometry,
+    mapLayoutReady,
     paperPositions,
     selectedPaper.id,
     viewMode,
@@ -997,10 +1028,12 @@ export function LzLandscape() {
               addition is reviewed before publication.
             </p>
             <p>
-              Paper dots repel one another while weak primary-island tension
-              keeps each family compact. The shaded envelopes are smoothed from
-              the settled dots, and the final layout remains still. Distance
-              expresses shared ideas, not evidence or consensus.
+              Each idea family settles into a compact group, then an exact
+              padded circle encloses its dots and label. Those circles repel one
+              another while weak attraction keeps the full atlas compact. LZ
+              participates in that packing without a visible blob, and the final
+              layout remains still. Distance expresses shared ideas, not
+              evidence or consensus.
             </p>
           </details>
         </aside>
@@ -1024,6 +1057,7 @@ export function LzLandscape() {
                   <MapIcon /> Map
                 </Button>
                 <Button
+                  ref={listViewButtonRef}
                   variant={viewMode === 'list' ? 'secondary' : 'ghost'}
                   size="sm"
                   aria-pressed={viewMode === 'list'}
@@ -1038,7 +1072,7 @@ export function LzLandscape() {
                     variant="outline"
                     size="icon-sm"
                     aria-label="Zoom out"
-                    disabled={zoom <= 0.86}
+                    disabled={!mapLayoutReady || zoom <= 0.86}
                     onClick={() => changeZoom(-0.15)}
                   >
                     <Minus />
@@ -1048,7 +1082,7 @@ export function LzLandscape() {
                     variant="outline"
                     size="icon-sm"
                     aria-label="Zoom in"
-                    disabled={zoom >= 1.44}
+                    disabled={!mapLayoutReady || zoom >= 1.44}
                     onClick={() => changeZoom(0.15)}
                   >
                     <Plus />
@@ -1057,6 +1091,7 @@ export function LzLandscape() {
                     variant="ghost"
                     size="icon-sm"
                     aria-label="Reset map"
+                    disabled={!mapLayoutReady}
                     onClick={resetMap}
                   >
                     <RotateCcw />
@@ -1068,12 +1103,22 @@ export function LzLandscape() {
 
           {viewMode === 'map' ? (
             <section
-              className={`map-viewport ${isPanning ? 'is-panning' : ''}`}
+              className={`map-viewport ${mapLayoutReady ? 'is-layout-ready' : ''} ${isPanning ? 'is-panning' : ''}`}
               ref={mapViewportRef}
-              tabIndex={0}
-              aria-label="Scrollable paper map. Scroll or drag the background to explore."
-              aria-describedby="map-pan-help"
+              tabIndex={mapLayoutReady ? 0 : -1}
+              aria-label={
+                mapLayoutReady
+                  ? 'Scrollable paper map. Scroll or drag the background to explore.'
+                  : mapLayoutUnavailable
+                    ? hierarchicalLayout.errorMessage
+                      ? 'Paper map temporarily unavailable.'
+                      : 'Paper map unavailable at this size.'
+                    : 'Preparing the paper map.'
+              }
+              aria-describedby={mapLayoutReady ? 'map-pan-help' : undefined}
+              aria-busy={!mapFontsReady || mapGeometry === null}
               onPointerDown={(event) => {
+                if (!mapLayoutReady) return;
                 if (event.button !== 0 || event.pointerType === 'touch') return;
                 const target = event.target;
                 if (
@@ -1094,6 +1139,7 @@ export function LzLandscape() {
                 setIsPanning(true);
               }}
               onScroll={() => {
+                if (!mapLayoutReady) return;
                 if (!tooltipPlacement) return;
                 const node = mapCanvasRef.current?.querySelector<HTMLElement>(
                   `[data-paper-node="${tooltipPlacement.paperId}"]`,
@@ -1101,6 +1147,7 @@ export function LzLandscape() {
                 if (node) positionTooltip(tooltipPlacement.paperId, node);
               }}
               onPointerMove={(event) => {
+                if (!mapLayoutReady) return;
                 const gesture = panGestureRef.current;
                 if (!gesture || gesture.pointerId !== event.pointerId) return;
                 event.preventDefault();
@@ -1120,8 +1167,10 @@ export function LzLandscape() {
                 }}
               >
                 <div
-                  className="map-canvas"
+                  className={`map-canvas ${mapLayoutReady ? '' : 'is-layout-hidden'}`}
                   ref={mapCanvasRef}
+                  aria-hidden={!mapLayoutReady}
+                  inert={!mapLayoutReady}
                   style={{
                     width: MAP_WORLD_WIDTH,
                     height: MAP_WORLD_HEIGHT,
@@ -1176,15 +1225,17 @@ export function LzLandscape() {
                     <rect width="100%" height="100%" fill="url(#grid)" />
                     {landscape.islands.flatMap((island) => {
                       if (island.id === 'observation') return [];
-                      const path = islandPaths.get(island.id);
-                      if (!path) return [];
+                      const circle = islandCircles.get(island.id);
+                      if (!circle) return [];
                       const hasVisiblePaper = visiblePrimaryIslandIds.has(
                         island.id,
                       );
                       return [
-                        <path
+                        <circle
                           className={`island-shape ${hasVisiblePaper ? '' : 'is-dimmed'}`}
-                          d={path}
+                          cx={circle.x}
+                          cy={circle.y}
+                          r={circle.radius}
                           fill={`url(#island-gradient-${island.id})`}
                           key={`island-${island.id}`}
                         />,
@@ -1201,9 +1252,9 @@ export function LzLandscape() {
                       islandLabelAnchor(island);
                     return (
                       <div
-                        className={`island-label ${mapGeometry ? '' : 'is-measuring'} ${hasVisiblePaper ? '' : 'is-dimmed'}`}
+                        className={`island-label ${mapLayoutReady ? '' : 'is-measuring'} ${hasVisiblePaper ? '' : 'is-dimmed'}`}
                         data-island-label={island.id}
-                        aria-hidden={!mapGeometry || !hasVisiblePaper}
+                        aria-hidden={!mapLayoutReady || !hasVisiblePaper}
                         key={`label-${island.id}`}
                         style={
                           {
@@ -1267,6 +1318,7 @@ export function LzLandscape() {
                           authorLabel ? tooltipAuthorId : undefined
                         }
                         aria-pressed={isSelected}
+                        tabIndex={mapLayoutReady ? 0 : -1}
                       >
                         {paper.role === 'observation' && (
                           <span className="paper-node-monogram">LZ</span>
@@ -1289,6 +1341,31 @@ export function LzLandscape() {
                     </div>
                   )}
                 </div>
+                {mapLayoutUnavailable && (
+                  <output className="map-layout-unavailable">
+                    <strong>
+                      {hierarchicalLayout.errorMessage
+                        ? 'Map layout is temporarily unavailable.'
+                        : 'The map needs more room at this size.'}
+                    </strong>
+                    <span>
+                      Matching papers remain available in the list view.
+                    </span>
+                    <Button
+                      ref={mapFallbackButtonRef}
+                      variant="outline"
+                      size="sm"
+                      onClick={() => {
+                        setViewMode('list');
+                        requestAnimationFrame(() =>
+                          listViewButtonRef.current?.focus(),
+                        );
+                      }}
+                    >
+                      <List aria-hidden="true" /> Open list view
+                    </Button>
+                  </output>
+                )}
               </div>
             </section>
           ) : (
@@ -1334,7 +1411,11 @@ export function LzLandscape() {
             <span>Distance expresses shared ideas—not evidence strength.</span>
             <span id="map-pan-help">
               {viewMode === 'map'
-                ? 'Scroll or drag to explore · citation lineage is in the paper details.'
+                ? mapLayoutReady
+                  ? 'Scroll or drag to explore · citation lineage is in the paper details.'
+                  : mapLayoutUnavailable
+                    ? 'Use the list view to browse matching papers.'
+                    : 'Preparing the map…'
                 : 'Select a paper to inspect it.'}
             </span>
           </footer>
