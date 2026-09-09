@@ -1,8 +1,8 @@
 {
   "schemaVersion": 2,
   "title": "LZ high-recoil literature landscape",
-  "updatedAt": "2026-09-07",
-  "lastSuccessfulScan": "2026-09-07T09:00:00Z",
+  "updatedAt": "2026-09-09",
+  "lastSuccessfulScan": "2026-09-09T10:31:08Z",
   "event": {
     "energyKev": 248,
     "statisticalUncertaintyKev": 23,
@@ -12,7 +12,7 @@
   },
   "citationData": {
     "source": "arXiv reference lists",
-    "checkedAt": "2026-09-07",
+    "checkedAt": "2026-09-09",
     "scope": "Citations between papers in this map",
     "note": "References to the official LZ preprint are normalized to arXiv:2609.02823."
   },
@@ -165,7 +165,7 @@
       "title": "Higgsino Above the Sea of Fog",
       "authors": ["JiJi Fan", "Matthew Reece"],
       "published": "2026-09-01",
-      "updated": "2026-09-01",
+      "updated": "2026-09-03",
       "role": "explanation",
       "primaryIsland": "higgsino",
       "islands": ["higgsino", "endothermic"],
@@ -175,7 +175,10 @@
       "url": "https://arxiv.org/abs/2609.01504",
       "x": 66,
       "y": 17,
-      "cites": ["2609.02775", "2609.02823"]
+      "cites": [
+        "2609.02775",
+        "2609.02823"
+      ]
     },
     {
       "id": "2609.01583",
@@ -265,7 +268,7 @@
       "title": "Dark Matter as the Z₂ Partner of the Standard Model Higgs Boson",
       "authors": ["Yasunori Nomura"],
       "published": "2026-09-02",
-      "updated": "2026-09-02",
+      "updated": "2026-09-05",
       "role": "explanation",
       "primaryIsland": "higgsino",
       "islands": ["higgsino", "endothermic"],
@@ -286,6 +289,7 @@
         "2609.01583",
         "2609.01590",
         "2609.01592",
+        "2609.02775",
         "2609.02823"
       ]
     },
@@ -349,7 +353,7 @@
       "title": "A Peccei-Quinn Origin for Inelastic Electroweak Dark Matter after LUX-ZEPLIN",
       "authors": ["Luca Visinelli"],
       "published": "2026-09-02",
-      "updated": "2026-09-02",
+      "updated": "2026-09-04",
       "role": "explanation",
       "primaryIsland": "higgsino",
       "islands": ["higgsino", "endothermic"],
@@ -381,7 +385,7 @@
       "title": "Inelastic Dark Photon Dark Matter for the LUX-ZEPLIN High-Recoil Event and the Galactic Halo Gamma-Ray Excess",
       "authors": ["Kimiko Yamashita"],
       "published": "2026-09-02",
-      "updated": "2026-09-02",
+      "updated": "2026-09-03",
       "role": "explanation",
       "primaryIsland": "endothermic",
       "islands": ["endothermic", "multimessenger"],
@@ -433,7 +437,7 @@
       "title": "Inelastic Signatures of Electroweak Dark Matter",
       "authors": ["Juri Smirnov", "Spencer Griffith", "John F. Beacom"],
       "published": "2026-09-03",
-      "updated": "2026-09-03",
+      "updated": "2026-09-08",
       "role": "explanation",
       "primaryIsland": "higgsino",
       "islands": ["higgsino", "endothermic"],
@@ -460,7 +464,15 @@
         "2609.02775",
         "2609.02807",
         "2609.02823",
-        "2609.02868"
+        "2609.02868",
+        "2609.04163",
+        "2609.04175",
+        "2609.04181",
+        "2609.04185",
+        "2609.04186",
+        "2609.04673",
+        "2609.05204",
+        "2609.05291"
       ]
     },
     {
@@ -671,7 +683,7 @@
       "title": "Exothermic Dark Matter at LZ",
       "authors": ["Carlos Henrique de Lima"],
       "published": "2026-09-04",
-      "updated": "2026-09-04",
+      "updated": "2026-09-08",
       "role": "explanation",
       "primaryIsland": "exothermic",
       "islands": ["exothermic", "endothermic", "constraints"],
@@ -692,10 +704,17 @@
         "2609.01590",
         "2609.01592",
         "2609.01892",
+        "2609.02505",
         "2609.02608",
         "2609.02775",
+        "2609.02807",
         "2609.02823",
-        "2609.04175"
+        "2609.02868",
+        "2609.04163",
+        "2609.04175",
+        "2609.04185",
+        "2609.04186",
+        "2609.04673"
       ]
     },
     {
@@ -738,6 +757,1167 @@
         "2609.04181",
         "2609.04185",
         "2609.04186"
+      ]
+    },
+    {
+      "id": "2609.06153",
+      "arxivId": "2609.06153",
+      "title": "Exothermic dark matter and the 248 keV nuclear recoil in LUX-ZEPLIN",
+      "authors": [
+        "Howard Baer",
+        "Vernon Barger"
+      ],
+      "published": "2026-09-05",
+      "updated": "2026-09-05",
+      "url": "https://arxiv.org/abs/2609.06153",
+      "role": "explanation",
+      "primaryIsland": "exothermic",
+      "islands": [
+        "exothermic",
+        "constraints"
+      ],
+      "tags": [
+        "exothermic DM",
+        "pseudo-Dirac DM",
+        "dark photon",
+        "argon test"
+      ],
+      "summary": "The authors model the candidate as exothermic downscattering of an excited pseudo-Dirac state, arguing that its rate is comparatively insensitive to the halo escape speed and predicting several argon events per tonne-year near 250 keV.",
+      "takeaway": "An exothermic benchmark with an argon discriminator and a long-lived excited-state requirement.",
+      "x": 83.54,
+      "y": 76.12,
+      "cites": [
+        "2609.01475",
+        "2609.01504",
+        "2609.01583",
+        "2609.01590",
+        "2609.01892",
+        "2609.02775",
+        "2609.02807",
+        "2609.02823"
+      ]
+    },
+    {
+      "id": "2609.06171",
+      "arxivId": "2609.06171",
+      "title": "Inelastic dark matter and baryon flavor symmetry in light of LUX-ZEPLIN (LZ) experiment",
+      "authors": [
+        "Hyun Min Lee"
+      ],
+      "published": "2026-09-05",
+      "updated": "2026-09-05",
+      "url": "https://arxiv.org/abs/2609.06171",
+      "role": "explanation",
+      "primaryIsland": "endothermic",
+      "islands": [
+        "endothermic",
+        "constraints"
+      ],
+      "tags": [
+        "baryon flavor",
+        "pseudo-Dirac DM",
+        "Z prime",
+        "relic density"
+      ],
+      "summary": "The author embeds TeV-scale inelastic dark matter in a broken baryon-flavor gauge symmetry and identifies parameters that reproduce the LZ recoil and relic density while satisfying existing collider and indirect-detection bounds.",
+      "takeaway": "Connects the required splitting to baryon flavor and predicts a relatively light weakly coupled gauge boson.",
+      "x": 65.83,
+      "y": 57.14,
+      "cites": [
+        "2609.01475",
+        "2609.01504",
+        "2609.01583",
+        "2609.01590",
+        "2609.01592",
+        "2609.01892",
+        "2609.02608",
+        "2609.02775",
+        "2609.02807",
+        "2609.02823",
+        "2609.02868",
+        "2609.02994",
+        "2609.04144",
+        "2609.04163",
+        "2609.04175",
+        "2609.04181",
+        "2609.04185"
+      ]
+    },
+    {
+      "id": "2609.06571",
+      "arxivId": "2609.06571",
+      "title": "The Inert Doublet Model of Dark Matter and the LUX-ZEPLIN High-Recoil Event",
+      "authors": [
+        "Lei Wang",
+        "Yang Xiao"
+      ],
+      "published": "2026-09-06",
+      "updated": "2026-09-06",
+      "url": "https://arxiv.org/abs/2609.06571",
+      "role": "explanation",
+      "primaryIsland": "higgsino",
+      "islands": [
+        "higgsino",
+        "endothermic"
+      ],
+      "tags": [
+        "inert doublet",
+        "electroweak DM",
+        "profile likelihood",
+        "endothermic DM"
+      ],
+      "summary": "The authors test the inert-doublet model with the LZ event likelihood and find a viable high-mass region, with a reported best fit near 1.08 TeV and a 369 keV splitting between the neutral scalars.",
+      "takeaway": "A scalar electroweak-doublet realization of the near-threshold inelastic interpretation.",
+      "x": 75.24,
+      "y": 31.22,
+      "cites": [
+        "2609.01475",
+        "2609.01504",
+        "2609.01583",
+        "2609.01590",
+        "2609.01592",
+        "2609.01892",
+        "2609.02505",
+        "2609.02608",
+        "2609.02807",
+        "2609.02823",
+        "2609.02868",
+        "2609.02994",
+        "2609.04144",
+        "2609.04163",
+        "2609.04175",
+        "2609.04181",
+        "2609.04185",
+        "2609.04186"
+      ]
+    },
+    {
+      "id": "2609.06640",
+      "arxivId": "2609.06640",
+      "title": "Multi-Messenger and Paleo-Detector Probes of the LZ Dark Matter Signal",
+      "authors": [
+        "Meiwen Yang",
+        "Quan-feng Wu",
+        "Yue-Lin Sming Tsai",
+        "Yi-Zhong Fan"
+      ],
+      "published": "2026-09-06",
+      "updated": "2026-09-06",
+      "url": "https://arxiv.org/abs/2609.06640",
+      "role": "diagnostic",
+      "primaryIsland": "multimessenger",
+      "islands": [
+        "multimessenger",
+        "endothermic",
+        "constraints"
+      ],
+      "tags": [
+        "leptophobic mediator",
+        "paleo-detectors",
+        "IceCube",
+        "gamma rays"
+      ],
+      "summary": "The authors fit a leptophobic inelastic model to the event, find no accompanying Fermi-LAT excess and consistency with IceCube, and estimate an approximately 80 nm recoil track that could be sought in lead-bearing paleo-detectors.",
+      "takeaway": "Extends an inelastic fit into multi-messenger null tests and a paleo-detector prediction.",
+      "x": 34.84,
+      "y": 55.85,
+      "cites": [
+        "2609.01475",
+        "2609.01504",
+        "2609.01583",
+        "2609.01590",
+        "2609.01592",
+        "2609.01892",
+        "2609.02505",
+        "2609.02608",
+        "2609.02775",
+        "2609.02807",
+        "2609.02823",
+        "2609.02868",
+        "2609.02994",
+        "2609.04144",
+        "2609.04163",
+        "2609.04175",
+        "2609.04181",
+        "2609.04185",
+        "2609.04186"
+      ]
+    },
+    {
+      "id": "2609.06750",
+      "arxivId": "2609.06750",
+      "title": "GUT-induced FCC signatures of the LUX-ZEPLIN event",
+      "authors": [
+        "Wojciech Kotlarski",
+        "Kamila Kowalska",
+        "Enrico Maria Sessolo"
+      ],
+      "published": "2026-09-06",
+      "updated": "2026-09-06",
+      "url": "https://arxiv.org/abs/2609.06750",
+      "role": "diagnostic",
+      "primaryIsland": "constraints",
+      "islands": [
+        "constraints",
+        "higgsino"
+      ],
+      "tags": [
+        "grand unification",
+        "FCC-hh",
+        "Z prime",
+        "collider test"
+      ],
+      "summary": "The authors connect the pseudo-Dirac splitting suggested by the LZ event to an SU(6) grand-unified construction and argue that the associated tens-of-TeV gauge boson would be discoverable at a future 100 TeV hadron collider.",
+      "takeaway": "Turns the inelastic mass splitting into a correlated future-collider target.",
+      "x": 65.85,
+      "y": 71.95,
+      "cites": [
+        "2609.01475",
+        "2609.01504",
+        "2609.01583",
+        "2609.01590",
+        "2609.01592",
+        "2609.01892",
+        "2609.02608",
+        "2609.02775",
+        "2609.02807",
+        "2609.02823",
+        "2609.02868",
+        "2609.02994",
+        "2609.04144",
+        "2609.04163",
+        "2609.04175",
+        "2609.04181",
+        "2609.04185",
+        "2609.04186"
+      ]
+    },
+    {
+      "id": "2609.06756",
+      "arxivId": "2609.06756",
+      "title": "LZ Nuclear-Recoil Excess from Boosted Light Magnetic Dipole-dipole Dark Matter",
+      "authors": [
+        "Jin-Han Liang",
+        "Zuowei Liu",
+        "Van Que Tran",
+        "Yongheng Xu"
+      ],
+      "published": "2026-09-06",
+      "updated": "2026-09-06",
+      "url": "https://arxiv.org/abs/2609.06756",
+      "role": "explanation",
+      "primaryIsland": "elastic",
+      "islands": [
+        "elastic",
+        "multimessenger"
+      ],
+      "tags": [
+        "boosted DM",
+        "magnetic dipole",
+        "momentum dependence",
+        "light dark sector"
+      ],
+      "summary": "The authors argue that boosted light dark-sector particles with magnetic dipole-dipole scattering can harden the recoil spectrum, reduce the unwanted low-energy rate, and reproduce the LZ candidate with masses extending to the GeV scale.",
+      "takeaway": "Uses a boosted population to rescue a momentum-dependent elastic spectrum without TeV halo dark matter.",
+      "x": 38.51,
+      "y": 74.99,
+      "cites": [
+        "2609.01475",
+        "2609.01504",
+        "2609.01583",
+        "2609.01590",
+        "2609.01592",
+        "2609.01892",
+        "2609.02505",
+        "2609.02608",
+        "2609.02775",
+        "2609.02807",
+        "2609.02823",
+        "2609.02868",
+        "2609.02994",
+        "2609.04144",
+        "2609.04163",
+        "2609.04175",
+        "2609.04185",
+        "2609.04186"
+      ]
+    },
+    {
+      "id": "2609.06760",
+      "arxivId": "2609.06760",
+      "title": "Solar Capture Tests of Inelastic Dark Matter after the LZ High-Recoil Event",
+      "authors": [
+        "Mattia Di Mauro",
+        "Halim Shaikh"
+      ],
+      "published": "2026-09-06",
+      "updated": "2026-09-06",
+      "url": "https://arxiv.org/abs/2609.06760",
+      "role": "constraint",
+      "primaryIsland": "constraints",
+      "islands": [
+        "constraints",
+        "higgsino",
+        "endothermic"
+      ],
+      "tags": [
+        "solar capture",
+        "IceCube",
+        "Higgsino tension",
+        "spin-dependent DM"
+      ],
+      "summary": "The authors compare solar-capture limits for three LZ-motivated endothermic models, excluding the canonical thermal Higgsino benchmark while finding that the tested pseudo-Dirac and neutron-philic spin-dependent cases remain below adopted IceCube limits.",
+      "takeaway": "Narrows the solar-neutrino challenge to fixed-strength Higgsino interpretations rather than all endothermic models.",
+      "x": 71.04,
+      "y": 73.84,
+      "cites": [
+        "2609.01475",
+        "2609.01504",
+        "2609.01583",
+        "2609.01590",
+        "2609.01592",
+        "2609.02608",
+        "2609.02775",
+        "2609.02823",
+        "2609.02868",
+        "2609.04163"
+      ]
+    },
+    {
+      "id": "2609.06825",
+      "arxivId": "2609.06825",
+      "title": "Inelastic Self-interacting Dark Matter and LUX-ZEPLIN 248 keV Event in a Dirac Modular Inverse Seesaw",
+      "authors": [
+        "Pritam Das",
+        "Biswajit Karmakar",
+        "Satyabrata Mahapatra",
+        "Partha Kumar Paul"
+      ],
+      "published": "2026-09-06",
+      "updated": "2026-09-06",
+      "url": "https://arxiv.org/abs/2609.06825",
+      "role": "explanation",
+      "primaryIsland": "endothermic",
+      "islands": [
+        "endothermic",
+        "multimessenger"
+      ],
+      "tags": [
+        "self-interacting DM",
+        "inverse seesaw",
+        "modular symmetry",
+        "gravitational waves"
+      ],
+      "summary": "The authors place an endothermic pseudo-Dirac self-interacting dark-matter fit inside a modular inverse-seesaw model, linking the required splitting to neutrino masses and to a possible gravitational-wave signal from domain-wall annihilation.",
+      "takeaway": "Connects the recoil mechanism to neutrino structure, self-interactions, and a gravitational-wave signature.",
+      "x": 56.81,
+      "y": 50.36,
+      "cites": [
+        "2609.01475",
+        "2609.01504",
+        "2609.01583",
+        "2609.01592",
+        "2609.02608",
+        "2609.02807",
+        "2609.02823",
+        "2609.02868",
+        "2609.02994",
+        "2609.04144",
+        "2609.04163",
+        "2609.04175",
+        "2609.04181",
+        "2609.04185",
+        "2609.04186"
+      ]
+    },
+    {
+      "id": "2609.06890",
+      "arxivId": "2609.06890",
+      "title": "High-Energy Nuclear Recoils from Boosted Dark Matter for the LZ 248-keV Event: Beyond the Halo-Dependent High-Velocity Tail",
+      "authors": [
+        "Haider Alhazmi",
+        "Doojin Kim",
+        "Kyoungchul Kong",
+        "Jong-Chul Park",
+        "Seodong Shin"
+      ],
+      "published": "2026-09-07",
+      "updated": "2026-09-07",
+      "url": "https://arxiv.org/abs/2609.06890",
+      "role": "explanation",
+      "primaryIsland": "elastic",
+      "islands": [
+        "elastic",
+        "endothermic",
+        "multimessenger"
+      ],
+      "tags": [
+        "boosted DM",
+        "recoil endpoints",
+        "pseudoscalar mediator",
+        "multi-target tests"
+      ],
+      "summary": "The authors propose light boosted dark matter whose energy is set by dark-sector masses, using either momentum-dependent elastic scattering or near-threshold inelastic scattering to confine recoils away from both LZ sidebands.",
+      "takeaway": "Replaces the uncertain halo tail with a boosted flux and sharply defined recoil endpoints.",
+      "x": 44.05,
+      "y": 77.38,
+      "cites": [
+        "2609.01504",
+        "2609.01583",
+        "2609.01590",
+        "2609.01592",
+        "2609.01892",
+        "2609.02608",
+        "2609.02807",
+        "2609.02823",
+        "2609.02868",
+        "2609.02994",
+        "2609.04144",
+        "2609.04163",
+        "2609.04175",
+        "2609.04181",
+        "2609.04185",
+        "2609.04186"
+      ]
+    },
+    {
+      "id": "2609.06909",
+      "arxivId": "2609.06909",
+      "title": "Inelastic B-L scalar dark matter and the LUX-ZEPLIN event",
+      "authors": [
+        "Nobuchika Okada",
+        "Osamu Seto"
+      ],
+      "published": "2026-09-07",
+      "updated": "2026-09-07",
+      "url": "https://arxiv.org/abs/2609.06909",
+      "role": "explanation",
+      "primaryIsland": "endothermic",
+      "islands": [
+        "endothermic",
+        "constraints"
+      ],
+      "tags": [
+        "B-L gauge symmetry",
+        "scalar DM",
+        "resonant annihilation",
+        "collider test"
+      ],
+      "summary": "The authors show that an inelastic scalar in a gauged B-L model can match the event near a resonant thermal-relic region and predict a gauge-boson resonance that can test the required coupling and mass scale.",
+      "takeaway": "A resonant scalar-dark-matter explanation with a linked collider target.",
+      "x": 59.71,
+      "y": 60.05,
+      "cites": [
+        "2609.01475",
+        "2609.01504",
+        "2609.01583",
+        "2609.01590",
+        "2609.01592",
+        "2609.01892",
+        "2609.02505",
+        "2609.02608",
+        "2609.02775",
+        "2609.02807",
+        "2609.02823",
+        "2609.02868",
+        "2609.04144",
+        "2609.04163",
+        "2609.04175",
+        "2609.04181",
+        "2609.04185",
+        "2609.04186"
+      ]
+    },
+    {
+      "id": "2609.07138",
+      "arxivId": "2609.07138",
+      "title": "A Dark-Dimension Origin of Geometric Inelastic Dark Matter: The LUX-ZEPLIN High-Recoil Event and Multi-Target Tests",
+      "authors": [
+        "Waqas Ahmed",
+        "George K. Leontaris"
+      ],
+      "published": "2026-09-07",
+      "updated": "2026-09-07",
+      "url": "https://arxiv.org/abs/2609.07138",
+      "role": "explanation",
+      "primaryIsland": "higgsino",
+      "islands": [
+        "higgsino",
+        "endothermic",
+        "constraints"
+      ],
+      "tags": [
+        "dark dimension",
+        "electroweak doublet",
+        "geometric splitting",
+        "tungsten test"
+      ],
+      "summary": "The authors derive the few-hundred-keV splitting of a pseudo-Dirac electroweak doublet from warped extra-dimensional localization, fit the LZ recoil region, and predict that tungsten remains accessible while lighter targets do not.",
+      "takeaway": "Gives the inelastic splitting a geometric origin and a heavy-target discriminator.",
+      "x": 71.9,
+      "y": 34.5,
+      "cites": [
+        "2609.01475",
+        "2609.01504",
+        "2609.01583",
+        "2609.01590",
+        "2609.01892",
+        "2609.02823"
+      ]
+    },
+    {
+      "id": "2609.07225",
+      "arxivId": "2609.07225",
+      "title": "Pseudo-Dirac Inelastic Dark Matter in the Leptophobic U(1)_B Model: Confronting the LUX-ZEPLIN High-Recoil Event with Collider Searches",
+      "authors": [
+        "Xin-Yu Du",
+        "Wenjie Huang",
+        "Keping Xie"
+      ],
+      "published": "2026-09-07",
+      "updated": "2026-09-07",
+      "url": "https://arxiv.org/abs/2609.07225",
+      "role": "explanation",
+      "primaryIsland": "endothermic",
+      "islands": [
+        "endothermic",
+        "constraints"
+      ],
+      "tags": [
+        "gauged baryon number",
+        "pseudo-Dirac DM",
+        "dijet search",
+        "thermal relic"
+      ],
+      "summary": "The authors use gauged baryon number to generate both dark-state stability and an off-diagonal current, identifying LZ-compatible thermal benchmarks whose mediator lies close to current or projected dijet-search reach.",
+      "takeaway": "An over-constrained leptophobic construction that can be tested with Run-3 and HL-LHC dijet data.",
+      "x": 67.27,
+      "y": 62.02,
+      "cites": [
+        "2609.01475",
+        "2609.01504",
+        "2609.01583",
+        "2609.01590",
+        "2609.01592",
+        "2609.01892",
+        "2609.02505",
+        "2609.02608",
+        "2609.02775",
+        "2609.02807",
+        "2609.02823",
+        "2609.02868",
+        "2609.02994",
+        "2609.04144",
+        "2609.04163",
+        "2609.04175",
+        "2609.04181",
+        "2609.04185",
+        "2609.04186"
+      ]
+    },
+    {
+      "id": "2609.07451",
+      "arxivId": "2609.07451",
+      "title": "LZ nuclear recoil event from inelastic singlet-doublet scalar dark matter",
+      "authors": [
+        "Disha Bandyopadhyay",
+        "Debasish Borah",
+        "Pankaj Borah"
+      ],
+      "published": "2026-09-07",
+      "updated": "2026-09-07",
+      "url": "https://arxiv.org/abs/2609.07451",
+      "role": "explanation",
+      "primaryIsland": "higgsino",
+      "islands": [
+        "higgsino",
+        "endothermic"
+      ],
+      "tags": [
+        "singlet-doublet scalar",
+        "electroweak DM",
+        "relic density",
+        "inelastic scattering"
+      ],
+      "summary": "The authors study mixed singlet-doublet scalar dark matter and find regions consistent with the relic abundance and elastic limits that also yield an endothermic recoil rate and energy compatible with the LZ candidate.",
+      "takeaway": "Broadens electroweak-doublet explanations through scalar singlet mixing.",
+      "x": 75.67,
+      "y": 21.81,
+      "cites": [
+        "2609.01475",
+        "2609.01504",
+        "2609.01583",
+        "2609.01590",
+        "2609.01592",
+        "2609.02505",
+        "2609.02608",
+        "2609.02775",
+        "2609.02807",
+        "2609.02823",
+        "2609.02868",
+        "2609.02994",
+        "2609.04144",
+        "2609.04163",
+        "2609.04175",
+        "2609.04181",
+        "2609.04185",
+        "2609.04186",
+        "2609.04673",
+        "2609.05204",
+        "2609.05291"
+      ]
+    },
+    {
+      "id": "2609.07742",
+      "arxivId": "2609.07742",
+      "title": "Boosted dark particles and the LZ nuclear recoil event",
+      "authors": [
+        "Kristjan Kannike",
+        "Martti Raidal",
+        "Alessandro Strumia"
+      ],
+      "published": "2026-09-07",
+      "updated": "2026-09-07",
+      "url": "https://arxiv.org/abs/2609.07742",
+      "role": "explanation",
+      "primaryIsland": "elastic",
+      "islands": [
+        "elastic",
+        "multimessenger",
+        "constraints"
+      ],
+      "tags": [
+        "boosted particles",
+        "pseudoscalar coupling",
+        "target complementarity",
+        "annual modulation"
+      ],
+      "summary": "The authors interpret the event as elastic scattering of a boosted dark-sector particle with momentum-dependent pseudoscalar interactions, predicting little annual modulation, no leading argon signal, and complementary recoils in spinful light nuclei.",
+      "takeaway": "A boosted elastic alternative with target and modulation signatures distinct from halo inelastic dark matter.",
+      "x": 46.83,
+      "y": 82.76,
+      "cites": [
+        "2609.01475",
+        "2609.01504",
+        "2609.01583",
+        "2609.01590",
+        "2609.01592",
+        "2609.01892",
+        "2609.02505",
+        "2609.02608",
+        "2609.02775",
+        "2609.02807",
+        "2609.02823",
+        "2609.02868",
+        "2609.02994",
+        "2609.04144",
+        "2609.04163",
+        "2609.04175",
+        "2609.04181",
+        "2609.04185",
+        "2609.04186",
+        "2609.04673",
+        "2609.05204",
+        "2609.05291"
+      ]
+    },
+    {
+      "id": "2609.07800",
+      "arxivId": "2609.07800",
+      "title": "Inelastic Singlet-Doublet Fermion Dark Matter in light of the 248 keV LZ event",
+      "authors": [
+        "Debasish Borah",
+        "Sujit Kumar Sahoo",
+        "Narendra Sahu",
+        "Shashwat Sharma"
+      ],
+      "published": "2026-09-07",
+      "updated": "2026-09-07",
+      "url": "https://arxiv.org/abs/2609.07800",
+      "role": "explanation",
+      "primaryIsland": "higgsino",
+      "islands": [
+        "higgsino",
+        "endothermic"
+      ],
+      "tags": [
+        "singlet-doublet fermion",
+        "pseudo-Dirac DM",
+        "Type-II seesaw",
+        "Z exchange"
+      ],
+      "summary": "The authors use a singlet-doublet fermion sector in which Majorana splitting suppresses elastic Z exchange while retaining endothermic scattering, and connect the splitting mechanism to a scalar triplet that also generates neutrino masses.",
+      "takeaway": "Links an electroweak inelastic fit to a Type-II seesaw origin for neutrino mass.",
+      "x": 76.23,
+      "y": 37.17,
+      "cites": [
+        "2609.01475",
+        "2609.01504",
+        "2609.01583",
+        "2609.01590",
+        "2609.01592",
+        "2609.02505",
+        "2609.02608",
+        "2609.02775",
+        "2609.02807",
+        "2609.02823",
+        "2609.02868",
+        "2609.02994",
+        "2609.04144",
+        "2609.04163",
+        "2609.04175",
+        "2609.04181",
+        "2609.04185",
+        "2609.04186",
+        "2609.04673",
+        "2609.05204",
+        "2609.05291"
+      ]
+    },
+    {
+      "id": "2609.07807",
+      "arxivId": "2609.07807",
+      "title": "Not so good νs for Higgsino dark matter as LZ excess: stringent limits from Super-Kamiokande and IceCube",
+      "authors": [
+        "Debajit Bose",
+        "Akash Kumar Saha",
+        "Deep Jyoti Das",
+        "Rinchen Sherpa",
+        "Abhijeet Singh",
+        "Durba Ghosh",
+        "Jaya Doliya",
+        "Subhadip Bouri",
+        "Biprajit Mondal",
+        "Ranjini Mondol",
+        "Nirmal Raj",
+        "Ranjan Laha"
+      ],
+      "published": "2026-09-07",
+      "updated": "2026-09-07",
+      "url": "https://arxiv.org/abs/2609.07807",
+      "role": "constraint",
+      "primaryIsland": "constraints",
+      "islands": [
+        "constraints",
+        "higgsino"
+      ],
+      "tags": [
+        "Super-Kamiokande",
+        "IceCube",
+        "solar capture",
+        "Higgsino tension"
+      ],
+      "summary": "The authors use atmospheric-neutrino measurements from Super-Kamiokande and IceCube to constrain Higgsinos captured in the Sun, reporting a lower splitting bound near 557 keV that disfavors standard-halo Higgsino explanations of the LZ event.",
+      "takeaway": "An independent solar-neutrino challenge to both thermal and nonthermal Higgsino interpretations.",
+      "x": 70.24,
+      "y": 66.99,
+      "cites": [
+        "2609.01475",
+        "2609.01504",
+        "2609.01583",
+        "2609.01590",
+        "2609.01592",
+        "2609.01892",
+        "2609.02608",
+        "2609.02775",
+        "2609.02807",
+        "2609.02823",
+        "2609.02868",
+        "2609.02994",
+        "2609.04144",
+        "2609.04163",
+        "2609.04175",
+        "2609.04181",
+        "2609.04185",
+        "2609.04186",
+        "2609.04673",
+        "2609.05204",
+        "2609.05291"
+      ]
+    },
+    {
+      "id": "2609.07811",
+      "arxivId": "2609.07811",
+      "title": "Higgsino Dark Matter Interpretation of the LZ High-Recoil Event in the GNMSSM with TeV-Scale Gauginos",
+      "authors": [
+        "Subhadip Bisal",
+        "Junjie Cao",
+        "Fei Li"
+      ],
+      "published": "2026-09-07",
+      "updated": "2026-09-07",
+      "url": "https://arxiv.org/abs/2609.07811",
+      "role": "explanation",
+      "primaryIsland": "higgsino",
+      "islands": [
+        "higgsino",
+        "endothermic"
+      ],
+      "tags": [
+        "GNMSSM",
+        "Higgsino-Singlino mixing",
+        "TeV gauginos",
+        "coannihilation"
+      ],
+      "summary": "The authors show that Higgsino-Singlino mixing in the GNMSSM can produce sub-MeV neutralino splittings with multi-TeV rather than ultraheavy gauginos, and present relic-compatible benchmarks fitting the LZ likelihood.",
+      "takeaway": "Realizes the Higgsino-like recoil with accessible gaugino scales, pending a dedicated solar-capture test.",
+      "x": 80.43,
+      "y": 32.8,
+      "cites": [
+        "2609.01475",
+        "2609.01504",
+        "2609.01583",
+        "2609.01590",
+        "2609.01592",
+        "2609.02608",
+        "2609.02775",
+        "2609.02807",
+        "2609.02823",
+        "2609.02868",
+        "2609.02994",
+        "2609.04144",
+        "2609.04163",
+        "2609.04175",
+        "2609.04181",
+        "2609.04185",
+        "2609.04186",
+        "2609.04673",
+        "2609.05204",
+        "2609.05291"
+      ]
+    },
+    {
+      "id": "2609.08712",
+      "arxivId": "2609.08712",
+      "title": "From LUX-ZEPLIN to Colliders: Probing Higgsino Dark Matter",
+      "authors": [
+        "Kingman Cheung",
+        "Sin Kyu Kang",
+        "Ranjeet Kumar"
+      ],
+      "published": "2026-09-08",
+      "updated": "2026-09-08",
+      "url": "https://arxiv.org/abs/2609.08712",
+      "role": "diagnostic",
+      "primaryIsland": "constraints",
+      "islands": [
+        "constraints",
+        "higgsino"
+      ],
+      "tags": [
+        "chargino tracklet",
+        "HL-LHC",
+        "muon collider",
+        "Higgsino test"
+      ],
+      "summary": "The authors trace the 1.1 TeV Higgsino interpretation to a nearly degenerate chargino with a sub-centimeter track, finding current LHC searches insensitive but identifying tracklet reach at future hadron and muon colliders.",
+      "takeaway": "Translates the LZ-motivated Higgsino spectrum into a short-track collider signature.",
+      "x": 63.74,
+      "y": 66.46,
+      "cites": [
+        "2609.01475",
+        "2609.01504",
+        "2609.01583",
+        "2609.01590",
+        "2609.01592",
+        "2609.01892",
+        "2609.02505",
+        "2609.02608",
+        "2609.02807",
+        "2609.02823",
+        "2609.02868",
+        "2609.02994",
+        "2609.04144",
+        "2609.04163",
+        "2609.04175",
+        "2609.04181",
+        "2609.04185",
+        "2609.04186",
+        "2609.04673",
+        "2609.05204",
+        "2609.05291"
+      ]
+    },
+    {
+      "id": "2609.08893",
+      "arxivId": "2609.08893",
+      "title": "ALP-mediated inelastic dark matter and the LUX-ZEPLIN high-recoil candidate event LZ230616",
+      "authors": [
+        "Guan-Wen Yuan",
+        "Bo Zhang",
+        "Wen-Yu Cao",
+        "Lei Feng",
+        "Ruizhi Yang"
+      ],
+      "published": "2026-09-08",
+      "updated": "2026-09-08",
+      "url": "https://arxiv.org/abs/2609.08893",
+      "role": "explanation",
+      "primaryIsland": "endothermic",
+      "islands": [
+        "endothermic",
+        "elastic",
+        "constraints"
+      ],
+      "tags": [
+        "axionlike mediator",
+        "Majorana DM",
+        "momentum dependence",
+        "halo sensitivity"
+      ],
+      "summary": "The authors model two Majorana states coupled through a gluonic axionlike mediator and find a narrow LZ-compatible spectrum near 350 GeV and a 330 keV splitting, while noting the large coupling product and strong halo-cutoff sensitivity.",
+      "takeaway": "Combines endothermic kinematics with a momentum-dependent axion portal and exposes its main consistency tests.",
+      "x": 53.71,
+      "y": 60.77,
+      "cites": [
+        "2609.01475",
+        "2609.01504",
+        "2609.01583",
+        "2609.01590",
+        "2609.01592",
+        "2609.01892",
+        "2609.02505",
+        "2609.02608",
+        "2609.02775",
+        "2609.02807",
+        "2609.02823",
+        "2609.02868",
+        "2609.04144",
+        "2609.04163",
+        "2609.04175",
+        "2609.04181",
+        "2609.04185",
+        "2609.04186",
+        "2609.04673",
+        "2609.05291"
+      ]
+    },
+    {
+      "id": "2609.08993",
+      "arxivId": "2609.08993",
+      "title": "A Vector-Like Lepton Interpretation of the High-Energy Nuclear Recoil Candidate in LUX-ZEPLIN",
+      "authors": [
+        "Fatemeh Elahi",
+        "Pedro Schwaller"
+      ],
+      "published": "2026-09-08",
+      "updated": "2026-09-08",
+      "url": "https://arxiv.org/abs/2609.08993",
+      "role": "explanation",
+      "primaryIsland": "elastic",
+      "islands": [
+        "elastic",
+        "constraints"
+      ],
+      "tags": [
+        "spin-dependent DM",
+        "vector-like lepton",
+        "Higgs blind spot",
+        "solar capture"
+      ],
+      "summary": "The authors fit the hard recoil with elastic spin-dependent scattering in singlet-doublet Majorana dark matter, using a Higgs blind spot to suppress low-energy spin-independent recoils while retaining a thermal-relic region.",
+      "takeaway": "A viable elastic spin-dependent alternative with complementary solar-neutrino tests.",
+      "x": 45.35,
+      "y": 88.03,
+      "cites": [
+        "2609.01504",
+        "2609.02505",
+        "2609.02775",
+        "2609.02807",
+        "2609.02823",
+        "2609.04144",
+        "2609.04175",
+        "2609.04181",
+        "2609.04185",
+        "2609.04186"
+      ]
+    },
+    {
+      "id": "2609.09015",
+      "arxivId": "2609.09015",
+      "title": "Endothermic dark matter with a light dark photon and the LUX--ZEPLIN high-energy nuclear-recoil candidate",
+      "authors": [
+        "Pengxuan Zhu",
+        "Giovani Dalla Valle Garcia",
+        "Xuan-Gong Wang",
+        "Anthony W. Thomas",
+        "Martin J. White"
+      ],
+      "published": "2026-09-08",
+      "updated": "2026-09-08",
+      "url": "https://arxiv.org/abs/2609.09015",
+      "role": "explanation",
+      "primaryIsland": "endothermic",
+      "islands": [
+        "endothermic",
+        "constraints"
+      ],
+      "tags": [
+        "light dark photon",
+        "global scan",
+        "relic density",
+        "excited-state cosmology"
+      ],
+      "summary": "The authors jointly scan the LZ energy likelihood and relic density for endothermic dark matter with a light kinetically mixed dark photon, finding TeV masses and few-hundred-keV splittings while highlighting late-time excited-state constraints.",
+      "takeaway": "A likelihood-based dark-photon fit whose viability depends on depleting the long-lived excited state.",
+      "x": 62.2,
+      "y": 50.91,
+      "cites": [
+        "2609.01475",
+        "2609.01504",
+        "2609.01583",
+        "2609.01590",
+        "2609.01592",
+        "2609.01892",
+        "2609.02608",
+        "2609.02775",
+        "2609.02807",
+        "2609.02823",
+        "2609.02868",
+        "2609.02994",
+        "2609.04144",
+        "2609.04163",
+        "2609.04175",
+        "2609.04181",
+        "2609.04185",
+        "2609.04186",
+        "2609.04673",
+        "2609.05204"
+      ]
+    },
+    {
+      "id": "2609.09037",
+      "arxivId": "2609.09037",
+      "title": "Neutron disappearance and the LZ nuclear recoil event",
+      "authors": [
+        "Mohammad Aghaie",
+        "Alessandro Strumia"
+      ],
+      "published": "2026-09-08",
+      "updated": "2026-09-08",
+      "url": "https://arxiv.org/abs/2609.09037",
+      "role": "explanation",
+      "primaryIsland": "absorption",
+      "islands": [
+        "absorption",
+        "constraints"
+      ],
+      "tags": [
+        "neutron disappearance",
+        "nuclear de-excitation",
+        "oxygen constraint",
+        "xenon lines"
+      ],
+      "summary": "The authors interpret the recoil as disappearance of a bound xenon neutron, either spontaneously or through a dark-matter-induced reaction, and derive quiet-event fractions, oxygen constraints, and line-like behavior near threshold.",
+      "takeaway": "A nuclear-disappearance alternative that can be tested through target dependence and accompanying activity.",
+      "x": 30.62,
+      "y": 36.23,
+      "cites": [
+        "2609.01475",
+        "2609.01592",
+        "2609.02823",
+        "2609.04181",
+        "2609.04185",
+        "2609.04186",
+        "2609.04673"
+      ]
+    },
+    {
+      "id": "2609.09136",
+      "arxivId": "2609.09136",
+      "title": "A Warped Extra Dimensional Candidate for the LZ 248 keV Event",
+      "authors": [
+        "Vincent S. H. Lee",
+        "Lisa Randall"
+      ],
+      "published": "2026-09-08",
+      "updated": "2026-09-08",
+      "url": "https://arxiv.org/abs/2609.09136",
+      "role": "explanation",
+      "primaryIsland": "endothermic",
+      "islands": [
+        "endothermic",
+        "higgsino",
+        "constraints"
+      ],
+      "tags": [
+        "warped extra dimension",
+        "pseudo-Dirac DM",
+        "dark gauge boson",
+        "solar constraints"
+      ],
+      "summary": "The authors construct a warped-extra-dimensional pseudo-Dirac fermion whose localized masses naturally generate a roughly 300 keV splitting and whose dark gauge mediator can fit the LZ event while evading fixed-coupling Higgsino tensions.",
+      "takeaway": "Uses geometric suppression to obtain the splitting and decouple the rate from the minimal Higgsino prediction.",
+      "x": 66.6,
+      "y": 48.96,
+      "cites": [
+        "2609.01475",
+        "2609.01504",
+        "2609.01583",
+        "2609.01590",
+        "2609.01592",
+        "2609.02505",
+        "2609.02608",
+        "2609.02775",
+        "2609.02807",
+        "2609.02823",
+        "2609.04144",
+        "2609.04163",
+        "2609.04175",
+        "2609.04186"
+      ]
+    },
+    {
+      "id": "2609.09138",
+      "arxivId": "2609.09138",
+      "title": "Mixing-suppressed inelastic dark matter: a minimal model for the LZ 248 keV event",
+      "authors": [
+        "Seung J. Lee",
+        "Taewook Youn"
+      ],
+      "published": "2026-09-08",
+      "updated": "2026-09-08",
+      "url": "https://arxiv.org/abs/2609.09138",
+      "role": "explanation",
+      "primaryIsland": "higgsino",
+      "islands": [
+        "higgsino",
+        "endothermic",
+        "constraints"
+      ],
+      "tags": [
+        "singlet-doublet fermion",
+        "mixing suppression",
+        "solar capture",
+        "coannihilation"
+      ],
+      "summary": "The authors use singlet-doublet mixing to suppress the Z-mediated inelastic rate without pushing the splitting deep into the halo tail, and study relic abundance, solar capture, cooling, and IceCube limits near the thermal endpoint.",
+      "takeaway": "Trades extreme-threshold suppression for mixing suppression while retaining correlated solar and relic tests.",
+      "x": 67.42,
+      "y": 32.32,
+      "cites": [
+        "2609.01475",
+        "2609.01504",
+        "2609.01583",
+        "2609.01590",
+        "2609.01592",
+        "2609.01892",
+        "2609.02505",
+        "2609.02608",
+        "2609.02775",
+        "2609.02807",
+        "2609.02823",
+        "2609.02868",
+        "2609.02994",
+        "2609.04144",
+        "2609.04163",
+        "2609.04175",
+        "2609.04181",
+        "2609.04185",
+        "2609.04186",
+        "2609.04673",
+        "2609.05204",
+        "2609.05291"
       ]
     }
   ]
