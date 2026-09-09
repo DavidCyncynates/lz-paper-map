@@ -12,7 +12,8 @@
     "start": "wrangler dev --config dist/server/wrangler.json",
     "typecheck": "tsc --noEmit",
     "validate:data": "python3 scripts/update_papers.py --validate-only",
-    "lint": "oxlint app lib scripts/prepare-pages.mjs components/ui/button.tsx components/ui/input.tsx",
+    "test:layout": "node --experimental-strip-types --test scripts/test-hierarchical-layout.mjs",
+    "lint": "oxlint app lib scripts/prepare-pages.mjs scripts/test-hierarchical-layout.mjs components/ui/button.tsx components/ui/input.tsx",
     "format": "oxfmt"
   },
   "dependencies": {

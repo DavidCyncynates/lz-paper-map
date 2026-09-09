@@ -21,12 +21,19 @@ The site is a static export hosted by GitHub Pages. A local Codex scheduled task
 reviews arXiv's public web pages after each announcement, validates any proposed
 catalog changes, and opens a pull request. It uses the signed-in Codex account,
 not an OpenAI developer API key or the arXiv API. A human merge publishes the
-update. Committed coordinates remain fixed semantic anchors; the browser applies
-a deterministic, non-animated layout pass: paper dots repel, weak primary-island
-tension keeps idea families compact, and labels repel every other map element.
-Each shaded island is then drawn as a smoothed envelope around its settled
-primary papers. The canvas can be scrolled, dragged, and zoomed without changing
-the underlying semantic layout.
+update. Committed coordinates remain fixed semantic anchors. The browser first
+settles each primary island independently: dots and its label repel at short
+range while weak attraction makes the group compact. An exact padded minimum
+circle encloses that complete group. Those rigid circles are then packed by a
+second deterministic attraction-and-repulsion pass, with the unshaded LZ result
+participating as its own collision body. Later-added papers absorb most new
+local collision adjustment, limiting disruption to established groups. Each
+record has an immutable layout rank assigned when it enters the catalog, so a
+late-discovered older preprint is still treated as the newcomer and a later JSON
+reorder cannot change the map. The canvas can be scrolled, dragged, and zoomed
+without changing the underlying semantic layout; if measured geometry cannot be
+packed safely, the map stays hidden and the matching list view remains
+available.
 
 The full rationale, data contract, trust boundaries, stable-layout policy, and
 failure behavior are in [docs/architecture.md](docs/architecture.md).
@@ -48,6 +55,7 @@ Useful checks:
 python3 scripts/update_papers.py --validate-only
 pnpm typecheck
 pnpm lint
+pnpm test:layout
 pnpm build
 ```
 
@@ -90,9 +98,10 @@ request creation will stop safely and require attention.
 
 The public catalog is [data/landscape.json](data/landscape.json). Island IDs are
 stable editorial concepts. To make a manual correction, edit the record, run
-the validation command, and commit the change. The legacy update script remains
-available as a validator, but its network/API update mode is disabled; the
-scheduled task runs it only with `--validate-only`.
+the validation command, and commit the change. Add new records at the end with
+the next unused `layoutRank`; never change an established record's rank. The
+legacy update script remains available as a validator, but its network/API
+update mode is disabled; the scheduled task runs it only with `--validate-only`.
 
 Successful scans that change data add an audit record under `data/runs/`.
 Uncertain candidates that need human judgment are retained in

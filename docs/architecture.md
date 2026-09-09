@@ -86,23 +86,49 @@ Each island keeps a fixed semantic seed rather than a fixed visible boundary. A
 new paper is attracted mostly toward its primary island and partly toward any
 secondary islands. A hash of the arXiv ID provides deterministic jitter;
 collision checks find the first unoccupied position. Existing coordinates remain
-pinned as semantic anchors. At display time, a deterministic relaxation pass
-gives papers and labels repulsion while weak primary-island tension pulls cluster
-outliers inward. Only the settled positions are rendered: there is no visible
-animation, and filtering does not reflow the map. The visible island is a padded
-convex envelope around its settled primary papers, converted into a smooth cubic
-path. Secondary memberships remain searchable and inform semantic placement,
-but do not inflate broad islands across most of the map. Adding a paper can
-therefore enlarge or reshape its primary island and cause small local spacing
-changes without altering the committed atlas.
+pinned as semantic anchors. At display time, a deterministic hierarchical solve
+first assembles each primary island independently. Its label and paper dots have
+short-range collision repulsion, while weak center attraction and authored
+coordinate springs preserve a compact, recognizable local arrangement. An exact
+minimum enclosing circle is calculated over the settled paper discs and all four
+corners of the measured label, then padded to form the visible island.
+
+Every paper has an immutable, contiguous `layoutRank` assigned when it enters
+the catalog. During a local collision, the higher-ranked record absorbs most of
+the correction; this makes routine additions move the newcomer much more than
+the established papers around it. The rule deliberately does not use arXiv-ID
+or JSON-array ordering, so an older preprint discovered in a later scan is still
+treated as the newcomer and a harmless file reorder cannot change the map. The
+committed placement pass also avoids occupied coordinates, making this bias a
+second stability guard rather than the primary spacing mechanism. Scheduled and
+manual additions receive one plus the current maximum rank; established ranks
+never change.
+
+The completed islands become rigid circles in a second solve. They retain weak
+springs toward their semantic anchors, attract gently toward the map centroid,
+and repel at short range so their shaded regions cannot overlap. The LZ result
+and its label participate as one additional collision circle, but that circle is
+not drawn. Children translate with their island and are never rotated, scaled,
+or independently re-solved during this outer pass. Only the settled result is
+rendered: there is no visible animation, and filtering does not reflow the map.
+The browser reveals spatial geometry only after the actual label and dot extents
+have been measured and both solver levels report convergence. If the available
+world cannot satisfy containment, separation, or canvas bounds, the map stays
+mounted but hidden so it can recover after a resize; an accessible message sends
+the reader to the matching list view instead of displaying misleading overlaps.
+
+Secondary memberships remain searchable and inform semantic placement, but do
+not duplicate a paper across physical islands. Adding a paper can enlarge its
+primary circle and trigger deterministic repacking without changing the
+committed semantic coordinates.
 
 The map lives on a larger two-dimensional stage that can be scrolled, dragged,
 and zoomed. This gives dense families room to breathe while preserving a
 viewport-height interface and a stable coordinate system.
 
-The shaded island blobs are restrained, borderless visual regions rather than
+The shaded island circles are restrained, borderless visual regions rather than
 inferred statistical confidence areas; the experimental anchor does not need a
-separate blob. Follow-up dot size is intentionally uniform, while the
+visible circle. Follow-up dot size is intentionally uniform, while the
 experimental anchor is slightly larger. Citation counts are especially
 misleading for papers only days old and do not affect the display.
 
@@ -135,9 +161,10 @@ At 12:00 Europe/Rome every day, the scheduled task:
 9. writes a concise source audit when data changes; and
 10. opens a new pull request for human review.
 
-Existing human-reviewed summaries, island memberships, and coordinates remain
-fixed. When a revision makes one of those fields questionable, the task flags it
-for human review instead of silently rewriting it. A revision to the
+Existing human-reviewed summaries, island memberships, coordinates, and layout
+ranks remain fixed. New records are appended with the next rank. When a revision
+makes one of those fields questionable, the task flags it for human review
+instead of silently rewriting it. A revision to the
 experimental anchor always creates a mandatory-review entry. If arXiv is
 unavailable, the previous site remains untouched. A merge to `main` triggers a
 fresh static build and GitHub Pages deployment. When a maintenance pull request
@@ -164,7 +191,19 @@ endorsement nor peer review.
 Every meaningful scan writes a manifest under `data/runs/` with its timestamp,
 per-lane coverage, public source pages, changed records, citation evidence, and
 validation results. The candidate log preserves uncertain suggestions. Git
-history then records exactly what a reviewer accepted.
+history then records exactly what a reviewer accepted. Catalog validation also
+requires layout ranks to be unique, contiguous integers, preventing a missing or
+reused stability identity from reaching the site.
+
+The pure solver and a conservative current-catalog geometry fixture are checked
+in CI: every primary paper and label corner must remain inside its circle, all
+nine packing bodies (including the hidden LZ body) must remain separated and
+within the world, and reversing input order must produce byte-identical geometry.
+The suite also covers scale-safe exact circles, dense/coincident bodies, invalid
+geometry, an impossible viewport, and the displacement caused by adding one
+later paper, including an older-ID backfill and an edge-growing placement.
+Runtime convergence checks cover the browser's measured font and focus extents,
+which cannot be known exactly in the Node-only fixture.
 
 The next useful upgrades are manual field locks, a contribution/correction form
 backed by GitHub Issues, and embeddings for suggesting conceptual neighbors

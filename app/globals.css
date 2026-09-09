@@ -512,6 +512,11 @@ a {
   touch-action: pan-x pan-y;
 }
 
+.map-viewport:not(.is-layout-ready) {
+  overflow: hidden;
+  cursor: default;
+}
+
 .map-viewport:focus-visible {
   outline: 2px solid rgba(59, 83, 75, 0.55);
   outline-offset: 2px;
@@ -546,6 +551,39 @@ a {
   top: 50%;
   transform-origin: center;
   transition: transform 220ms ease;
+}
+
+.map-canvas.is-layout-hidden {
+  visibility: hidden;
+}
+
+.map-layout-unavailable {
+  position: absolute;
+  z-index: 30;
+  inset: 50% auto auto 50%;
+  width: min(330px, calc(100vw - 36px));
+  display: grid;
+  justify-items: center;
+  gap: 8px;
+  padding: 20px;
+  border: 1px solid rgba(82, 94, 87, 0.2);
+  border-radius: 9px;
+  background: rgba(248, 248, 242, 0.94);
+  color: #43514c;
+  box-shadow: 0 12px 32px rgba(42, 53, 48, 0.09);
+  text-align: center;
+  transform: translate(-50%, -50%);
+}
+
+.map-layout-unavailable strong {
+  color: #263630;
+  font-family: var(--font-serif-display);
+  font-size: 15px;
+}
+
+.map-layout-unavailable span {
+  font-size: 11px;
+  line-height: 1.5;
 }
 
 .map-contours {

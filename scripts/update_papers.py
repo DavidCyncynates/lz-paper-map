@@ -345,6 +345,9 @@ def add_annotations(
     annotation_by_id = {item["arxiv_id"]: item for item in annotations}
     islands = {island["id"]: island for island in landscape["islands"]}
     occupied = [(paper["x"], paper["y"]) for paper in landscape["papers"]]
+    next_layout_rank = max(
+        (paper.get("layoutRank", -1) for paper in landscape["papers"]), default=-1
+    ) + 1
     candidate_log: list[dict[str, Any]] = []
     added = 0
 
@@ -391,6 +394,7 @@ def add_annotations(
         landscape["papers"].append(
             {
                 "id": record["id"],
+                "layoutRank": next_layout_rank,
                 "arxivId": record["id"],
                 "title": record["title"],
                 "authors": record["authors"],
@@ -415,6 +419,7 @@ def add_annotations(
             }
         )
         added += 1
+        next_layout_rank += 1
     return added, candidate_log
 
 
@@ -533,6 +538,18 @@ def validate(landscape: dict[str, Any], candidates: dict[str, Any] | None = None
     if len(paper_ids) != len(set(paper_ids)):
         errors.append("paper IDs must be unique")
     valid_papers = set(paper_ids)
+    layout_ranks = [
+        paper.get("layoutRank") for paper in landscape.get("papers", [])
+    ]
+    if (
+        any(
+            not isinstance(rank, int) or isinstance(rank, bool) or rank < 0
+            for rank in layout_ranks
+        )
+        or len(layout_ranks) != len(set(layout_ranks))
+        or set(layout_ranks) != set(range(len(layout_ranks)))
+    ):
+        errors.append("paper layoutRank values must be unique contiguous integers from zero")
 
     for paper in landscape.get("papers", []):
         label = paper.get("id", "<missing-id>")
