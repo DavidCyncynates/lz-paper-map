@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "title": "LZ high-recoil literature landscape",
   "updatedAt": "2026-09-09",
-  "lastSuccessfulScan": "2026-09-09T10:31:08Z",
+  "lastSuccessfulScan": "2026-09-09T12:09:03Z",
   "event": {
     "energyKev": 248,
     "statisticalUncertaintyKev": 23,
@@ -1820,6 +1820,61 @@
         "2609.04185",
         "2609.04186",
         "2609.04673"
+      ]
+    },
+    {
+      "id": "2609.09107",
+      "arxivId": "2609.09107",
+      "title": "For Whom the Xenon Recoils: Magnetic Inelastic Dark Baryons",
+      "authors": [
+        "Pouya Asadi",
+        "Austin Batz",
+        "Patrick J. Fox",
+        "Samuel D. Homiller",
+        "Graham D. Kribs"
+      ],
+      "published": "2026-09-08",
+      "updated": "2026-09-08",
+      "url": "https://arxiv.org/abs/2609.09107",
+      "role": "explanation",
+      "primaryIsland": "endothermic",
+      "islands": [
+        "endothermic",
+        "constraints"
+      ],
+      "tags": [
+        "magnetic inelastic DM",
+        "dark baryons",
+        "transition dipole",
+        "coincident photon"
+      ],
+      "summary": "The authors construct composite dark-baryon dark matter with an inelastic magnetic transition, find that TeV-scale masses and 100–500 keV splittings can fit the LZ event across several halo models, and predict an accompanying photon signal for some recoils.",
+      "takeaway": "A composite magnetic-inelastic explanation with a coincident-photon discriminator.",
+      "x": 71.88,
+      "y": 61.42,
+      "cites": [
+        "2609.01475",
+        "2609.01504",
+        "2609.01583",
+        "2609.01590",
+        "2609.01592",
+        "2609.01892",
+        "2609.02505",
+        "2609.02608",
+        "2609.02775",
+        "2609.02807",
+        "2609.02823",
+        "2609.02868",
+        "2609.02994",
+        "2609.04144",
+        "2609.04163",
+        "2609.04175",
+        "2609.04181",
+        "2609.04185",
+        "2609.04186",
+        "2609.04673",
+        "2609.05204",
+        "2609.05291"
       ]
     },
     {
