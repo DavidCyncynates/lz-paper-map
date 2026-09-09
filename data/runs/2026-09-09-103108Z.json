@@ -1,0 +1,997 @@
+{
+  "schemaVersion": 1,
+  "runId": "2026-09-09-103108Z",
+  "runAt": "2026-09-09T10:31:08Z",
+  "scanWindow": {
+    "previousSuccessfulScan": "2026-09-07T09:00:00Z",
+    "overlapStart": "2026-08-31T09:00:00Z"
+  },
+  "listingSources": [
+    "https://arxiv.org/list/hep-ph/new",
+    "https://arxiv.org/list/hep-ex/new",
+    "https://arxiv.org/list/astro-ph/new"
+  ],
+  "searchSources": [
+    "https://arxiv.org/search/?query=%22LUX-ZEPLIN%22&searchtype=all&abstracts=show&order=-announced_date_first&size=200",
+    "https://arxiv.org/search/?query=LZ+248+keV&searchtype=all&abstracts=show&order=-announced_date_first&size=100",
+    "https://arxiv.org/search/?query=LZ+high+recoil&searchtype=all&abstracts=show&order=-announced_date_first&size=100",
+    "https://arxiv.org/search/?query=LZ+nuclear-recoil+candidate&searchtype=all&abstracts=show&order=-announced_date_first&size=100",
+    "https://arxiv.org/search/?query=Search+for+dark+matter+particle+interactions+in+an+extended+nuclear+recoil+energy+window&searchtype=all&abstracts=show&order=-announced_date_first&size=100"
+  ],
+  "discovery": {
+    "newPapers": [
+      {
+        "id": "2609.06153",
+        "source": "https://arxiv.org/abs/2609.06153",
+        "relevance": "Directly fits the 248 keV event and proposes a target-material discriminator.",
+        "role": "explanation",
+        "islands": [
+          "exothermic",
+          "constraints"
+        ],
+        "cites": [
+          "2609.01475",
+          "2609.01504",
+          "2609.01583",
+          "2609.01590",
+          "2609.01892",
+          "2609.02775",
+          "2609.02807",
+          "2609.02823"
+        ],
+        "referenceSource": "https://arxiv.org/html/2609.06153",
+        "referenceCount": 23
+      },
+      {
+        "id": "2609.06171",
+        "source": "https://arxiv.org/abs/2609.06171",
+        "relevance": "Builds and tests a concrete endothermic model for this event.",
+        "role": "explanation",
+        "islands": [
+          "endothermic",
+          "constraints"
+        ],
+        "cites": [
+          "2609.01475",
+          "2609.01504",
+          "2609.01583",
+          "2609.01590",
+          "2609.01592",
+          "2609.01892",
+          "2609.02608",
+          "2609.02775",
+          "2609.02807",
+          "2609.02823",
+          "2609.02868",
+          "2609.02994",
+          "2609.04144",
+          "2609.04163",
+          "2609.04175",
+          "2609.04181",
+          "2609.04185"
+        ],
+        "referenceSource": "https://arxiv.org/html/2609.06171",
+        "referenceCount": 17
+      },
+      {
+        "id": "2609.06571",
+        "source": "https://arxiv.org/abs/2609.06571",
+        "relevance": "Performs a direct profile-likelihood fit of a concrete model to the event.",
+        "role": "explanation",
+        "islands": [
+          "higgsino",
+          "endothermic"
+        ],
+        "cites": [
+          "2609.01475",
+          "2609.01504",
+          "2609.01583",
+          "2609.01590",
+          "2609.01592",
+          "2609.01892",
+          "2609.02505",
+          "2609.02608",
+          "2609.02807",
+          "2609.02823",
+          "2609.02868",
+          "2609.02994",
+          "2609.04144",
+          "2609.04163",
+          "2609.04175",
+          "2609.04181",
+          "2609.04185",
+          "2609.04186"
+        ],
+        "referenceSource": "https://arxiv.org/html/2609.06571",
+        "referenceCount": 42
+      },
+      {
+        "id": "2609.06640",
+        "source": "https://arxiv.org/abs/2609.06640",
+        "relevance": "Provides concrete cross-channel discriminants for the proposed event interpretation.",
+        "role": "diagnostic",
+        "islands": [
+          "multimessenger",
+          "endothermic",
+          "constraints"
+        ],
+        "cites": [
+          "2609.01475",
+          "2609.01504",
+          "2609.01583",
+          "2609.01590",
+          "2609.01592",
+          "2609.01892",
+          "2609.02505",
+          "2609.02608",
+          "2609.02775",
+          "2609.02807",
+          "2609.02823",
+          "2609.02868",
+          "2609.02994",
+          "2609.04144",
+          "2609.04163",
+          "2609.04175",
+          "2609.04181",
+          "2609.04185",
+          "2609.04186"
+        ],
+        "referenceSource": "https://arxiv.org/html/2609.06640",
+        "referenceCount": 26
+      },
+      {
+        "id": "2609.06750",
+        "source": "https://arxiv.org/abs/2609.06750",
+        "relevance": "Derives a collider discriminator tied specifically to the proposed LZ explanation.",
+        "role": "diagnostic",
+        "islands": [
+          "constraints",
+          "higgsino"
+        ],
+        "cites": [
+          "2609.01475",
+          "2609.01504",
+          "2609.01583",
+          "2609.01590",
+          "2609.01592",
+          "2609.01892",
+          "2609.02608",
+          "2609.02775",
+          "2609.02807",
+          "2609.02823",
+          "2609.02868",
+          "2609.02994",
+          "2609.04144",
+          "2609.04163",
+          "2609.04175",
+          "2609.04181",
+          "2609.04185",
+          "2609.04186"
+        ],
+        "referenceSource": "https://arxiv.org/html/2609.06750",
+        "referenceCount": 60
+      },
+      {
+        "id": "2609.06756",
+        "source": "https://arxiv.org/abs/2609.06756",
+        "relevance": "Directly fits the isolated event with a distinct boosted elastic mechanism.",
+        "role": "explanation",
+        "islands": [
+          "elastic",
+          "multimessenger"
+        ],
+        "cites": [
+          "2609.01475",
+          "2609.01504",
+          "2609.01583",
+          "2609.01590",
+          "2609.01592",
+          "2609.01892",
+          "2609.02505",
+          "2609.02608",
+          "2609.02775",
+          "2609.02807",
+          "2609.02823",
+          "2609.02868",
+          "2609.02994",
+          "2609.04144",
+          "2609.04163",
+          "2609.04175",
+          "2609.04185",
+          "2609.04186"
+        ],
+        "referenceSource": "https://arxiv.org/html/2609.06756",
+        "referenceCount": 30
+      },
+      {
+        "id": "2609.06760",
+        "source": "https://arxiv.org/abs/2609.06760",
+        "relevance": "Directly constrains and discriminates leading explanations of this event.",
+        "role": "constraint",
+        "islands": [
+          "constraints",
+          "higgsino",
+          "endothermic"
+        ],
+        "cites": [
+          "2609.01475",
+          "2609.01504",
+          "2609.01583",
+          "2609.01590",
+          "2609.01592",
+          "2609.02608",
+          "2609.02775",
+          "2609.02823",
+          "2609.02868",
+          "2609.04163"
+        ],
+        "referenceSource": "https://arxiv.org/html/2609.06760",
+        "referenceCount": 70
+      },
+      {
+        "id": "2609.06825",
+        "source": "https://arxiv.org/abs/2609.06825",
+        "relevance": "Constructs a multi-sector model that explicitly accommodates the 248 keV event.",
+        "role": "explanation",
+        "islands": [
+          "endothermic",
+          "multimessenger"
+        ],
+        "cites": [
+          "2609.01475",
+          "2609.01504",
+          "2609.01583",
+          "2609.01592",
+          "2609.02608",
+          "2609.02807",
+          "2609.02823",
+          "2609.02868",
+          "2609.02994",
+          "2609.04144",
+          "2609.04163",
+          "2609.04175",
+          "2609.04181",
+          "2609.04185",
+          "2609.04186"
+        ],
+        "referenceSource": "https://arxiv.org/html/2609.06825",
+        "referenceCount": 111
+      },
+      {
+        "id": "2609.06890",
+        "source": "https://arxiv.org/abs/2609.06890",
+        "relevance": "Offers two directly modeled boosted mechanisms for the isolated event.",
+        "role": "explanation",
+        "islands": [
+          "elastic",
+          "endothermic",
+          "multimessenger"
+        ],
+        "cites": [
+          "2609.01504",
+          "2609.01583",
+          "2609.01590",
+          "2609.01592",
+          "2609.01892",
+          "2609.02608",
+          "2609.02807",
+          "2609.02823",
+          "2609.02868",
+          "2609.02994",
+          "2609.04144",
+          "2609.04163",
+          "2609.04175",
+          "2609.04181",
+          "2609.04185",
+          "2609.04186"
+        ],
+        "referenceSource": "https://arxiv.org/html/2609.06890",
+        "referenceCount": 63
+      },
+      {
+        "id": "2609.06909",
+        "source": "https://arxiv.org/abs/2609.06909",
+        "relevance": "Directly normalizes a concrete inelastic model to the LZ event.",
+        "role": "explanation",
+        "islands": [
+          "endothermic",
+          "constraints"
+        ],
+        "cites": [
+          "2609.01475",
+          "2609.01504",
+          "2609.01583",
+          "2609.01590",
+          "2609.01592",
+          "2609.01892",
+          "2609.02505",
+          "2609.02608",
+          "2609.02775",
+          "2609.02807",
+          "2609.02823",
+          "2609.02868",
+          "2609.04144",
+          "2609.04163",
+          "2609.04175",
+          "2609.04181",
+          "2609.04185",
+          "2609.04186"
+        ],
+        "referenceSource": "https://arxiv.org/html/2609.06909",
+        "referenceCount": 39
+      },
+      {
+        "id": "2609.07138",
+        "source": "https://arxiv.org/abs/2609.07138",
+        "relevance": "Models the event and derives multi-target consequences in a specific framework.",
+        "role": "explanation",
+        "islands": [
+          "higgsino",
+          "endothermic",
+          "constraints"
+        ],
+        "cites": [
+          "2609.01475",
+          "2609.01504",
+          "2609.01583",
+          "2609.01590",
+          "2609.01892",
+          "2609.02823"
+        ],
+        "referenceSource": "https://arxiv.org/html/2609.07138",
+        "referenceCount": 24
+      },
+      {
+        "id": "2609.07225",
+        "source": "https://arxiv.org/abs/2609.07225",
+        "relevance": "Explains the event and ties its normalization to a near-term collider test.",
+        "role": "explanation",
+        "islands": [
+          "endothermic",
+          "constraints"
+        ],
+        "cites": [
+          "2609.01475",
+          "2609.01504",
+          "2609.01583",
+          "2609.01590",
+          "2609.01592",
+          "2609.01892",
+          "2609.02505",
+          "2609.02608",
+          "2609.02775",
+          "2609.02807",
+          "2609.02823",
+          "2609.02868",
+          "2609.02994",
+          "2609.04144",
+          "2609.04163",
+          "2609.04175",
+          "2609.04181",
+          "2609.04185",
+          "2609.04186"
+        ],
+        "referenceSource": "https://arxiv.org/html/2609.07225",
+        "referenceCount": 39
+      },
+      {
+        "id": "2609.07451",
+        "source": "https://arxiv.org/abs/2609.07451",
+        "relevance": "Directly tests a concrete scalar model against the event and existing bounds.",
+        "role": "explanation",
+        "islands": [
+          "higgsino",
+          "endothermic"
+        ],
+        "cites": [
+          "2609.01475",
+          "2609.01504",
+          "2609.01583",
+          "2609.01590",
+          "2609.01592",
+          "2609.02505",
+          "2609.02608",
+          "2609.02775",
+          "2609.02807",
+          "2609.02823",
+          "2609.02868",
+          "2609.02994",
+          "2609.04144",
+          "2609.04163",
+          "2609.04175",
+          "2609.04181",
+          "2609.04185",
+          "2609.04186",
+          "2609.04673",
+          "2609.05204",
+          "2609.05291"
+        ],
+        "referenceSource": "https://arxiv.org/html/2609.07451",
+        "referenceCount": 61
+      },
+      {
+        "id": "2609.07742",
+        "source": "https://arxiv.org/abs/2609.07742",
+        "relevance": "Directly explains the recoil while proposing discriminating target responses.",
+        "role": "explanation",
+        "islands": [
+          "elastic",
+          "multimessenger",
+          "constraints"
+        ],
+        "cites": [
+          "2609.01475",
+          "2609.01504",
+          "2609.01583",
+          "2609.01590",
+          "2609.01592",
+          "2609.01892",
+          "2609.02505",
+          "2609.02608",
+          "2609.02775",
+          "2609.02807",
+          "2609.02823",
+          "2609.02868",
+          "2609.02994",
+          "2609.04144",
+          "2609.04163",
+          "2609.04175",
+          "2609.04181",
+          "2609.04185",
+          "2609.04186",
+          "2609.04673",
+          "2609.05204",
+          "2609.05291"
+        ],
+        "referenceSource": "https://arxiv.org/html/2609.07742",
+        "referenceCount": 65
+      },
+      {
+        "id": "2609.07800",
+        "source": "https://arxiv.org/abs/2609.07800",
+        "relevance": "Constructs a model whose inelastic rate is tailored to the isolated LZ event.",
+        "role": "explanation",
+        "islands": [
+          "higgsino",
+          "endothermic"
+        ],
+        "cites": [
+          "2609.01475",
+          "2609.01504",
+          "2609.01583",
+          "2609.01590",
+          "2609.01592",
+          "2609.02505",
+          "2609.02608",
+          "2609.02775",
+          "2609.02807",
+          "2609.02823",
+          "2609.02868",
+          "2609.02994",
+          "2609.04144",
+          "2609.04163",
+          "2609.04175",
+          "2609.04181",
+          "2609.04185",
+          "2609.04186",
+          "2609.04673",
+          "2609.05204",
+          "2609.05291"
+        ],
+        "referenceSource": "https://arxiv.org/html/2609.07800",
+        "referenceCount": 71
+      },
+      {
+        "id": "2609.07807",
+        "source": "https://arxiv.org/abs/2609.07807",
+        "relevance": "Directly tests the proposed Higgsino explanation with neutrino-telescope data.",
+        "role": "constraint",
+        "islands": [
+          "constraints",
+          "higgsino"
+        ],
+        "cites": [
+          "2609.01475",
+          "2609.01504",
+          "2609.01583",
+          "2609.01590",
+          "2609.01592",
+          "2609.01892",
+          "2609.02608",
+          "2609.02775",
+          "2609.02807",
+          "2609.02823",
+          "2609.02868",
+          "2609.02994",
+          "2609.04144",
+          "2609.04163",
+          "2609.04175",
+          "2609.04181",
+          "2609.04185",
+          "2609.04186",
+          "2609.04673",
+          "2609.05204",
+          "2609.05291"
+        ],
+        "referenceSource": "https://arxiv.org/html/2609.07807",
+        "referenceCount": 68
+      },
+      {
+        "id": "2609.07811",
+        "source": "https://arxiv.org/abs/2609.07811",
+        "relevance": "Provides explicit likelihood-tested benchmarks for the event.",
+        "role": "explanation",
+        "islands": [
+          "higgsino",
+          "endothermic"
+        ],
+        "cites": [
+          "2609.01475",
+          "2609.01504",
+          "2609.01583",
+          "2609.01590",
+          "2609.01592",
+          "2609.02608",
+          "2609.02775",
+          "2609.02807",
+          "2609.02823",
+          "2609.02868",
+          "2609.02994",
+          "2609.04144",
+          "2609.04163",
+          "2609.04175",
+          "2609.04181",
+          "2609.04185",
+          "2609.04186",
+          "2609.04673",
+          "2609.05204",
+          "2609.05291"
+        ],
+        "referenceSource": "https://arxiv.org/html/2609.07811",
+        "referenceCount": 92
+      },
+      {
+        "id": "2609.08712",
+        "source": "https://arxiv.org/abs/2609.08712",
+        "relevance": "Develops a specific collider discriminator for a leading event interpretation.",
+        "role": "diagnostic",
+        "islands": [
+          "constraints",
+          "higgsino"
+        ],
+        "cites": [
+          "2609.01475",
+          "2609.01504",
+          "2609.01583",
+          "2609.01590",
+          "2609.01592",
+          "2609.01892",
+          "2609.02505",
+          "2609.02608",
+          "2609.02807",
+          "2609.02823",
+          "2609.02868",
+          "2609.02994",
+          "2609.04144",
+          "2609.04163",
+          "2609.04175",
+          "2609.04181",
+          "2609.04185",
+          "2609.04186",
+          "2609.04673",
+          "2609.05204",
+          "2609.05291"
+        ],
+        "referenceSource": "https://arxiv.org/html/2609.08712",
+        "referenceCount": 37
+      },
+      {
+        "id": "2609.08893",
+        "source": "https://arxiv.org/abs/2609.08893",
+        "relevance": "Quantitatively fits a distinct mediator model to the event.",
+        "role": "explanation",
+        "islands": [
+          "endothermic",
+          "elastic",
+          "constraints"
+        ],
+        "cites": [
+          "2609.01475",
+          "2609.01504",
+          "2609.01583",
+          "2609.01590",
+          "2609.01592",
+          "2609.01892",
+          "2609.02505",
+          "2609.02608",
+          "2609.02775",
+          "2609.02807",
+          "2609.02823",
+          "2609.02868",
+          "2609.04144",
+          "2609.04163",
+          "2609.04175",
+          "2609.04181",
+          "2609.04185",
+          "2609.04186",
+          "2609.04673",
+          "2609.05291"
+        ],
+        "referenceSource": "https://arxiv.org/html/2609.08893",
+        "referenceCount": 73
+      },
+      {
+        "id": "2609.08993",
+        "source": "https://arxiv.org/abs/2609.08993",
+        "relevance": "Directly fits the event with an elastic operator and tests correlated constraints.",
+        "role": "explanation",
+        "islands": [
+          "elastic",
+          "constraints"
+        ],
+        "cites": [
+          "2609.01504",
+          "2609.02505",
+          "2609.02775",
+          "2609.02807",
+          "2609.02823",
+          "2609.04144",
+          "2609.04175",
+          "2609.04181",
+          "2609.04185",
+          "2609.04186"
+        ],
+        "referenceSource": "https://arxiv.org/html/2609.08993",
+        "referenceCount": 46
+      },
+      {
+        "id": "2609.09015",
+        "source": "https://arxiv.org/abs/2609.09015",
+        "relevance": "Directly models the event and its relic and cosmological consistency conditions.",
+        "role": "explanation",
+        "islands": [
+          "endothermic",
+          "constraints"
+        ],
+        "cites": [
+          "2609.01475",
+          "2609.01504",
+          "2609.01583",
+          "2609.01590",
+          "2609.01592",
+          "2609.01892",
+          "2609.02608",
+          "2609.02775",
+          "2609.02807",
+          "2609.02823",
+          "2609.02868",
+          "2609.02994",
+          "2609.04144",
+          "2609.04163",
+          "2609.04175",
+          "2609.04181",
+          "2609.04185",
+          "2609.04186",
+          "2609.04673",
+          "2609.05204"
+        ],
+        "referenceSource": "https://arxiv.org/html/2609.09015",
+        "referenceCount": 70
+      },
+      {
+        "id": "2609.09037",
+        "source": "https://arxiv.org/abs/2609.09037",
+        "relevance": "Proposes and constrains a non-scattering explanation specific to the 248 keV event.",
+        "role": "explanation",
+        "islands": [
+          "absorption",
+          "constraints"
+        ],
+        "cites": [
+          "2609.01475",
+          "2609.01592",
+          "2609.02823",
+          "2609.04181",
+          "2609.04185",
+          "2609.04186",
+          "2609.04673"
+        ],
+        "referenceSource": "https://arxiv.org/html/2609.09037",
+        "referenceCount": 17
+      },
+      {
+        "id": "2609.09136",
+        "source": "https://arxiv.org/abs/2609.09136",
+        "relevance": "Builds a concrete endothermic model in response to the event and its leading constraints.",
+        "role": "explanation",
+        "islands": [
+          "endothermic",
+          "higgsino",
+          "constraints"
+        ],
+        "cites": [
+          "2609.01475",
+          "2609.01504",
+          "2609.01583",
+          "2609.01590",
+          "2609.01592",
+          "2609.02505",
+          "2609.02608",
+          "2609.02775",
+          "2609.02807",
+          "2609.02823",
+          "2609.04144",
+          "2609.04163",
+          "2609.04175",
+          "2609.04186"
+        ],
+        "referenceSource": "https://arxiv.org/html/2609.09136",
+        "referenceCount": 41
+      },
+      {
+        "id": "2609.09138",
+        "source": "https://arxiv.org/abs/2609.09138",
+        "relevance": "Directly fits and stress-tests a minimal inelastic model for this event.",
+        "role": "explanation",
+        "islands": [
+          "higgsino",
+          "endothermic",
+          "constraints"
+        ],
+        "cites": [
+          "2609.01475",
+          "2609.01504",
+          "2609.01583",
+          "2609.01590",
+          "2609.01592",
+          "2609.01892",
+          "2609.02505",
+          "2609.02608",
+          "2609.02775",
+          "2609.02807",
+          "2609.02823",
+          "2609.02868",
+          "2609.02994",
+          "2609.04144",
+          "2609.04163",
+          "2609.04175",
+          "2609.04181",
+          "2609.04185",
+          "2609.04186",
+          "2609.04673",
+          "2609.05204",
+          "2609.05291"
+        ],
+        "referenceSource": "https://arxiv.org/html/2609.09138",
+        "referenceCount": 78
+      }
+    ],
+    "ambiguousCandidates": []
+  },
+  "revisions": [
+    {
+      "id": "2609.01504",
+      "previousUpdated": "2026-09-01",
+      "updated": "2026-09-03",
+      "source": "https://arxiv.org/abs/2609.01504",
+      "assessment": "v2 expands the halo-tail uncertainty and solar-capture discussion; the existing editorial fields remain accurate"
+    },
+    {
+      "id": "2609.02505",
+      "previousUpdated": "2026-09-02",
+      "updated": "2026-09-05",
+      "source": "https://arxiv.org/abs/2609.02505",
+      "assessment": "v2 adds solar-capture context and a mapped citation; the existing editorial fields remain accurate"
+    },
+    {
+      "id": "2609.02807",
+      "previousUpdated": "2026-09-02",
+      "updated": "2026-09-04",
+      "source": "https://arxiv.org/abs/2609.02807",
+      "assessment": "v2 adjusts numerical benchmarks and normalization details; the existing editorial fields remain accurate"
+    },
+    {
+      "id": "2609.02868",
+      "previousUpdated": "2026-09-02",
+      "updated": "2026-09-03",
+      "source": "https://arxiv.org/abs/2609.02868",
+      "assessment": "v2 clarifies the mediator content; the existing editorial fields remain accurate"
+    },
+    {
+      "id": "2609.04144",
+      "previousUpdated": "2026-09-03",
+      "updated": "2026-09-08",
+      "source": "https://arxiv.org/abs/2609.04144",
+      "assessment": "v2 broadens relic, elastic-scattering, and solar-capture constraints; the existing summary still accurately describes the model core"
+    },
+    {
+      "id": "2609.05204",
+      "previousUpdated": "2026-09-04",
+      "updated": "2026-09-08",
+      "source": "https://arxiv.org/abs/2609.05204",
+      "assessment": "v2 reorganizes the presentation and expands the current references; the existing editorial fields remain accurate"
+    }
+  ],
+  "citationReconciliation": {
+    "scope": "24 new papers and 6 revised mapped papers",
+    "existingPaperChanges": [
+      {
+        "id": "2609.02505",
+        "before": [
+          "2609.01475",
+          "2609.01504",
+          "2609.01583",
+          "2609.01590",
+          "2609.01592",
+          "2609.02823"
+        ],
+        "after": [
+          "2609.01475",
+          "2609.01504",
+          "2609.01583",
+          "2609.01590",
+          "2609.01592",
+          "2609.02775",
+          "2609.02823"
+        ],
+        "added": [
+          "2609.02775"
+        ],
+        "removed": [],
+        "source": "https://arxiv.org/html/2609.02505",
+        "referenceCount": 20
+      },
+      {
+        "id": "2609.04144",
+        "before": [
+          "2609.01475",
+          "2609.01504",
+          "2609.01583",
+          "2609.01590",
+          "2609.01592",
+          "2609.01892",
+          "2609.02505",
+          "2609.02608",
+          "2609.02775",
+          "2609.02807",
+          "2609.02823",
+          "2609.02868"
+        ],
+        "after": [
+          "2609.01475",
+          "2609.01504",
+          "2609.01583",
+          "2609.01590",
+          "2609.01592",
+          "2609.01892",
+          "2609.02505",
+          "2609.02608",
+          "2609.02775",
+          "2609.02807",
+          "2609.02823",
+          "2609.02868",
+          "2609.04163",
+          "2609.04175",
+          "2609.04181",
+          "2609.04185",
+          "2609.04186",
+          "2609.04673",
+          "2609.05204",
+          "2609.05291"
+        ],
+        "added": [
+          "2609.04163",
+          "2609.04175",
+          "2609.04181",
+          "2609.04185",
+          "2609.04186",
+          "2609.04673",
+          "2609.05204",
+          "2609.05291"
+        ],
+        "removed": [],
+        "source": "https://arxiv.org/html/2609.04144",
+        "referenceCount": 59
+      },
+      {
+        "id": "2609.05204",
+        "before": [
+          "2609.01504",
+          "2609.01583",
+          "2609.01590",
+          "2609.01592",
+          "2609.01892",
+          "2609.02608",
+          "2609.02775",
+          "2609.02823",
+          "2609.04175"
+        ],
+        "after": [
+          "2609.01504",
+          "2609.01583",
+          "2609.01590",
+          "2609.01592",
+          "2609.01892",
+          "2609.02505",
+          "2609.02608",
+          "2609.02775",
+          "2609.02807",
+          "2609.02823",
+          "2609.02868",
+          "2609.04163",
+          "2609.04175",
+          "2609.04185",
+          "2609.04186",
+          "2609.04673"
+        ],
+        "added": [
+          "2609.02505",
+          "2609.02807",
+          "2609.02868",
+          "2609.04163",
+          "2609.04185",
+          "2609.04186",
+          "2609.04673"
+        ],
+        "removed": [],
+        "source": "https://arxiv.org/html/2609.05204",
+        "referenceCount": 58
+      }
+    ],
+    "uncertain": [],
+    "referenceSources": [
+      "https://arxiv.org/pdf/2609.01504",
+      "https://arxiv.org/html/2609.02505",
+      "https://arxiv.org/html/2609.02807",
+      "https://arxiv.org/html/2609.02868",
+      "https://arxiv.org/html/2609.04144",
+      "https://arxiv.org/html/2609.05204",
+      "https://arxiv.org/html/2609.06153",
+      "https://arxiv.org/html/2609.06171",
+      "https://arxiv.org/html/2609.06571",
+      "https://arxiv.org/html/2609.06640",
+      "https://arxiv.org/html/2609.06750",
+      "https://arxiv.org/html/2609.06756",
+      "https://arxiv.org/html/2609.06760",
+      "https://arxiv.org/html/2609.06825",
+      "https://arxiv.org/html/2609.06890",
+      "https://arxiv.org/html/2609.06909",
+      "https://arxiv.org/html/2609.07138",
+      "https://arxiv.org/html/2609.07225",
+      "https://arxiv.org/html/2609.07451",
+      "https://arxiv.org/html/2609.07742",
+      "https://arxiv.org/html/2609.07800",
+      "https://arxiv.org/html/2609.07807",
+      "https://arxiv.org/html/2609.07811",
+      "https://arxiv.org/html/2609.08712",
+      "https://arxiv.org/html/2609.08893",
+      "https://arxiv.org/html/2609.08993",
+      "https://arxiv.org/html/2609.09015",
+      "https://arxiv.org/html/2609.09037",
+      "https://arxiv.org/html/2609.09136",
+      "https://arxiv.org/html/2609.09138"
+    ]
+  },
+  "validation": [
+    {
+      "command": "python3 scripts/update_papers.py --validate-only",
+      "status": "passed"
+    },
+    {
+      "command": "pnpm typecheck",
+      "status": "passed"
+    },
+    {
+      "command": "pnpm lint",
+      "status": "passed"
+    },
+    {
+      "command": "pnpm build",
+      "status": "passed"
+    },
+    {
+      "command": "git diff --check",
+      "status": "passed"
+    }
+  ]
+}
