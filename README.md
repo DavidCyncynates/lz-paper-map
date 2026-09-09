@@ -8,7 +8,8 @@ recoil candidate announced on 1 September 2026.
 The atlas contains the LZ experimental paper and the response literature found
 through the latest reviewed arXiv scan. Nearby dots share mechanisms or
 phenomenology; the islands name the main families of ideas. Search, filters,
-map/list views, paper details, and shareable paper links are built in.
+publication-date windows, map/list views, paper details, and shareable links are
+built in.
 
 This is a literature-navigation aid, not a statement of scientific consensus.
 The LZ result is one roughly 248 keV candidate with 2.6σ global significance,
@@ -56,6 +57,7 @@ python3 scripts/update_papers.py --validate-only
 pnpm typecheck
 pnpm lint
 pnpm test:layout
+pnpm test:date-range
 pnpm build
 ```
 
