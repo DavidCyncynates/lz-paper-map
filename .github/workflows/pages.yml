@@ -65,6 +65,9 @@ jobs:
       - name: Test hierarchical map layout
         run: pnpm test:layout
 
+      - name: Test publication date filtering
+        run: pnpm test:date-range
+
       - name: Configure Pages
         uses: actions/configure-pages@v5
 

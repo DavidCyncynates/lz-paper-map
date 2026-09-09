@@ -25,10 +25,24 @@ import {
   type HierarchicalIslandLayout,
   type HierarchicalLayoutDiagnostics,
 } from '@/lib/hierarchical-map-layout';
+import {
+  applyDateRangeToSearchParams,
+  clampDateToBounds,
+  dateRangeFromSearchParams,
+  dayIndexToIsoDate,
+  formatDateField,
+  isFullDateRange,
+  isoDateToDayIndex,
+  paperInDateRange,
+  parseDateField,
+  publicationDateBounds,
+  type PaperDateRange,
+} from '@/lib/paper-date-range';
 
 type Island = (typeof landscape.islands)[number];
 type Paper = (typeof landscape.papers)[number];
 type ViewMode = 'map' | 'list';
+type DateEndpoint = 'from' | 'to';
 type MapPoint = { x: number; y: number };
 type LabelGeometry = {
   id: string;
@@ -89,6 +103,21 @@ const islandById = new Map(
   landscape.islands.map((island) => [island.id, island]),
 );
 const paperById = new Map(landscape.papers.map((paper) => [paper.id, paper]));
+const CATALOG_DATE_BOUNDS = publicationDateBounds(landscape.papers);
+const CATALOG_FIRST_DAY = isoDateToDayIndex(CATALOG_DATE_BOUNDS.from);
+const CATALOG_LAST_DAY = isoDateToDayIndex(CATALOG_DATE_BOUNDS.to);
+const CATALOG_DAY_SPAN = Math.max(1, CATALOG_LAST_DAY - CATALOG_FIRST_DAY);
+const PUBLICATION_DAY_COUNTS = [
+  ...landscape.papers.reduce((counts, paper) => {
+    const day = isoDateToDayIndex(paper.published);
+    counts.set(day, (counts.get(day) ?? 0) + 1);
+    return counts;
+  }, new Map<number, number>()),
+].sort(([first], [second]) => first - second);
+const MAX_PUBLICATION_DAY_COUNT = Math.max(
+  1,
+  ...PUBLICATION_DAY_COUNTS.map(([, count]) => count),
+);
 
 const MAP_WORLD_WIDTH = 1160;
 const MAP_WORLD_HEIGHT = 780;
@@ -206,7 +235,11 @@ function tooltipAuthorLabel(authors: readonly string[]) {
   return `${names[0]} et al.`;
 }
 
-function filterPapers(query: string, islandId: string) {
+function filterPapers(
+  query: string,
+  islandId: string,
+  dateRange: PaperDateRange = CATALOG_DATE_BOUNDS,
+) {
   const normalized = query.trim().toLowerCase();
   return landscape.papers.filter((paper) => {
     const inIsland = islandId === 'all' || paper.islands.includes(islandId);
@@ -220,7 +253,11 @@ function filterPapers(query: string, islandId: string) {
     ]
       .join(' ')
       .toLowerCase();
-    return inIsland && (!normalized || haystack.includes(normalized));
+    return (
+      inIsland &&
+      paperInDateRange(paper, dateRange) &&
+      (!normalized || haystack.includes(normalized))
+    );
   });
 }
 
@@ -228,12 +265,16 @@ type CitationGroupProps = {
   title: string;
   papers: Paper[];
   relationship: 'cites' | 'cited-by';
+  dateRange: PaperDateRange;
+  dateRangeActive: boolean;
   onSelect: (id: string) => void;
 };
 
 function CitationRows({
   papers,
   relationship,
+  dateRange,
+  dateRangeActive,
   onSelect,
 }: Omit<CitationGroupProps, 'title'>) {
   return (
@@ -244,16 +285,24 @@ function CitationRows({
           relationship === 'cites'
             ? 'cited by this paper'
             : 'which cites this paper';
+        const isOutsideDateRange =
+          dateRangeActive && !paperInDateRange(paper, dateRange);
         return (
-          <li key={paper.id}>
+          <li
+            className={isOutsideDateRange ? 'is-outside-date-range' : ''}
+            key={paper.id}
+          >
             <button
               type="button"
               onClick={() => onSelect(paper.id)}
-              aria-label={`Select ${paper.title}, ${relationshipLabel}`}
+              aria-label={`Select ${paper.title}, ${relationshipLabel}${isOutsideDateRange ? ', outside the selected publication dates' : ''}`}
             >
               <small>
-                {authorLabel ? `${authorLabel} · ` : ''}
-                {paper.published.slice(0, 4)}
+                <span>
+                  {authorLabel ? `${authorLabel} · ` : ''}
+                  {paper.published.slice(0, 4)}
+                </span>
+                {isOutsideDateRange && <em>Outside dates</em>}
               </small>
               <span>{paper.title}</span>
             </button>
@@ -268,6 +317,8 @@ function CitationGroup({
   title,
   papers,
   relationship,
+  dateRange,
+  dateRangeActive,
   onSelect,
 }: CitationGroupProps) {
   const visiblePapers = papers.slice(0, MAX_VISIBLE_CITATION_ROWS);
@@ -283,6 +334,8 @@ function CitationGroup({
           <CitationRows
             papers={visiblePapers}
             relationship={relationship}
+            dateRange={dateRange}
+            dateRangeActive={dateRangeActive}
             onSelect={onSelect}
           />
           {remainingPapers.length > 0 && (
@@ -291,6 +344,8 @@ function CitationGroup({
               <CitationRows
                 papers={remainingPapers}
                 relationship={relationship}
+                dateRange={dateRange}
+                dateRangeActive={dateRangeActive}
                 onSelect={onSelect}
               />
             </details>
@@ -306,6 +361,17 @@ function CitationGroup({
 export function LzLandscape() {
   const [query, setQuery] = useState('');
   const [activeIsland, setActiveIsland] = useState('all');
+  const [dateRange, setDateRange] =
+    useState<PaperDateRange>(CATALOG_DATE_BOUNDS);
+  const [dateRangeHydrated, setDateRangeHydrated] = useState(false);
+  const [dateFilterOpen, setDateFilterOpen] = useState(false);
+  const [fromDateDraft, setFromDateDraft] = useState(
+    formatDateField(CATALOG_DATE_BOUNDS.from),
+  );
+  const [toDateDraft, setToDateDraft] = useState(
+    formatDateField(CATALOG_DATE_BOUNDS.to),
+  );
+  const [dateError, setDateError] = useState<DateEndpoint | null>(null);
   const [selectedId, setSelectedId] = useState(landscape.papers[0].id);
   const [zoom, setZoom] = useState(1);
   const [viewMode, setViewMode] = useState<ViewMode>('map');
@@ -318,10 +384,15 @@ export function LzLandscape() {
   const mapCanvasRef = useRef<HTMLDivElement>(null);
   const mapFallbackButtonRef = useRef<HTMLButtonElement>(null);
   const listViewButtonRef = useRef<HTMLButtonElement>(null);
+  const dateFilterRef = useRef<HTMLDivElement>(null);
+  const dateFilterButtonRef = useRef<HTMLButtonElement>(null);
+  const fromDateInputRef = useRef<HTMLInputElement>(null);
+  const dateRangeRef = useRef(dateRange);
   const panGestureRef = useRef<PanGesture | null>(null);
   const revealedPaperRef = useRef<string | null>(null);
   const detailTitleRef = useRef<HTMLHeadingElement>(null);
   const focusDetailAfterCitation = useRef(false);
+  dateRangeRef.current = dateRange;
 
   useLayoutEffect(() => {
     if (viewMode !== 'map') return;
@@ -404,17 +475,79 @@ export function LzLandscape() {
   }, [viewMode]);
 
   useEffect(() => {
-    const paperId = new URLSearchParams(window.location.search).get('paper');
-    if (paperId && landscape.papers.some((paper) => paper.id === paperId)) {
-      let isCurrent = true;
-      queueMicrotask(() => {
-        if (isCurrent) setSelectedId(paperId);
-      });
-      return () => {
-        isCurrent = false;
-      };
-    }
+    const params = new URLSearchParams(window.location.search);
+    const paperId = params.get('paper');
+    const initialDateRange = dateRangeFromSearchParams(
+      params,
+      CATALOG_DATE_BOUNDS,
+    );
+    const requestedPaper = paperId ? paperById.get(paperId) : undefined;
+    const initialVisiblePaper = filterPapers('', 'all', initialDateRange)[0];
+    let isCurrent = true;
+    queueMicrotask(() => {
+      if (!isCurrent) return;
+      if (
+        requestedPaper &&
+        paperInDateRange(requestedPaper, initialDateRange)
+      ) {
+        setSelectedId(requestedPaper.id);
+      } else if (initialVisiblePaper) {
+        setSelectedId(initialVisiblePaper.id);
+      }
+      setDateRange(initialDateRange);
+      setFromDateDraft(formatDateField(initialDateRange.from));
+      setToDateDraft(formatDateField(initialDateRange.to));
+      setDateRangeHydrated(true);
+    });
+    return () => {
+      isCurrent = false;
+    };
   }, []);
+
+  useEffect(() => {
+    if (!dateRangeHydrated) return;
+    const url = new URL(window.location.href);
+    const nextParams = applyDateRangeToSearchParams(
+      url.searchParams,
+      dateRange,
+      CATALOG_DATE_BOUNDS,
+    );
+    if (nextParams.has('paper')) {
+      nextParams.set('paper', selectedId);
+    }
+    const nextSearch = nextParams.toString();
+    const nextLocation = `${url.pathname}${nextSearch ? `?${nextSearch}` : ''}${url.hash}`;
+    const currentLocation = `${url.pathname}${url.search}${url.hash}`;
+    if (nextLocation !== currentLocation) {
+      window.history.replaceState(null, '', nextLocation);
+    }
+  }, [dateRange, dateRangeHydrated, selectedId]);
+
+  useEffect(() => {
+    if (!dateFilterOpen) return;
+
+    function closeOnOutsidePointer(event: PointerEvent) {
+      if (
+        event.target instanceof Node &&
+        !dateFilterRef.current?.contains(event.target)
+      ) {
+        setDateFilterOpen(false);
+      }
+    }
+
+    function closeOnEscape(event: KeyboardEvent) {
+      if (event.key !== 'Escape') return;
+      setDateFilterOpen(false);
+      dateFilterButtonRef.current?.focus();
+    }
+
+    document.addEventListener('pointerdown', closeOnOutsidePointer);
+    document.addEventListener('keydown', closeOnEscape);
+    return () => {
+      document.removeEventListener('pointerdown', closeOnOutsidePointer);
+      document.removeEventListener('keydown', closeOnEscape);
+    };
+  }, [dateFilterOpen]);
 
   useEffect(() => {
     const context = document.modelContext;
@@ -469,7 +602,11 @@ export function LzLandscape() {
                 'island must be one of the published island IDs.',
               );
             }
-            const matches = filterPapers(nextQuery, nextIsland);
+            const matches = filterPapers(
+              nextQuery,
+              nextIsland,
+              dateRangeRef.current,
+            );
             setQuery(nextQuery);
             setActiveIsland(nextIsland);
             setViewMode('list');
@@ -513,6 +650,13 @@ export function LzLandscape() {
             if (!paper) {
               throw new Error(`No paper with arXiv ID ${identifier}.`);
             }
+            if (!paperInDateRange(paper, dateRangeRef.current)) {
+              setDateRange(CATALOG_DATE_BOUNDS);
+              setFromDateDraft(formatDateField(CATALOG_DATE_BOUNDS.from));
+              setToDateDraft(formatDateField(CATALOG_DATE_BOUNDS.to));
+              setDateError(null);
+            }
+            setQuery('');
             setSelectedId(paper.id);
             setActiveIsland('all');
             const url = new URL(window.location.href);
@@ -541,9 +685,18 @@ export function LzLandscape() {
   }, []);
 
   const visiblePapers = useMemo(
-    () => filterPapers(query, activeIsland),
-    [activeIsland, query],
+    () => filterPapers(query, activeIsland, dateRange),
+    [activeIsland, dateRange, query],
   );
+  const dateRangeActive = !isFullDateRange(dateRange, CATALOG_DATE_BOUNDS);
+  const dateRangeFromDay = isoDateToDayIndex(dateRange.from);
+  const dateRangeToDay = isoDateToDayIndex(dateRange.to);
+  const dateRangeFromPercent =
+    ((dateRangeFromDay - CATALOG_FIRST_DAY) / CATALOG_DAY_SPAN) * 100;
+  const dateRangeToPercent =
+    ((dateRangeToDay - CATALOG_FIRST_DAY) / CATALOG_DAY_SPAN) * 100;
+  const dateRangeHandlesAreTight =
+    dateRangeToPercent - dateRangeFromPercent < 8;
 
   const hierarchicalLayout = useMemo<HierarchicalLayoutAttempt>(() => {
     const width = mapGeometry?.width ?? MAP_WORLD_WIDTH;
@@ -814,7 +967,7 @@ export function LzLandscape() {
 
   function chooseIsland(id: string) {
     setActiveIsland(id);
-    const firstMatch = filterPapers(query, id)[0];
+    const firstMatch = filterPapers(query, id, dateRange)[0];
     if (firstMatch) selectPaper(firstMatch.id);
   }
 
@@ -822,7 +975,88 @@ export function LzLandscape() {
     focusDetailAfterCitation.current = true;
     setQuery('');
     setActiveIsland('all');
+    const paper = paperById.get(id);
+    if (paper && !paperInDateRange(paper, dateRange)) {
+      resetDateRange();
+    }
     selectPaper(id);
+  }
+
+  function setPublicationDateRange(nextRange: PaperDateRange) {
+    setDateRange(nextRange);
+    const nextVisiblePapers = filterPapers(query, activeIsland, nextRange);
+    if (
+      nextVisiblePapers.length > 0 &&
+      !nextVisiblePapers.some((paper) => paper.id === selectedId)
+    ) {
+      setSelectedId(nextVisiblePapers[0].id);
+    }
+  }
+
+  function updateDateFromSlider(endpoint: DateEndpoint, dayIndex: number) {
+    setDateError(null);
+    if (endpoint === 'from') {
+      const nextFrom = Math.min(dayIndex, dateRangeToDay);
+      const nextRange = {
+        from: dayIndexToIsoDate(nextFrom),
+        to: dateRange.to,
+      };
+      setPublicationDateRange(nextRange);
+      setFromDateDraft(formatDateField(nextRange.from));
+      setToDateDraft(formatDateField(nextRange.to));
+      return;
+    }
+    const nextTo = Math.max(dayIndex, dateRangeFromDay);
+    const nextRange = {
+      from: dateRange.from,
+      to: dayIndexToIsoDate(nextTo),
+    };
+    setPublicationDateRange(nextRange);
+    setFromDateDraft(formatDateField(nextRange.from));
+    setToDateDraft(formatDateField(nextRange.to));
+  }
+
+  function commitDateDraft(endpoint: DateEndpoint) {
+    const parsed = parseDateField(
+      endpoint === 'from' ? fromDateDraft : toDateDraft,
+    );
+    if (!parsed) {
+      setDateError(endpoint);
+      return;
+    }
+
+    const clamped = clampDateToBounds(parsed, CATALOG_DATE_BOUNDS);
+    const nextRange =
+      endpoint === 'from'
+        ? {
+            from: clamped,
+            to: clamped > dateRange.to ? clamped : dateRange.to,
+          }
+        : {
+            from: clamped < dateRange.from ? clamped : dateRange.from,
+            to: clamped,
+          };
+    setPublicationDateRange(nextRange);
+    setFromDateDraft(formatDateField(nextRange.from));
+    setToDateDraft(formatDateField(nextRange.to));
+    setDateError(null);
+  }
+
+  function resetDateRange() {
+    setPublicationDateRange(CATALOG_DATE_BOUNDS);
+    setFromDateDraft(formatDateField(CATALOG_DATE_BOUNDS.from));
+    setToDateDraft(formatDateField(CATALOG_DATE_BOUNDS.to));
+    setDateError(null);
+  }
+
+  function toggleDateFilter() {
+    if (!dateFilterOpen) {
+      setFromDateDraft(formatDateField(dateRange.from));
+      setToDateDraft(formatDateField(dateRange.to));
+      setDateError(null);
+      requestAnimationFrame(() => fromDateInputRef.current?.focus());
+    }
+    setDateFilterOpen((open) => !open);
   }
 
   function finishPan(pointerId: number) {
@@ -914,6 +1148,7 @@ export function LzLandscape() {
     setZoom(1);
     setQuery('');
     setActiveIsland('all');
+    resetDateRange();
     requestAnimationFrame(() => requestAnimationFrame(() => centerMap()));
   }
 
@@ -958,16 +1193,184 @@ export function LzLandscape() {
 
       <section className="workspace" id="top">
         <aside className="sidebar" aria-label="Map controls">
-          <label className="search-field" htmlFor="paper-search">
-            <span className="sr-only">Search papers</span>
-            <Search aria-hidden="true" />
-            <Input
-              id="paper-search"
-              value={query}
-              onChange={(event) => setQuery(event.target.value)}
-              placeholder="Search title, author, idea…"
-            />
-          </label>
+          <div className="search-controls" ref={dateFilterRef}>
+            <label className="search-field" htmlFor="paper-search">
+              <span className="sr-only">Search papers</span>
+              <Search aria-hidden="true" />
+              <Input
+                id="paper-search"
+                value={query}
+                onChange={(event) => setQuery(event.target.value)}
+                placeholder="Search title, author, idea…"
+              />
+            </label>
+            <Button
+              ref={dateFilterButtonRef}
+              type="button"
+              variant={dateRangeActive ? 'secondary' : 'outline'}
+              size="icon"
+              className={`date-filter-trigger ${dateRangeActive ? 'is-active' : ''}`}
+              aria-label={
+                dateRangeActive
+                  ? `Publication dates ${formatDateField(dateRange.from)} to ${formatDateField(dateRange.to)}; ${visiblePapers.length} papers shown`
+                  : 'Filter papers by publication date'
+              }
+              aria-haspopup="dialog"
+              aria-expanded={dateFilterOpen}
+              aria-controls="date-filter-panel"
+              onClick={toggleDateFilter}
+            >
+              <CalendarDays aria-hidden="true" />
+            </Button>
+
+            {dateFilterOpen && (
+              <dialog
+                open
+                className="date-filter-popover"
+                id="date-filter-panel"
+                aria-labelledby="date-filter-title"
+              >
+                <div className="date-filter-heading">
+                  <strong id="date-filter-title">Publication dates</strong>
+                  <button
+                    type="button"
+                    disabled={!dateRangeActive}
+                    onClick={resetDateRange}
+                  >
+                    All dates
+                  </button>
+                </div>
+
+                <fieldset className="date-filter-fields">
+                  <legend className="sr-only">
+                    Inclusive publication date interval
+                  </legend>
+                  <label htmlFor="date-filter-from">
+                    <span>From</span>
+                    <Input
+                      ref={fromDateInputRef}
+                      id="date-filter-from"
+                      value={fromDateDraft}
+                      autoComplete="off"
+                      maxLength={10}
+                      aria-invalid={dateError === 'from'}
+                      aria-describedby={
+                        dateError === 'from' ? 'date-filter-error' : undefined
+                      }
+                      onChange={(event) => {
+                        setFromDateDraft(event.target.value);
+                        if (dateError === 'from') setDateError(null);
+                      }}
+                      onBlur={() => commitDateDraft('from')}
+                      onKeyDown={(event) => {
+                        if (event.key !== 'Enter') return;
+                        event.preventDefault();
+                        commitDateDraft('from');
+                      }}
+                    />
+                  </label>
+                  <label htmlFor="date-filter-to">
+                    <span>To</span>
+                    <Input
+                      id="date-filter-to"
+                      value={toDateDraft}
+                      autoComplete="off"
+                      maxLength={10}
+                      aria-invalid={dateError === 'to'}
+                      aria-describedby={
+                        dateError === 'to' ? 'date-filter-error' : undefined
+                      }
+                      onChange={(event) => {
+                        setToDateDraft(event.target.value);
+                        if (dateError === 'to') setDateError(null);
+                      }}
+                      onBlur={() => commitDateDraft('to')}
+                      onKeyDown={(event) => {
+                        if (event.key !== 'Enter') return;
+                        event.preventDefault();
+                        commitDateDraft('to');
+                      }}
+                    />
+                  </label>
+                </fieldset>
+
+                <div
+                  className={`date-range-slider ${dateRangeHandlesAreTight ? 'has-tight-handles' : ''}`}
+                  style={
+                    {
+                      '--date-range-from': `${dateRangeFromPercent}%`,
+                      '--date-range-to': `${dateRangeToPercent}%`,
+                    } as React.CSSProperties
+                  }
+                >
+                  <span className="date-range-track" aria-hidden="true" />
+                  <span className="date-range-selection" aria-hidden="true" />
+                  <span className="date-range-rug" aria-hidden="true">
+                    {PUBLICATION_DAY_COUNTS.map(([day, count]) => (
+                      <i
+                        key={day}
+                        style={{
+                          left: `${((day - CATALOG_FIRST_DAY) / CATALOG_DAY_SPAN) * 100}%`,
+                          height: `${3 + (count / MAX_PUBLICATION_DAY_COUNT) * 6}px`,
+                        }}
+                      />
+                    ))}
+                  </span>
+                  <label className="sr-only" htmlFor="date-range-from">
+                    Start of publication date range
+                  </label>
+                  <input
+                    className="date-range-input date-range-input--from"
+                    id="date-range-from"
+                    type="range"
+                    min={CATALOG_FIRST_DAY}
+                    max={CATALOG_LAST_DAY}
+                    step={1}
+                    value={dateRangeFromDay}
+                    aria-valuemax={dateRangeToDay}
+                    aria-valuetext={formatDateField(dateRange.from)}
+                    onChange={(event) =>
+                      updateDateFromSlider('from', Number(event.target.value))
+                    }
+                  />
+                  <label className="sr-only" htmlFor="date-range-to">
+                    End of publication date range
+                  </label>
+                  <input
+                    className="date-range-input date-range-input--to"
+                    id="date-range-to"
+                    type="range"
+                    min={CATALOG_FIRST_DAY}
+                    max={CATALOG_LAST_DAY}
+                    step={1}
+                    value={dateRangeToDay}
+                    aria-valuemin={dateRangeFromDay}
+                    aria-valuetext={formatDateField(dateRange.to)}
+                    onChange={(event) =>
+                      updateDateFromSlider('to', Number(event.target.value))
+                    }
+                  />
+                </div>
+
+                {dateError && (
+                  <p className="date-filter-error" id="date-filter-error">
+                    Use DD/MM/YY or DD/MM/YYYY.
+                  </p>
+                )}
+
+                <output className="date-filter-count" aria-live="polite">
+                  <span>
+                    {formatDateField(dateRange.from)}–
+                    {formatDateField(dateRange.to)}
+                  </span>
+                  <strong>
+                    {visiblePapers.length}{' '}
+                    {visiblePapers.length === 1 ? 'paper' : 'papers'}
+                  </strong>
+                </output>
+              </dialog>
+            )}
+          </div>
 
           <nav className="island-nav" aria-label="Filter by explanation">
             <p className="nav-label">Ideas</p>
@@ -1337,7 +1740,11 @@ export function LzLandscape() {
                     <div className="empty-map">
                       <Search aria-hidden="true" />
                       <strong>No matching papers</strong>
-                      <span>Try a mechanism, author, or arXiv ID.</span>
+                      <span>
+                        {dateRangeActive
+                          ? 'Try widening the dates or changing another filter.'
+                          : 'Try a mechanism, author, or arXiv ID.'}
+                      </span>
                     </div>
                   )}
                 </div>
@@ -1401,7 +1808,11 @@ export function LzLandscape() {
                 <div className="empty-list">
                   <Search aria-hidden="true" />
                   <strong>No matching papers</strong>
-                  <span>Try a mechanism, author, or arXiv ID.</span>
+                  <span>
+                    {dateRangeActive
+                      ? 'Try widening the dates or changing another filter.'
+                      : 'Try a mechanism, author, or arXiv ID.'}
+                  </span>
                 </div>
               )}
             </div>
@@ -1466,12 +1877,16 @@ export function LzLandscape() {
               title="Cites on this map"
               papers={selectedCites}
               relationship="cites"
+              dateRange={dateRange}
+              dateRangeActive={dateRangeActive}
               onSelect={selectCitationPaper}
             />
             <CitationGroup
               title="Cited by on this map"
               papers={selectedCitedBy}
               relationship="cited-by"
+              dateRange={dateRange}
+              dateRangeActive={dateRangeActive}
               onSelect={selectCitationPaper}
             />
           </section>

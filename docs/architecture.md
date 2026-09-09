@@ -177,7 +177,8 @@ arXiv revision may make them eligible for a new assessment.
 ## Research interface
 
 The map supports title, author, concept, and arXiv-ID search; idea filtering;
-map and list views; keyboard-focusable paper nodes; shareable `?paper=` links;
+inclusive publication-date windows; map and list views; keyboard-focusable
+paper nodes; shareable `?paper=`, `?from=`, and `?to=` links;
 machine-summary labeling; selectable “cites” and “cited by” lists; and direct
 links to each arXiv record. The list view preserves access when spatial browsing
 is not useful or the screen is narrow.
