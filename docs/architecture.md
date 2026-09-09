@@ -4,7 +4,7 @@
 
 The LZ Paper Map is a small, reviewable research atlas. It treats the September
 2026 LZ result as one isolated high-recoil candidate event, not as a confirmed
-dark-matter signal or a broad excess. Each circle is a paper; distance encodes
+dark-matter signal or a broad excess. Each dot is a paper; distance encodes
 shared physical ideas. Labels distinguish interpretations, constraints,
 diagnostics, adjacent work, and the experimental result. Citation lineage is
 kept in the selected paper's detail panel rather than overlaid on the map.
@@ -82,23 +82,29 @@ Researchers should be able to build a mental map over time. For that reason,
 the browser never runs a random or continuously moving force layout, and the
 scheduled task does not rewrite existing semantic coordinates.
 
-Each island has a fixed region. A new paper is attracted mostly toward its
-primary island and partly toward any secondary islands. A hash of the arXiv ID
-provides deterministic jitter; collision checks find the first unoccupied
-position. Existing coordinates remain pinned as semantic anchors. At display
-time, a deterministic relaxation pass gives papers and labels a small amount of
-repulsion while attracting them back toward those anchors. Only the settled
-positions are rendered: there is no visible animation, and filtering does not
-reflow the map. Viewport and font metrics can produce small responsive
-adjustments, and adding a paper can cause local spacing changes without altering
-the committed atlas. A global change to the semantic coordinates remains an
-explicit new atlas version reviewed like any other editorial change.
+Each island keeps a fixed semantic seed rather than a fixed visible boundary. A
+new paper is attracted mostly toward its primary island and partly toward any
+secondary islands. A hash of the arXiv ID provides deterministic jitter;
+collision checks find the first unoccupied position. Existing coordinates remain
+pinned as semantic anchors. At display time, a deterministic relaxation pass
+gives papers and labels repulsion while weak primary-island tension pulls cluster
+outliers inward. Only the settled positions are rendered: there is no visible
+animation, and filtering does not reflow the map. The visible island is a padded
+convex envelope around its settled primary papers, converted into a smooth cubic
+path. Secondary memberships remain searchable and inform semantic placement,
+but do not inflate broad islands across most of the map. Adding a paper can
+therefore enlarge or reshape its primary island and cause small local spacing
+changes without altering the committed atlas.
 
-The shaded island blobs are restrained visual regions rather than inferred
-statistical confidence areas; the experimental anchor does not need a separate
-blob. Follow-up circle size is intentionally uniform, while the experimental
-anchor is slightly larger. Citation counts are especially misleading for papers
-only days old and do not affect the display.
+The map lives on a larger two-dimensional stage that can be scrolled, dragged,
+and zoomed. This gives dense families room to breathe while preserving a
+viewport-height interface and a stable coordinate system.
+
+The shaded island blobs are restrained, borderless visual regions rather than
+inferred statistical confidence areas; the experimental anchor does not need a
+separate blob. Follow-up dot size is intentionally uniform, while the
+experimental anchor is slightly larger. Citation counts are especially
+misleading for papers only days old and do not affect the display.
 
 The detail panel lists the complete “cites” and “cited by” relationships among
 mapped papers. Keeping citation lineage out of the spatial canvas avoids
@@ -109,19 +115,25 @@ from producing a starburst of lines.
 
 At 12:00 Europe/Rome every day, the scheduled task:
 
-1. inspects arXiv's public new-listing and search pages for LUX-ZEPLIN and
-   event-specific phrases, with an overlap window for delayed or missed runs;
-2. deduplicates results by versionless arXiv ID and checks known abstract pages
+1. completely enumerates the relevant public arXiv new/recent listings over a
+   seven-day overlap and reads every plausibly related abstract, without
+   requiring LZ language in the title;
+2. searches broad standalone event phrases and identifiers, citation neighbors,
+   and new-paper authors as independent discovery lanes;
+3. deduplicates results by versionless arXiv ID and checks known abstract pages
    for new revisions;
-3. conservatively screens genuinely new or revised records for relevance to the
+4. conservatively screens genuinely new or revised records for relevance to the
    isolated 248 keV candidate;
-4. verifies outgoing citations from each affected paper's current arXiv HTML
+5. verifies outgoing citations from each affected paper's current arXiv HTML
    reference list or PDF reference section;
-5. on Sundays, reconciles the reference lists of every mapped paper to repair
+6. on Sundays, reconciles the reference lists of every mapped paper to repair
    older omissions as well as changes associated with new revisions;
-6. validates taxonomy references, URLs, coordinates, roles, and citation IDs;
-7. writes a concise source audit when data changes; and
-8. opens a new pull request for human review.
+7. validates taxonomy references, URLs, coordinates, roles, and citation IDs;
+8. records per-lane coverage and refuses to advance the successful-scan
+   timestamp if a listing, pagination step, search, or discovery lane was
+   incomplete;
+9. writes a concise source audit when data changes; and
+10. opens a new pull request for human review.
 
 Existing human-reviewed summaries, island memberships, and coordinates remain
 fixed. When a revision makes one of those fields questionable, the task flags it
@@ -150,9 +162,9 @@ endorsement nor peer review.
 ## Reproducibility and review
 
 Every meaningful scan writes a manifest under `data/runs/` with its timestamp,
-public source pages, changed records, citation evidence, and validation results.
-The candidate log preserves uncertain suggestions. Git history then records
-exactly what a reviewer accepted.
+per-lane coverage, public source pages, changed records, citation evidence, and
+validation results. The candidate log preserves uncertain suggestions. Git
+history then records exactly what a reviewer accepted.
 
 The next useful upgrades are manual field locks, a contribution/correction form
 backed by GitHub Issues, and embeddings for suggesting conceptual neighbors
