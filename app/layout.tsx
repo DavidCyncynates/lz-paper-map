@@ -53,6 +53,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
+        <meta id="theme-color" name="theme-color" content="#f4f1e9" />
         <script
           dangerouslySetInnerHTML={{
             __html: createColorThemeBootstrapScript(),
