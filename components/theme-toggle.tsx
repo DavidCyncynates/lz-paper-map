@@ -6,6 +6,8 @@ import { Moon, Sun } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import {
   COLOR_THEME_STORAGE_KEY,
+  isColorTheme,
+  LEGACY_COLOR_THEME_STORAGE_KEY,
   oppositeColorTheme,
   resolveColorTheme,
   type ColorTheme,
@@ -25,18 +27,36 @@ type CompatibleMediaQueryList = {
   removeListener?: (listener: (event: MediaQueryListEvent) => void) => void;
 };
 
-function readStoredTheme(): string | null {
+function readStoredTheme(): ColorTheme | null {
   try {
-    return window.localStorage.getItem(COLOR_THEME_STORAGE_KEY);
+    const storedTheme = window.localStorage.getItem(COLOR_THEME_STORAGE_KEY);
+    if (isColorTheme(storedTheme)) return storedTheme;
+
+    const legacyTheme = window.localStorage.getItem(
+      LEGACY_COLOR_THEME_STORAGE_KEY,
+    );
+    if (isColorTheme(legacyTheme)) {
+      try {
+        window.localStorage.setItem(COLOR_THEME_STORAGE_KEY, legacyTheme);
+      } catch {
+        // Migration is best-effort; the legacy preference still applies.
+      }
+      return legacyTheme;
+    }
   } catch {
-    return null;
+    // Browser privacy settings can disable storage entirely.
   }
+  return null;
 }
 
 function applyTheme(theme: ColorTheme) {
   const root = document.documentElement;
   root.classList.toggle('dark', theme === 'dark');
   root.dataset.theme = theme;
+  root.style.colorScheme = theme;
+  document
+    .querySelector('#theme-color')
+    ?.setAttribute('content', theme === 'dark' ? '#111614' : '#f4f1e9');
 }
 
 export function ThemeToggle() {
@@ -60,6 +80,19 @@ export function ThemeToggle() {
       }
     };
     const followStoredTheme = (event: StorageEvent) => {
+      if (
+        event.key === LEGACY_COLOR_THEME_STORAGE_KEY &&
+        isColorTheme(event.newValue)
+      ) {
+        applyTheme(event.newValue);
+        setTheme(event.newValue);
+        try {
+          window.localStorage.setItem(COLOR_THEME_STORAGE_KEY, event.newValue);
+        } catch {
+          // The received theme can still be applied without storage.
+        }
+        return;
+      }
       if (event.key === null || event.key === COLOR_THEME_STORAGE_KEY) {
         synchronizeTheme();
       }
@@ -92,6 +125,7 @@ export function ThemeToggle() {
     setTheme(nextTheme);
     try {
       window.localStorage.setItem(COLOR_THEME_STORAGE_KEY, nextTheme);
+      window.localStorage.setItem(LEGACY_COLOR_THEME_STORAGE_KEY, nextTheme);
     } catch {
       // The theme still changes for this page when storage is unavailable.
     }
