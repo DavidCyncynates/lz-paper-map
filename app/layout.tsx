@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { createColorThemeBootstrapScript } from '@/lib/color-theme';
 import './globals.css';
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL;
@@ -50,7 +51,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: createColorThemeBootstrapScript(),
+          }}
+        />
+      </head>
       <body>{children}</body>
     </html>
   );

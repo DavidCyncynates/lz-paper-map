@@ -71,6 +71,9 @@ jobs:
       - name: Test citation sizing
         run: pnpm test:citation-size
 
+      - name: Test color-theme behavior
+        run: pnpm test:theme
+
       - name: Configure Pages
         uses: actions/configure-pages@v5
 
