@@ -6,6 +6,10 @@ import {
   createHierarchicalMapLayout,
   createMinimumEnclosingCircle,
 } from '../lib/hierarchical-map-layout.ts';
+import {
+  citationDiameter,
+  incomingCitationCounts,
+} from '../lib/paper-citation-size.ts';
 
 const EPSILON = 1e-3;
 const WIDTH = 1160;
@@ -39,7 +43,7 @@ function mapSnapshot(layout) {
   });
 }
 
-function currentCatalogInputs() {
+function currentCatalogInputs(sizeMode = 'uniform') {
   const labelSizes = new Map(
     landscape.islands.map((island) => [
       island.id,
@@ -53,15 +57,23 @@ function currentCatalogInputs() {
       },
     ]),
   );
-  const papers = landscape.papers.map((paper) => ({
-    id: paper.id,
-    islandId: paper.primaryIsland,
-    stabilityRank: paper.layoutRank,
-    x: (paper.x / 100) * WIDTH,
-    y: (paper.y / 100) * HEIGHT,
-    radius:
-      ((paper.role === 'observation' ? 28 : 16) / 2 + HALO) * ACTIVE_SCALE,
-  }));
+  const citationCounts = incomingCitationCounts(landscape.papers);
+  const papers = landscape.papers.map((paper) => {
+    const diameter =
+      sizeMode === 'citations'
+        ? citationDiameter(citationCounts.get(paper.id) ?? 0)
+        : paper.role === 'observation'
+          ? 28
+          : 16;
+    return {
+      id: paper.id,
+      islandId: paper.primaryIsland,
+      stabilityRank: paper.layoutRank,
+      x: (paper.x / 100) * WIDTH,
+      y: (paper.y / 100) * HEIGHT,
+      radius: (diameter / 2 + HALO) * ACTIVE_SCALE,
+    };
+  });
   const labels = landscape.islands.map((island) => {
     const size = labelSizes.get(island.id);
     return {
@@ -320,6 +332,104 @@ test('current catalog is contained, separated, bounded, and deterministic', () =
           firstBody.radius + LABEL_GAP,
         `${first.id} overlaps the ${islandId} label`,
       );
+    }
+  }
+});
+
+test('citation-sized catalog remains contained, separated, and deterministic', () => {
+  const citationInputs = currentCatalogInputs('citations');
+  const uniformInputs = currentCatalogInputs('uniform');
+  const options = {
+    islandPadding: ISLAND_PADDING,
+    observationPadding: OBSERVATION_PADDING,
+    outerGap: OUTER_GAP,
+  };
+  const layout = createHierarchicalMapLayout(
+    WIDTH,
+    HEIGHT,
+    citationInputs.papers,
+    citationInputs.labels,
+    citationInputs.islands,
+    options,
+  );
+  const reversed = createHierarchicalMapLayout(
+    WIDTH,
+    HEIGHT,
+    [...citationInputs.papers].reverse(),
+    [...citationInputs.labels].reverse(),
+    [...citationInputs.islands].reverse(),
+    options,
+  );
+  const uniformBefore = createHierarchicalMapLayout(
+    WIDTH,
+    HEIGHT,
+    uniformInputs.papers,
+    uniformInputs.labels,
+    uniformInputs.islands,
+    options,
+  );
+  const uniformAfter = createHierarchicalMapLayout(
+    WIDTH,
+    HEIGHT,
+    uniformInputs.papers,
+    uniformInputs.labels,
+    uniformInputs.islands,
+    options,
+  );
+
+  assert.equal(layout.diagnostics.converged, true);
+  assert.equal(layout.diagnostics.exactEnclosures, true);
+  assert.ok(layout.diagnostics.maxInnerOverlap <= EPSILON);
+  assert.ok(layout.diagnostics.maxOuterOverlap <= EPSILON);
+  assert.ok(layout.diagnostics.maxCanvasOverflow <= EPSILON);
+  assert.equal(mapSnapshot(layout), mapSnapshot(reversed));
+  assert.equal(mapSnapshot(uniformBefore), mapSnapshot(uniformAfter));
+  assert.notEqual(mapSnapshot(layout), mapSnapshot(uniformBefore));
+
+  const papersById = new Map(
+    citationInputs.papers.map((paper) => [paper.id, paper]),
+  );
+  for (const paper of landscape.papers) {
+    const body = papersById.get(paper.id);
+    const point = layout.papers.get(paper.id);
+    const circle = layout.islands.get(paper.primaryIsland);
+    const padding =
+      paper.primaryIsland === 'observation'
+        ? OBSERVATION_PADDING
+        : ISLAND_PADDING;
+    assert.ok(body && point && circle);
+    assert.ok(
+      circleDistance(point, circle) + body.radius + padding <=
+        circle.radius + EPSILON,
+      `${paper.id} escaped ${paper.primaryIsland} in citation mode`,
+    );
+  }
+
+  const primaryGroups = Map.groupBy(
+    landscape.papers,
+    (paper) => paper.primaryIsland,
+  );
+  for (const members of primaryGroups.values()) {
+    for (let firstIndex = 0; firstIndex < members.length; firstIndex += 1) {
+      const first = members[firstIndex];
+      const firstPoint = layout.papers.get(first.id);
+      const firstBody = papersById.get(first.id);
+      assert.ok(firstPoint && firstBody);
+      for (
+        let secondIndex = firstIndex + 1;
+        secondIndex < members.length;
+        secondIndex += 1
+      ) {
+        const second = members[secondIndex];
+        const secondPoint = layout.papers.get(second.id);
+        const secondBody = papersById.get(second.id);
+        assert.ok(secondPoint && secondBody);
+        assert.ok(
+          circleDistance(firstPoint, secondPoint) + EPSILON >=
+            firstBody.radius + secondBody.radius + PAPER_GAP,
+          `${first.id} overlaps ${second.id} in citation mode`,
+        );
+      }
     }
   }
 });

@@ -128,9 +128,13 @@ viewport-height interface and a stable coordinate system.
 
 The shaded island circles are restrained, borderless visual regions rather than
 inferred statistical confidence areas; the experimental anchor does not need a
-visible circle. Follow-up dot size is intentionally uniform, while the
-experimental anchor is slightly larger. Citation counts are especially
-misleading for papers only days old and do not affect the display.
+visible circle. Dot size is uniform by default. An optional “citations on this
+map” mode derives incoming counts from the full verified mapped citation graph
+and scales perceived dot area with a bounded `log(1 + citations)` transform from
+12–28 pixels. The fixed scale keeps additions from resizing every existing dot,
+and the two-stage solver reruns with the resulting radii so dots, labels, and
+island circles remain separated. These are not global scholarly citation totals
+or a proxy for evidence strength.
 
 The detail panel lists the complete “cites” and “cited by” relationships among
 mapped papers. Keeping citation lineage out of the spatial canvas avoids
@@ -139,7 +143,7 @@ from producing a starburst of lines.
 
 ## Daily lifecycle
 
-At 12:00 Europe/Rome every day, the scheduled task:
+At 11:00 Europe/Rome every day, the scheduled task:
 
 1. completely enumerates the relevant public arXiv new/recent listings over a
    seven-day overlap and reads every plausibly related abstract, without
@@ -178,10 +182,11 @@ arXiv revision may make them eligible for a new assessment.
 
 The map supports title, author, concept, and arXiv-ID search; idea filtering;
 inclusive publication-date windows; map and list views; keyboard-focusable
-paper nodes; shareable `?paper=`, `?from=`, and `?to=` links;
-machine-summary labeling; selectable “cites” and “cited by” lists; and direct
-links to each arXiv record. The list view preserves access when spatial browsing
-is not useful or the screen is narrow.
+paper nodes and island explanations; uniform or mapped-citation dot sizing;
+shareable `?paper=`, `?from=`, and `?to=` links; machine-summary labeling;
+selectable “cites” and “cited by” lists; and direct links to each arXiv record.
+The list view preserves access when spatial browsing is not useful or the
+screen is narrow.
 
 Distance means conceptual overlap, not evidential strength, consensus, paper
 quality, or probability that an explanation is correct. Inclusion is neither
@@ -196,15 +201,16 @@ history then records exactly what a reviewer accepted. Catalog validation also
 requires layout ranks to be unique, contiguous integers, preventing a missing or
 reused stability identity from reaching the site.
 
-The pure solver and a conservative current-catalog geometry fixture are checked
-in CI: every primary paper and label corner must remain inside its circle, all
-nine packing bodies (including the hidden LZ body) must remain separated and
-within the world, and reversing input order must produce byte-identical geometry.
-The suite also covers scale-safe exact circles, dense/coincident bodies, invalid
-geometry, an impossible viewport, and the displacement caused by adding one
-later paper, including an older-ID backfill and an edge-growing placement.
-Runtime convergence checks cover the browser's measured font and focus extents,
-which cannot be known exactly in the Node-only fixture.
+The pure solver and conservative current-catalog geometry fixtures are checked
+in CI in both sizing modes: every primary paper and label corner must remain
+inside its circle, all nine packing bodies (including the hidden LZ body) must
+remain separated and within the world, and reversing input order must produce
+byte-identical geometry. The suite also covers citation counting and scaling,
+scale-safe exact circles, dense/coincident bodies, invalid geometry, an
+impossible viewport, and the displacement caused by adding one later paper,
+including an older-ID backfill and an edge-growing placement. Runtime
+convergence checks cover the browser's measured font and focus extents, which
+cannot be known exactly in the Node-only fixture.
 
 The next useful upgrades are manual field locks, a contribution/correction form
 backed by GitHub Issues, and embeddings for suggesting conceptual neighbors

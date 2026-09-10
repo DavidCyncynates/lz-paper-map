@@ -68,6 +68,9 @@ jobs:
       - name: Test publication date filtering
         run: pnpm test:date-range
 
+      - name: Test citation sizing
+        run: pnpm test:citation-size
+
       - name: Configure Pages
         uses: actions/configure-pages@v5
 
