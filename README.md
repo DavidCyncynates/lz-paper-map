@@ -10,6 +10,8 @@ through the latest reviewed arXiv scan. Nearby dots share mechanisms or
 phenomenology; the islands name the main families of ideas. Search, filters,
 publication-date windows, map/list views, hover explanations for each island,
 optional citation-scaled dots, paper details, and shareable links are built in.
+The color theme follows the visitor's system on first load; the top-bar switch
+stores an explicit light or dark preference only in that browser.
 
 This is a literature-navigation aid, not a statement of scientific consensus.
 The LZ result is one roughly 248 keV candidate with 2.6σ global significance,
@@ -59,6 +61,7 @@ pnpm lint
 pnpm test:layout
 pnpm test:date-range
 pnpm test:citation-size
+pnpm test:theme
 pnpm build
 ```
 

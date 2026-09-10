@@ -60,6 +60,28 @@
   color-scheme: light;
 }
 
+:root.dark {
+  --background: #111614;
+  --foreground: #e5e8e3;
+  --card: #161d1a;
+  --card-foreground: #e5e8e3;
+  --popover: #1d2522;
+  --popover-foreground: #eef0eb;
+  --primary: #b7cbc2;
+  --primary-foreground: #13201c;
+  --secondary: #26302c;
+  --secondary-foreground: #dbe2de;
+  --muted: #202824;
+  --muted-foreground: #a2ada7;
+  --accent: #2a3732;
+  --accent-foreground: #e8ede9;
+  --destructive: #e18a7a;
+  --border: #36413d;
+  --input: #43504b;
+  --ring: #86aa9b;
+  color-scheme: dark;
+}
+
 * {
   box-sizing: border-box;
   border-color: var(--border);
@@ -215,6 +237,38 @@ a {
 .topbar-meta svg {
   width: 13px;
   height: 13px;
+}
+
+.theme-toggle {
+  position: relative;
+  flex: none;
+  margin-left: 2px;
+  border: 1px solid rgba(78, 91, 84, 0.17);
+  color: #52655e;
+}
+
+.theme-toggle .theme-icon {
+  position: absolute;
+  width: 13px;
+  height: 13px;
+  transition:
+    opacity 140ms ease,
+    transform 180ms ease;
+}
+
+.theme-icon--sun {
+  opacity: 0;
+  transform: rotate(-35deg) scale(0.7);
+}
+
+:root.dark .theme-icon--moon {
+  opacity: 0;
+  transform: rotate(35deg) scale(0.7);
+}
+
+:root.dark .theme-icon--sun {
+  opacity: 1;
+  transform: rotate(0deg) scale(1);
 }
 
 .meta-divider {
@@ -1789,5 +1843,431 @@ a {
   *::after {
     scroll-behavior: auto !important;
     transition-duration: 0.01ms !important;
+  }
+}
+
+/* The map keeps its paper and island colors in both themes. These overrides
+   change only the surrounding ink, paper, and contrast relationships. */
+:root.dark .app-shell {
+  background:
+    radial-gradient(circle at 48% 42%, rgba(70, 86, 79, 0.16), transparent 38%),
+    var(--background);
+}
+
+:root.dark .topbar {
+  border-bottom-color: rgba(196, 211, 203, 0.12);
+  background: rgba(17, 22, 20, 0.92);
+}
+
+:root.dark .brand small,
+:root.dark .topbar-meta,
+:root.dark .nav-label,
+:root.dark .search-field > svg,
+:root.dark .date-filter-fields label,
+:root.dark .date-filter-count,
+:root.dark .island-nav button small,
+:root.dark .reading-key,
+:root.dark .method-summary,
+:root.dark .map-toolbar,
+:root.dark .map-footer,
+:root.dark .zoom-controls span,
+:root.dark .node-tooltip small,
+:root.dark .empty-map,
+:root.dark .empty-list,
+:root.dark .list-copy small,
+:root.dark .list-copy > span,
+:root.dark .paper-list > button > svg,
+:root.dark .detail-topline,
+:root.dark .paper-kind,
+:root.dark .authors,
+:root.dark .paper-facts,
+:root.dark .citation-lineage > h3,
+:root.dark .citation-group-heading > span,
+:root.dark .citation-list small,
+:root.dark .citation-empty,
+:root.dark .takeaway-card small,
+:root.dark .screening-note {
+  color: #a2ada7;
+}
+
+:root.dark .topbar-meta a,
+:root.dark .date-filter-heading strong,
+:root.dark .date-filter-heading button,
+:root.dark .date-filter-count strong,
+:root.dark .method-summary summary,
+:root.dark .map-layout-unavailable,
+:root.dark .empty-map strong,
+:root.dark .empty-list strong,
+:root.dark .citation-group-heading h4,
+:root.dark .citation-more summary {
+  color: #c2d2ca;
+}
+
+:root.dark .brand-mark {
+  border-color: #52645c;
+  background: #202925;
+}
+
+:root.dark .brand-mark span {
+  border-color: #95aba1;
+}
+
+:root.dark .brand-mark span:nth-child(2) {
+  background: #95aba1;
+}
+
+:root.dark .brand-mark span:nth-child(3) {
+  border-color: #c39572;
+  background: #c39572;
+}
+
+:root.dark .meta-divider {
+  background: #3b4541;
+}
+
+:root.dark .theme-toggle {
+  border-color: rgba(196, 211, 203, 0.14);
+  color: #b7cbc2;
+}
+
+:root.dark .sidebar,
+:root.dark .paper-detail {
+  background: rgba(22, 29, 26, 0.76);
+}
+
+:root.dark .sidebar {
+  border-right-color: rgba(196, 211, 203, 0.1);
+}
+
+:root.dark .paper-detail {
+  border-left-color: rgba(196, 211, 203, 0.1);
+}
+
+:root.dark .search-field input,
+:root.dark .date-filter-trigger,
+:root.dark .view-toggle,
+:root.dark .zoom-controls button {
+  border-color: #36413d;
+  background: rgba(37, 47, 43, 0.72);
+  color: #dbe2de;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.14);
+}
+
+:root.dark .search-field input::placeholder {
+  color: #87938d;
+}
+
+:root.dark .date-filter-trigger.is-active {
+  color: #c6d9d0;
+}
+
+:root.dark .date-filter-trigger.is-active::after {
+  border-color: #222b27;
+  background: #91b39f;
+}
+
+:root.dark .date-filter-popover,
+:root.dark .island-summary,
+:root.dark .node-tooltip,
+:root.dark .empty-map,
+:root.dark .map-layout-unavailable {
+  border-color: #3b4741;
+  background: rgba(29, 37, 34, 0.98);
+  color: #dce3df;
+  box-shadow: 0 15px 36px rgba(0, 0, 0, 0.31);
+}
+
+:root.dark .date-filter-heading button:disabled {
+  color: #68726d;
+}
+
+:root.dark .date-filter-fields input {
+  border-color: #3c4843;
+  background: #18201d;
+  color: #dce3df;
+}
+
+:root.dark .date-range-track {
+  background: #3c4642;
+}
+
+:root.dark .date-range-selection {
+  background: #8eaa9e;
+}
+
+:root.dark .date-range-rug i {
+  background: rgba(173, 198, 186, 0.42);
+}
+
+:root.dark .date-range-input::-webkit-slider-thumb {
+  border-color: #18201d;
+  background: #9ab9ab;
+  box-shadow: 0 0 0 1px #9ab9ab;
+}
+
+:root.dark .date-range-input::-moz-range-thumb {
+  border-color: #18201d;
+  background: #9ab9ab;
+  box-shadow: 0 0 0 1px #9ab9ab;
+}
+
+:root.dark .date-range-input:focus-visible::-webkit-slider-thumb {
+  box-shadow:
+    0 0 0 1px #a8c6b8,
+    0 0 0 4px rgba(134, 170, 155, 0.27);
+}
+
+:root.dark .date-range-input:focus-visible::-moz-range-thumb {
+  box-shadow:
+    0 0 0 1px #a8c6b8,
+    0 0 0 4px rgba(134, 170, 155, 0.27);
+}
+
+:root.dark .date-filter-error {
+  color: #e29a8f;
+}
+
+:root.dark .date-filter-count,
+:root.dark .reading-key,
+:root.dark .method-summary,
+:root.dark .citation-lineage,
+:root.dark .citation-list li + li,
+:root.dark .citation-more {
+  border-color: rgba(183, 203, 194, 0.15);
+}
+
+:root.dark .island-nav button {
+  color: #b3beb8;
+}
+
+:root.dark .island-nav button:hover {
+  background: rgba(158, 184, 171, 0.09);
+  color: #ecf1ee;
+}
+
+:root.dark .island-nav button.is-active {
+  background: #29342f;
+  color: #ecf1ee;
+}
+
+:root.dark .island-swatch,
+:root.dark .list-dot,
+:root.dark .detail-island-dot {
+  box-shadow: inset 0 0 0 1px rgba(240, 247, 243, 0.35);
+}
+
+:root.dark .key-node {
+  border-color: #a6bbb1;
+  background: #708c7f;
+}
+
+:root.dark .key-node--source {
+  border-color: #8198af;
+  background: #506983;
+  box-shadow: 0 0 0 2px rgba(129, 152, 175, 0.16);
+}
+
+:root.dark .view-toggle,
+:root.dark .citation-size-toggle,
+:root.dark .zoom-controls button {
+  border-color: #39453f;
+}
+
+:root.dark .live-dot {
+  background: #8daf9b;
+  box-shadow: 0 0 0 4px rgba(141, 175, 155, 0.14);
+}
+
+:root.dark .map-viewport,
+:root.dark .paper-list {
+  border-color: rgba(190, 207, 198, 0.16);
+  background:
+    radial-gradient(circle at 50% 46%, rgba(75, 92, 84, 0.18), transparent 50%),
+    #171d1b;
+  box-shadow:
+    inset 0 1px 0 rgba(238, 245, 241, 0.035),
+    0 14px 38px rgba(0, 0, 0, 0.14);
+}
+
+:root.dark .map-viewport {
+  scrollbar-color: rgba(175, 195, 185, 0.31) transparent;
+}
+
+:root.dark .map-viewport:focus-visible {
+  outline-color: var(--ring);
+}
+
+:root.dark .map-viewport::-webkit-scrollbar-thumb {
+  background: rgba(175, 195, 185, 0.28);
+  background-clip: padding-box;
+}
+
+:root.dark .map-contours pattern path {
+  stroke: rgba(205, 218, 211, 0.035);
+}
+
+:root.dark .island-gradient-stop--core {
+  stop-opacity: 0.32;
+}
+
+:root.dark .island-gradient-stop--middle {
+  stop-opacity: 0.18;
+}
+
+:root.dark .island-gradient-stop--edge {
+  stop-opacity: 0;
+}
+
+:root.dark .island-shape {
+  filter: saturate(0.92) brightness(1.15) blur(5px);
+}
+
+:root.dark .island-shape.is-dimmed {
+  opacity: 0.1;
+  filter: grayscale(0.65) blur(5px);
+}
+
+:root.dark .island-label {
+  background: rgba(22, 29, 26, 0.9);
+  color: color-mix(in srgb, var(--island-color), #e5e8e3 55%);
+}
+
+:root.dark .island-label small {
+  opacity: 0.86;
+}
+
+:root.dark .island-label:focus-visible {
+  outline-color: color-mix(in srgb, var(--island-color), #e5e8e3 62%);
+}
+
+:root.dark .paper-node {
+  border-color: color-mix(in srgb, var(--node-color), white 55%);
+  background: color-mix(in srgb, var(--node-color), white 20%);
+  color: #ffffff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.38);
+}
+
+:root.dark .paper-node--constraint,
+:root.dark .paper-node--diagnostic {
+  border-color: rgba(245, 249, 247, 0.88);
+}
+
+:root.dark .paper-node--adjacent {
+  border-color: color-mix(in srgb, var(--node-color), white 70%);
+  background: color-mix(in srgb, var(--node-color), white 22%);
+}
+
+:root.dark .paper-node:hover,
+:root.dark .paper-node:focus-visible,
+:root.dark .paper-node.is-selected {
+  background: color-mix(in srgb, var(--node-color), white 30%);
+}
+
+:root.dark .paper-node:focus-visible {
+  outline-color: var(--ring);
+}
+
+:root.dark .paper-node--observation:hover,
+:root.dark .paper-node--observation:focus-visible,
+:root.dark .paper-node--observation.is-selected {
+  background: color-mix(in srgb, var(--node-color), white 26%);
+}
+
+:root.dark .paper-list {
+  background: rgba(23, 29, 27, 0.82);
+}
+
+:root.dark .paper-list > button {
+  border-bottom-color: #343e3a;
+  color: #dde4e0;
+}
+
+:root.dark .paper-list > button:hover,
+:root.dark .paper-list > button.is-selected {
+  background: rgba(183, 203, 194, 0.08);
+}
+
+:root.dark .paper-kind,
+:root.dark .tag-list span {
+  border-color: #3b4641;
+}
+
+:root.dark .citation-list button {
+  color: #cdd8d2;
+}
+
+:root.dark .citation-list button:hover {
+  color: #f0f4f2;
+}
+
+:root.dark .citation-list button:focus-visible {
+  outline-color: var(--ring);
+}
+
+:root.dark .citation-list small em {
+  border-color: rgba(187, 207, 197, 0.3);
+}
+
+:root.dark .takeaway-card {
+  border-color: #3b4841;
+  background: #202a26;
+}
+
+:root.dark .takeaway-card > svg {
+  color: #9db7aa;
+}
+
+:root.dark .takeaway-card p,
+:root.dark .summary-block > p:last-child {
+  color: #c3cec8;
+}
+
+:root.dark .tag-list span {
+  background: rgba(183, 203, 194, 0.07);
+  color: #adb9b3;
+}
+
+:root.dark .paper-link {
+  background: #b7cbc2;
+  color: #13201c;
+}
+
+:root.dark .paper-link:hover {
+  background: #ccddd5;
+}
+
+@media (max-width: 960px) {
+  :root.dark .paper-detail {
+    border-top-color: rgba(196, 211, 203, 0.1);
+  }
+}
+
+@media (max-width: 680px) {
+  :root.dark .sidebar {
+    border-bottom-color: rgba(196, 211, 203, 0.1);
+  }
+
+  :root.dark .island-nav button {
+    border-color: #3b4641;
+    background: rgba(183, 203, 194, 0.055);
+  }
+}
+
+@media (max-width: 460px) {
+  .topbar {
+    gap: 10px;
+  }
+
+  .topbar-meta a:first-of-type {
+    display: none;
+  }
+
+  .topbar-meta {
+    gap: 7px;
+  }
+
+  .topbar-meta a,
+  .theme-toggle {
+    margin-left: 0;
   }
 }

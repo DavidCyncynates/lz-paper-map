@@ -19,6 +19,7 @@ import {
 
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { ThemeToggle } from '@/components/theme-toggle';
 import landscape from '@/data/landscape.json';
 import {
   createHierarchicalMapLayout,
@@ -1174,6 +1175,7 @@ export function LzLandscape() {
           >
             LZ result <ArrowUpRight aria-hidden="true" />
           </a>
+          <ThemeToggle />
         </div>
       </header>
 
@@ -1615,16 +1617,19 @@ export function LzLandscape() {
                                 r="72%"
                               >
                                 <stop
+                                  className="island-gradient-stop island-gradient-stop--core"
                                   offset="0%"
                                   stopColor={island.color}
                                   stopOpacity="0.2"
                                 />
                                 <stop
+                                  className="island-gradient-stop island-gradient-stop--middle"
                                   offset="72%"
                                   stopColor={island.color}
                                   stopOpacity="0.12"
                                 />
                                 <stop
+                                  className="island-gradient-stop island-gradient-stop--edge"
                                   offset="100%"
                                   stopColor={island.color}
                                   stopOpacity="0"

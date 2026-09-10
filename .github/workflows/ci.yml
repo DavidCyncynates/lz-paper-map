@@ -54,5 +54,8 @@ jobs:
       - name: Test citation sizing
         run: pnpm test:citation-size
 
+      - name: Test color-theme behavior
+        run: pnpm test:theme
+
       - name: Build the static site
         run: pnpm build
