@@ -533,6 +533,10 @@ def validate(landscape: dict[str, Any], candidates: dict[str, Any] | None = None
     island_ids = [island.get("id") for island in landscape.get("islands", [])]
     if len(island_ids) != len(set(island_ids)):
         errors.append("island IDs must be unique")
+    for island in landscape.get("islands", []):
+        label = island.get("id", "<missing-island-id>")
+        if not compact(island.get("summary", "")):
+            errors.append(f"{label}: island summary is required")
     valid_islands = set(island_ids)
     paper_ids = [paper.get("id") for paper in landscape.get("papers", [])]
     if len(paper_ids) != len(set(paper_ids)):

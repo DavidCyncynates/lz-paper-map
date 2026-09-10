@@ -26,6 +26,10 @@ import {
   type HierarchicalLayoutDiagnostics,
 } from '@/lib/hierarchical-map-layout';
 import {
+  citationDiameter,
+  incomingCitationCounts,
+} from '@/lib/paper-citation-size';
+import {
   applyDateRangeToSearchParams,
   clampDateToBounds,
   dateRangeFromSearchParams,
@@ -42,6 +46,7 @@ import {
 type Island = (typeof landscape.islands)[number];
 type Paper = (typeof landscape.papers)[number];
 type ViewMode = 'map' | 'list';
+type NodeSizeMode = 'uniform' | 'citations';
 type DateEndpoint = 'from' | 'to';
 type MapPoint = { x: number; y: number };
 type LabelGeometry = {
@@ -49,15 +54,10 @@ type LabelGeometry = {
   width: number;
   height: number;
 };
-type PaperGeometry = {
-  id: string;
-  diameter: number;
-};
 type MapGeometry = {
   width: number;
   height: number;
   labels: LabelGeometry[];
-  papers: PaperGeometry[];
 };
 type HierarchicalLayoutAttempt = {
   papers: Map<string, MapPoint>;
@@ -103,6 +103,7 @@ const islandById = new Map(
   landscape.islands.map((island) => [island.id, island]),
 );
 const paperById = new Map(landscape.papers.map((paper) => [paper.id, paper]));
+const MAPPED_CITATION_COUNTS = incomingCitationCounts(landscape.papers);
 const CATALOG_DATE_BOUNDS = publicationDateBounds(landscape.papers);
 const CATALOG_FIRST_DAY = isoDateToDayIndex(CATALOG_DATE_BOUNDS.from);
 const CATALOG_LAST_DAY = isoDateToDayIndex(CATALOG_DATE_BOUNDS.to);
@@ -148,6 +149,15 @@ const NODE_HALO_PX: Record<Paper['role'], number> = {
 
 const NODE_ACTIVE_SCALE = 1.12;
 
+function paperNodeDiameter(paper: Paper, mode: NodeSizeMode) {
+  if (mode === 'citations') {
+    return citationDiameter(MAPPED_CITATION_COUNTS.get(paper.id) ?? 0);
+  }
+  return paper.role === 'observation'
+    ? OBSERVATION_DIAMETER_PX
+    : FOLLOW_UP_DIAMETER_PX;
+}
+
 function islandLabelAnchor(island: Island): MapPoint {
   return {
     x: island.x + island.width * 0.5,
@@ -171,8 +181,7 @@ function sameMapGeometry(previous: MapGeometry | null, next: MapGeometry) {
     !previous ||
     previous.width !== next.width ||
     previous.height !== next.height ||
-    previous.labels.length !== next.labels.length ||
-    previous.papers.length !== next.papers.length
+    previous.labels.length !== next.labels.length
   ) {
     return false;
   }
@@ -185,11 +194,7 @@ function sameMapGeometry(previous: MapGeometry | null, next: MapGeometry) {
       label.height === nextLabel.height
     );
   });
-  const papersMatch = previous.papers.every((paper, index) => {
-    const nextPaper = next.papers[index];
-    return paper.id === nextPaper.id && paper.diameter === nextPaper.diameter;
-  });
-  return labelsMatch && papersMatch;
+  return labelsMatch;
 }
 
 function dateLabel(value: string) {
@@ -375,6 +380,7 @@ export function LzLandscape() {
   const [selectedId, setSelectedId] = useState(landscape.papers[0].id);
   const [zoom, setZoom] = useState(1);
   const [viewMode, setViewMode] = useState<ViewMode>('map');
+  const [nodeSizeMode, setNodeSizeMode] = useState<NodeSizeMode>('uniform');
   const [mapGeometry, setMapGeometry] = useState<MapGeometry | null>(null);
   const [mapFontsReady, setMapFontsReady] = useState(false);
   const [isPanning, setIsPanning] = useState(false);
@@ -415,9 +421,6 @@ export function LzLandscape() {
     const labels = Array.from(
       canvas.querySelectorAll<HTMLElement>('[data-island-label]'),
     );
-    const paperNodes = Array.from(
-      canvas.querySelectorAll<HTMLElement>('[data-paper-node]'),
-    );
     const measureMap = () => {
       const width = canvas.clientWidth;
       const height = canvas.clientHeight;
@@ -434,21 +437,10 @@ export function LzLandscape() {
           },
         ];
       });
-      const paperGeometry = paperNodes.flatMap((paperNode) => {
-        const id = paperNode.dataset.paperNode;
-        if (!id) return [];
-        return [
-          {
-            id,
-            diameter: roundMapValue(paperNode.offsetWidth),
-          },
-        ];
-      });
       const nextGeometry = {
         width,
         height,
         labels: labelGeometry,
-        papers: paperGeometry,
       };
       setMapGeometry((previous) =>
         sameMapGeometry(previous, nextGeometry) ? previous : nextGeometry,
@@ -459,7 +451,6 @@ export function LzLandscape() {
     const observer = new ResizeObserver(measureMap);
     observer.observe(canvas);
     for (const label of labels) observer.observe(label);
-    for (const paperNode of paperNodes) observer.observe(paperNode);
 
     let isCurrent = true;
     void document.fonts.ready.then(() => {
@@ -704,9 +695,6 @@ export function LzLandscape() {
     const labelGeometryById = new Map(
       mapGeometry?.labels.map((label) => [label.id, label]) ?? [],
     );
-    const paperGeometryById = new Map(
-      mapGeometry?.papers.map((paper) => [paper.id, paper]) ?? [],
-    );
     const paperAnchors = landscape.papers.map((paper) => ({
       id: paper.id,
       islandId: paper.primaryIsland,
@@ -714,11 +702,7 @@ export function LzLandscape() {
       x: (paper.x / 100) * width,
       y: (paper.y / 100) * height,
       radius:
-        ((paperGeometryById.get(paper.id)?.diameter ??
-          (paper.role === 'observation'
-            ? OBSERVATION_DIAMETER_PX
-            : FOLLOW_UP_DIAMETER_PX)) /
-          2 +
+        (paperNodeDiameter(paper, nodeSizeMode) / 2 +
           NODE_HALO_PX[paper.role]) *
         NODE_ACTIVE_SCALE,
     }));
@@ -811,7 +795,7 @@ export function LzLandscape() {
           error instanceof Error ? error.message : 'Unknown layout error.',
       };
     }
-  }, [mapGeometry]);
+  }, [mapGeometry, nodeSizeMode]);
 
   const paperPositions = hierarchicalLayout.papers;
   const labelPositions = hierarchicalLayout.labels;
@@ -880,14 +864,15 @@ export function LzLandscape() {
       revealedPaperRef.current = null;
       return;
     }
+    const revealKey = `${nodeSizeMode}:${selectedPaper.id}`;
     if (
       !mapLayoutReady ||
       visiblePapers.length === 0 ||
-      revealedPaperRef.current === selectedPaper.id
+      revealedPaperRef.current === revealKey
     ) {
       return;
     }
-    revealedPaperRef.current = selectedPaper.id;
+    revealedPaperRef.current = revealKey;
     const frame = requestAnimationFrame(() => {
       const viewport = mapViewportRef.current;
       const position = paperPositions.get(selectedPaper.id);
@@ -926,6 +911,7 @@ export function LzLandscape() {
     return () => cancelAnimationFrame(frame);
   }, [
     mapLayoutReady,
+    nodeSizeMode,
     paperPositions,
     selectedPaper.id,
     viewMode,
@@ -1470,36 +1456,58 @@ export function LzLandscape() {
                 </Button>
               </div>
               {viewMode === 'map' && (
-                <div className="zoom-controls" aria-label="Map zoom controls">
+                <>
                   <Button
-                    variant="outline"
-                    size="icon-sm"
-                    aria-label="Zoom out"
-                    disabled={!mapLayoutReady || zoom <= 0.86}
-                    onClick={() => changeZoom(-0.15)}
+                    className="citation-size-toggle"
+                    variant={
+                      nodeSizeMode === 'citations' ? 'secondary' : 'outline'
+                    }
+                    size="sm"
+                    aria-label="Size dots by citations on this map"
+                    aria-pressed={nodeSizeMode === 'citations'}
+                    title="Size dots by incoming citations from papers on this map"
+                    onClick={() => {
+                      setNodeSizeMode((current) =>
+                        current === 'uniform' ? 'citations' : 'uniform',
+                      );
+                      setTooltipPlacement(null);
+                      revealedPaperRef.current = null;
+                    }}
                   >
-                    <Minus />
+                    <BookOpenText aria-hidden="true" />
+                    <span>Citations</span>
                   </Button>
-                  <span>{Math.round(zoom * 100)}%</span>
-                  <Button
-                    variant="outline"
-                    size="icon-sm"
-                    aria-label="Zoom in"
-                    disabled={!mapLayoutReady || zoom >= 1.44}
-                    onClick={() => changeZoom(0.15)}
-                  >
-                    <Plus />
-                  </Button>
-                  <Button
-                    variant="ghost"
-                    size="icon-sm"
-                    aria-label="Reset map"
-                    disabled={!mapLayoutReady}
-                    onClick={resetMap}
-                  >
-                    <RotateCcw />
-                  </Button>
-                </div>
+                  <div className="zoom-controls" aria-label="Map zoom controls">
+                    <Button
+                      variant="outline"
+                      size="icon-sm"
+                      aria-label="Zoom out"
+                      disabled={!mapLayoutReady || zoom <= 0.86}
+                      onClick={() => changeZoom(-0.15)}
+                    >
+                      <Minus />
+                    </Button>
+                    <span>{Math.round(zoom * 100)}%</span>
+                    <Button
+                      variant="outline"
+                      size="icon-sm"
+                      aria-label="Zoom in"
+                      disabled={!mapLayoutReady || zoom >= 1.44}
+                      onClick={() => changeZoom(0.15)}
+                    >
+                      <Plus />
+                    </Button>
+                    <Button
+                      variant="ghost"
+                      size="icon-sm"
+                      aria-label="Reset map"
+                      disabled={!mapLayoutReady}
+                      onClick={resetMap}
+                    >
+                      <RotateCcw />
+                    </Button>
+                  </div>
+                </>
               )}
             </div>
           </div>
@@ -1526,7 +1534,7 @@ export function LzLandscape() {
                 const target = event.target;
                 if (
                   target instanceof Element &&
-                  target.closest('.paper-node')
+                  target.closest('.paper-node, .island-label')
                 ) {
                   return;
                 }
@@ -1653,12 +1661,29 @@ export function LzLandscape() {
                     const position =
                       labelPositions.get(island.id) ??
                       islandLabelAnchor(island);
+                    const summaryEdgeClass =
+                      position.x < 25
+                        ? 'island-label--summary-right'
+                        : position.x > 75
+                          ? 'island-label--summary-left'
+                          : '';
+                    const summaryVerticalClass =
+                      position.y < 25 ? 'island-label--summary-below' : '';
+                    const summaryId = `island-summary-${island.id}`;
                     return (
-                      <div
-                        className={`island-label ${mapLayoutReady ? '' : 'is-measuring'} ${hasVisiblePaper ? '' : 'is-dimmed'}`}
+                      <button
+                        type="button"
+                        className={`island-label ${summaryEdgeClass} ${summaryVerticalClass} ${mapLayoutReady ? '' : 'is-measuring'} ${hasVisiblePaper ? '' : 'is-dimmed'}`}
                         data-island-label={island.id}
                         aria-hidden={!mapLayoutReady || !hasVisiblePaper}
+                        aria-describedby={summaryId}
                         key={`label-${island.id}`}
+                        tabIndex={mapLayoutReady && hasVisiblePaper ? 0 : -1}
+                        onKeyDown={(event) => {
+                          if (event.key === 'Escape') {
+                            event.currentTarget.blur();
+                          }
+                        }}
                         style={
                           {
                             '--island-color': island.color,
@@ -1667,9 +1692,18 @@ export function LzLandscape() {
                           } as React.CSSProperties
                         }
                       >
-                        <span>{island.label}</span>
+                        <span className="island-label-title">
+                          {island.label}
+                        </span>
                         <small>{island.kicker}</small>
-                      </div>
+                        <span
+                          className="island-summary"
+                          id={summaryId}
+                          role="tooltip"
+                        >
+                          {island.summary}
+                        </span>
+                      </button>
                     );
                   })}
 
@@ -1696,6 +1730,10 @@ export function LzLandscape() {
                         : '';
                     const authorLabel = tooltipAuthorLabel(paper.authors);
                     const tooltipAuthorId = `paper-authors-${paper.id}`;
+                    const tooltipCitationId = `paper-citations-${paper.id}`;
+                    const mappedCitationCount =
+                      MAPPED_CITATION_COUNTS.get(paper.id) ?? 0;
+                    const diameter = paperNodeDiameter(paper, nodeSizeMode);
                     return (
                       <button
                         type="button"
@@ -1704,6 +1742,7 @@ export function LzLandscape() {
                         style={
                           {
                             '--node-color': island.color,
+                            '--node-diameter': `${diameter}px`,
                             left: `${position.x}%`,
                             top: `${position.y}%`,
                           } as React.CSSProperties
@@ -1717,9 +1756,7 @@ export function LzLandscape() {
                         }
                         data-paper-node={paper.id}
                         aria-label={`Open ${paper.title}`}
-                        aria-describedby={
-                          authorLabel ? tooltipAuthorId : undefined
-                        }
+                        aria-describedby={`${authorLabel ? `${tooltipAuthorId} ` : ''}${tooltipCitationId}`}
                         aria-pressed={isSelected}
                         tabIndex={mapLayoutReady ? 0 : -1}
                       >
@@ -1731,6 +1768,13 @@ export function LzLandscape() {
                           {authorLabel && (
                             <small id={tooltipAuthorId}>{authorLabel}</small>
                           )}
+                          <small id={tooltipCitationId}>
+                            {mappedCitationCount}{' '}
+                            {mappedCitationCount === 1
+                              ? 'citation'
+                              : 'citations'}{' '}
+                            from papers on this map
+                          </small>
                         </span>
                       </button>
                     );
@@ -1819,7 +1863,11 @@ export function LzLandscape() {
           )}
 
           <footer className="map-footer">
-            <span>Distance expresses shared ideas—not evidence strength.</span>
+            <span>
+              {nodeSizeMode === 'citations'
+                ? 'Dot area follows log-scaled citations on this map; distance still expresses shared ideas.'
+                : 'Distance expresses shared ideas—not evidence strength.'}
+            </span>
             <span id="map-pan-help">
               {viewMode === 'map'
                 ? mapLayoutReady

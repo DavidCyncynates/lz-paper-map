@@ -14,7 +14,8 @@
     "validate:data": "python3 scripts/update_papers.py --validate-only",
     "test:layout": "node --experimental-strip-types --test scripts/test-hierarchical-layout.mjs",
     "test:date-range": "node --experimental-strip-types --test scripts/test-paper-date-range.mjs",
-    "lint": "oxlint app lib scripts/prepare-pages.mjs scripts/test-hierarchical-layout.mjs scripts/test-paper-date-range.mjs components/ui/button.tsx components/ui/input.tsx",
+    "test:citation-size": "node --experimental-strip-types --test scripts/test-paper-citation-size.mjs",
+    "lint": "oxlint app lib scripts/prepare-pages.mjs scripts/test-hierarchical-layout.mjs scripts/test-paper-date-range.mjs scripts/test-paper-citation-size.mjs components/ui/button.tsx components/ui/input.tsx",
     "format": "oxfmt"
   },
   "dependencies": {

@@ -51,5 +51,8 @@ jobs:
       - name: Test publication date filtering
         run: pnpm test:date-range
 
+      - name: Test citation sizing
+        run: pnpm test:citation-size
+
       - name: Build the static site
         run: pnpm build
