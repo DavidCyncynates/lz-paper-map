@@ -7,7 +7,18 @@
     "overlapStart": "2026-09-03T10:46:23Z",
     "coverageComplete": true,
     "catalogTimestampAdvanced": true,
-    "note": "The same-day source cache was reused as evidence after the interrupted first attempt; every incomplete lane was rerun before coverage was marked complete."
+    "note": "The same-day source cache was reused as evidence after the interrupted first attempt; every incomplete lane was rerun before coverage was marked complete.",
+    "carriedForwardListingCoverage": {
+      "date": "2026-09-03",
+      "sourceAudit": "data/runs/2026-09-10-104623Z.json",
+      "categoryCounts": {
+        "hep-ph": 43,
+        "hep-ex": 15,
+        "hep-th": 31,
+        "astro-ph.HE": 24,
+        "astro-ph.CO": 16
+      }
+    }
   },
   "listingCoverage": [
     {
@@ -172,7 +183,7 @@
       },
       {
         "id": "2609.00118",
-        "reason": "A gamma-ray/dark-matter study returned by an author-name search; it is unrelated to the LZ high-recoil event."
+        "reason": "A solar spin-dependent dark-matter and neutron-constraint paper that predates and does not address the LZ high-recoil event."
       }
     ],
     "authorSearchFalsePositives": [
@@ -340,9 +351,14 @@
     ]
   },
   "citationReconciliation": {
-    "scope": "All 52 previously mapped papers plus the 6 new papers",
-    "checkedPaperCount": 58,
+    "scope": "The 6 new papers plus the 2 revised mapped papers",
+    "checkedPaperCount": 8,
     "sourcePattern": "https://arxiv.org/html/{id}",
+    "priorFullReconciliation": {
+      "checkedPaperCount": 52,
+      "sourceAudit": "data/runs/2026-09-10-104623Z.json",
+      "note": "The complete 52-paper reconciliation was performed and recorded by the September 10 audit; it was not repeated in this run."
+    },
     "existingPaperChanges": ["2609.04186", "2609.06760"],
     "newPaperEdgeCounts": {
       "2609.10636": 6,
