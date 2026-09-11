@@ -381,7 +381,7 @@ export function LzLandscape() {
   const [selectedId, setSelectedId] = useState(landscape.papers[0].id);
   const [zoom, setZoom] = useState(1);
   const [viewMode, setViewMode] = useState<ViewMode>('map');
-  const [nodeSizeMode, setNodeSizeMode] = useState<NodeSizeMode>('uniform');
+  const [nodeSizeMode, setNodeSizeMode] = useState<NodeSizeMode>('citations');
   const [mapGeometry, setMapGeometry] = useState<MapGeometry | null>(null);
   const [mapFontsReady, setMapFontsReady] = useState(false);
   const [isPanning, setIsPanning] = useState(false);
