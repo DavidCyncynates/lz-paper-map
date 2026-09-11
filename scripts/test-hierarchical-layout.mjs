@@ -578,6 +578,48 @@ test('append-only additions preserve the established mental map, including backf
   }
 });
 
+test('dense append-only islands converge below the clearance tolerance', () => {
+  for (const sizeMode of ['uniform', 'citations']) {
+    const { papers, labels, islands } = currentCatalogInputs(sizeMode);
+    const additions = [
+      {
+        id: '9999.99990',
+        islandId: 'endothermic',
+        stabilityRank: papers.length,
+        x: 0.7437 * WIDTH,
+        y: 0.552 * HEIGHT,
+        radius: FOLLOW_UP_RADIUS,
+      },
+      {
+        id: '9999.99991',
+        islandId: 'endothermic',
+        stabilityRank: papers.length + 1,
+        x: 0.63 * WIDTH,
+        y: 0.495 * HEIGHT,
+        radius: FOLLOW_UP_RADIUS,
+      },
+    ];
+    const layout = createHierarchicalMapLayout(
+      WIDTH,
+      HEIGHT,
+      [...papers, ...additions],
+      labels,
+      islands,
+      {
+        islandPadding: ISLAND_PADDING,
+        observationPadding: OBSERVATION_PADDING,
+        outerGap: OUTER_GAP,
+      },
+    );
+
+    assert.equal(layout.diagnostics.converged, true);
+    assert.ok(
+      layout.diagnostics.maxInnerOverlap <= EPSILON,
+      `Expected ${sizeMode} inner overlap below ${EPSILON}px, received ${layout.diagnostics.maxInnerOverlap}px`,
+    );
+  }
+});
+
 test('an edge addition grows its island without large-scale map churn', () => {
   const { papers, labels, islands } = currentCatalogInputs();
   const options = {
