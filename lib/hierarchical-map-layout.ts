@@ -76,7 +76,8 @@ type PackedIsland = LayoutCircle & {
 };
 
 const INNER_ITERATIONS = 260;
-const INNER_CLEANUP_ITERATIONS = 720;
+const INNER_CLEANUP_MIN_ITERATIONS = 720;
+const INNER_CLEANUP_MAX_ITERATIONS = 1200;
 const OUTER_ITERATIONS = 300;
 const OUTER_CLEANUP_ITERATIONS = 1200;
 const INNER_INITIAL_SCALE = 0.85;
@@ -100,7 +101,8 @@ const DEFAULT_ISLAND_PADDING = 24;
 const DEFAULT_OBSERVATION_PADDING = 12;
 const DEFAULT_OUTER_GAP = 16;
 const LAYOUT_EPSILON = 1e-6;
-const LAYOUT_TOLERANCE = 0.02;
+const LAYOUT_TOLERANCE = 1e-3;
+const INNER_CLEANUP_TARGET = 5e-4;
 const MEC_EPSILON = 1e-10;
 
 function clamp(value: number, minimum: number, maximum: number) {
@@ -659,7 +661,7 @@ function relaxIslandContents(
 
   for (
     let iteration = 0;
-    iteration < INNER_CLEANUP_ITERATIONS;
+    iteration < INNER_CLEANUP_MAX_ITERATIONS;
     iteration += 1
   ) {
     const paperMovement = new Map(
@@ -682,6 +684,15 @@ function relaxIslandContents(
     }
     label.x += clamp(labelMovement.x, -MAX_INNER_STEP, MAX_INNER_STEP);
     label.y += clamp(labelMovement.y, -MAX_INNER_STEP, MAX_INNER_STEP);
+    // Preserve the established layout through the previous cleanup budget,
+    // then continue only when a growing island still needs numerical headroom.
+    if (
+      iteration + 1 >= INNER_CLEANUP_MIN_ITERATIONS &&
+      measureInnerOverlap({ papers, label }, spacingScale) <=
+        INNER_CLEANUP_TARGET
+    ) {
+      break;
+    }
   }
 
   const enclosingBodies: EnclosingBody[] = papers.map((paper) => ({
@@ -873,7 +884,10 @@ function packIslands(
   return ordered;
 }
 
-function measureInnerOverlap(island: PackedIsland, spacingScale: number) {
+function measureInnerOverlap(
+  island: Pick<PackedIsland, 'papers' | 'label'>,
+  spacingScale: number,
+) {
   let maximumOverlap = 0;
   for (let firstIndex = 0; firstIndex < island.papers.length; firstIndex += 1) {
     const first = island.papers[firstIndex];
