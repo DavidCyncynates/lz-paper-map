@@ -1921,6 +1921,25 @@ export function LzLandscape() {
             <ExternalLink aria-hidden="true" />
           </a>
 
+          <div className="takeaway-card">
+            <Sparkles aria-hidden="true" />
+            <div>
+              <small>Why it is here</small>
+              <p>{selectedPaper.takeaway}</p>
+            </div>
+          </div>
+
+          <div className="summary-block">
+            <p className="nav-label">Machine-assisted summary</p>
+            <p>{selectedPaper.summary}</p>
+          </div>
+
+          <div className="tag-list" aria-label="Paper concepts">
+            {selectedPaper.tags.map((tag) => (
+              <span key={tag}>{tag}</span>
+            ))}
+          </div>
+
           <section
             className="citation-lineage"
             aria-labelledby="citation-lineage-title"
@@ -1943,25 +1962,6 @@ export function LzLandscape() {
               onSelect={selectCitationPaper}
             />
           </section>
-
-          <div className="takeaway-card">
-            <Sparkles aria-hidden="true" />
-            <div>
-              <small>Why it is here</small>
-              <p>{selectedPaper.takeaway}</p>
-            </div>
-          </div>
-
-          <div className="summary-block">
-            <p className="nav-label">Machine-assisted summary</p>
-            <p>{selectedPaper.summary}</p>
-          </div>
-
-          <div className="tag-list" aria-label="Paper concepts">
-            {selectedPaper.tags.map((tag) => (
-              <span key={tag}>{tag}</span>
-            ))}
-          </div>
 
           <p className="screening-note">
             Metadata comes from arXiv. Summaries and placement are
