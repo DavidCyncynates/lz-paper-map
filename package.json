@@ -16,7 +16,9 @@
     "test:date-range": "node --experimental-strip-types --test scripts/test-paper-date-range.mjs",
     "test:citation-size": "node --experimental-strip-types --test scripts/test-paper-citation-size.mjs",
     "test:theme": "node --experimental-strip-types --test scripts/test-color-theme.mjs",
-    "lint": "oxlint app lib scripts/prepare-pages.mjs scripts/test-color-theme.mjs scripts/test-hierarchical-layout.mjs scripts/test-paper-date-range.mjs scripts/test-paper-citation-size.mjs components/theme-toggle.tsx components/ui/button.tsx components/ui/input.tsx",
+    "test:seo": "node --test scripts/test-search-discovery.mjs",
+    "check:seo": "node scripts/check-search-artifact.mjs",
+    "lint": "oxlint app lib scripts/prepare-pages.mjs scripts/search-discovery.mjs scripts/check-search-artifact.mjs scripts/test-color-theme.mjs scripts/test-hierarchical-layout.mjs scripts/test-paper-date-range.mjs scripts/test-paper-citation-size.mjs scripts/test-search-discovery.mjs components/theme-toggle.tsx components/ui/button.tsx components/ui/input.tsx",
     "format": "oxfmt"
   },
   "dependencies": {
