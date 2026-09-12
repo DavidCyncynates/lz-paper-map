@@ -77,7 +77,7 @@ test('the pre-paint bootstrap applies a stored theme and uses a scoped key', () 
   assert.deepEqual(changes, [['dark', true]]);
   assert.equal(dataset.theme, 'dark');
   assert.equal(style.colorScheme, 'dark');
-  assert.equal(themeColor, '#111614');
+  assert.equal(themeColor, '#191a18');
 });
 
 test('the pre-paint bootstrap migrates the legacy map preference', () => {
