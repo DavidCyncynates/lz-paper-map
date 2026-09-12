@@ -56,7 +56,7 @@ function applyTheme(theme: ColorTheme) {
   root.style.colorScheme = theme;
   document
     .querySelector('#theme-color')
-    ?.setAttribute('content', theme === 'dark' ? '#111614' : '#f4f1e9');
+    ?.setAttribute('content', theme === 'dark' ? '#191a18' : '#f4f1e9');
 }
 
 export function ThemeToggle() {

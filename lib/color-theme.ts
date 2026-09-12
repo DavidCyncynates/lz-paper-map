@@ -46,7 +46,7 @@ export function createColorThemeBootstrapScript(
     root.style.colorScheme = theme;
     document.querySelector('#theme-color')?.setAttribute(
       'content',
-      theme === 'dark' ? '#111614' : '#f4f1e9',
+      theme === 'dark' ? '#191a18' : '#f4f1e9',
     );
   })();`;
 }

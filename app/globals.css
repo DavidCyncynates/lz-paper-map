@@ -61,24 +61,24 @@
 }
 
 :root.dark {
-  --background: #111614;
-  --foreground: #e5e8e3;
-  --card: #161d1a;
-  --card-foreground: #e5e8e3;
-  --popover: #1d2522;
-  --popover-foreground: #eef0eb;
-  --primary: #b7cbc2;
-  --primary-foreground: #13201c;
-  --secondary: #26302c;
-  --secondary-foreground: #dbe2de;
-  --muted: #202824;
-  --muted-foreground: #a2ada7;
-  --accent: #2a3732;
-  --accent-foreground: #e8ede9;
+  --background: #191a18;
+  --foreground: #e8e4dc;
+  --card: #22231f;
+  --card-foreground: #e8e4dc;
+  --popover: #292a26;
+  --popover-foreground: #f1ede5;
+  --primary: #8fc4c1;
+  --primary-foreground: #17201e;
+  --secondary: #2d2e29;
+  --secondary-foreground: #dedad2;
+  --muted: #262722;
+  --muted-foreground: #aaa69d;
+  --accent: #2d3937;
+  --accent-foreground: #e8e4dc;
   --destructive: #e18a7a;
-  --border: #36413d;
-  --input: #43504b;
-  --ring: #86aa9b;
+  --border: #3a3a34;
+  --input: #4a4942;
+  --ring: #67a9a5;
   color-scheme: dark;
 }
 
@@ -1850,13 +1850,13 @@ a {
    change only the surrounding ink, paper, and contrast relationships. */
 :root.dark .app-shell {
   background:
-    radial-gradient(circle at 48% 42%, rgba(70, 86, 79, 0.16), transparent 38%),
+    radial-gradient(circle at 48% 42%, rgba(139, 119, 90, 0.075), transparent 38%),
     var(--background);
 }
 
 :root.dark .topbar {
-  border-bottom-color: rgba(196, 211, 203, 0.12);
-  background: rgba(17, 22, 20, 0.92);
+  border-bottom-color: rgba(232, 228, 220, 0.11);
+  background: rgba(25, 26, 24, 0.92);
 }
 
 :root.dark .brand small,
@@ -1887,7 +1887,7 @@ a {
 :root.dark .citation-empty,
 :root.dark .takeaway-card small,
 :root.dark .screening-note {
-  color: #a2ada7;
+  color: #aaa69d;
 }
 
 :root.dark .topbar-meta a,
@@ -1900,20 +1900,20 @@ a {
 :root.dark .empty-list strong,
 :root.dark .citation-group-heading h4,
 :root.dark .citation-more summary {
-  color: #c2d2ca;
+  color: #bad4d1;
 }
 
 :root.dark .brand-mark {
-  border-color: #52645c;
-  background: #202925;
+  border-color: #56554e;
+  background: #242520;
 }
 
 :root.dark .brand-mark span {
-  border-color: #95aba1;
+  border-color: #7fb2ad;
 }
 
 :root.dark .brand-mark span:nth-child(2) {
-  background: #95aba1;
+  background: #7fb2ad;
 }
 
 :root.dark .brand-mark span:nth-child(3) {
@@ -1922,48 +1922,48 @@ a {
 }
 
 :root.dark .meta-divider {
-  background: #3b4541;
+  background: #3f3f39;
 }
 
 :root.dark .theme-toggle {
-  border-color: rgba(196, 211, 203, 0.14);
-  color: #b7cbc2;
+  border-color: rgba(232, 228, 220, 0.13);
+  color: #8fc4c1;
 }
 
 :root.dark .sidebar,
 :root.dark .paper-detail {
-  background: rgba(22, 29, 26, 0.76);
+  background: rgba(34, 35, 31, 0.76);
 }
 
 :root.dark .sidebar {
-  border-right-color: rgba(196, 211, 203, 0.1);
+  border-right-color: rgba(232, 228, 220, 0.09);
 }
 
 :root.dark .paper-detail {
-  border-left-color: rgba(196, 211, 203, 0.1);
+  border-left-color: rgba(232, 228, 220, 0.09);
 }
 
 :root.dark .search-field input,
 :root.dark .date-filter-trigger,
 :root.dark .view-toggle,
 :root.dark .zoom-controls button {
-  border-color: #36413d;
-  background: rgba(37, 47, 43, 0.72);
-  color: #dbe2de;
+  border-color: #3a3a34;
+  background: rgba(45, 46, 41, 0.72);
+  color: #dedad2;
   box-shadow: 0 1px 0 rgba(0, 0, 0, 0.14);
 }
 
 :root.dark .search-field input::placeholder {
-  color: #87938d;
+  color: #8f8b82;
 }
 
 :root.dark .date-filter-trigger.is-active {
-  color: #c6d9d0;
+  color: #b9d7d4;
 }
 
 :root.dark .date-filter-trigger.is-active::after {
-  border-color: #222b27;
-  background: #91b39f;
+  border-color: #292a26;
+  background: #67a9a5;
 }
 
 :root.dark .date-filter-popover,
@@ -1971,56 +1971,56 @@ a {
 :root.dark .node-tooltip,
 :root.dark .empty-map,
 :root.dark .map-layout-unavailable {
-  border-color: #3b4741;
-  background: rgba(29, 37, 34, 0.98);
-  color: #dce3df;
+  border-color: #44443d;
+  background: rgba(41, 42, 38, 0.98);
+  color: #e7e3db;
   box-shadow: 0 15px 36px rgba(0, 0, 0, 0.31);
 }
 
 :root.dark .date-filter-heading button:disabled {
-  color: #68726d;
+  color: #77736b;
 }
 
 :root.dark .date-filter-fields input {
-  border-color: #3c4843;
-  background: #18201d;
-  color: #dce3df;
+  border-color: #44443d;
+  background: #1f201d;
+  color: #e7e3db;
 }
 
 :root.dark .date-range-track {
-  background: #3c4642;
+  background: #46463f;
 }
 
 :root.dark .date-range-selection {
-  background: #8eaa9e;
+  background: #67a9a5;
 }
 
 :root.dark .date-range-rug i {
-  background: rgba(173, 198, 186, 0.42);
+  background: rgba(103, 169, 165, 0.42);
 }
 
 :root.dark .date-range-input::-webkit-slider-thumb {
-  border-color: #18201d;
-  background: #9ab9ab;
-  box-shadow: 0 0 0 1px #9ab9ab;
+  border-color: #1f201d;
+  background: #7bb5b1;
+  box-shadow: 0 0 0 1px #7bb5b1;
 }
 
 :root.dark .date-range-input::-moz-range-thumb {
-  border-color: #18201d;
-  background: #9ab9ab;
-  box-shadow: 0 0 0 1px #9ab9ab;
+  border-color: #1f201d;
+  background: #7bb5b1;
+  box-shadow: 0 0 0 1px #7bb5b1;
 }
 
 :root.dark .date-range-input:focus-visible::-webkit-slider-thumb {
   box-shadow:
-    0 0 0 1px #a8c6b8,
-    0 0 0 4px rgba(134, 170, 155, 0.27);
+    0 0 0 1px #8fc4c1,
+    0 0 0 4px rgba(103, 169, 165, 0.25);
 }
 
 :root.dark .date-range-input:focus-visible::-moz-range-thumb {
   box-shadow:
-    0 0 0 1px #a8c6b8,
-    0 0 0 4px rgba(134, 170, 155, 0.27);
+    0 0 0 1px #8fc4c1,
+    0 0 0 4px rgba(103, 169, 165, 0.25);
 }
 
 :root.dark .date-filter-error {
@@ -2033,32 +2033,32 @@ a {
 :root.dark .citation-lineage,
 :root.dark .citation-list li + li,
 :root.dark .citation-more {
-  border-color: rgba(183, 203, 194, 0.15);
+  border-color: rgba(232, 228, 220, 0.12);
 }
 
 :root.dark .island-nav button {
-  color: #b3beb8;
+  color: #b6b1a8;
 }
 
 :root.dark .island-nav button:hover {
-  background: rgba(158, 184, 171, 0.09);
-  color: #ecf1ee;
+  background: rgba(103, 169, 165, 0.08);
+  color: #f0ece4;
 }
 
 :root.dark .island-nav button.is-active {
-  background: #29342f;
-  color: #ecf1ee;
+  background: #2d312e;
+  color: #f0ece4;
 }
 
 :root.dark .island-swatch,
 :root.dark .list-dot,
 :root.dark .detail-island-dot {
-  box-shadow: inset 0 0 0 1px rgba(240, 247, 243, 0.35);
+  box-shadow: inset 0 0 0 1px rgba(241, 237, 229, 0.35);
 }
 
 :root.dark .key-node {
-  border-color: #a6bbb1;
-  background: #708c7f;
+  border-color: #9bc2bd;
+  background: #668f89;
 }
 
 :root.dark .key-node--source {
@@ -2070,27 +2070,27 @@ a {
 :root.dark .view-toggle,
 :root.dark .citation-size-toggle,
 :root.dark .zoom-controls button {
-  border-color: #39453f;
+  border-color: #3f3f39;
 }
 
 :root.dark .live-dot {
-  background: #8daf9b;
-  box-shadow: 0 0 0 4px rgba(141, 175, 155, 0.14);
+  background: #67a9a5;
+  box-shadow: 0 0 0 4px rgba(103, 169, 165, 0.14);
 }
 
 :root.dark .map-viewport,
 :root.dark .paper-list {
-  border-color: rgba(190, 207, 198, 0.16);
+  border-color: rgba(232, 228, 220, 0.13);
   background:
-    radial-gradient(circle at 50% 46%, rgba(75, 92, 84, 0.18), transparent 50%),
-    #171d1b;
+    radial-gradient(circle at 50% 46%, rgba(116, 100, 76, 0.1), transparent 50%),
+    #1e1f1c;
   box-shadow:
-    inset 0 1px 0 rgba(238, 245, 241, 0.035),
+    inset 0 1px 0 rgba(241, 237, 229, 0.035),
     0 14px 38px rgba(0, 0, 0, 0.14);
 }
 
 :root.dark .map-viewport {
-  scrollbar-color: rgba(175, 195, 185, 0.31) transparent;
+  scrollbar-color: rgba(170, 166, 157, 0.31) transparent;
 }
 
 :root.dark .map-viewport:focus-visible {
@@ -2098,12 +2098,12 @@ a {
 }
 
 :root.dark .map-viewport::-webkit-scrollbar-thumb {
-  background: rgba(175, 195, 185, 0.28);
+  background: rgba(170, 166, 157, 0.28);
   background-clip: padding-box;
 }
 
 :root.dark .map-contours pattern path {
-  stroke: rgba(205, 218, 211, 0.035);
+  stroke: rgba(232, 228, 220, 0.035);
 }
 
 :root.dark .island-gradient-stop--core {
@@ -2119,7 +2119,7 @@ a {
 }
 
 :root.dark .island-shape {
-  filter: saturate(0.92) brightness(1.15) blur(5px);
+  filter: saturate(0.82) brightness(1.12) blur(5px);
 }
 
 :root.dark .island-shape.is-dimmed {
@@ -2128,8 +2128,8 @@ a {
 }
 
 :root.dark .island-label {
-  background: rgba(22, 29, 26, 0.9);
-  color: color-mix(in srgb, var(--island-color), #e5e8e3 55%);
+  background: rgba(34, 35, 31, 0.9);
+  color: color-mix(in srgb, var(--island-color), #e8e4dc 58%);
 }
 
 :root.dark .island-label small {
@@ -2137,7 +2137,7 @@ a {
 }
 
 :root.dark .island-label:focus-visible {
-  outline-color: color-mix(in srgb, var(--island-color), #e5e8e3 62%);
+  outline-color: color-mix(in srgb, var(--island-color), #e8e4dc 64%);
 }
 
 :root.dark .paper-node {
@@ -2174,30 +2174,30 @@ a {
 }
 
 :root.dark .paper-list {
-  background: rgba(23, 29, 27, 0.82);
+  background: rgba(31, 32, 29, 0.84);
 }
 
 :root.dark .paper-list > button {
-  border-bottom-color: #343e3a;
-  color: #dde4e0;
+  border-bottom-color: #3b3b35;
+  color: #e3dfd7;
 }
 
 :root.dark .paper-list > button:hover,
 :root.dark .paper-list > button.is-selected {
-  background: rgba(183, 203, 194, 0.08);
+  background: rgba(103, 169, 165, 0.07);
 }
 
 :root.dark .paper-kind,
 :root.dark .tag-list span {
-  border-color: #3b4641;
+  border-color: #44443d;
 }
 
 :root.dark .citation-list button {
-  color: #cdd8d2;
+  color: #c9d8d5;
 }
 
 :root.dark .citation-list button:hover {
-  color: #f0f4f2;
+  color: #f3efe7;
 }
 
 :root.dark .citation-list button:focus-visible {
@@ -2205,51 +2205,51 @@ a {
 }
 
 :root.dark .citation-list small em {
-  border-color: rgba(187, 207, 197, 0.3);
+  border-color: rgba(103, 169, 165, 0.32);
 }
 
 :root.dark .takeaway-card {
-  border-color: #3b4841;
-  background: #202a26;
+  border-color: #44443d;
+  background: #272823;
 }
 
 :root.dark .takeaway-card > svg {
-  color: #9db7aa;
+  color: #7fb2ad;
 }
 
 :root.dark .takeaway-card p,
 :root.dark .summary-block > p:last-child {
-  color: #c3cec8;
+  color: #cbc7be;
 }
 
 :root.dark .tag-list span {
-  background: rgba(183, 203, 194, 0.07);
-  color: #adb9b3;
+  background: rgba(232, 228, 220, 0.055);
+  color: #b6b1a8;
 }
 
 :root.dark .paper-link {
-  background: #b7cbc2;
-  color: #13201c;
+  background: #79b4b0;
+  color: #17201e;
 }
 
 :root.dark .paper-link:hover {
-  background: #ccddd5;
+  background: #91c5c2;
 }
 
 @media (max-width: 960px) {
   :root.dark .paper-detail {
-    border-top-color: rgba(196, 211, 203, 0.1);
+    border-top-color: rgba(232, 228, 220, 0.09);
   }
 }
 
 @media (max-width: 680px) {
   :root.dark .sidebar {
-    border-bottom-color: rgba(196, 211, 203, 0.1);
+    border-bottom-color: rgba(232, 228, 220, 0.09);
   }
 
   :root.dark .island-nav button {
-    border-color: #3b4641;
-    background: rgba(183, 203, 194, 0.055);
+    border-color: #44443d;
+    background: rgba(232, 228, 220, 0.045);
   }
 }
 
