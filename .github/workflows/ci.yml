@@ -57,5 +57,11 @@ jobs:
       - name: Test color-theme behavior
         run: pnpm test:theme
 
+      - name: Test search discovery
+        run: pnpm test:seo
+
       - name: Build the static site
         run: pnpm build
+
+      - name: Check search artifacts
+        run: pnpm check:seo

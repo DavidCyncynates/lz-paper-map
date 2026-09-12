@@ -2,7 +2,14 @@
 
 /* oxlint-disable jsx-a11y/no-noninteractive-tabindex -- The scrollable map needs a keyboard focus target so arrow and page keys can pan it. */
 
-import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
+import {
+  type MouseEvent as ReactMouseEvent,
+  useEffect,
+  useLayoutEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 import {
   ArrowUpRight,
   BookOpenText,
@@ -221,6 +228,16 @@ const MAX_TOOLTIP_AUTHORS = 4;
 const MAX_TOOLTIP_AUTHOR_CHARACTERS = 80;
 const MAX_VISIBLE_CITATION_ROWS = 5;
 
+function isUnmodifiedPrimaryClick(event: ReactMouseEvent<HTMLAnchorElement>) {
+  return (
+    event.button === 0 &&
+    !event.altKey &&
+    !event.ctrlKey &&
+    !event.metaKey &&
+    !event.shiftKey
+  );
+}
+
 function tooltipAuthorLabel(authors: readonly string[]) {
   const names = authors.map((author) => author.trim()).filter(Boolean);
   const collaboration = names.find((author) =>
@@ -298,9 +315,13 @@ function CitationRows({
             className={isOutsideDateRange ? 'is-outside-date-range' : ''}
             key={paper.id}
           >
-            <button
-              type="button"
-              onClick={() => onSelect(paper.id)}
+            <a
+              href={`papers/${encodeURIComponent(paper.id)}/`}
+              onClick={(event) => {
+                if (!isUnmodifiedPrimaryClick(event)) return;
+                event.preventDefault();
+                onSelect(paper.id);
+              }}
               aria-label={`Select ${paper.title}, ${relationshipLabel}${isOutsideDateRange ? ', outside the selected publication dates' : ''}`}
             >
               <small>
@@ -311,7 +332,7 @@ function CitationRows({
                 {isOutsideDateRange && <em>Outside dates</em>}
               </small>
               <span>{paper.title}</span>
-            </button>
+            </a>
           </li>
         );
       })}
@@ -1141,6 +1162,9 @@ export function LzLandscape() {
 
   return (
     <main className="app-shell">
+      <h1 className="sr-only">
+        LUX-ZEPLIN 248 keV high-recoil candidate literature map
+      </h1>
       <header className="topbar">
         <a className="brand" href="#top" aria-label="LZ Paper Map home">
           <span className="brand-mark" aria-hidden="true">
@@ -1740,8 +1764,8 @@ export function LzLandscape() {
                       MAPPED_CITATION_COUNTS.get(paper.id) ?? 0;
                     const diameter = paperNodeDiameter(paper, nodeSizeMode);
                     return (
-                      <button
-                        type="button"
+                      <a
+                        href={`papers/${encodeURIComponent(paper.id)}/`}
                         key={paper.id}
                         className={`paper-node paper-node--${paper.role} ${tooltipEdgeClass} ${tooltipVerticalClass} ${isSelected ? 'is-selected' : ''} ${isVisible ? '' : 'is-hidden'}`}
                         style={
@@ -1752,7 +1776,11 @@ export function LzLandscape() {
                             top: `${position.y}%`,
                           } as React.CSSProperties
                         }
-                        onClick={() => selectPaper(paper.id)}
+                        onClick={(event) => {
+                          if (!isUnmodifiedPrimaryClick(event)) return;
+                          event.preventDefault();
+                          selectPaper(paper.id);
+                        }}
                         onPointerEnter={(event) =>
                           positionTooltip(paper.id, event.currentTarget)
                         }
@@ -1762,7 +1790,7 @@ export function LzLandscape() {
                         data-paper-node={paper.id}
                         aria-label={`Open ${paper.title}`}
                         aria-describedby={`${authorLabel ? `${tooltipAuthorId} ` : ''}${tooltipCitationId}`}
-                        aria-pressed={isSelected}
+                        aria-current={isSelected ? 'true' : undefined}
                         tabIndex={mapLayoutReady ? 0 : -1}
                       >
                         {paper.role === 'observation' && (
@@ -1781,7 +1809,7 @@ export function LzLandscape() {
                             from papers on this map
                           </small>
                         </span>
-                      </button>
+                      </a>
                     );
                   })}
 
@@ -1830,13 +1858,20 @@ export function LzLandscape() {
                 visiblePapers.map((paper) => {
                   const island = islandById.get(paper.primaryIsland);
                   return (
-                    <button
-                      type="button"
+                    <a
+                      href={`papers/${encodeURIComponent(paper.id)}/`}
                       key={paper.id}
                       className={
                         selectedPaper.id === paper.id ? 'is-selected' : ''
                       }
-                      onClick={() => selectPaper(paper.id)}
+                      onClick={(event) => {
+                        if (!isUnmodifiedPrimaryClick(event)) return;
+                        event.preventDefault();
+                        selectPaper(paper.id);
+                      }}
+                      aria-current={
+                        selectedPaper.id === paper.id ? 'true' : undefined
+                      }
                     >
                       <span
                         className="list-dot"
@@ -1850,7 +1885,7 @@ export function LzLandscape() {
                         <span>{paper.authors.join(', ')}</span>
                       </span>
                       <ArrowUpRight aria-hidden="true" />
-                    </button>
+                    </a>
                   );
                 })
               ) : (

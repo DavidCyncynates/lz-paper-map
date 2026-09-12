@@ -1086,6 +1086,7 @@ a {
   color: #fffdf7;
   box-shadow: 0 1px 2px rgba(42, 53, 48, 0.18);
   cursor: pointer;
+  text-decoration: none;
   transform: translate(-50%, -50%);
   transition:
     opacity 180ms ease,
@@ -1284,7 +1285,7 @@ a {
   background: rgba(243, 242, 235, 0.76);
 }
 
-.paper-list > button {
+.paper-list > a {
   width: 100%;
   display: grid;
   grid-template-columns: auto minmax(0, 1fr) auto;
@@ -1297,11 +1298,12 @@ a {
   background: transparent;
   color: #293531;
   cursor: pointer;
+  text-decoration: none;
   text-align: left;
 }
 
-.paper-list > button:hover,
-.paper-list > button.is-selected {
+.paper-list > a:hover,
+.paper-list > a.is-selected {
   background: rgba(255, 255, 255, 0.65);
 }
 
@@ -1335,7 +1337,7 @@ a {
   font-size: 10px;
 }
 
-.paper-list > button > svg {
+.paper-list > a > svg {
   width: 13px;
   height: 13px;
   margin-top: 2px;
@@ -1482,7 +1484,7 @@ a {
   opacity: 0.75;
 }
 
-.citation-list button {
+.citation-list a {
   width: 100%;
   min-height: 42px;
   display: grid;
@@ -1493,14 +1495,15 @@ a {
   background: transparent;
   color: #35443f;
   cursor: pointer;
+  text-decoration: none;
   text-align: left;
 }
 
-.citation-list button:hover {
+.citation-list a:hover {
   color: #172f29;
 }
 
-.citation-list button:focus-visible {
+.citation-list a:focus-visible {
   outline: 2px solid #526861;
   outline-offset: 2px;
 }
@@ -1535,7 +1538,7 @@ a {
   text-transform: uppercase;
 }
 
-.citation-list button > span {
+.citation-list a > span {
   display: -webkit-box;
   overflow: hidden;
   font-size: 9.5px;
@@ -1876,7 +1879,7 @@ a {
 :root.dark .empty-list,
 :root.dark .list-copy small,
 :root.dark .list-copy > span,
-:root.dark .paper-list > button > svg,
+:root.dark .paper-list > a > svg,
 :root.dark .detail-topline,
 :root.dark .paper-kind,
 :root.dark .authors,
@@ -2177,13 +2180,13 @@ a {
   background: rgba(31, 32, 29, 0.84);
 }
 
-:root.dark .paper-list > button {
+:root.dark .paper-list > a {
   border-bottom-color: #3b3b35;
   color: #e3dfd7;
 }
 
-:root.dark .paper-list > button:hover,
-:root.dark .paper-list > button.is-selected {
+:root.dark .paper-list > a:hover,
+:root.dark .paper-list > a.is-selected {
   background: rgba(103, 169, 165, 0.07);
 }
 
@@ -2192,15 +2195,15 @@ a {
   border-color: #44443d;
 }
 
-:root.dark .citation-list button {
+:root.dark .citation-list a {
   color: #c9d8d5;
 }
 
-:root.dark .citation-list button:hover {
+:root.dark .citation-list a:hover {
   color: #f3efe7;
 }
 
-:root.dark .citation-list button:focus-visible {
+:root.dark .citation-list a:focus-visible {
   outline-color: var(--ring);
 }
 
