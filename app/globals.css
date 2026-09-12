@@ -1044,7 +1044,7 @@ a {
   visibility: visible;
   opacity: 1;
   transform: translate(var(--summary-offset-x), 0);
-  transition-delay: 420ms;
+  transition-delay: 0ms;
 }
 
 .island-label:focus .island-summary {
