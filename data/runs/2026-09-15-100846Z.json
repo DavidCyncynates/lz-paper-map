@@ -1,0 +1,859 @@
+{
+  "schemaVersion": 1,
+  "runId": "2026-09-15-100846Z",
+  "runAt": "2026-09-15T10:08:46Z",
+  "scanWindow": {
+    "previousSuccessfulScan": "2026-09-14T09:26:19Z",
+    "overlapStart": "2026-09-07T09:26:19Z",
+    "coverageComplete": true,
+    "catalogTimestampAdvanced": true,
+    "categoryAppearances": 1122,
+    "uniqueVersionlessIds": 885,
+    "note": "The live recent pages completely covered Sep 9, 10, 11, 14, and 15. Sep 7 had fallen off the five-group pages, so its already-complete category counts and unique contribution were carried from the Sep 14 audit; Sep 8, 12, and 13 had no announcement group.",
+    "carriedForwardListingCoverage": {
+      "date": "2026-09-07",
+      "sourceAudit": "data/runs/2026-09-14-092619Z.json",
+      "uniqueContribution": 86,
+      "categoryCounts": {
+        "hep-ph": 28,
+        "hep-ex": 14,
+        "hep-th": 25,
+        "astro-ph.HE": 18,
+        "astro-ph.CO": 19
+      }
+    }
+  },
+  "listingCoverage": [
+    {
+      "category": "hep-ph",
+      "url": "https://arxiv.org/list/hep-ph/recent?skip=0&show=2000",
+      "advertisedEntries": 303,
+      "parsedEntries": 303,
+      "dateGroups": {
+        "2026-09-15": 69,
+        "2026-09-14": 40,
+        "2026-09-11": 52,
+        "2026-09-10": 36,
+        "2026-09-09": 106
+      }
+    },
+    {
+      "category": "hep-ex",
+      "url": "https://arxiv.org/list/hep-ex/recent?skip=0&show=2000",
+      "advertisedEntries": 112,
+      "parsedEntries": 112,
+      "dateGroups": {
+        "2026-09-15": 29,
+        "2026-09-14": 13,
+        "2026-09-11": 17,
+        "2026-09-10": 15,
+        "2026-09-09": 38
+      }
+    },
+    {
+      "category": "hep-th",
+      "url": "https://arxiv.org/list/hep-th/recent?skip=0&show=2000",
+      "advertisedEntries": 255,
+      "parsedEntries": 255,
+      "dateGroups": {
+        "2026-09-15": 55,
+        "2026-09-14": 29,
+        "2026-09-11": 55,
+        "2026-09-10": 41,
+        "2026-09-09": 75
+      }
+    },
+    {
+      "category": "astro-ph.HE",
+      "url": "https://arxiv.org/list/astro-ph.HE/recent?skip=0&show=2000",
+      "advertisedEntries": 189,
+      "parsedEntries": 189,
+      "dateGroups": {
+        "2026-09-15": 40,
+        "2026-09-14": 22,
+        "2026-09-11": 26,
+        "2026-09-10": 33,
+        "2026-09-09": 68
+      }
+    },
+    {
+      "category": "astro-ph.CO",
+      "url": "https://arxiv.org/list/astro-ph.CO/recent?skip=0&show=2000",
+      "advertisedEntries": 159,
+      "parsedEntries": 159,
+      "dateGroups": {
+        "2026-09-15": 42,
+        "2026-09-14": 13,
+        "2026-09-11": 30,
+        "2026-09-10": 21,
+        "2026-09-09": 53
+      }
+    }
+  ],
+  "searchCoverage": [
+    {
+      "query": "LZ",
+      "url": "https://arxiv.org/search/?query=LZ&searchtype=all&abstracts=show&order=-announced_date_first&size=50",
+      "hitCount": 590,
+      "returnedCount": 100,
+      "overlapComplete": true,
+      "note": "The first two date-sorted pages passed the overlap window."
+    },
+    {
+      "query": "LUX-ZEPLIN",
+      "url": "https://arxiv.org/search/?query=LUX-ZEPLIN&searchtype=all&abstracts=show&order=-announced_date_first&size=200",
+      "hitCount": 187,
+      "returnedCount": 187
+    },
+    {
+      "query": "\"LZ event\"",
+      "hitCount": 21,
+      "returnedCount": 21
+    },
+    {
+      "query": "\"one event observed at LZ\"",
+      "hitCount": 1,
+      "returnedCount": 1
+    },
+    {
+      "query": "\"xenon recoil\"",
+      "hitCount": 4,
+      "returnedCount": 4
+    },
+    {
+      "query": "\"xenon recoils\"",
+      "hitCount": 4,
+      "returnedCount": 4
+    },
+    {
+      "query": "\"high-energy nuclear recoil\"",
+      "hitCount": 19,
+      "returnedCount": 19
+    },
+    {
+      "query": "\"248 keV\"",
+      "hitCount": 36,
+      "returnedCount": 36
+    },
+    {
+      "query": "LZ230616",
+      "hitCount": 6,
+      "returnedCount": 6
+    },
+    {
+      "query": "2609.02823",
+      "hitCount": 1,
+      "returnedCount": 1,
+      "note": "Identifier search resolved to the canonical abstract page."
+    },
+    {
+      "query": "official title",
+      "hitCount": 1,
+      "returnedCount": 1
+    }
+  ],
+  "abstractPagesOpened": {
+    "urlPattern": "https://arxiv.org/abs/{id}",
+    "mappedCount": 61,
+    "candidateCount": 94,
+    "candidateIds": [
+      "2609.15985",
+      "2609.15933",
+      "2609.15808",
+      "2609.15782",
+      "2609.15742",
+      "2609.15714",
+      "2609.15656",
+      "2609.15634",
+      "2609.15600",
+      "2609.15513",
+      "2609.15431",
+      "2609.15413",
+      "2609.15324",
+      "2609.15321",
+      "2609.15181",
+      "2609.15118",
+      "2609.15027",
+      "2609.14799",
+      "2609.14446",
+      "2609.13964",
+      "2609.13915",
+      "2609.13743",
+      "2609.13562",
+      "2609.13438",
+      "2609.15970",
+      "2609.14494",
+      "2609.13821",
+      "2609.12942",
+      "2609.12821",
+      "2609.12806",
+      "2609.12664",
+      "2609.12336",
+      "2609.12098",
+      "2609.13041",
+      "2609.12120",
+      "2609.12044",
+      "2609.11914",
+      "2609.11750",
+      "2609.11747",
+      "2609.11386",
+      "2609.10674",
+      "2609.10671",
+      "2609.10668",
+      "2609.11800",
+      "2609.11511",
+      "2609.10383",
+      "2609.09830",
+      "2609.09444",
+      "2609.09194",
+      "2609.09120",
+      "2609.08808",
+      "2609.07661",
+      "2609.06494",
+      "2609.06423",
+      "2609.06203",
+      "2609.06139",
+      "2609.05865",
+      "2609.05689",
+      "2609.05626",
+      "2609.05621",
+      "2609.08753",
+      "2609.08628",
+      "2609.12941",
+      "2609.12683",
+      "2609.11617",
+      "2609.10048",
+      "2609.08900",
+      "2609.08144",
+      "2609.07908",
+      "2609.05900",
+      "2609.07378",
+      "2512.05840",
+      "2609.15737",
+      "2609.12588",
+      "2609.07841",
+      "2609.09079",
+      "2609.06751",
+      "2609.12055",
+      "2609.10931",
+      "2609.11031",
+      "2609.10128",
+      "2609.06201",
+      "2609.07863",
+      "2609.15748",
+      "2609.10661",
+      "2609.11328",
+      "2609.10897",
+      "2609.10700",
+      "2609.09729",
+      "2609.06184",
+      "2609.05660",
+      "2609.08771",
+      "2608.22456",
+      "2609.15604"
+    ]
+  },
+  "candidateScreening": {
+    "uniqueCandidates": 94,
+    "included": [
+      "2609.14799",
+      "2609.15027",
+      "2609.15118",
+      "2609.15321",
+      "2609.15413",
+      "2609.15600",
+      "2609.15634",
+      "2609.15714",
+      "2609.15742",
+      "2609.15782",
+      "2609.15933",
+      "2609.15985"
+    ],
+    "nearMissExclusions": [
+      {
+        "id": "2609.15808",
+        "reason": "Heavy-ion phase-transition analysis unrelated to the xenon recoil."
+      },
+      {
+        "id": "2609.15656",
+        "reason": "Deep-inelastic hyperon-polarization proceedings unrelated to LZ."
+      },
+      {
+        "id": "2609.15513",
+        "reason": "QCD chiral-crossover study unrelated to the event."
+      },
+      {
+        "id": "2609.15431",
+        "reason": "Generic neutrino-energy reconstruction study with no LZ analysis."
+      },
+      {
+        "id": "2609.15324",
+        "reason": "Belle II displaced-diphoton vertexing study; recoil refers to a photon technique, not LZ."
+      },
+      {
+        "id": "2609.15181",
+        "reason": "Gamma-Z box correction for parity-violating DIS, unrelated to LZ."
+      },
+      {
+        "id": "2609.14446",
+        "reason": "Solar-neutrino magnetic-moment study unrelated to the high-recoil event."
+      },
+      {
+        "id": "2609.13562",
+        "reason": "Generic xenon electron-recoil direct-detection study unrelated to the nuclear-recoil candidate."
+      },
+      {
+        "id": "2609.15251",
+        "reason": "LHCb heavy-baryon decay paper returned for the common name V. Oliveira."
+      },
+      {
+        "id": "2609.09802",
+        "reason": "Charmed-baryon decay paper returned for Jia-Jun Wu."
+      },
+      {
+        "id": "2609.00575",
+        "reason": "Machine-learning compression paper returned for Junseok Lee."
+      },
+      {
+        "id": "2609.05532",
+        "reason": "Medical-imaging model returned for the common name Hyun Min Lee."
+      },
+      {
+        "id": "2609.05403",
+        "reason": "Retail federated-learning paper returned for Abhijeet Singh."
+      },
+      {
+        "id": "2609.08145",
+        "reason": "Roman deep-field survey paper returned for Patrick J. Fox."
+      },
+      {
+        "id": "2609.00441",
+        "reason": "Workplace-conversation AI paper returned for Rahul Srivastava."
+      }
+    ],
+    "ambiguousCandidates": [],
+    "pdfBodyReview": {
+      "id": "2609.15413",
+      "source": "https://arxiv.org/pdf/2609.15413",
+      "pagesReviewed": 11,
+      "decision": "included-adjacent",
+      "reason": "The complete paper contains a dedicated LZ section and explicitly links the event-motivated mass scale to its gamma-ray and collider scenario, but does not perform a quantitative recoil fit."
+    }
+  },
+  "authorSearches": {
+    "urlTemplate": "https://arxiv.org/search/?query={author}&searchtype=author&abstracts=hide&order=-announced_date_first&size=50",
+    "retryMethod": "Paced sequential public-browser searches with at least eight seconds between completed navigations; each success was retained and not repeated.",
+    "newPaperAuthors": [
+      {
+        "author": "D. Cabo-Almeida",
+        "hitCount": 8,
+        "returnedCount": 8
+      },
+      {
+        "author": "F. Costa",
+        "hitCount": 3559,
+        "returnedCount": 50
+      },
+      {
+        "author": "D. Feiteira",
+        "hitCount": 8,
+        "returnedCount": 8
+      },
+      {
+        "author": "V. Oliveira",
+        "hitCount": 2059,
+        "returnedCount": 50
+      },
+      {
+        "author": "Hiroshi Okada",
+        "hitCount": 276,
+        "returnedCount": 50
+      },
+      {
+        "author": "Yoshihiro Shigekami",
+        "hitCount": 27,
+        "returnedCount": 27
+      },
+      {
+        "author": "Jia-Jun Wu",
+        "hitCount": 128,
+        "returnedCount": 50
+      },
+      {
+        "author": "Junseok Lee",
+        "hitCount": 77,
+        "returnedCount": 50
+      },
+      {
+        "author": "Fuminobu Takahashi",
+        "hitCount": 245,
+        "returnedCount": 50
+      },
+      {
+        "author": "Yu-Dai Tsai",
+        "hitCount": 74,
+        "returnedCount": 50
+      }
+    ],
+    "weeklyTranche": {
+      "selection": "Mapped authors whose paper layoutRank modulo 7 equals 2",
+      "authors": [
+        {
+          "author": "JiJi Fan",
+          "hitCount": 80,
+          "returnedCount": 50
+        },
+        {
+          "author": "Matthew Reece",
+          "hitCount": 110,
+          "returnedCount": 50
+        },
+        {
+          "author": "Maxim Pospelov",
+          "hitCount": 210,
+          "returnedCount": 50
+        },
+        {
+          "author": "Harikrishnan Ramani",
+          "hitCount": 46,
+          "returnedCount": 46
+        },
+        {
+          "author": "Christopher McCabe",
+          "hitCount": 67,
+          "returnedCount": 50
+        },
+        {
+          "author": "Hyun Min Lee",
+          "hitCount": 236,
+          "returnedCount": 50
+        },
+        {
+          "author": "Haider Alhazmi",
+          "hitCount": 8,
+          "returnedCount": 8
+        },
+        {
+          "author": "Doojin Kim",
+          "hitCount": 122,
+          "returnedCount": 50
+        },
+        {
+          "author": "Kyoungchul Kong",
+          "hitCount": 113,
+          "returnedCount": 50
+        },
+        {
+          "author": "Jong-Chul Park",
+          "hitCount": 83,
+          "returnedCount": 50
+        },
+        {
+          "author": "Seodong Shin",
+          "hitCount": 60,
+          "returnedCount": 50
+        },
+        {
+          "author": "Debajit Bose",
+          "hitCount": 11,
+          "returnedCount": 11
+        },
+        {
+          "author": "Akash Kumar Saha",
+          "hitCount": 29,
+          "returnedCount": 29
+        },
+        {
+          "author": "Deep Jyoti Das",
+          "hitCount": 3,
+          "returnedCount": 3
+        },
+        {
+          "author": "Rinchen Sherpa",
+          "hitCount": 3,
+          "returnedCount": 3
+        },
+        {
+          "author": "Abhijeet Singh",
+          "hitCount": 26,
+          "returnedCount": 26
+        },
+        {
+          "author": "Durba Ghosh",
+          "hitCount": 1,
+          "returnedCount": 1
+        },
+        {
+          "author": "Jaya Doliya",
+          "hitCount": 3,
+          "returnedCount": 3
+        },
+        {
+          "author": "Subhadip Bouri",
+          "hitCount": 10,
+          "returnedCount": 10
+        },
+        {
+          "author": "Biprajit Mondal",
+          "hitCount": 4,
+          "returnedCount": 4
+        },
+        {
+          "author": "Ranjini Mondol",
+          "hitCount": 8,
+          "returnedCount": 8
+        },
+        {
+          "author": "Nirmal Raj",
+          "hitCount": 60,
+          "returnedCount": 50
+        },
+        {
+          "author": "Ranjan Laha",
+          "hitCount": 62,
+          "returnedCount": 50
+        },
+        {
+          "author": "Pouya Asadi",
+          "hitCount": 41,
+          "returnedCount": 41
+        },
+        {
+          "author": "Austin Batz",
+          "hitCount": 13,
+          "returnedCount": 13
+        },
+        {
+          "author": "Patrick J. Fox",
+          "hitCount": 191,
+          "returnedCount": 50
+        },
+        {
+          "author": "Samuel D. Homiller",
+          "hitCount": 29,
+          "returnedCount": 29
+        },
+        {
+          "author": "Graham D. Kribs",
+          "hitCount": 103,
+          "returnedCount": 50
+        },
+        {
+          "author": "Ayan Chattaraj",
+          "hitCount": 4,
+          "returnedCount": 4
+        },
+        {
+          "author": "Anirban Majumdar",
+          "hitCount": 39,
+          "returnedCount": 39
+        },
+        {
+          "author": "Dimitrios K. Papoulias",
+          "hitCount": 50,
+          "returnedCount": 50
+        },
+        {
+          "author": "Rahul Srivastava",
+          "hitCount": 232,
+          "returnedCount": 50
+        }
+      ]
+    },
+    "plausibleNewIdsBeyondIncluded": []
+  },
+  "citationDiscovery": {
+    "officialArxivPage": "https://arxiv.org/abs/2609.02823",
+    "linkedRecord": "https://inspirehep.net/literature/3199115",
+    "citingWorksUrl": "https://inspirehep.net/literature?sort=mostrecent&size=100&page=1&q=refersto%3Arecid%3A3199115",
+    "hitCount": 63,
+    "citingIds": [
+      "2609.15027",
+      "2609.15118",
+      "2609.15413",
+      "2609.15321",
+      "2609.14799",
+      "2609.13038",
+      "2609.11600",
+      "2609.11833",
+      "2609.12045",
+      "2609.09830",
+      "2609.10491",
+      "2609.10504",
+      "2609.10453",
+      "2609.10636",
+      "2609.10827",
+      "2609.08893",
+      "2609.08712",
+      "2609.08771",
+      "2609.08808",
+      "2609.08993",
+      "2609.09015",
+      "2609.09037",
+      "2609.09138",
+      "2609.09107",
+      "2609.09136",
+      "2609.09385",
+      "2609.06909",
+      "2609.06890",
+      "2609.07138",
+      "2609.07225",
+      "2609.07451",
+      "2609.07800",
+      "2609.07811",
+      "2609.07742",
+      "2609.07807",
+      "2609.09230",
+      "2609.06571",
+      "2609.06640",
+      "2609.06760",
+      "2609.06756",
+      "2609.06750",
+      "2609.06825",
+      "2609.06171",
+      "2609.06153",
+      "2609.04673",
+      "2609.05291",
+      "2609.05204",
+      "2609.04144",
+      "2609.04186",
+      "2609.04163",
+      "2609.04181",
+      "2609.04185",
+      "2609.04175",
+      "2609.02608",
+      "2609.02775",
+      "2609.02807",
+      "2609.02505",
+      "2609.02868",
+      "2609.01475",
+      "2609.01583",
+      "2609.01590",
+      "2609.01504",
+      "2609.01892"
+    ]
+  },
+  "revisions": {
+    "submissionHistoriesChecked": 61,
+    "changed": [
+      {
+        "id": "2609.06171",
+        "source": "https://arxiv.org/abs/2609.06171",
+        "updated": "2026-09-13",
+        "referenceSource": "https://arxiv.org/html/2609.06171",
+        "referenceCount": 22,
+        "addedMappedReferences": [
+          "2609.04186",
+          "2609.04673",
+          "2609.05204",
+          "2609.06571",
+          "2609.07807",
+          "2609.09138",
+          "2609.11833"
+        ]
+      }
+    ]
+  },
+  "discovery": {
+    "newPapers": [
+      {
+        "id": "2609.14799",
+        "source": "https://arxiv.org/abs/2609.14799",
+        "referenceSource": "https://arxiv.org/html/2609.14799",
+        "referenceCount": 57,
+        "role": "diagnostic",
+        "islands": [
+          "elastic",
+          "constraints",
+          "endothermic"
+        ],
+        "primaryIsland": "elastic"
+      },
+      {
+        "id": "2609.15027",
+        "source": "https://arxiv.org/abs/2609.15027",
+        "referenceSource": "https://arxiv.org/html/2609.15027",
+        "referenceCount": 69,
+        "role": "explanation",
+        "islands": [
+          "endothermic",
+          "constraints"
+        ],
+        "primaryIsland": "endothermic"
+      },
+      {
+        "id": "2609.15118",
+        "source": "https://arxiv.org/abs/2609.15118",
+        "referenceSource": "https://arxiv.org/html/2609.15118",
+        "referenceCount": 78,
+        "role": "explanation",
+        "islands": [
+          "endothermic",
+          "constraints"
+        ],
+        "primaryIsland": "endothermic"
+      },
+      {
+        "id": "2609.15321",
+        "source": "https://arxiv.org/abs/2609.15321",
+        "referenceSource": "https://arxiv.org/html/2609.15321",
+        "referenceCount": 25,
+        "role": "constraint",
+        "islands": [
+          "endothermic",
+          "constraints",
+          "higgsino"
+        ],
+        "primaryIsland": "endothermic"
+      },
+      {
+        "id": "2609.15413",
+        "source": "https://arxiv.org/abs/2609.15413",
+        "referenceSource": "https://arxiv.org/pdf/2609.15413",
+        "referenceCount": 14,
+        "role": "adjacent",
+        "islands": [
+          "multimessenger",
+          "higgsino",
+          "constraints"
+        ],
+        "primaryIsland": "multimessenger"
+      },
+      {
+        "id": "2609.15600",
+        "source": "https://arxiv.org/abs/2609.15600",
+        "referenceSource": "https://arxiv.org/html/2609.15600",
+        "referenceCount": 95,
+        "role": "explanation",
+        "islands": [
+          "endothermic",
+          "constraints"
+        ],
+        "primaryIsland": "endothermic"
+      },
+      {
+        "id": "2609.15634",
+        "source": "https://arxiv.org/abs/2609.15634",
+        "referenceSource": "https://arxiv.org/html/2609.15634",
+        "referenceCount": 49,
+        "role": "diagnostic",
+        "islands": [
+          "constraints",
+          "endothermic"
+        ],
+        "primaryIsland": "constraints"
+      },
+      {
+        "id": "2609.15714",
+        "source": "https://arxiv.org/abs/2609.15714",
+        "referenceSource": "https://arxiv.org/html/2609.15714",
+        "referenceCount": 82,
+        "role": "explanation",
+        "islands": [
+          "exothermic",
+          "constraints"
+        ],
+        "primaryIsland": "exothermic"
+      },
+      {
+        "id": "2609.15742",
+        "source": "https://arxiv.org/abs/2609.15742",
+        "referenceSource": "https://arxiv.org/html/2609.15742",
+        "referenceCount": 124,
+        "role": "explanation",
+        "islands": [
+          "endothermic",
+          "higgsino",
+          "constraints"
+        ],
+        "primaryIsland": "endothermic"
+      },
+      {
+        "id": "2609.15782",
+        "source": "https://arxiv.org/abs/2609.15782",
+        "referenceSource": "https://arxiv.org/html/2609.15782",
+        "referenceCount": 30,
+        "role": "diagnostic",
+        "islands": [
+          "exothermic",
+          "constraints",
+          "higgsino"
+        ],
+        "primaryIsland": "exothermic"
+      },
+      {
+        "id": "2609.15933",
+        "source": "https://arxiv.org/abs/2609.15933",
+        "referenceSource": "https://arxiv.org/html/2609.15933",
+        "referenceCount": 73,
+        "role": "explanation",
+        "islands": [
+          "absorption",
+          "constraints"
+        ],
+        "primaryIsland": "absorption"
+      },
+      {
+        "id": "2609.15985",
+        "source": "https://arxiv.org/abs/2609.15985",
+        "referenceSource": "https://arxiv.org/html/2609.15985",
+        "referenceCount": 50,
+        "role": "diagnostic",
+        "islands": [
+          "constraints",
+          "exothermic",
+          "endothermic"
+        ],
+        "primaryIsland": "constraints"
+      }
+    ]
+  },
+  "citationReconciliation": {
+    "scope": "The 12 new papers plus the 1 revised mapped paper",
+    "checkedPaperCount": 13,
+    "sourcePattern": "Complete current arXiv HTML reference lists, except the complete PDF bibliography for 2609.15413",
+    "priorFullReconciliation": {
+      "checkedPaperCount": 58,
+      "performedAt": "2026-09-13T09:16:21Z",
+      "note": "The prior Sunday full reconciliation remains the baseline for unchanged mapped papers."
+    },
+    "existingPaperChanges": [
+      "2609.06171"
+    ],
+    "newPaperEdgeCounts": {
+      "2609.14799": 30,
+      "2609.15027": 33,
+      "2609.15118": 27,
+      "2609.15321": 1,
+      "2609.15413": 3,
+      "2609.15600": 1,
+      "2609.15634": 41,
+      "2609.15714": 45,
+      "2609.15742": 58,
+      "2609.15782": 16,
+      "2609.15933": 49,
+      "2609.15985": 1
+    },
+    "normalization": "Version suffixes were removed; explicit official-result citations and title/preprint aliases were normalized to 2609.02823; no edge was inferred from similarity, date, prose, or external citation graphs.",
+    "uncertainEdges": []
+  },
+  "validation": {
+    "status": "passed",
+    "commands": [
+      "python3 scripts/update_papers.py --validate-only",
+      "pnpm typecheck",
+      "pnpm lint",
+      "pnpm test:layout",
+      "pnpm test:date-range",
+      "pnpm test:citation-size",
+      "pnpm test:theme",
+      "pnpm build",
+      "git diff --check"
+    ],
+    "notes": [
+      "Twelve records were appended with contiguous layout ranks 61 through 72; every established coordinate, layout rank, record order, summary, role, and island membership was preserved.",
+      "The only established-record changes are the authoritative updated date and seven newly explicit mapped citations for 2609.06171.",
+      "The final catalog is based on origin/main commit 39564dc9."
+    ]
+  }
+}
