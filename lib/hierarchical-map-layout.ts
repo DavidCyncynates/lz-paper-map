@@ -40,6 +40,8 @@ export type HierarchicalLayoutDiagnostics = {
 };
 
 export type HierarchicalMapLayout = {
+  width: number;
+  height: number;
   papers: Map<string, LayoutPoint>;
   labels: Map<string, LayoutPoint>;
   islands: Map<string, HierarchicalIslandLayout>;
@@ -52,6 +54,7 @@ export type HierarchicalLayoutOptions = {
   islandPadding?: number;
   observationPadding?: number;
   outerGap?: number;
+  allowCanvasExpansion?: boolean;
 };
 
 type InternalPaper = HierarchicalPaperAnchor & {
@@ -79,7 +82,7 @@ const INNER_ITERATIONS = 260;
 const INNER_CLEANUP_MIN_ITERATIONS = 720;
 const INNER_CLEANUP_MAX_ITERATIONS = 1200;
 const OUTER_ITERATIONS = 300;
-const OUTER_CLEANUP_ITERATIONS = 1200;
+const OUTER_CLEANUP_MAX_ITERATIONS = 5000;
 const INNER_INITIAL_SCALE = 0.85;
 const INNER_CENTER_STRENGTH = 0.007;
 const INNER_SEMANTIC_STRENGTH = 0.1;
@@ -103,6 +106,8 @@ const DEFAULT_OUTER_GAP = 16;
 const LAYOUT_EPSILON = 1e-6;
 const LAYOUT_TOLERANCE = 1e-3;
 const INNER_CLEANUP_TARGET = 5e-4;
+const OUTER_CLEANUP_TARGET = 5e-4;
+const CANVAS_EXPANSION_STEP = 8;
 const MEC_EPSILON = 1e-10;
 
 function clamp(value: number, minimum: number, maximum: number) {
@@ -821,12 +826,173 @@ function addOuterRepulsion(
   }
 }
 
+function projectOuterPair(
+  first: PackedIsland,
+  second: PackedIsland,
+  outerGap: number,
+  spacingScale: number,
+) {
+  let horizontalDistance = second.x - first.x;
+  let verticalDistance = second.y - first.y;
+  let distance = Math.hypot(horizontalDistance, verticalDistance);
+  if (distance < LAYOUT_EPSILON) {
+    const direction = deterministicDirection(first.id, second.id);
+    horizontalDistance = direction.x;
+    verticalDistance = direction.y;
+    distance = 1;
+  }
+
+  const preferredDistance =
+    first.radius + second.radius + outerGap * spacingScale;
+  const penetration = preferredDistance - distance;
+  if (penetration <= OUTER_CLEANUP_TARGET) return;
+
+  const unitX = horizontalDistance / distance;
+  const unitY = verticalDistance / distance;
+  const firstMobility = first.observation ? OBSERVATION_MOBILITY : 1;
+  const secondMobility = second.observation ? OBSERVATION_MOBILITY : 1;
+  const combinedMobility = firstMobility + secondMobility;
+  const correction = penetration + OUTER_CLEANUP_TARGET * 0.25;
+  const firstTravel = correction * (firstMobility / combinedMobility);
+  const secondTravel = correction * (secondMobility / combinedMobility);
+
+  first.x -= unitX * firstTravel;
+  first.y -= unitY * firstTravel;
+  second.x += unitX * secondTravel;
+  second.y += unitY * secondTravel;
+}
+
+function projectOuterConstraints(
+  islands: PackedIsland[],
+  outerGap: number,
+  spacingScale: number,
+) {
+  // Resolve contacts immediately and without wall clamps. Simultaneous
+  // wall-clamped corrections can settle into a jam even when the circles fit
+  // in a slightly larger scrollable world.
+  const pairs: Array<[PackedIsland, PackedIsland]> = [];
+  for (let firstIndex = 0; firstIndex < islands.length; firstIndex += 1) {
+    for (
+      let secondIndex = firstIndex + 1;
+      secondIndex < islands.length;
+      secondIndex += 1
+    ) {
+      pairs.push([islands[firstIndex], islands[secondIndex]]);
+    }
+  }
+
+  for (
+    let iteration = 0;
+    iteration < OUTER_CLEANUP_MAX_ITERATIONS;
+    iteration += 1
+  ) {
+    if (iteration % 2 === 0) {
+      for (const [first, second] of pairs) {
+        projectOuterPair(first, second, outerGap, spacingScale);
+      }
+    } else {
+      for (let pairIndex = pairs.length - 1; pairIndex >= 0; pairIndex -= 1) {
+        const [first, second] = pairs[pairIndex];
+        projectOuterPair(first, second, outerGap, spacingScale);
+      }
+    }
+
+    if (
+      measureMaximumOuterOverlap(islands, outerGap, spacingScale) <=
+      OUTER_CLEANUP_TARGET
+    )
+      break;
+  }
+}
+
+function measureMaximumOuterOverlap(
+  islands: readonly PackedIsland[],
+  outerGap: number,
+  spacingScale: number,
+) {
+  let maximumOverlap = 0;
+  for (let firstIndex = 0; firstIndex < islands.length; firstIndex += 1) {
+    const first = islands[firstIndex];
+    for (
+      let secondIndex = firstIndex + 1;
+      secondIndex < islands.length;
+      secondIndex += 1
+    ) {
+      const second = islands[secondIndex];
+      maximumOverlap = Math.max(
+        maximumOverlap,
+        first.radius +
+          second.radius +
+          outerGap * spacingScale -
+          Math.hypot(first.x - second.x, first.y - second.y),
+      );
+    }
+  }
+  return Math.max(0, maximumOverlap);
+}
+
+function fitPackedIslandsToCanvas(
+  islands: PackedIsland[],
+  requestedWidth: number,
+  requestedHeight: number,
+  allowCanvasExpansion: boolean,
+) {
+  if (islands.length === 0) {
+    return { width: requestedWidth, height: requestedHeight };
+  }
+  const minimumX = Math.min(
+    ...islands.map((island) => island.x - island.radius - CANVAS_MARGIN),
+  );
+  const maximumX = Math.max(
+    ...islands.map((island) => island.x + island.radius + CANVAS_MARGIN),
+  );
+  const minimumY = Math.min(
+    ...islands.map((island) => island.y - island.radius - CANVAS_MARGIN),
+  );
+  const maximumY = Math.max(
+    ...islands.map((island) => island.y + island.radius + CANVAS_MARGIN),
+  );
+  const contentWidth = maximumX - minimumX;
+  const contentHeight = maximumY - minimumY;
+  // Expansion is quantized so small geometry changes do not resize the world
+  // by subpixels from one catalog update to the next.
+  const width = allowCanvasExpansion
+    ? Math.max(
+        requestedWidth,
+        Math.ceil(contentWidth / CANVAS_EXPANSION_STEP) * CANVAS_EXPANSION_STEP,
+      )
+    : requestedWidth;
+  const height = allowCanvasExpansion
+    ? Math.max(
+        requestedHeight,
+        Math.ceil(contentHeight / CANVAS_EXPANSION_STEP) *
+          CANVAS_EXPANSION_STEP,
+      )
+    : requestedHeight;
+  const shiftX =
+    contentWidth <= width
+      ? clamp(0, -minimumX, width - maximumX)
+      : (width - minimumX - maximumX) / 2;
+  const shiftY =
+    contentHeight <= height
+      ? clamp(0, -minimumY, height - maximumY)
+      : (height - minimumY - maximumY) / 2;
+
+  for (const island of islands) {
+    island.x += shiftX;
+    island.y += shiftY;
+  }
+
+  return { width, height };
+}
+
 function packIslands(
   islands: PackedIsland[],
   width: number,
   height: number,
   outerGap: number,
   spacingScale: number,
+  allowCanvasExpansion: boolean,
 ) {
   const ordered = [...islands].sort(compareIds);
   for (const island of ordered) keepIslandInsideCanvas(island, width, height);
@@ -865,23 +1031,14 @@ function packIslands(
     }
   }
 
-  for (
-    let iteration = 0;
-    iteration < OUTER_CLEANUP_ITERATIONS;
-    iteration += 1
-  ) {
-    const movement = new Map(
-      ordered.map((island) => [island.id, { x: 0, y: 0 }]),
-    );
-    addOuterRepulsion(ordered, movement, 1, false, outerGap, spacingScale);
-    for (const island of ordered) {
-      const islandMovement = movement.get(island.id) as LayoutPoint;
-      island.x += clamp(islandMovement.x, -MAX_OUTER_STEP, MAX_OUTER_STEP);
-      island.y += clamp(islandMovement.y, -MAX_OUTER_STEP, MAX_OUTER_STEP);
-      keepIslandInsideCanvas(island, width, height);
-    }
-  }
-  return ordered;
+  projectOuterConstraints(ordered, outerGap, spacingScale);
+  const canvas = fitPackedIslandsToCanvas(
+    ordered,
+    width,
+    height,
+    allowCanvasExpansion,
+  );
+  return { islands: ordered, ...canvas };
 }
 
 function measureInnerOverlap(
@@ -1031,11 +1188,12 @@ export function createHierarchicalMapLayout(
     safeHeight,
     outerGap,
     spacingScale,
+    options.allowCanvasExpansion ?? true,
   );
   const papers = new Map<string, LayoutPoint>();
   const labels = new Map<string, LayoutPoint>();
   const islands = new Map<string, HierarchicalIslandLayout>();
-  for (const island of packed) {
+  for (const island of packed.islands) {
     islands.set(island.id, {
       x: island.x,
       y: island.y,
@@ -1063,24 +1221,28 @@ export function createHierarchicalMapLayout(
   }
   const maxInnerOverlap = Math.max(
     0,
-    ...packed.map((island) => measureInnerOverlap(island, spacingScale)),
+    ...packed.islands.map((island) =>
+      measureInnerOverlap(island, spacingScale),
+    ),
   );
   const { maxOuterOverlap, maxCanvasOverflow } = measureOuterDiagnostics(
-    packed,
-    safeWidth,
-    safeHeight,
+    packed.islands,
+    packed.width,
+    packed.height,
     outerGap,
     spacingScale,
   );
   const maxObservationDrift = Math.max(
     0,
-    ...packed
+    ...packed.islands
       .filter((island) => island.observation)
       .map((island) =>
         Math.hypot(island.x - island.anchorX, island.y - island.anchorY),
       ),
   );
   return {
+    width: packed.width,
+    height: packed.height,
     papers,
     labels,
     islands,

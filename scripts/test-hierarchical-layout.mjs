@@ -274,8 +274,10 @@ test('current catalog is contained, separated, bounded, and deterministic', () =
     const [firstId, first] = packedCircles[firstIndex];
     assert.ok(first.x - first.radius >= CANVAS_MARGIN - EPSILON);
     assert.ok(first.y - first.radius >= CANVAS_MARGIN - EPSILON);
-    assert.ok(first.x + first.radius <= WIDTH - CANVAS_MARGIN + EPSILON);
-    assert.ok(first.y + first.radius <= HEIGHT - CANVAS_MARGIN + EPSILON);
+    assert.ok(first.x + first.radius <= layout.width - CANVAS_MARGIN + EPSILON);
+    assert.ok(
+      first.y + first.radius <= layout.height - CANVAS_MARGIN + EPSILON,
+    );
     for (
       let secondIndex = firstIndex + 1;
       secondIndex < packedCircles.length;
@@ -431,6 +433,53 @@ test('citation-sized catalog remains contained, separated, and deterministic', (
         );
       }
     }
+  }
+});
+
+test('September 16 additions expand the scrollable world deterministically', () => {
+  const recoveredPaperIds = ['2609.16529', '2609.17196', '2609.17412'];
+  for (const paperId of recoveredPaperIds) {
+    assert.ok(
+      landscape.papers.some((paper) => paper.id === paperId),
+      `Expected the recovered catalog to contain ${paperId}`,
+    );
+  }
+
+  for (const sizeMode of ['uniform', 'citations']) {
+    const { papers, labels, islands } = currentCatalogInputs(sizeMode);
+    const options = {
+      islandPadding: ISLAND_PADDING,
+      observationPadding: OBSERVATION_PADDING,
+      outerGap: OUTER_GAP,
+      allowCanvasExpansion: true,
+    };
+    const layout = createHierarchicalMapLayout(
+      WIDTH,
+      HEIGHT,
+      papers,
+      labels,
+      islands,
+      options,
+    );
+    const reversed = createHierarchicalMapLayout(
+      WIDTH,
+      HEIGHT,
+      [...papers].reverse(),
+      [...labels].reverse(),
+      [...islands].reverse(),
+      options,
+    );
+
+    assert.equal(layout.diagnostics.converged, true);
+    assert.ok(layout.width >= WIDTH);
+    assert.ok(layout.height >= HEIGHT);
+    assert.equal(layout.width % 8, 0);
+    assert.equal(layout.height % 8, 0);
+    assert.ok(layout.diagnostics.maxOuterOverlap <= EPSILON);
+    assert.ok(layout.diagnostics.maxCanvasOverflow <= EPSILON);
+    assert.equal(mapSnapshot(layout), mapSnapshot(reversed));
+    near(layout.width, reversed.width);
+    near(layout.height, reversed.height);
   }
 });
 
@@ -832,6 +881,7 @@ test('an impossible viewport returns finite, non-converged diagnostics', () => {
       { id: 'one', x: 40, y: 30 },
       { id: 'two', x: 40, y: 30 },
     ],
+    { allowCanvasExpansion: false },
   );
   assert.equal(layout.diagnostics.converged, false);
   assert.ok(
