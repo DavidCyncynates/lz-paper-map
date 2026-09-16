@@ -68,6 +68,8 @@ type MapGeometry = {
   labels: LabelGeometry[];
 };
 type HierarchicalLayoutAttempt = {
+  width: number;
+  height: number;
   papers: Map<string, MapPoint>;
   labels: Map<string, MapPoint>;
   islands: Map<string, HierarchicalIslandLayout>;
@@ -712,8 +714,8 @@ export function LzLandscape() {
     dateRangeToPercent - dateRangeFromPercent < 8;
 
   const hierarchicalLayout = useMemo<HierarchicalLayoutAttempt>(() => {
-    const width = mapGeometry?.width ?? MAP_WORLD_WIDTH;
-    const height = mapGeometry?.height ?? MAP_WORLD_HEIGHT;
+    const width = MAP_WORLD_WIDTH;
+    const height = MAP_WORLD_HEIGHT;
     const labelGeometryById = new Map(
       mapGeometry?.labels.map((label) => [label.id, label]) ?? [],
     );
@@ -764,16 +766,19 @@ export function LzLandscape() {
           islandPadding: ISLAND_PADDING_PX,
           observationPadding: OBSERVATION_PACKING_PADDING_PX,
           outerGap: ISLAND_GAP_PX,
+          allowCanvasExpansion: true,
         },
       );
 
       return {
+        width: packedLayout.width,
+        height: packedLayout.height,
         papers: new Map(
           [...packedLayout.papers].map(([id, point]) => [
             id,
             {
-              x: roundMapValue((point.x / width) * 100),
-              y: roundMapValue((point.y / height) * 100),
+              x: roundMapValue((point.x / packedLayout.width) * 100),
+              y: roundMapValue((point.y / packedLayout.height) * 100),
             },
           ]),
         ),
@@ -781,8 +786,8 @@ export function LzLandscape() {
           [...packedLayout.labels].map(([id, point]) => [
             id,
             {
-              x: roundMapValue((point.x / width) * 100),
-              y: roundMapValue((point.y / height) * 100),
+              x: roundMapValue((point.x / packedLayout.width) * 100),
+              y: roundMapValue((point.y / packedLayout.height) * 100),
             },
           ]),
         ),
@@ -792,6 +797,8 @@ export function LzLandscape() {
       };
     } catch (error) {
       return {
+        width,
+        height,
         papers: new Map(
           landscape.papers.map((paper) => [
             paper.id,
@@ -822,6 +829,8 @@ export function LzLandscape() {
   const paperPositions = hierarchicalLayout.papers;
   const labelPositions = hierarchicalLayout.labels;
   const islandCircles = hierarchicalLayout.islands;
+  const mapWorldWidth = hierarchicalLayout.width;
+  const mapWorldHeight = hierarchicalLayout.height;
   const mapLayoutReady =
     mapFontsReady &&
     mapGeometry !== null &&
@@ -900,8 +909,8 @@ export function LzLandscape() {
       const position = paperPositions.get(selectedPaper.id);
       if (!viewport || !position) return;
 
-      const scaledWidth = MAP_WORLD_WIDTH * zoom;
-      const scaledHeight = MAP_WORLD_HEIGHT * zoom;
+      const scaledWidth = mapWorldWidth * zoom;
+      const scaledHeight = mapWorldHeight * zoom;
       const stageWidth = Math.max(viewport.clientWidth, scaledWidth);
       const stageHeight = Math.max(viewport.clientHeight, scaledHeight);
       const paperX =
@@ -938,6 +947,8 @@ export function LzLandscape() {
     selectedPaper.id,
     viewMode,
     visiblePapers.length,
+    mapWorldHeight,
+    mapWorldWidth,
     zoom,
   ]);
 
@@ -1126,11 +1137,11 @@ export function LzLandscape() {
     const viewport = mapViewportRef.current;
     const centerX = viewport
       ? (viewport.scrollLeft + viewport.clientWidth / 2) /
-        Math.max(viewport.clientWidth, MAP_WORLD_WIDTH * zoom)
+        Math.max(viewport.clientWidth, mapWorldWidth * zoom)
       : 0.5;
     const centerY = viewport
       ? (viewport.scrollTop + viewport.clientHeight / 2) /
-        Math.max(viewport.clientHeight, MAP_WORLD_HEIGHT * zoom)
+        Math.max(viewport.clientHeight, mapWorldHeight * zoom)
       : 0.5;
 
     setZoom(nextZoom);
@@ -1139,11 +1150,11 @@ export function LzLandscape() {
       if (!currentViewport) return;
       const nextWidth = Math.max(
         currentViewport.clientWidth,
-        MAP_WORLD_WIDTH * nextZoom,
+        mapWorldWidth * nextZoom,
       );
       const nextHeight = Math.max(
         currentViewport.clientHeight,
-        MAP_WORLD_HEIGHT * nextZoom,
+        mapWorldHeight * nextZoom,
       );
       currentViewport.scrollTo({
         left: centerX * nextWidth - currentViewport.clientWidth / 2,
@@ -1599,8 +1610,8 @@ export function LzLandscape() {
               <div
                 className="map-stage"
                 style={{
-                  width: MAP_WORLD_WIDTH * zoom,
-                  height: MAP_WORLD_HEIGHT * zoom,
+                  width: mapWorldWidth * zoom,
+                  height: mapWorldHeight * zoom,
                 }}
               >
                 <div
@@ -1609,14 +1620,14 @@ export function LzLandscape() {
                   aria-hidden={!mapLayoutReady}
                   inert={!mapLayoutReady}
                   style={{
-                    width: MAP_WORLD_WIDTH,
-                    height: MAP_WORLD_HEIGHT,
+                    width: mapWorldWidth,
+                    height: mapWorldHeight,
                     transform: `translate(-50%, -50%) scale(${zoom})`,
                   }}
                 >
                   <svg
                     className="map-contours"
-                    viewBox={`0 0 ${mapGeometry?.width ?? MAP_WORLD_WIDTH} ${mapGeometry?.height ?? MAP_WORLD_HEIGHT}`}
+                    viewBox={`0 0 ${mapWorldWidth} ${mapWorldHeight}`}
                     preserveAspectRatio="none"
                     aria-hidden="true"
                   >

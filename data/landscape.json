@@ -1,8 +1,8 @@
 {
   "schemaVersion": 2,
   "title": "LZ high-recoil literature landscape",
-  "updatedAt": "2026-09-15",
-  "lastSuccessfulScan": "2026-09-15T10:08:46Z",
+  "updatedAt": "2026-09-16",
+  "lastSuccessfulScan": "2026-09-16T09:26:39Z",
   "event": {
     "energyKev": 248,
     "statisticalUncertaintyKev": 23,
@@ -12,7 +12,7 @@
   },
   "citationData": {
     "source": "arXiv reference lists",
-    "checkedAt": "2026-09-15",
+    "checkedAt": "2026-09-16",
     "scope": "Citations between papers in this map",
     "note": "References to the official LZ preprint are normalized to arXiv:2609.02823."
   },
@@ -2041,7 +2041,7 @@
         "Taewook Youn"
       ],
       "published": "2026-09-08",
-      "updated": "2026-09-08",
+      "updated": "2026-09-15",
       "url": "https://arxiv.org/abs/2609.09138",
       "role": "explanation",
       "primaryIsland": "higgsino",
@@ -2082,7 +2082,23 @@
         "2609.04186",
         "2609.04673",
         "2609.05204",
-        "2609.05291"
+        "2609.05291",
+        "2609.06171",
+        "2609.06571",
+        "2609.06760",
+        "2609.06825",
+        "2609.06890",
+        "2609.07800",
+        "2609.07807",
+        "2609.07811",
+        "2609.08993",
+        "2609.09136",
+        "2609.09230",
+        "2609.09385",
+        "2609.10453",
+        "2609.10491",
+        "2609.10504",
+        "2609.11833"
       ]
     },
     {
@@ -3459,6 +3475,193 @@
       "y": 83.57,
       "cites": [
         "2609.02823"
+      ]
+    },
+    {
+      "id": "2609.16529",
+      "layoutRank": 73,
+      "arxivId": "2609.16529",
+      "title": "Dark Matter Inelastic Scattering with Nuclei for Direct Detection",
+      "authors": [
+        "Shao-Feng Ge",
+        "Oleg Titov",
+        "Yakun Wang"
+      ],
+      "published": "2026-09-16",
+      "updated": "2026-09-16",
+      "url": "https://arxiv.org/abs/2609.16529",
+      "role": "diagnostic",
+      "primaryIsland": "constraints",
+      "islands": [
+        "constraints",
+        "elastic"
+      ],
+      "tags": [
+        "xenon nuclear response",
+        "nuclear excitation",
+        "effective operators",
+        "nuclear theory uncertainty"
+      ],
+      "summary": "The authors recalculate elastic and nuclear-excitation responses for xenon-129 and xenon-131, finding that the event-favored effective operator can behave very differently from shell-model predictions near 248 keV and in the lower-energy sideband.",
+      "takeaway": "The apparent high-recoil peak can depend strongly on the nuclear calculation, with the compared event rate differing by up to a factor of 25.",
+      "x": 53.53,
+      "y": 85.71,
+      "cites": [
+        "2609.02823"
+      ]
+    },
+    {
+      "id": "2609.17196",
+      "layoutRank": 74,
+      "arxivId": "2609.17196",
+      "title": "A possible interpretation of the LUX-ZEPLIN recoil event in the 2HD+a scenario",
+      "authors": [
+        "Giorgio Arcadi",
+        "Mattia di Mauro",
+        "Abdelhak Djouadi",
+        "Farinaldo Queiroz"
+      ],
+      "published": "2026-09-16",
+      "updated": "2026-09-16",
+      "url": "https://arxiv.org/abs/2609.17196",
+      "role": "explanation",
+      "primaryIsland": "elastic",
+      "islands": [
+        "elastic",
+        "constraints",
+        "multimessenger"
+      ],
+      "tags": [
+        "2HD+a",
+        "pseudoscalar mediator",
+        "momentum dependence",
+        "collider constraints"
+      ],
+      "summary": "The authors fit the candidate with elastic fermionic dark matter in a two-Higgs-doublet plus pseudoscalar model, using momentum-dependent scattering through a light pseudoscalar while imposing relic-density, collider, flavor, and loop-level direct-detection constraints.",
+      "takeaway": "Provides a complete elastic particle model in which the recoil-selected parameters are testable through light-pseudoscalar and heavy-Higgs searches.",
+      "x": 37.19,
+      "y": 88.54,
+      "cites": [
+        "2609.01475",
+        "2609.01583",
+        "2609.01592",
+        "2609.01892",
+        "2609.02505",
+        "2609.02608",
+        "2609.02775",
+        "2609.02823",
+        "2609.04163",
+        "2609.04181",
+        "2609.04186",
+        "2609.06153",
+        "2609.06571",
+        "2609.06756",
+        "2609.06760",
+        "2609.06890",
+        "2609.06909",
+        "2609.07742",
+        "2609.07800",
+        "2609.07811",
+        "2609.09037",
+        "2609.09138",
+        "2609.09230",
+        "2609.09385",
+        "2609.10491",
+        "2609.10827",
+        "2609.11833"
+      ]
+    },
+    {
+      "id": "2609.17412",
+      "layoutRank": 75,
+      "arxivId": "2609.17412",
+      "title": "Cosmological Constrained Axion-Portal Inelastic Dark Matter for the LZ Event",
+      "authors": [
+        "Haipeng An",
+        "Fei Gao",
+        "Jia Liu",
+        "Minghao Liu",
+        "Changlong Xu"
+      ],
+      "published": "2026-09-16",
+      "updated": "2026-09-16",
+      "url": "https://arxiv.org/abs/2609.17412",
+      "role": "explanation",
+      "primaryIsland": "endothermic",
+      "islands": [
+        "endothermic",
+        "exothermic",
+        "multimessenger"
+      ],
+      "tags": [
+        "axion-like mediator",
+        "excited-state relic fraction",
+        "dark-sector conversion",
+        "annual modulation"
+      ],
+      "summary": "The authors track both states of axion-portal inelastic dark matter through the early Universe and show that the interaction's Lorentz structure selects whether today's recoil spectrum is dominated by endothermic up-scattering or exothermic down-scattering.",
+      "takeaway": "Links the event's scattering direction to the cosmological excited-state abundance, with annual modulation and collider searches as discriminants.",
+      "x": 45.29,
+      "y": 49.87,
+      "cites": [
+        "2609.01475",
+        "2609.01504",
+        "2609.01583",
+        "2609.01590",
+        "2609.01592",
+        "2609.01892",
+        "2609.02505",
+        "2609.02608",
+        "2609.02775",
+        "2609.02807",
+        "2609.02823",
+        "2609.02868",
+        "2609.04144",
+        "2609.04163",
+        "2609.04175",
+        "2609.04181",
+        "2609.04185",
+        "2609.04186",
+        "2609.04673",
+        "2609.05204",
+        "2609.05291",
+        "2609.06153",
+        "2609.06171",
+        "2609.06571",
+        "2609.06640",
+        "2609.06750",
+        "2609.06756",
+        "2609.06760",
+        "2609.06825",
+        "2609.06890",
+        "2609.06909",
+        "2609.07138",
+        "2609.07225",
+        "2609.07451",
+        "2609.07742",
+        "2609.07800",
+        "2609.07807",
+        "2609.07811",
+        "2609.08712",
+        "2609.08893",
+        "2609.08993",
+        "2609.09015",
+        "2609.09037",
+        "2609.09107",
+        "2609.09136",
+        "2609.09138",
+        "2609.09230",
+        "2609.09385",
+        "2609.10453",
+        "2609.10491",
+        "2609.10504",
+        "2609.10636",
+        "2609.10827",
+        "2609.11241",
+        "2609.11600",
+        "2609.11833",
+        "2609.12045",
+        "2609.13038"
       ]
     }
   ]
