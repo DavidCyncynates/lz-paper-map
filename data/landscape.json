@@ -1,8 +1,8 @@
 {
   "schemaVersion": 2,
   "title": "LZ high-recoil literature landscape",
-  "updatedAt": "2026-09-16",
-  "lastSuccessfulScan": "2026-09-16T09:26:39Z",
+  "updatedAt": "2026-09-17",
+  "lastSuccessfulScan": "2026-09-17T12:01:33Z",
   "event": {
     "energyKev": 248,
     "statisticalUncertaintyKev": 23,
@@ -12,7 +12,7 @@
   },
   "citationData": {
     "source": "arXiv reference lists",
-    "checkedAt": "2026-09-16",
+    "checkedAt": "2026-09-17",
     "scope": "Citations between papers in this map",
     "note": "References to the official LZ preprint are normalized to arXiv:2609.02823."
   },
@@ -3662,6 +3662,126 @@
         "2609.11833",
         "2609.12045",
         "2609.13038"
+      ]
+    },
+    {
+      "id": "2609.17935",
+      "layoutRank": 76,
+      "arxivId": "2609.17935",
+      "title": "Galactic Endothermic Production and Exothermic Detection of Excited Dark Matter: Implications for LUX-ZEPLIN",
+      "authors": [
+        "Chuan-Yang Xing"
+      ],
+      "published": "2026-09-15",
+      "updated": "2026-09-15",
+      "url": "https://arxiv.org/abs/2609.17935",
+      "role": "explanation",
+      "primaryIsland": "exothermic",
+      "islands": [
+        "exothermic",
+        "endothermic"
+      ],
+      "tags": [
+        "excited dark matter",
+        "Galactic self-scattering",
+        "exothermic detection",
+        "light scalar mediator"
+      ],
+      "summary": "The author proposes a two-step Galactic mechanism in which fast ground-state particles endothermically self-scatter into an excited population, whose exothermic scattering on xenon can produce an order-one event count near the candidate energy for TeV-scale dark matter and sub-MeV splittings.",
+      "takeaway": "Builds the excited component inside the present-day halo, then releases its splitting through exothermic xenon recoils.",
+      "x": 83.56,
+      "y": 62.02,
+      "cites": [
+        "2609.01475",
+        "2609.01504",
+        "2609.01583",
+        "2609.01590",
+        "2609.01892",
+        "2609.02505",
+        "2609.02608",
+        "2609.02807",
+        "2609.02823",
+        "2609.02868",
+        "2609.04144",
+        "2609.04163",
+        "2609.04181",
+        "2609.04673",
+        "2609.05204",
+        "2609.06153",
+        "2609.06171",
+        "2609.06571",
+        "2609.06750",
+        "2609.06825",
+        "2609.06909",
+        "2609.07138",
+        "2609.07225",
+        "2609.07451",
+        "2609.07800",
+        "2609.07811",
+        "2609.08893",
+        "2609.09015",
+        "2609.09136",
+        "2609.09138",
+        "2609.09385",
+        "2609.10491",
+        "2609.10636",
+        "2609.10827",
+        "2609.13038",
+        "2609.13130",
+        "2609.15027",
+        "2609.15118",
+        "2609.15714",
+        "2609.15742",
+        "2609.15985"
+      ]
+    },
+    {
+      "id": "2609.18564",
+      "layoutRank": 77,
+      "arxivId": "2609.18564",
+      "title": "Asymmetric Inelastic Dark Matter and the LUX-ZEPLIN event",
+      "authors": [
+        "Natsumi Nagata",
+        "Tsutomu T. Yanagida"
+      ],
+      "published": "2026-09-16",
+      "updated": "2026-09-16",
+      "url": "https://arxiv.org/abs/2609.18564",
+      "role": "explanation",
+      "primaryIsland": "higgsino",
+      "islands": [
+        "higgsino",
+        "endothermic",
+        "constraints"
+      ],
+      "tags": [
+        "asymmetric dark matter",
+        "singlet-doublet fermion",
+        "off-diagonal Z coupling",
+        "solar-capture constraint"
+      ],
+      "summary": "The authors propose an asymmetric singlet-doublet fermion whose depleted antiparticle population suppresses solar annihilation and the associated IceCube constraint, while a mixing-controlled off-diagonal Z coupling permits an observable endothermic xenon recoil with a few-hundred-keV splitting.",
+      "takeaway": "Uses a primordial asymmetry to preserve the electroweak inelastic signal while removing the solar-annihilation tension of a symmetric Higgsino.",
+      "x": 87.62,
+      "y": 28.78,
+      "cites": [
+        "2609.01475",
+        "2609.01504",
+        "2609.01583",
+        "2609.01590",
+        "2609.02775",
+        "2609.02823",
+        "2609.04163",
+        "2609.04175",
+        "2609.06760",
+        "2609.07800",
+        "2609.07807",
+        "2609.07811",
+        "2609.08712",
+        "2609.09138",
+        "2609.09385",
+        "2609.11241",
+        "2609.11833"
       ]
     }
   ]
