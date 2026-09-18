@@ -1,8 +1,8 @@
 {
   "schemaVersion": 2,
   "title": "LZ high-recoil literature landscape",
-  "updatedAt": "2026-09-17",
-  "lastSuccessfulScan": "2026-09-17T12:01:33Z",
+  "updatedAt": "2026-09-18",
+  "lastSuccessfulScan": "2026-09-18T09:21:59Z",
   "event": {
     "energyKev": 248,
     "statisticalUncertaintyKev": 23,
@@ -12,7 +12,7 @@
   },
   "citationData": {
     "source": "arXiv reference lists",
-    "checkedAt": "2026-09-17",
+    "checkedAt": "2026-09-18",
     "scope": "Citations between papers in this map",
     "note": "References to the official LZ preprint are normalized to arXiv:2609.02823."
   },
@@ -223,7 +223,7 @@
       "title": "TeV Higgsino Dark Matter from LZ Nuclear Recoil to Fermi-LAT Gamma Rays",
       "authors": ["Lei Wu", "Yang Zhang", "Bin Zhu"],
       "published": "2026-09-01",
-      "updated": "2026-09-01",
+      "updated": "2026-09-17",
       "role": "explanation",
       "primaryIsland": "higgsino",
       "islands": ["higgsino", "endothermic", "multimessenger"],
@@ -233,7 +233,7 @@
       "url": "https://arxiv.org/abs/2609.01590",
       "x": 79,
       "y": 18,
-      "cites": ["2609.02823"]
+      "cites": ["2609.02775", "2609.02823", "2609.04144", "2609.04175"]
     },
     {
       "id": "2609.01592",
@@ -3488,7 +3488,7 @@
         "Yakun Wang"
       ],
       "published": "2026-09-16",
-      "updated": "2026-09-16",
+      "updated": "2026-09-17",
       "url": "https://arxiv.org/abs/2609.16529",
       "role": "diagnostic",
       "primaryIsland": "constraints",
@@ -3782,6 +3782,52 @@
         "2609.09385",
         "2609.11241",
         "2609.11833"
+      ]
+    },
+    {
+      "id": "2609.19174",
+      "layoutRank": 78,
+      "arxivId": "2609.19174",
+      "title": "Testing Higgs-Coupled Minimal Dark Matter with Solar Neutrinos after the LZ High-Recoil Event",
+      "authors": [
+        "Mattia Di Mauro"
+      ],
+      "published": "2026-09-14",
+      "updated": "2026-09-14",
+      "url": "https://arxiv.org/abs/2609.19174",
+      "role": "constraint",
+      "primaryIsland": "constraints",
+      "islands": [
+        "constraints",
+        "higgsino",
+        "endothermic"
+      ],
+      "tags": [
+        "solar capture",
+        "IceCube",
+        "Higgs-coupled minimal dark matter",
+        "finite-temperature nuclei"
+      ],
+      "summary": "The author recomputes solar capture and post-capture evolution for Higgs-coupled minimal-dark-matter benchmarks, finding that the two light thermal cases lie well above IceCube sensitivity and extending the comparison to heavier electroweak representations.",
+      "takeaway": "A detailed solar-neutrino stress test leaves the light Higgs-coupled benchmarks in strong tension while making the heaviest cases response dependent.",
+      "x": 56.22,
+      "y": 70.74,
+      "cites": [
+        "2609.01475",
+        "2609.01504",
+        "2609.01583",
+        "2609.01590",
+        "2609.02608",
+        "2609.02775",
+        "2609.02823",
+        "2609.02868",
+        "2609.04144",
+        "2609.04163",
+        "2609.04175",
+        "2609.04181",
+        "2609.06760",
+        "2609.07807",
+        "2609.09138"
       ]
     }
   ]
