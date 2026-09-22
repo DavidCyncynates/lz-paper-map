@@ -1,8 +1,8 @@
 {
   "schemaVersion": 2,
   "title": "LZ high-recoil literature landscape",
-  "updatedAt": "2026-09-21",
-  "lastSuccessfulScan": "2026-09-21T09:23:23Z",
+  "updatedAt": "2026-09-22",
+  "lastSuccessfulScan": "2026-09-22T09:54:38Z",
   "event": {
     "energyKev": 248,
     "statisticalUncertaintyKev": 23,
@@ -12,7 +12,7 @@
   },
   "citationData": {
     "source": "arXiv reference lists",
-    "checkedAt": "2026-09-21",
+    "checkedAt": "2026-09-22",
     "scope": "Citations between papers in this map",
     "note": "References to the official LZ preprint are normalized to arXiv:2609.02823."
   },
@@ -2406,7 +2406,7 @@
       "title": "Nonthermal Solar Stalling of an Inelastic Scalar Signal in Xenon",
       "authors": ["XinXin Qi", "Hao Sun"],
       "published": "2026-09-09",
-      "updated": "2026-09-09",
+      "updated": "2026-09-20",
       "url": "https://arxiv.org/abs/2609.10636",
       "role": "explanation",
       "primaryIsland": "constraints",
@@ -2424,10 +2424,18 @@
       "cites": [
         "2609.01583",
         "2609.01590",
+        "2609.01592",
         "2609.02775",
         "2609.02823",
         "2609.04175",
-        "2609.05291"
+        "2609.04186",
+        "2609.05291",
+        "2609.06760",
+        "2609.06825",
+        "2609.07807",
+        "2609.07811",
+        "2609.08993",
+        "2609.10491"
       ]
     },
     {
@@ -4279,6 +4287,211 @@
         "2609.17196",
         "2609.17412",
         "2609.18564"
+      ]
+    },
+    {
+      "id": "2609.22739",
+      "layoutRank": 83,
+      "arxivId": "2609.22739",
+      "title": "Kaluza--Klein Dark-Photon Mediation of Inelastic Dark Matter at LUX-ZEPLIN",
+      "authors": ["Waqas Ahmed", "George K. Leontaris"],
+      "published": "2026-09-19",
+      "updated": "2026-09-19",
+      "url": "https://arxiv.org/abs/2609.22739",
+      "role": "explanation",
+      "primaryIsland": "endothermic",
+      "islands": ["endothermic", "constraints"],
+      "tags": [
+        "Kaluza--Klein dark photon",
+        "pseudo-Dirac dark matter",
+        "endothermic scattering",
+        "solar capture"
+      ],
+      "summary": "The authors embed singlet pseudo-Dirac dark matter and its few-hundred-keV splitting in a five-dimensional dark-photon model, where the Kaluza--Klein tower enhances the event-rate benchmark while separating terrestrial and solar kinematics.",
+      "takeaway": "An extra-dimensional mediator tower boosts an endothermic xenon signal and predicts a distinct solar-capture regime.",
+      "x": 45.32,
+      "y": 61.81,
+      "cites": [
+        "2609.01475", "2609.01504", "2609.01583", "2609.01592", "2609.02608",
+        "2609.02775", "2609.02823", "2609.02868", "2609.04163", "2609.04181",
+        "2609.04186", "2609.06153", "2609.06571", "2609.06890", "2609.07138",
+        "2609.07225", "2609.07800", "2609.07807", "2609.08893", "2609.08993",
+        "2609.09015", "2609.09385", "2609.11600", "2609.11833", "2609.15634",
+        "2609.15985", "2609.18564"
+      ]
+    },
+    {
+      "id": "2609.23096",
+      "layoutRank": 84,
+      "arxivId": "2609.23096",
+      "title": "The 248 keV LZ Recoil: A Possible Hint of Non-SM-Like Quark Yukawa Couplings with a Scalar-Portal Dark Matter",
+      "authors": ["Bibhabasu De"],
+      "published": "2026-09-19",
+      "updated": "2026-09-19",
+      "url": "https://arxiv.org/abs/2609.23096",
+      "role": "explanation",
+      "primaryIsland": "endothermic",
+      "islands": ["endothermic", "multimessenger", "constraints"],
+      "tags": [
+        "scalar portal",
+        "vector-like fermions",
+        "quark Yukawa couplings",
+        "collider test"
+      ],
+      "summary": "The author fits the recoil with two nearly degenerate vector-like fermions coupled through a scalar portal, requiring flavor-specific departures in quark Yukawa couplings that can arise from a dimension-six operator below roughly 10 TeV.",
+      "takeaway": "Links an inelastic recoil fit to nonstandard quark Yukawa couplings testable at colliders.",
+      "x": 42.56,
+      "y": 56.98,
+      "cites": [
+        "2609.01475", "2609.01583", "2609.01590", "2609.01592", "2609.01892",
+        "2609.02608", "2609.02823", "2609.02868", "2609.02994", "2609.04163",
+        "2609.04175", "2609.04181", "2609.04185", "2609.04186", "2609.04673",
+        "2609.05204", "2609.05291", "2609.06153", "2609.06171", "2609.06571",
+        "2609.06750", "2609.06756", "2609.06760", "2609.06825", "2609.06890",
+        "2609.06909", "2609.07138", "2609.07225", "2609.07451", "2609.07742",
+        "2609.07807", "2609.07811", "2609.08712", "2609.08893", "2609.08993",
+        "2609.09015", "2609.09037", "2609.09136", "2609.09138", "2609.09230",
+        "2609.09385", "2609.10453", "2609.10491", "2609.10504", "2609.10636",
+        "2609.10827", "2609.11241", "2609.11600", "2609.11833", "2609.12045",
+        "2609.13038", "2609.13130", "2609.15027", "2609.15118", "2609.15321",
+        "2609.15600", "2609.15714", "2609.15742", "2609.17935", "2609.18564",
+        "2609.19174"
+      ]
+    },
+    {
+      "id": "2609.23477",
+      "layoutRank": 85,
+      "arxivId": "2609.23477",
+      "title": "The LUX-ZEPLIN Event as Hyperfine Spectroscopy of Composite Dark Matter",
+      "authors": ["Jie Sheng", "Kairui Zhang"],
+      "published": "2026-09-20",
+      "updated": "2026-09-20",
+      "url": "https://arxiv.org/abs/2609.23477",
+      "role": "explanation",
+      "primaryIsland": "endothermic",
+      "islands": ["endothermic", "constraints", "multimessenger"],
+      "tags": [
+        "composite dark matter",
+        "hyperfine excitation",
+        "dark QCD",
+        "axion depletion"
+      ],
+      "summary": "The authors interpret the recoil as endothermic hyperfine excitation between pseudoscalar and vector states of one composite dark hadron, with a PQ-augmented dark-QCD sector suppressing elastic scattering and depleting excited states.",
+      "takeaway": "Treats the candidate as dark-hadron hyperfine spectroscopy with a few-hundred-keV internal splitting.",
+      "x": 48.43,
+      "y": 45.08,
+      "cites": [
+        "2609.01475", "2609.01504", "2609.01583", "2609.01590", "2609.01592",
+        "2609.01892", "2609.02505", "2609.02608", "2609.02775", "2609.02807",
+        "2609.02823", "2609.02868", "2609.04144", "2609.04163", "2609.04175",
+        "2609.04181", "2609.04673", "2609.05204", "2609.06153", "2609.06171",
+        "2609.06571", "2609.06750", "2609.06825", "2609.06909", "2609.07138",
+        "2609.07225", "2609.07451", "2609.07800", "2609.07807", "2609.07811",
+        "2609.08893", "2609.09015", "2609.09107", "2609.09136", "2609.09138",
+        "2609.09385", "2609.10491", "2609.10636", "2609.10827", "2609.13038",
+        "2609.13130", "2609.15027", "2609.15118", "2609.15714", "2609.15742",
+        "2609.15985", "2609.16529", "2609.17935", "2609.18564"
+      ]
+    },
+    {
+      "id": "2609.23691",
+      "layoutRank": 86,
+      "arxivId": "2609.23691",
+      "title": "LZ-Motivated Pseudo-Dirac Higgsinos in the Supersymmetric 331 Model from the Supersymmetric \\texorpdfstring{$SU(6)$}{SU(6)} GUT Model",
+      "authors": [
+        "Imtiaz Khan", "Ali Muhammad", "G. Mustafa", "Farruh Atamurotov",
+        "Ahmadjon Abdujabbarov", "Mussawir Khan"
+      ],
+      "published": "2026-09-20",
+      "updated": "2026-09-20",
+      "url": "https://arxiv.org/abs/2609.23691",
+      "role": "explanation",
+      "primaryIsland": "higgsino",
+      "islands": ["higgsino", "endothermic", "constraints"],
+      "tags": [
+        "pseudo-Dirac Higgsino",
+        "supersymmetric 331 model",
+        "SU(6) unification",
+        "gaugino sum rule"
+      ],
+      "summary": "The authors derive a sub-MeV pseudo-Dirac Higgsino splitting within a supersymmetric 331 model descending from an SU(6) grand-unified construction, replacing the usual bino--wino cancellation with correlated gaugino invariants.",
+      "takeaway": "Builds the recoil-scale Higgsino splitting into a unified gauge and gaugino sector.",
+      "x": 59.23,
+      "y": 28.79,
+      "cites": [
+        "2609.01475", "2609.01504", "2609.01583", "2609.01590", "2609.01592",
+        "2609.01892", "2609.02608", "2609.02775", "2609.02823", "2609.02868",
+        "2609.04144", "2609.04163", "2609.04175", "2609.04181", "2609.04186",
+        "2609.06153", "2609.06750", "2609.06760", "2609.07807", "2609.07811",
+        "2609.08712", "2609.08993", "2609.09107", "2609.09230"
+      ]
+    },
+    {
+      "id": "2609.24982",
+      "layoutRank": 87,
+      "arxivId": "2609.24982",
+      "title": "A closer look at the LZ 248 keV event through the lens of cosmic-ray boosted dark matter",
+      "authors": ["Bhavesh Chauhan", "Soham Sahasrabuddhe", "Manibrata Sen"],
+      "published": "2026-09-21",
+      "updated": "2026-09-21",
+      "url": "https://arxiv.org/abs/2609.24982",
+      "role": "explanation",
+      "primaryIsland": "elastic",
+      "islands": ["elastic", "multimessenger", "constraints"],
+      "tags": [
+        "cosmic-ray boosted DM",
+        "spin-dependent scattering",
+        "pseudoscalar mediator",
+        "relativistic kinematics"
+      ],
+      "summary": "The authors calculate cosmic-ray production, propagation, and xenon scattering with relativistic kinematics, finding that a spin-dependent pseudoscalar interaction can populate the event window without filling the lower-energy sideband.",
+      "takeaway": "A roughly 300 MeV pseudoscalar mediator makes a cosmic-ray-boosted explanation viable beyond the contact limit.",
+      "x": 41.29,
+      "y": 70.98,
+      "cites": [
+        "2609.01475", "2609.01504", "2609.01583", "2609.01590", "2609.01892",
+        "2609.02505", "2609.02608", "2609.02775", "2609.02807", "2609.02823",
+        "2609.02868", "2609.04144", "2609.04163", "2609.04175", "2609.04181",
+        "2609.04185", "2609.04186", "2609.04673", "2609.05204", "2609.05291",
+        "2609.06153", "2609.06171", "2609.06571", "2609.06640", "2609.06750",
+        "2609.06756", "2609.06760", "2609.06825", "2609.06890", "2609.06909",
+        "2609.07138", "2609.07225", "2609.07451", "2609.07742", "2609.07800",
+        "2609.07807", "2609.07811", "2609.08712", "2609.08893", "2609.08993",
+        "2609.09015", "2609.09037", "2609.09107", "2609.09136", "2609.09138",
+        "2609.09230", "2609.09385", "2609.10453", "2609.10491", "2609.10504",
+        "2609.10636", "2609.10827", "2609.11600", "2609.11833", "2609.12045",
+        "2609.13038", "2609.14799", "2609.15027", "2609.15118", "2609.15321",
+        "2609.15600", "2609.15634", "2609.15714", "2609.15742", "2609.15933",
+        "2609.15985", "2609.16529", "2609.17196", "2609.17412", "2609.17935",
+        "2609.18564", "2609.19174"
+      ]
+    },
+    {
+      "id": "2609.24988",
+      "layoutRank": 88,
+      "arxivId": "2609.24988",
+      "title": "Interpreting the LZ 248 keV Event using Dark QCD",
+      "authors": ["Francesco Sannino", "Jessica Turner"],
+      "published": "2026-09-21",
+      "updated": "2026-09-21",
+      "url": "https://arxiv.org/abs/2609.24988",
+      "role": "explanation",
+      "primaryIsland": "endothermic",
+      "islands": ["endothermic", "constraints"],
+      "tags": [
+        "dark QCD",
+        "composite dark baryon",
+        "Majorana splitting",
+        "leptophobic vector"
+      ],
+      "summary": "The authors split the lightest baryon of a confining dark-QCD theory into two Majorana states through a dimension-ten operator and fit endothermic scattering through a leptophobic baryon-number vector mediator.",
+      "takeaway": "A composite dark-baryon benchmark matches the recoil while remaining compatible with solar-neutrino and dijet bounds.",
+      "x": 80.66,
+      "y": 56.41,
+      "cites": [
+        "2609.01475", "2609.01504", "2609.01592", "2609.02608", "2609.02775",
+        "2609.02823", "2609.02868", "2609.04175", "2609.04181", "2609.07225",
+        "2609.09107", "2609.11833"
       ]
     }
   ]
