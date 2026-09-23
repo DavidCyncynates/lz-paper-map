@@ -1,8 +1,8 @@
 {
   "schemaVersion": 2,
   "title": "LZ high-recoil literature landscape",
-  "updatedAt": "2026-09-22",
-  "lastSuccessfulScan": "2026-09-22T09:54:38Z",
+  "updatedAt": "2026-09-23",
+  "lastSuccessfulScan": "2026-09-23T09:26:40Z",
   "event": {
     "energyKev": 248,
     "statisticalUncertaintyKev": 23,
@@ -12,7 +12,7 @@
   },
   "citationData": {
     "source": "arXiv reference lists",
-    "checkedAt": "2026-09-22",
+    "checkedAt": "2026-09-23",
     "scope": "Citations between papers in this map",
     "note": "References to the official LZ preprint are normalized to arXiv:2609.02823."
   },
@@ -1653,7 +1653,7 @@
         "Fei Li"
       ],
       "published": "2026-09-07",
-      "updated": "2026-09-07",
+      "updated": "2026-09-22",
       "url": "https://arxiv.org/abs/2609.07811",
       "role": "explanation",
       "primaryIsland": "higgsino",
@@ -1677,6 +1677,7 @@
         "2609.01583",
         "2609.01590",
         "2609.01592",
+        "2609.01892",
         "2609.02608",
         "2609.02775",
         "2609.02807",
@@ -1691,7 +1692,24 @@
         "2609.04186",
         "2609.04673",
         "2609.05204",
-        "2609.05291"
+        "2609.05291",
+        "2609.06571",
+        "2609.06640",
+        "2609.06756",
+        "2609.06760",
+        "2609.06825",
+        "2609.07225",
+        "2609.07451",
+        "2609.07800",
+        "2609.07807",
+        "2609.08712",
+        "2609.08893",
+        "2609.09015",
+        "2609.09138",
+        "2609.09230",
+        "2609.09385",
+        "2609.11241",
+        "2609.11833"
       ]
     },
     {
@@ -2290,7 +2308,7 @@
         "Yue Zhao"
       ],
       "published": "2026-09-09",
-      "updated": "2026-09-09",
+      "updated": "2026-09-22",
       "url": "https://arxiv.org/abs/2609.10491",
       "role": "explanation",
       "primaryIsland": "exothermic",
@@ -2313,21 +2331,28 @@
         "2609.01475",
         "2609.01504",
         "2609.01583",
+        "2609.01590",
+        "2609.01592",
         "2609.02505",
         "2609.02608",
         "2609.02775",
+        "2609.02807",
         "2609.02823",
         "2609.02868",
         "2609.04144",
         "2609.04163",
         "2609.04175",
         "2609.04181",
+        "2609.04185",
+        "2609.04186",
         "2609.04673",
         "2609.05204",
+        "2609.05291",
         "2609.06153",
         "2609.06171",
         "2609.06571",
         "2609.06640",
+        "2609.06750",
         "2609.06756",
         "2609.06760",
         "2609.06825",
@@ -2347,7 +2372,9 @@
         "2609.09037",
         "2609.09107",
         "2609.09136",
-        "2609.09138"
+        "2609.09138",
+        "2609.09385",
+        "2609.11833"
       ]
     },
     {
@@ -2876,7 +2903,7 @@
         "Partha Kumar Paul"
       ],
       "published": "2026-09-14",
-      "updated": "2026-09-14",
+      "updated": "2026-09-22",
       "url": "https://arxiv.org/abs/2609.15027",
       "role": "explanation",
       "primaryIsland": "endothermic",
@@ -2904,13 +2931,17 @@
         "2609.02807",
         "2609.02823",
         "2609.02868",
+        "2609.04163",
         "2609.04175",
         "2609.04181",
         "2609.04185",
         "2609.04186",
+        "2609.04673",
         "2609.06153",
+        "2609.06750",
         "2609.06825",
         "2609.06890",
+        "2609.06909",
         "2609.07138",
         "2609.07225",
         "2609.07451",
@@ -2921,13 +2952,16 @@
         "2609.08712",
         "2609.08993",
         "2609.09015",
+        "2609.09037",
         "2609.09138",
         "2609.09230",
         "2609.09385",
         "2609.10453",
         "2609.10504",
         "2609.10827",
-        "2609.11600"
+        "2609.11600",
+        "2609.11833",
+        "2609.21823"
       ]
     },
     {
@@ -4327,7 +4361,7 @@
       "title": "The 248 keV LZ Recoil: A Possible Hint of Non-SM-Like Quark Yukawa Couplings with a Scalar-Portal Dark Matter",
       "authors": ["Bibhabasu De"],
       "published": "2026-09-19",
-      "updated": "2026-09-19",
+      "updated": "2026-09-22",
       "url": "https://arxiv.org/abs/2609.23096",
       "role": "explanation",
       "primaryIsland": "endothermic",
@@ -4353,9 +4387,9 @@
         "2609.09015", "2609.09037", "2609.09136", "2609.09138", "2609.09230",
         "2609.09385", "2609.10453", "2609.10491", "2609.10504", "2609.10636",
         "2609.10827", "2609.11241", "2609.11600", "2609.11833", "2609.12045",
-        "2609.13038", "2609.13130", "2609.15027", "2609.15118", "2609.15321",
-        "2609.15600", "2609.15714", "2609.15742", "2609.17935", "2609.18564",
-        "2609.19174"
+        "2609.13038", "2609.13130", "2609.14799", "2609.15027", "2609.15118",
+        "2609.15321", "2609.15600", "2609.15714", "2609.15742", "2609.15985",
+        "2609.17935", "2609.18564", "2609.19174", "2609.21823"
       ]
     },
     {
@@ -4492,6 +4526,128 @@
         "2609.01475", "2609.01504", "2609.01592", "2609.02608", "2609.02775",
         "2609.02823", "2609.02868", "2609.04175", "2609.04181", "2609.07225",
         "2609.09107", "2609.11833"
+      ]
+    },
+    {
+      "id": "2609.25114",
+      "layoutRank": 89,
+      "arxivId": "2609.25114",
+      "title": "Elastic toroidal vector dark matter through a dark photon in the LUX-ZEPLIN high recoil window",
+      "authors": ["Imtiaz Khan", "Salvatore Capozziello", "G. Mustafa", "Farkhod Botirov", "Ahmadjon Abdujabbarov", "Farruh Atamurotov", "Phongpichit Channuie"],
+      "published": "2026-09-20",
+      "updated": "2026-09-20",
+      "url": "https://arxiv.org/abs/2609.25114",
+      "role": "explanation",
+      "primaryIsland": "elastic",
+      "islands": ["elastic", "constraints"],
+      "tags": [
+        "toroidal vector dark matter",
+        "dark photon",
+        "elastic tensor operators",
+        "xenon isotope response"
+      ],
+      "summary": "The authors derive the elastic xenon response of complex vector dark matter with a toroidal electromagnetic moment, correlate its coherent and transverse-spin tensor operators, and construct a dark-photon benchmark whose spectrum retains substantial weight at 248 keV.",
+      "takeaway": "An elastic tensor interaction produces a broad high-recoil spectrum with linked isotope, argon, timing, mediator, and upper-sideband tests.",
+      "x": 49.51,
+      "y": 93,
+      "cites": [
+        "2609.01475", "2609.01504", "2609.01583", "2609.01590", "2609.01592",
+        "2609.01892", "2609.02608", "2609.02775", "2609.02807", "2609.02823",
+        "2609.02868", "2609.04144", "2609.04163", "2609.04175", "2609.04181",
+        "2609.04185", "2609.04186", "2609.04673", "2609.05204", "2609.06153",
+        "2609.06890", "2609.07138", "2609.07225", "2609.07800", "2609.07807",
+        "2609.07811", "2609.08712", "2609.08893", "2609.08993", "2609.09015",
+        "2609.09230", "2609.10453", "2609.10504", "2609.11600"
+      ]
+    },
+    {
+      "id": "2609.25723",
+      "layoutRank": 90,
+      "arxivId": "2609.25723",
+      "title": "Dark Diffraction at LZ from a Screened Neutral Composite Baryon",
+      "authors": ["Hyunjoo Jung", "Seong Chan Park"],
+      "published": "2026-09-22",
+      "updated": "2026-09-22",
+      "url": "https://arxiv.org/abs/2609.25723",
+      "role": "explanation",
+      "primaryIsland": "elastic",
+      "islands": ["elastic", "constraints"],
+      "tags": [
+        "composite dark matter",
+        "screened charge form factor",
+        "dark diffraction",
+        "high-energy sideband"
+      ],
+      "summary": "The authors model a neutral SU(4) dark baryon whose constituent charge form factor suppresses low momentum transfer but recovers near the candidate recoil, producing an elastic band-pass spectrum with target-dependent diffraction nodes.",
+      "takeaway": "A screened composite baryon explains the hard recoil elastically and predicts both events above the current window and movable diffraction zeros across targets.",
+      "x": 54.95,
+      "y": 93.45,
+      "cites": [
+        "2609.01475", "2609.01583", "2609.01592", "2609.01892", "2609.02608",
+        "2609.02823", "2609.02868", "2609.04175", "2609.04185", "2609.06153",
+        "2609.06571", "2609.06760", "2609.06890", "2609.07742", "2609.07811",
+        "2609.08712", "2609.08893", "2609.09136", "2609.09230", "2609.09385",
+        "2609.10504", "2609.11600"
+      ]
+    },
+    {
+      "id": "2609.26570",
+      "layoutRank": 91,
+      "arxivId": "2609.26570",
+      "title": "A Simple Dark Matter Model to Explain the LZ Event and Galactic Center Excess",
+      "authors": ["Caleb Gemmell", "Dan Hooper", "Gordan Krnjaic"],
+      "published": "2026-09-22",
+      "updated": "2026-09-22",
+      "url": "https://arxiv.org/abs/2609.26570",
+      "role": "explanation",
+      "primaryIsland": "exothermic",
+      "islands": ["exothermic", "multimessenger", "constraints"],
+      "tags": [
+        "pseudo-Dirac dark matter",
+        "exothermic scattering",
+        "baryon-number mediator",
+        "Galactic Center excess"
+      ],
+      "summary": "The authors propose 20--100 GeV pseudo-Dirac dark matter coupled through a hadrophilic baryon-number vector, with a cosmologically long-lived excited state whose roughly MeV downscattering can fit the xenon recoil in the same thermal parameter space as the Galactic Center gamma-ray excess.",
+      "takeaway": "One exothermic pseudo-Dirac benchmark connects the LZ candidate to the Galactic Center excess while requiring an excited state that survives to the present halo.",
+      "x": 76.64,
+      "y": 66.33,
+      "cites": [
+        "2609.01475", "2609.01504", "2609.01583", "2609.01590", "2609.01892",
+        "2609.02505", "2609.02608", "2609.02823", "2609.02868", "2609.04181",
+        "2609.04186", "2609.05204", "2609.07800", "2609.09138", "2609.09385",
+        "2609.11833", "2609.13130", "2609.15027", "2609.17196", "2609.17412"
+      ]
+    },
+    {
+      "id": "2609.26698",
+      "layoutRank": 92,
+      "arxivId": "2609.26698",
+      "title": "Model-Independent Sideband Constraints on Inelastic Dark Matter at the LZ High-Recoil Candidate",
+      "authors": ["David Delepine", "Shaaban Khalil"],
+      "published": "2026-09-22",
+      "updated": "2026-09-22",
+      "url": "https://arxiv.org/abs/2609.26698",
+      "role": "constraint",
+      "primaryIsland": "constraints",
+      "islands": ["constraints", "endothermic"],
+      "tags": [
+        "sideband constraints",
+        "endothermic dark matter",
+        "Helm form factor",
+        "high-energy recoil search"
+      ],
+      "summary": "The authors derive model-independent low- and high-sideband event ratios for coherent endothermic scattering, finding a mass-dependent optimal splitting and growing tension at multi-TeV masses once both sidebands and the xenon Helm suppression are included.",
+      "takeaway": "A search above 271 keV can decisively test large-splitting inelastic explanations that evade the lower-energy sideband.",
+      "x": 79.9,
+      "y": 84.73,
+      "cites": [
+        "2609.01475", "2609.01504", "2609.01583", "2609.02608", "2609.02823",
+        "2609.04163", "2609.04175", "2609.04186", "2609.05204", "2609.06153",
+        "2609.06571", "2609.06760", "2609.06825", "2609.06890", "2609.07138",
+        "2609.07225", "2609.07451", "2609.07800", "2609.07811", "2609.08712",
+        "2609.09138", "2609.10491", "2609.10827", "2609.11600", "2609.14799",
+        "2609.15600", "2609.15742", "2609.17412"
       ]
     }
   ]
