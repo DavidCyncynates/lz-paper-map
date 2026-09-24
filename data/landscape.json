@@ -1,8 +1,8 @@
 {
   "schemaVersion": 2,
   "title": "LZ high-recoil literature landscape",
-  "updatedAt": "2026-09-23",
-  "lastSuccessfulScan": "2026-09-23T09:26:40Z",
+  "updatedAt": "2026-09-24",
+  "lastSuccessfulScan": "2026-09-24T09:18:39Z",
   "event": {
     "energyKev": 248,
     "statisticalUncertaintyKev": 23,
@@ -12,7 +12,7 @@
   },
   "citationData": {
     "source": "arXiv reference lists",
-    "checkedAt": "2026-09-23",
+    "checkedAt": "2026-09-24",
     "scope": "Citations between papers in this map",
     "note": "References to the official LZ preprint are normalized to arXiv:2609.02823."
   },
@@ -4648,6 +4648,155 @@
         "2609.07225", "2609.07451", "2609.07800", "2609.07811", "2609.08712",
         "2609.09138", "2609.10491", "2609.10827", "2609.11600", "2609.14799",
         "2609.15600", "2609.15742", "2609.17412"
+      ]
+    },
+    {
+      "id": "2609.26870",
+      "layoutRank": 93,
+      "arxivId": "2609.26870",
+      "title": "The LHC is not enough: the LZ High-Recoil Event at FCC-hh and a Muon Collider",
+      "authors": ["Benedikt Maier", "Michael Spannowsky"],
+      "published": "2026-09-22",
+      "updated": "2026-09-22",
+      "url": "https://arxiv.org/abs/2609.26870",
+      "role": "diagnostic",
+      "primaryIsland": "constraints",
+      "islands": ["constraints", "higgsino", "multimessenger"],
+      "tags": [
+        "future colliders",
+        "electroweak multiplets",
+        "disappearing tracks",
+        "muon collider"
+      ],
+      "summary": "The authors translate the event-motivated thermal Higgsino into a broader set of nearly pure electroweak multiplets and compare disappearing-track, Drell--Yan, and recoil-channel reach at FCC-hh, CLIC, and high-energy muon colliders.",
+      "takeaway": "The HL-LHC cannot cover the benchmark class, while future hadron and muon colliders can test most of the specified thermal multiplets.",
+      "x": 59.42,
+      "y": 91.15,
+      "cites": [
+        "2609.01475", "2609.01504", "2609.01583", "2609.01590", "2609.01592",
+        "2609.01892", "2609.02505", "2609.02608", "2609.02775", "2609.02807",
+        "2609.02823", "2609.02868", "2609.02994", "2609.04144", "2609.04163",
+        "2609.04175", "2609.04181", "2609.04186", "2609.04673", "2609.05204",
+        "2609.05291", "2609.06153", "2609.06171", "2609.06571", "2609.06750",
+        "2609.06760", "2609.06890", "2609.06909", "2609.07138", "2609.07225",
+        "2609.07451", "2609.07742", "2609.07800", "2609.07807", "2609.07811",
+        "2609.08712", "2609.08893", "2609.08993", "2609.09015", "2609.09037",
+        "2609.09107", "2609.09136", "2609.09138", "2609.09385", "2609.10453",
+        "2609.10491", "2609.10504", "2609.10636", "2609.10827", "2609.11241",
+        "2609.11833", "2609.12045", "2609.14799", "2609.15321", "2609.15413",
+        "2609.15634", "2609.15742", "2609.15782", "2609.15985", "2609.16529",
+        "2609.17196", "2609.17412", "2609.17935", "2609.18564", "2609.19174"
+      ]
+    },
+    {
+      "id": "2609.28129",
+      "layoutRank": 94,
+      "arxivId": "2609.28129",
+      "title": "Environment-dependent mass splitting to suppress solar capture in the inelastic-doublet interpretation of the LZ event",
+      "authors": ["Sudhakantha Girmohanta", "Tae Hyun Jung"],
+      "published": "2026-09-23",
+      "updated": "2026-09-23",
+      "url": "https://arxiv.org/abs/2609.28129",
+      "role": "explanation",
+      "primaryIsland": "higgsino",
+      "islands": ["higgsino", "constraints", "endothermic"],
+      "tags": [
+        "environment-dependent splitting",
+        "electroweak doublet",
+        "solar capture",
+        "ultralight scalar"
+      ],
+      "summary": "The authors couple an ultralight scalar quadratically to electrons so that density effects raise an inelastic electroweak-doublet splitting inside the Sun while preserving the roughly 350 keV laboratory value used to fit the LZ recoil.",
+      "takeaway": "A matter-dependent splitting can separate terrestrial and solar kinematics, although the viable construction requires severe scalar-potential fine-tuning.",
+      "x": 76.38,
+      "y": 43.99,
+      "cites": [
+        "2609.01475", "2609.01504", "2609.01583", "2609.01590", "2609.01892",
+        "2609.02505", "2609.02608", "2609.02775", "2609.02807", "2609.02823",
+        "2609.02868", "2609.04144", "2609.04163", "2609.04175", "2609.04181",
+        "2609.04185", "2609.04186", "2609.04673", "2609.05204", "2609.05291",
+        "2609.06171", "2609.06571", "2609.06640", "2609.06750", "2609.06756",
+        "2609.06760", "2609.06825", "2609.06890", "2609.06909", "2609.07138",
+        "2609.07225", "2609.07451", "2609.07742", "2609.07800", "2609.07807",
+        "2609.07811", "2609.08712", "2609.08893", "2609.08993", "2609.09015",
+        "2609.09037", "2609.09107", "2609.09136", "2609.09138", "2609.09230",
+        "2609.09385", "2609.10453", "2609.10491", "2609.10504", "2609.10636",
+        "2609.10827", "2609.11600", "2609.11833", "2609.13038", "2609.14799",
+        "2609.15027", "2609.15118", "2609.15321", "2609.15413", "2609.15600",
+        "2609.15634", "2609.15714", "2609.15742", "2609.15782", "2609.15933",
+        "2609.15985", "2609.16529", "2609.17196", "2609.17412", "2609.17935",
+        "2609.18564", "2609.19174", "2609.21011", "2609.21444", "2609.21823",
+        "2609.22063", "2609.22739", "2609.23096", "2609.23477", "2609.23691",
+        "2609.24982", "2609.24988", "2609.25114", "2609.25723", "2609.26570",
+        "2609.26698"
+      ]
+    },
+    {
+      "id": "2609.28218",
+      "layoutRank": 95,
+      "arxivId": "2609.28218",
+      "title": "Solar capture and annihilation of fermionic and scalar dark matter motivated by the LUX-ZEPLIN high-recoil candidate",
+      "authors": ["Antonio Capolupo", "Gabriele Pisacane", "Raoul Serao"],
+      "published": "2026-09-23",
+      "updated": "2026-09-23",
+      "url": "https://arxiv.org/abs/2609.28218",
+      "role": "diagnostic",
+      "primaryIsland": "constraints",
+      "islands": ["constraints", "higgsino", "multimessenger"],
+      "tags": [
+        "solar capture",
+        "fermion-scalar comparison",
+        "IceCube templates",
+        "neutrino spectra"
+      ],
+      "summary": "The authors match fermionic and scalar electroweak doublets to the same xenon recoil response, then follow capture, cooling, annihilation, and neutrino production in the Sun to isolate differences hidden from direct detection.",
+      "takeaway": "The matched models have similar total solar annihilation rates but distinct neutrino spectra; detector-level modeling is still needed for exclusion or discrimination.",
+      "x": 48.74,
+      "y": 65.95,
+      "cites": [
+        "2609.01592", "2609.02775", "2609.02807", "2609.02823", "2609.04175",
+        "2609.04181", "2609.06571", "2609.06760", "2609.07451", "2609.07811",
+        "2609.09385", "2609.10636", "2609.11833", "2609.15321"
+      ]
+    },
+    {
+      "id": "2609.28415",
+      "layoutRank": 96,
+      "arxivId": "2609.28415",
+      "title": "Inelastic dark matter mediated by natural dark photon",
+      "authors": ["Jie Tang", "Pei-Hong Gu"],
+      "published": "2026-09-23",
+      "updated": "2026-09-23",
+      "url": "https://arxiv.org/abs/2609.28415",
+      "role": "explanation",
+      "primaryIsland": "exothermic",
+      "islands": ["exothermic", "constraints"],
+      "tags": [
+        "dark photon",
+        "exothermic dark matter",
+        "loop-induced kinetic mixing",
+        "IceCube constraint"
+      ],
+      "summary": "The authors generate sub-MeV splitting in a complex scalar dark-matter pair together with naturally small dark-photon kinetic mixing, then use exothermic nuclear downscattering to fit the event with a reduced interaction strength.",
+      "takeaway": "Kinematic enhancement from exothermic scattering lets the dark-photon benchmark target the LZ event while weakening its solar-neutrino tension.",
+      "x": 87.74,
+      "y": 79.53,
+      "cites": [
+        "2609.02608", "2609.02775", "2609.02807", "2609.02823", "2609.04144",
+        "2609.04163", "2609.04175", "2609.04181", "2609.04185", "2609.04186",
+        "2609.04673", "2609.05204", "2609.05291", "2609.06153", "2609.06171",
+        "2609.06571", "2609.06640", "2609.06750", "2609.06756", "2609.06760",
+        "2609.06825", "2609.06890", "2609.06909", "2609.07138", "2609.07225",
+        "2609.07451", "2609.07742", "2609.07800", "2609.07807", "2609.07811",
+        "2609.08893", "2609.09015", "2609.09107", "2609.09136", "2609.09138",
+        "2609.09230", "2609.09385", "2609.10453", "2609.10491", "2609.10504",
+        "2609.10636", "2609.10827", "2609.11241", "2609.11600", "2609.11833",
+        "2609.14799", "2609.15027", "2609.15118", "2609.15321", "2609.15413",
+        "2609.15600", "2609.15634", "2609.15714", "2609.15742", "2609.15782",
+        "2609.15933", "2609.15985", "2609.16529", "2609.17196", "2609.17412",
+        "2609.18564", "2609.19174", "2609.21011", "2609.21444", "2609.21823",
+        "2609.22739", "2609.23096", "2609.23477", "2609.24982", "2609.24988",
+        "2609.25114", "2609.25723", "2609.26570", "2609.26698"
       ]
     }
   ]
