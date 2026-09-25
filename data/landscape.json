@@ -1,8 +1,8 @@
 {
   "schemaVersion": 2,
   "title": "LZ high-recoil literature landscape",
-  "updatedAt": "2026-09-24",
-  "lastSuccessfulScan": "2026-09-24T09:18:39Z",
+  "updatedAt": "2026-09-25",
+  "lastSuccessfulScan": "2026-09-25T09:48:38Z",
   "event": {
     "energyKev": 248,
     "statisticalUncertaintyKev": 23,
@@ -12,7 +12,7 @@
   },
   "citationData": {
     "source": "arXiv reference lists",
-    "checkedAt": "2026-09-24",
+    "checkedAt": "2026-09-25",
     "scope": "Citations between papers in this map",
     "note": "References to the official LZ preprint are normalized to arXiv:2609.02823."
   },
@@ -1429,7 +1429,7 @@
         "Pankaj Borah"
       ],
       "published": "2026-09-07",
-      "updated": "2026-09-07",
+      "updated": "2026-09-24",
       "url": "https://arxiv.org/abs/2609.07451",
       "role": "explanation",
       "primaryIsland": "higgsino",
@@ -1453,6 +1453,7 @@
         "2609.01583",
         "2609.01590",
         "2609.01592",
+        "2609.01892",
         "2609.02505",
         "2609.02608",
         "2609.02775",
@@ -1468,7 +1469,12 @@
         "2609.04186",
         "2609.04673",
         "2609.05204",
-        "2609.05291"
+        "2609.05291",
+        "2609.06571",
+        "2609.06760",
+        "2609.07807",
+        "2609.09138",
+        "2609.11833"
       ]
     },
     {
@@ -4009,7 +4015,7 @@
         "Digesh Raut"
       ],
       "published": "2026-09-17",
-      "updated": "2026-09-17",
+      "updated": "2026-09-24",
       "url": "https://arxiv.org/abs/2609.21011",
       "role": "explanation",
       "primaryIsland": "endothermic",
@@ -4045,6 +4051,7 @@
         "2609.04175",
         "2609.04181",
         "2609.04185",
+        "2609.04186",
         "2609.04673",
         "2609.05204",
         "2609.05291",
@@ -4083,7 +4090,12 @@
         "2609.11833",
         "2609.12045",
         "2609.13038",
-        "2609.17412"
+        "2609.14799",
+        "2609.15027",
+        "2609.15714",
+        "2609.15985",
+        "2609.17412",
+        "2609.21823"
       ]
     },
     {
@@ -4797,6 +4809,151 @@
         "2609.18564", "2609.19174", "2609.21011", "2609.21444", "2609.21823",
         "2609.22739", "2609.23096", "2609.23477", "2609.24982", "2609.24988",
         "2609.25114", "2609.25723", "2609.26570", "2609.26698"
+      ]
+    },
+    {
+      "id": "2609.28616",
+      "layoutRank": 97,
+      "arxivId": "2609.28616",
+      "title": "Sneaky Sneutrino Scattering at LZ",
+      "authors": ["Kevin Langhoff", "Huangyu Xiao"],
+      "published": "2026-09-23",
+      "updated": "2026-09-23",
+      "url": "https://arxiv.org/abs/2609.28616",
+      "role": "explanation",
+      "primaryIsland": "endothermic",
+      "islands": ["endothermic", "constraints"],
+      "tags": [
+        "sneutrino dark matter",
+        "R-symmetric supersymmetry",
+        "inelastic scattering",
+        "solar capture"
+      ],
+      "summary": "An R-symmetric supersymmetric model mixes sneutrinos with singlets to obtain a technically natural splitting and suppress their Z coupling; a coannihilation benchmark near 360 GeV fits the recoil while easing solar-capture limits.",
+      "takeaway": "Singlet mixing lets inelastic sneutrino dark matter target the event without pushing the rest of the supersymmetric spectrum to extreme scales.",
+      "x": 85.9,
+      "y": 54.3,
+      "cites": [
+        "2609.01475", "2609.01504", "2609.01592", "2609.02505", "2609.02775",
+        "2609.02823", "2609.02868", "2609.02994", "2609.04144", "2609.04163",
+        "2609.04175", "2609.04181", "2609.04185", "2609.04186", "2609.04673",
+        "2609.05204", "2609.05291", "2609.06153", "2609.06171", "2609.06571",
+        "2609.06640", "2609.06750", "2609.06756", "2609.06825", "2609.06890",
+        "2609.06909", "2609.07138", "2609.07225", "2609.07451", "2609.07742",
+        "2609.07800", "2609.07811", "2609.08712", "2609.08893", "2609.08993",
+        "2609.09015", "2609.09037", "2609.09107", "2609.09136", "2609.09138",
+        "2609.09230", "2609.09385", "2609.10453", "2609.10491", "2609.10504",
+        "2609.15742", "2609.21444"
+      ]
+    },
+    {
+      "id": "2609.28740",
+      "layoutRank": 98,
+      "arxivId": "2609.28740",
+      "title": "Heavy Higgsino Dark Matter at the Scale of the Vanishing Higgs Quartic",
+      "authors": ["James Unwin"],
+      "published": "2026-09-23",
+      "updated": "2026-09-23",
+      "url": "https://arxiv.org/abs/2609.28740",
+      "role": "explanation",
+      "primaryIsland": "higgsino",
+      "islands": ["higgsino", "constraints"],
+      "tags": [
+        "PeV Higgsino",
+        "high-scale supersymmetry",
+        "Boltzmann-suppressed freeze-in",
+        "vanishing Higgs quartic"
+      ],
+      "summary": "The event-specific limit of this high-scale supersymmetry construction uses 100–1000 TeV Higgsinos, roughly 10^7 GeV Majorana gauginos, and a 330–480 keV splitting, with low-reheat freeze-in supplying the relic abundance.",
+      "takeaway": "A much heavier nonthermal Higgsino can evade the sideband and solar problems of the thermal benchmark while retaining a link to the scale where the Higgs quartic vanishes.",
+      "x": 87.66,
+      "y": 44.01,
+      "cites": [
+        "2609.01475", "2609.01504", "2609.01583", "2609.01590", "2609.02775",
+        "2609.02823", "2609.04144", "2609.04175", "2609.04186", "2609.06890",
+        "2609.09136", "2609.09385", "2609.11600"
+      ]
+    },
+    {
+      "id": "2609.28819",
+      "layoutRank": 99,
+      "arxivId": "2609.28819",
+      "title": "Heavy Inert Doublet Reconciles LZ and IceCube",
+      "authors": ["Hitoshi Murayama", "Bea Noether"],
+      "published": "2026-09-23",
+      "updated": "2026-09-23",
+      "url": "https://arxiv.org/abs/2609.28819",
+      "role": "explanation",
+      "primaryIsland": "higgsino",
+      "islands": ["higgsino", "constraints"],
+      "tags": [
+        "inert doublet",
+        "electroweak dark matter",
+        "inelastic scattering",
+        "IceCube"
+      ],
+      "summary": "A scalar inert doublet with a roughly 370 keV splitting fits the recoil for 11.3–20.3 TeV dark matter; its lower number density weakens solar capture enough to satisfy IceCube while a large Higgs coupling sets the thermal abundance.",
+      "takeaway": "Replacing the thermal Higgsino with a heavier scalar electroweak doublet preserves the Z-mediated recoil shape but reduces the solar-neutrino tension.",
+      "x": 94.37,
+      "y": 38.27,
+      "cites": [
+        "2609.01504", "2609.01583", "2609.01590", "2609.02505", "2609.02775",
+        "2609.02823", "2609.04175", "2609.06571", "2609.06760", "2609.07451",
+        "2609.07807", "2609.09385", "2609.11833", "2609.15321", "2609.15742",
+        "2609.17196"
+      ]
+    },
+    {
+      "id": "2609.29462",
+      "layoutRank": 100,
+      "arxivId": "2609.29462",
+      "title": "Limits on Primordial Black Hole Evaporation from LUX-ZEPLIN",
+      "authors": ["Jitumani Kalita"],
+      "published": "2026-09-24",
+      "updated": "2026-09-24",
+      "url": "https://arxiv.org/abs/2609.29462",
+      "role": "constraint",
+      "primaryIsland": "constraints",
+      "islands": ["constraints", "elastic", "endothermic"],
+      "tags": [
+        "primordial black holes",
+        "Hawking-boosted dark matter",
+        "low-energy sideband",
+        "NREFT"
+      ],
+      "summary": "The paper tests Hawking-boosted dark matter with momentum-dependent elastic operators and endothermic transitions, finding that the thermal spectrum inevitably overproduces lower-energy LZ recoils before reaching the 248 keV event.",
+      "takeaway": "The event cannot be explained by contemporary PBH evaporation in the tested class, but the same low-energy null result yields stringent limits on light primordial-black-hole abundance.",
+      "x": 66.16,
+      "y": 91.91,
+      "cites": ["2609.02823"]
+    },
+    {
+      "id": "2609.30255",
+      "layoutRank": 101,
+      "arxivId": "2609.30255",
+      "title": "A Narrow Neutrino Window for the LZ Event",
+      "authors": ["Vedran Brdar", "Dibya S. Chattopadhyay"],
+      "published": "2026-09-24",
+      "updated": "2026-09-24",
+      "url": "https://arxiv.org/abs/2609.30255",
+      "role": "explanation",
+      "primaryIsland": "neutrino",
+      "islands": ["neutrino", "constraints"],
+      "tags": [
+        "atmospheric neutrinos",
+        "parametric resonance",
+        "heavy neutral leptons",
+        "baryonic vector mediator"
+      ],
+      "summary": "Atmospheric neutrinos resonantly convert into a narrow N1 spectrum, which then up-scatters to N2 through a baryonic vector mediator; the tuned energy window permits roughly 250 keV xenon recoils while staying below thresholds in lighter neutrino-detector targets.",
+      "takeaway": "A two-step neutrino mechanism uses target-dependent thresholds to produce one xenon event without the large neutral-current signal expected in oxygen or carbon detectors.",
+      "x": 28.65,
+      "y": 77.69,
+      "cites": [
+        "2609.01475", "2609.01504", "2609.01583", "2609.01590", "2609.01892",
+        "2609.02608", "2609.02775", "2609.02823", "2609.02868", "2609.04144",
+        "2609.04175", "2609.04181", "2609.04185", "2609.04673", "2609.06890",
+        "2609.07807", "2609.09385", "2609.13038", "2609.15782"
       ]
     }
   ]
