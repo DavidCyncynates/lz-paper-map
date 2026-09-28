@@ -1,0 +1,813 @@
+{
+  "schemaVersion": 1,
+  "runId": "2026-09-28-091553Z",
+  "runAt": "2026-09-28T09:15:53Z",
+  "scanWindow": {
+    "previousSuccessfulScan": "2026-09-25T09:48:38Z",
+    "overlapStart": "2026-09-18T09:48:38Z",
+    "coverageComplete": true,
+    "catalogTimestampAdvanced": true,
+    "categoryAppearances": 1091,
+    "uniqueVersionlessIds": 848,
+    "note": "The five live recent show-all pages completely supplied Sep 22-25 and Sep 28, including cross-lists; the fully audited Sep 18 and Sep 21 groups were carried from the Sep 25 audit. Sep 19-20 and Sep 26-27 had no announcement groups. The Sep 28 group contained 99 category appearances / 77 unique versionless IDs, all of whose abstracts were opened."
+  },
+  "listingCoverage": [
+    {
+      "category": "hep-ph",
+      "url": "https://arxiv.org/list/hep-ph/recent?show=2000",
+      "currentMonthUrl": "https://arxiv.org/list/hep-ph/current?show=2000",
+      "overlapEntries": 303,
+      "dateGroups": {
+        "2026-09-28": 23,
+        "2026-09-25": 42,
+        "2026-09-24": 48,
+        "2026-09-23": 44,
+        "2026-09-22": 69,
+        "2026-09-21": 33,
+        "2026-09-18": 44
+      }
+    },
+    {
+      "category": "hep-ex",
+      "url": "https://arxiv.org/list/hep-ex/recent?show=2000",
+      "currentMonthUrl": "https://arxiv.org/list/hep-ex/current?show=2000",
+      "overlapEntries": 122,
+      "dateGroups": {
+        "2026-09-28": 7,
+        "2026-09-25": 12,
+        "2026-09-24": 13,
+        "2026-09-23": 26,
+        "2026-09-22": 25,
+        "2026-09-21": 13,
+        "2026-09-18": 26
+      }
+    },
+    {
+      "category": "hep-th",
+      "url": "https://arxiv.org/list/hep-th/recent?show=2000",
+      "currentMonthUrl": "https://arxiv.org/list/hep-th/current?show=2000",
+      "overlapEntries": 304,
+      "dateGroups": {
+        "2026-09-28": 31,
+        "2026-09-25": 45,
+        "2026-09-24": 33,
+        "2026-09-23": 49,
+        "2026-09-22": 68,
+        "2026-09-21": 32,
+        "2026-09-18": 46
+      }
+    },
+    {
+      "category": "astro-ph.HE",
+      "url": "https://arxiv.org/list/astro-ph.HE/recent?show=2000",
+      "currentMonthUrl": "https://arxiv.org/list/astro-ph.HE/current?show=2000",
+      "overlapEntries": 211,
+      "dateGroups": {
+        "2026-09-28": 24,
+        "2026-09-25": 30,
+        "2026-09-24": 40,
+        "2026-09-23": 28,
+        "2026-09-22": 42,
+        "2026-09-21": 27,
+        "2026-09-18": 20
+      }
+    },
+    {
+      "category": "astro-ph.CO",
+      "url": "https://arxiv.org/list/astro-ph.CO/recent?show=2000",
+      "currentMonthUrl": "https://arxiv.org/list/astro-ph.CO/current?show=2000",
+      "overlapEntries": 151,
+      "dateGroups": {
+        "2026-09-28": 14,
+        "2026-09-25": 20,
+        "2026-09-24": 21,
+        "2026-09-23": 26,
+        "2026-09-22": 27,
+        "2026-09-21": 20,
+        "2026-09-18": 23
+      }
+    }
+  ],
+  "abstractPagesOpened": {
+    "urlPattern": "https://arxiv.org/abs/{id}",
+    "newListingAbstracts": 77,
+    "newListingIds": [
+      "2609.29434",
+      "2609.30312",
+      "2609.30318",
+      "2609.30332",
+      "2609.30333",
+      "2609.30335",
+      "2609.30357",
+      "2609.30362",
+      "2609.30363",
+      "2609.30366",
+      "2609.30367",
+      "2609.30369",
+      "2609.30370",
+      "2609.30371",
+      "2609.30375",
+      "2609.30376",
+      "2609.30378",
+      "2609.30390",
+      "2609.30392",
+      "2609.30403",
+      "2609.30408",
+      "2609.30418",
+      "2609.30426",
+      "2609.30440",
+      "2609.30441",
+      "2609.30443",
+      "2609.30453",
+      "2609.30463",
+      "2609.30473",
+      "2609.30488",
+      "2609.30494",
+      "2609.30545",
+      "2609.30551",
+      "2609.30616",
+      "2609.30635",
+      "2609.30641",
+      "2609.30754",
+      "2609.30775",
+      "2609.30793",
+      "2609.30835",
+      "2609.30850",
+      "2609.30917",
+      "2609.30937",
+      "2609.30964",
+      "2609.30994",
+      "2609.31020",
+      "2609.31055",
+      "2609.31081",
+      "2609.31106",
+      "2609.31113",
+      "2609.31120",
+      "2609.31144",
+      "2609.31237",
+      "2609.31273",
+      "2609.31296",
+      "2609.31309",
+      "2609.31321",
+      "2609.31324",
+      "2609.31340",
+      "2609.31348",
+      "2609.31365",
+      "2609.31366",
+      "2609.31406",
+      "2609.31425",
+      "2609.31426",
+      "2609.31438",
+      "2609.31457",
+      "2609.31465",
+      "2609.31495",
+      "2609.31499",
+      "2609.31504",
+      "2609.31510",
+      "2609.31541",
+      "2609.31543",
+      "2609.31576",
+      "2609.31611",
+      "2609.31618"
+    ],
+    "mappedSubmissionHistories": 102,
+    "authorSearchUnmappedHitsScreened": 36,
+    "authorSearchUnmappedIds": [
+      "2602.09962",
+      "2603.28941",
+      "2609.18148",
+      "2609.19794",
+      "2609.21527",
+      "2609.21558",
+      "2609.21692",
+      "2609.21745",
+      "2609.22068",
+      "2609.22071",
+      "2609.22613",
+      "2609.23008",
+      "2609.23791",
+      "2609.24074",
+      "2609.24205",
+      "2609.24325",
+      "2609.24863",
+      "2609.24899",
+      "2609.25136",
+      "2609.25158",
+      "2609.25363",
+      "2609.25560",
+      "2609.25753",
+      "2609.25875",
+      "2609.25904",
+      "2609.26924",
+      "2609.27149",
+      "2609.27383",
+      "2609.27467",
+      "2609.27616",
+      "2609.28288",
+      "2609.30221",
+      "2609.30247",
+      "2609.30737",
+      "2609.30988",
+      "2609.31590"
+    ],
+    "additionalSearchAndReferenceCandidates": [
+      "2609.09830",
+      "2609.30193"
+    ]
+  },
+  "searchCoverage": [
+    {
+      "query": "LZ",
+      "url": "https://arxiv.org/search/?query=LZ&searchtype=all&abstracts=show&order=-announced_date_first&size=50",
+      "hitCount": 618,
+      "returnedCount": 50,
+      "overlapComplete": true
+    },
+    {
+      "query": "LUX-ZEPLIN",
+      "url": "https://arxiv.org/search/?query=LUX-ZEPLIN&searchtype=all&abstracts=show&order=-announced_date_first&size=50",
+      "hitCount": 211,
+      "returnedCount": 50,
+      "overlapComplete": true
+    },
+    {
+      "query": "\"LZ event\"",
+      "url": "https://arxiv.org/search/?query=%22LZ%20event%22&searchtype=all&abstracts=show&order=-announced_date_first&size=50",
+      "hitCount": 33,
+      "returnedCount": 33,
+      "overlapComplete": true
+    },
+    {
+      "query": "\"one event observed at LZ\"",
+      "url": "https://arxiv.org/search/?query=%22one%20event%20observed%20at%20LZ%22&searchtype=all&abstracts=show&order=-announced_date_first&size=50",
+      "hitCount": 1,
+      "returnedCount": 1,
+      "overlapComplete": true
+    },
+    {
+      "query": "\"xenon recoil\"",
+      "url": "https://arxiv.org/search/?query=%22xenon%20recoil%22&searchtype=all&abstracts=show&order=-announced_date_first&size=50",
+      "hitCount": 7,
+      "returnedCount": 7,
+      "overlapComplete": true
+    },
+    {
+      "query": "\"xenon recoils\"",
+      "url": "https://arxiv.org/search/?query=%22xenon%20recoils%22&searchtype=all&abstracts=show&order=-announced_date_first&size=50",
+      "hitCount": 7,
+      "returnedCount": 7,
+      "overlapComplete": true
+    },
+    {
+      "query": "\"high-energy nuclear recoil\"",
+      "url": "https://arxiv.org/search/?query=%22high-energy%20nuclear%20recoil%22&searchtype=all&abstracts=show&order=-announced_date_first&size=50",
+      "hitCount": 24,
+      "returnedCount": 24,
+      "overlapComplete": true
+    },
+    {
+      "query": "\"248 keV\"",
+      "url": "https://arxiv.org/search/?query=%22248%20keV%22&searchtype=all&abstracts=show&order=-announced_date_first&size=50",
+      "hitCount": 42,
+      "returnedCount": 42,
+      "overlapComplete": true
+    },
+    {
+      "query": "LZ230616",
+      "url": "https://arxiv.org/search/?query=LZ230616&searchtype=all&abstracts=show&order=-announced_date_first&size=50",
+      "hitCount": 7,
+      "returnedCount": 7,
+      "overlapComplete": true
+    },
+    {
+      "query": "official title",
+      "url": "https://arxiv.org/search/?query=Search%20for%20dark%20matter%20particle%20interactions%20in%20an%20extended%20nuclear%20recoil%20energy%20window%20with%20the%20LUX-ZEPLIN%20%28LZ%29%20experiment&searchtype=all&abstracts=show&order=-announced_date_first&size=50",
+      "hitCount": 1,
+      "returnedCount": 1,
+      "overlapComplete": true
+    },
+    {
+      "query": "2609.02823",
+      "url": "https://arxiv.org/abs/2609.02823",
+      "hitCount": 1,
+      "returnedCount": 1,
+      "overlapComplete": true
+    }
+  ],
+  "citationDiscovery": {
+    "url": "https://inspirehep.net/literature?sort=mostrecent&size=100&page=1&q=refersto%3Arecid%3A3199115",
+    "page2Url": "https://inspirehep.net/literature?sort=mostrecent&size=100&page=2&q=refersto%3Arecid%3A3199115",
+    "hitCount": 103,
+    "ids": [
+      "2609.29462",
+      "2609.30255",
+      "2609.28129",
+      "2609.28218",
+      "2609.28415",
+      "2609.28616",
+      "2609.28819",
+      "2609.28740",
+      "2609.25723",
+      "2609.26545",
+      "2609.26570",
+      "2609.26698",
+      "2609.26876",
+      "2609.26870",
+      "2609.24988",
+      "2609.24982",
+      "2609.23477",
+      "2609.23691",
+      "2609.25114",
+      "2609.22739",
+      "2609.23096",
+      "2609.21444",
+      "2609.21823",
+      "2609.22063",
+      "2609.21011",
+      "2609.18564",
+      "2609.18790",
+      "2609.17196",
+      "2609.17412",
+      "2609.16529",
+      "2609.17935",
+      "2609.15027",
+      "2609.15118",
+      "2609.15413",
+      "2609.15321",
+      "2609.15600",
+      "2609.15742",
+      "2609.15634",
+      "2609.15782",
+      "2609.15985",
+      "2609.15933",
+      "2609.15714",
+      "2609.19174",
+      "2609.14799",
+      "2609.13038",
+      "2609.11600",
+      "2609.11833",
+      "2609.12045",
+      "2609.09830",
+      "2609.10491",
+      "2609.10504",
+      "2609.10453",
+      "2609.10636",
+      "2609.10827",
+      "2609.08893",
+      "2609.08712",
+      "2609.08771",
+      "2609.08808",
+      "2609.08993",
+      "2609.09015",
+      "2609.09037",
+      "2609.09138",
+      "2609.09107",
+      "2609.09136",
+      "2609.09385",
+      "2609.06909",
+      "2609.06890",
+      "2609.07138",
+      "2609.07225",
+      "2609.07451",
+      "2609.07800",
+      "2609.07811",
+      "2609.07742",
+      "2609.07807",
+      "2609.09230",
+      "2609.06571",
+      "2609.06640",
+      "2609.06760",
+      "2609.06756",
+      "2609.06750",
+      "2609.06825",
+      "2609.06171",
+      "2609.06153",
+      "2609.04673",
+      "2609.05291",
+      "2609.05204",
+      "2609.04144",
+      "2609.04186",
+      "2609.04163",
+      "2609.04181",
+      "2609.04185",
+      "2609.04175",
+      "2609.02608",
+      "2609.02775",
+      "2609.02807",
+      "2609.02505",
+      "2609.02868",
+      "2609.02994",
+      "2609.01475",
+      "2609.01583",
+      "2609.01590",
+      "2609.01504",
+      "2609.01892"
+    ],
+    "newRelevantIds": [],
+    "note": "Both rendered public INSPIRE pages were enumerated only for candidate discovery. The one result newly indexed since Sep 25 was already-mapped 2609.02994; no new candidate ID appeared."
+  },
+  "authorSearches": {
+    "selection": "All unique authors of mapped response papers whose layoutRank modulo 7 equals 1; no new paper authors were added today.",
+    "globalUrlTemplate": "https://arxiv.org/search/?query={author}&searchtype=author&abstracts=show&order=-announced_date_first&size=50",
+    "searchCount": 39,
+    "searches": [
+      {
+        "author": "Aditya Ghosh",
+        "hitCount": 105,
+        "url": "https://arxiv.org/search/?query=Aditya%20Ghosh&searchtype=author&abstracts=show&order=-announced_date_first&size=50"
+      },
+      {
+        "author": "Alessandro Strumia",
+        "hitCount": 213,
+        "url": "https://arxiv.org/search/?query=Alessandro%20Strumia&searchtype=author&abstracts=show&order=-announced_date_first&size=50"
+      },
+      {
+        "author": "Bea Noether",
+        "hitCount": 11,
+        "url": "https://arxiv.org/search/?query=Bea%20Noether&searchtype=author&abstracts=show&order=-announced_date_first&size=50"
+      },
+      {
+        "author": "Benjamin R. Safdi",
+        "hitCount": 95,
+        "url": "https://arxiv.org/search/?query=Benjamin%20R.%20Safdi&searchtype=author&abstracts=show&order=-announced_date_first&size=50"
+      },
+      {
+        "author": "Biswajit Karmakar",
+        "hitCount": 42,
+        "url": "https://arxiv.org/search/?query=Biswajit%20Karmakar&searchtype=author&abstracts=show&order=-announced_date_first&size=50"
+      },
+      {
+        "author": "Chris Kelso",
+        "hitCount": 33,
+        "url": "https://arxiv.org/search/?query=Chris%20Kelso&searchtype=author&abstracts=show&order=-announced_date_first&size=50"
+      },
+      {
+        "author": "Dan Hooper",
+        "hitCount": 286,
+        "url": "https://arxiv.org/search/?query=Dan%20Hooper&searchtype=author&abstracts=show&order=-announced_date_first&size=50"
+      },
+      {
+        "author": "David Delepine",
+        "hitCount": 73,
+        "url": "https://arxiv.org/search/?query=David%20Delepine&searchtype=author&abstracts=show&order=-announced_date_first&size=50"
+      },
+      {
+        "author": "Debasish Borah",
+        "hitCount": 182,
+        "url": "https://arxiv.org/search/?query=Debasish%20Borah&searchtype=author&abstracts=show&order=-announced_date_first&size=50"
+      },
+      {
+        "author": "Hitoshi Murayama",
+        "hitCount": 299,
+        "url": "https://arxiv.org/search/?query=Hitoshi%20Murayama&searchtype=author&abstracts=show&order=-announced_date_first&size=50"
+      },
+      {
+        "author": "Hong-Jian He",
+        "hitCount": 126,
+        "url": "https://arxiv.org/search/?query=Hong-Jian%20He&searchtype=author&abstracts=show&order=-announced_date_first&size=50"
+      },
+      {
+        "author": "Howard Baer",
+        "hitCount": 249,
+        "url": "https://arxiv.org/search/?query=Howard%20Baer&searchtype=author&abstracts=show&order=-announced_date_first&size=50"
+      },
+      {
+        "author": "Ilumi Chavez",
+        "hitCount": 1,
+        "url": "https://arxiv.org/search/?query=Ilumi%20Chavez&searchtype=author&abstracts=show&order=-announced_date_first&size=50"
+      },
+      {
+        "author": "J. Julio",
+        "hitCount": 2823,
+        "url": "https://arxiv.org/search/?query=J.%20Julio&searchtype=author&abstracts=show&order=-announced_date_first&size=50"
+      },
+      {
+        "author": "Jie Sheng",
+        "hitCount": 316,
+        "url": "https://arxiv.org/search/?query=Jie%20Sheng&searchtype=author&abstracts=show&order=-announced_date_first&size=50"
+      },
+      {
+        "author": "Jin Min Yang",
+        "hitCount": 1255,
+        "url": "https://arxiv.org/search/?query=Jin%20Min%20Yang&searchtype=author&abstracts=show&order=-announced_date_first&size=50"
+      },
+      {
+        "author": "Kairui Zhang",
+        "hitCount": 62,
+        "url": "https://arxiv.org/search/?query=Kairui%20Zhang&searchtype=author&abstracts=show&order=-announced_date_first&size=50"
+      },
+      {
+        "author": "Liangliang Su",
+        "hitCount": 38,
+        "url": "https://arxiv.org/search/?query=Liangliang%20Su&searchtype=author&abstracts=show&order=-announced_date_first&size=50"
+      },
+      {
+        "author": "Mattia Di Mauro",
+        "hitCount": 101,
+        "url": "https://arxiv.org/search/?query=Mattia%20Di%20Mauro&searchtype=author&abstracts=show&order=-announced_date_first&size=50"
+      },
+      {
+        "author": "Mohammad Aghaie",
+        "hitCount": 8,
+        "url": "https://arxiv.org/search/?query=Mohammad%20Aghaie&searchtype=author&abstracts=show&order=-announced_date_first&size=50"
+      },
+      {
+        "author": "Narendra Sahu",
+        "hitCount": 110,
+        "url": "https://arxiv.org/search/?query=Narendra%20Sahu&searchtype=author&abstracts=show&order=-announced_date_first&size=50"
+      },
+      {
+        "author": "Nicholas L. Rodd",
+        "hitCount": 78,
+        "url": "https://arxiv.org/search/?query=Nicholas%20L.%20Rodd&searchtype=author&abstracts=show&order=-announced_date_first&size=50"
+      },
+      {
+        "author": "P. Uttayarat",
+        "hitCount": 38,
+        "url": "https://arxiv.org/search/?query=P.%20Uttayarat&searchtype=author&abstracts=show&order=-announced_date_first&size=50"
+      },
+      {
+        "author": "Partha Kumar Paul",
+        "hitCount": 27,
+        "url": "https://arxiv.org/search/?query=Partha%20Kumar%20Paul&searchtype=author&abstracts=show&order=-announced_date_first&size=50"
+      },
+      {
+        "author": "Pritam Das",
+        "hitCount": 57,
+        "url": "https://arxiv.org/search/?query=Pritam%20Das&searchtype=author&abstracts=show&order=-announced_date_first&size=50"
+      },
+      {
+        "author": "R. Primulando",
+        "hitCount": 27,
+        "url": "https://arxiv.org/search/?query=R.%20Primulando&searchtype=author&abstracts=show&order=-announced_date_first&size=50"
+      },
+      {
+        "author": "Satyabrata Mahapatra",
+        "hitCount": 39,
+        "url": "https://arxiv.org/search/?query=Satyabrata%20Mahapatra&searchtype=author&abstracts=show&order=-announced_date_first&size=50"
+      },
+      {
+        "author": "Shaaban Khalil",
+        "hitCount": 173,
+        "url": "https://arxiv.org/search/?query=Shaaban%20Khalil&searchtype=author&abstracts=show&order=-announced_date_first&size=50"
+      },
+      {
+        "author": "Shashwat Sharma",
+        "hitCount": 29,
+        "url": "https://arxiv.org/search/?query=Shashwat%20Sharma&searchtype=author&abstracts=show&order=-announced_date_first&size=50"
+      },
+      {
+        "author": "Sujit Kumar Sahoo",
+        "hitCount": 26,
+        "url": "https://arxiv.org/search/?query=Sujit%20Kumar%20Sahoo&searchtype=author&abstracts=show&order=-announced_date_first&size=50"
+      },
+      {
+        "author": "Thong T.Q. Nguyen",
+        "hitCount": 19,
+        "url": "https://arxiv.org/search/?searchtype=author&query=Nguyen%2C+T+T+Q&abstracts=show&order=-announced_date_first&size=50"
+      },
+      {
+        "author": "Tim Linden",
+        "hitCount": 215,
+        "url": "https://arxiv.org/search/?query=Tim%20Linden&searchtype=author&abstracts=show&order=-announced_date_first&size=50"
+      },
+      {
+        "author": "Tracy R. Slatyer",
+        "hitCount": 104,
+        "url": "https://arxiv.org/search/?query=Tracy%20R.%20Slatyer&searchtype=author&abstracts=show&order=-announced_date_first&size=50"
+      },
+      {
+        "author": "Vernon Barger",
+        "hitCount": 215,
+        "url": "https://arxiv.org/search/?query=Vernon%20Barger&searchtype=author&abstracts=show&order=-announced_date_first&size=50"
+      },
+      {
+        "author": "Weishuang Linda Xu",
+        "hitCount": 21,
+        "url": "https://arxiv.org/search/?query=Weishuang%20Linda%20Xu&searchtype=author&abstracts=show&order=-announced_date_first&size=50"
+      },
+      {
+        "author": "Wen-Na Yang",
+        "hitCount": 7,
+        "url": "https://arxiv.org/search/?query=Wen-Na%20Yang&searchtype=author&abstracts=show&order=-announced_date_first&size=50"
+      },
+      {
+        "author": "Yu-Chen Wang",
+        "hitCount": 86,
+        "url": "https://arxiv.org/search/?query=Yu-Chen%20Wang&searchtype=author&abstracts=show&order=-announced_date_first&size=50"
+      },
+      {
+        "author": "Yue Zhao",
+        "hitCount": 2629,
+        "url": "https://arxiv.org/search/?query=Yue%20Zhao&searchtype=author&abstracts=show&order=-announced_date_first&size=50"
+      },
+      {
+        "author": "Zi-Tong Fan",
+        "hitCount": 2,
+        "url": "https://arxiv.org/search/?query=Zi-Tong%20Fan&searchtype=author&abstracts=show&order=-announced_date_first&size=50"
+      }
+    ],
+    "currentWindowUnmappedIdsOpened": [
+      "2602.09962",
+      "2603.28941",
+      "2609.18148",
+      "2609.19794",
+      "2609.21527",
+      "2609.21558",
+      "2609.21692",
+      "2609.21745",
+      "2609.22068",
+      "2609.22071",
+      "2609.22613",
+      "2609.23008",
+      "2609.23791",
+      "2609.24074",
+      "2609.24205",
+      "2609.24325",
+      "2609.24863",
+      "2609.24899",
+      "2609.25136",
+      "2609.25158",
+      "2609.25363",
+      "2609.25560",
+      "2609.25753",
+      "2609.25875",
+      "2609.25904",
+      "2609.26924",
+      "2609.27149",
+      "2609.27383",
+      "2609.27467",
+      "2609.27616",
+      "2609.28288",
+      "2609.30221",
+      "2609.30247",
+      "2609.30737",
+      "2609.30988",
+      "2609.31590"
+    ],
+    "note": "The display-name query for Thong T.Q. Nguyen returned zero results, so the canonical arXiv author-field form Nguyen, T T Q was used and completely returned 19 records. All other searches completed directly. Current-window results were unrelated name matches or non-event work."
+  },
+  "uniqueCandidates": [
+    "2609.09830",
+    "2609.30193",
+    "2609.30335",
+    "2609.30917",
+    "2609.31340",
+    "2609.31495",
+    "2602.09962",
+    "2609.21745",
+    "2609.22071"
+  ],
+  "nearMissExclusions": [
+    {
+      "id": "2609.09830",
+      "reason": "Generic radiative corrections to Higgsino-like direct detection; it mentions recent LZ scattering rates but does not analyze the isolated 248 keV candidate.",
+      "url": "https://arxiv.org/abs/2609.09830"
+    },
+    {
+      "id": "2609.30193",
+      "reason": "Lempel-Ziv compression acronym collision, unrelated to the detector or event.",
+      "url": "https://arxiv.org/abs/2609.30193"
+    },
+    {
+      "id": "2609.30335",
+      "reason": "Neutron-star conversion-rate constraints on heavy dark matter, with no LZ or 248 keV event analysis.",
+      "url": "https://arxiv.org/abs/2609.30335"
+    },
+    {
+      "id": "2609.30917",
+      "reason": "Gamma-ray signal/background machine learning with a generic annihilation simulation, unrelated to the LZ event.",
+      "url": "https://arxiv.org/abs/2609.30917"
+    },
+    {
+      "id": "2609.31340",
+      "reason": "Sterile-neutrino production and early-Universe cosmology, unrelated to direct detection or the LZ event.",
+      "url": "https://arxiv.org/abs/2609.31340"
+    },
+    {
+      "id": "2609.31495",
+      "reason": "High-frequency gravitational waves from phase-transition particle production, with only generic dark-matter motivation.",
+      "url": "https://arxiv.org/abs/2609.31495"
+    },
+    {
+      "id": "2602.09962",
+      "reason": "Revised light-dark-matter cosmology paper without discussion of the isolated LZ candidate.",
+      "url": "https://arxiv.org/abs/2602.09962"
+    },
+    {
+      "id": "2609.21745",
+      "reason": "PBH-remnant dark matter and leptogenesis, unrelated to xenon recoil phenomenology.",
+      "url": "https://arxiv.org/abs/2609.21745"
+    },
+    {
+      "id": "2609.22071",
+      "reason": "A stellar-stream paper whose dark-matter mention concerns galactic structure only.",
+      "url": "https://arxiv.org/abs/2609.22071"
+    }
+  ],
+  "revisionChecks": {
+    "mappedPaperCount": 102,
+    "revised": [
+      {
+        "id": "2609.01583",
+        "previousUpdated": "2026-09-01",
+        "currentUpdated": "2026-09-24",
+        "version": 2,
+        "url": "https://arxiv.org/abs/2609.01583"
+      },
+      {
+        "id": "2609.02994",
+        "previousUpdated": "2026-09-02",
+        "currentUpdated": "2026-09-25",
+        "version": 2,
+        "url": "https://arxiv.org/abs/2609.02994"
+      }
+    ],
+    "note": "The three v1 records whose submission date precedes their catalog announcement date were not revisions; existing published/update normalization was preserved."
+  },
+  "changes": {
+    "addedPaperIds": [],
+    "revisedPaperIds": [
+      "2609.01583",
+      "2609.02994"
+    ],
+    "candidateLogChanged": false,
+    "preserved": "All paper order, layoutRank values, coordinates, roles, islands, summaries, takeaways, tags, titles, authors, original dates, and URLs were preserved."
+  },
+  "citationReconciliation": {
+    "scope": "The two mapped papers revised since the previous successful scan; the full 102-paper graph was reconciled on 2026-09-27.",
+    "checkedPaperCount": 2,
+    "completeReferenceCount": 191,
+    "existingPaperChanges": [
+      {
+        "id": "2609.02994",
+        "added": [
+          "2609.01892",
+          "2609.02807",
+          "2609.05291",
+          "2609.06153",
+          "2609.06171",
+          "2609.06571",
+          "2609.06640",
+          "2609.06750",
+          "2609.06756",
+          "2609.06825",
+          "2609.06890",
+          "2609.07225",
+          "2609.07451",
+          "2609.07742",
+          "2609.07800",
+          "2609.07807",
+          "2609.07811",
+          "2609.08712",
+          "2609.09015",
+          "2609.09107",
+          "2609.09138",
+          "2609.10453",
+          "2609.10827",
+          "2609.11600",
+          "2609.13038",
+          "2609.15118",
+          "2609.15600",
+          "2609.15742",
+          "2609.21823",
+          "2609.22063",
+          "2609.23096",
+          "2609.26870",
+          "2609.28616"
+        ],
+        "removed": [],
+        "url": "https://arxiv.org/html/2609.02994v2"
+      }
+    ],
+    "evidence": [
+      {
+        "id": "2609.01583",
+        "url": "https://arxiv.org/html/2609.01583v2",
+        "completeReferenceCount": 24,
+        "mappedCitationCount": 1
+      },
+      {
+        "id": "2609.02994",
+        "url": "https://arxiv.org/html/2609.02994v2",
+        "completeReferenceCount": 167,
+        "mappedCitationCount": 37
+      }
+    ],
+    "normalization": "Version suffixes were removed and the explicit pre-arXiv LZ reference in 2609.02994 was normalized to 2609.02823. No edge was inferred from similarity, date, prose, proximity, or an external citation graph.",
+    "uncertainEdges": []
+  },
+  "validation": {
+    "catalogValidator": "passed: 102 papers and 9 islands",
+    "typecheck": "passed",
+    "lint": "passed",
+    "layoutTests": "passed: 11",
+    "dateRangeTests": "passed: 7",
+    "citationSizeTests": "passed: 3",
+    "themeTests": "passed: 7",
+    "seoTests": "passed: 3",
+    "productionBuild": "passed: 103 prerendered routes",
+    "semanticDiff": "passed: only the two verified revision dates and the verified 2609.02994 citation set changed among established records",
+    "gitDiff": "passed: only data/landscape.json and this audit are modified"
+  }
+}
