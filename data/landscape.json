@@ -1,8 +1,8 @@
 {
   "schemaVersion": 2,
   "title": "LZ high-recoil literature landscape",
-  "updatedAt": "2026-09-28",
-  "lastSuccessfulScan": "2026-09-28T09:15:53Z",
+  "updatedAt": "2026-09-29",
+  "lastSuccessfulScan": "2026-09-29T09:20:12Z",
   "event": {
     "energyKev": 248,
     "statisticalUncertaintyKev": 23,
@@ -12,7 +12,7 @@
   },
   "citationData": {
     "source": "arXiv reference lists",
-    "checkedAt": "2026-09-28",
+    "checkedAt": "2026-09-29",
     "scope": "Citations between papers in this map",
     "note": "References to the official LZ preprint are normalized to arXiv:2609.02823."
   },
@@ -4992,6 +4992,205 @@
         "2609.02608", "2609.02775", "2609.02823", "2609.02868", "2609.04144",
         "2609.04175", "2609.04181", "2609.04185", "2609.04673", "2609.06890",
         "2609.07807", "2609.09385", "2609.13038", "2609.15782"
+      ]
+    },
+    {
+      "id": "2609.32435",
+      "layoutRank": 102,
+      "arxivId": "2609.32435",
+      "title": "Escaping Solar Capture: Majoron mediated Elastic Dark Matter for the LZ 248~keV Event",
+      "authors": ["Salvador Centelles Chuliá", "Ayan Chattaraj", "Rahul Srivastava", "Surabhi Srivastava"],
+      "published": "2026-09-26",
+      "updated": "2026-09-26",
+      "url": "https://arxiv.org/abs/2609.32435",
+      "role": "explanation",
+      "primaryIsland": "elastic",
+      "islands": ["elastic", "constraints"],
+      "tags": [
+        "Majoron mediator",
+        "elastic pseudoscalar scattering",
+        "scotogenic dark matter",
+        "solar capture"
+      ],
+      "summary": "A light Majoron mediates elastic scattering through the momentum-dependent O6 operator, fitting the high-recoil candidate without filling lower-energy bins; a scotogenic completion links the portal to neutrino mass and suppresses solar capture.",
+      "takeaway": "An elastic momentum-dependent portal can reproduce the event while using its spin structure and kinematics to avoid the strongest solar-neutrino constraint.",
+      "x": 43.14,
+      "y": 95.56,
+      "cites": [
+        "2609.01475", "2609.01504", "2609.01583", "2609.01590", "2609.02608",
+        "2609.02775", "2609.02807", "2609.02823", "2609.04144", "2609.04181",
+        "2609.04185", "2609.04186", "2609.04673", "2609.05204", "2609.06153",
+        "2609.06571", "2609.06756", "2609.06760", "2609.06890", "2609.07742",
+        "2609.07800", "2609.09037", "2609.09107", "2609.10453", "2609.10491",
+        "2609.10504", "2609.10827", "2609.11600", "2609.11833", "2609.12045",
+        "2609.13038", "2609.15027", "2609.15321", "2609.15634", "2609.15714",
+        "2609.15933", "2609.15985", "2609.17196", "2609.21823", "2609.28819",
+        "2609.30255"
+      ]
+    },
+    {
+      "id": "2609.33869",
+      "layoutRank": 103,
+      "arxivId": "2609.33869",
+      "title": "Heavy Higgsino Dark Matter With Low Reheating in View of the LZ High-Recoil Event",
+      "authors": ["C. Pallis"],
+      "published": "2026-09-27",
+      "updated": "2026-09-27",
+      "url": "https://arxiv.org/abs/2609.33869",
+      "role": "explanation",
+      "primaryIsland": "higgsino",
+      "islands": ["higgsino", "constraints"],
+      "tags": [
+        "PeV Higgsino",
+        "low reheating",
+        "nonthermal production",
+        "modulus decay"
+      ],
+      "summary": "The paper embeds an event-compatible roughly 0.1 PeV Higgsino in a low-reheating cosmology, where modulus decay supplies nonthermal dark matter and reheating below about 595 GeV controls the final abundance.",
+      "takeaway": "A nonstandard thermal history can make the heavy Higgsino interpretation cosmologically viable without changing its direct- and indirect-detection requirements.",
+      "x": 91.04,
+      "y": 33.87,
+      "cites": [
+        "2609.01583", "2609.01590", "2609.01892", "2609.02608", "2609.02775",
+        "2609.02807", "2609.02823", "2609.04163", "2609.04175", "2609.04185",
+        "2609.04186", "2609.04673", "2609.05291", "2609.06153", "2609.06171",
+        "2609.06909", "2609.07138", "2609.07451", "2609.07800", "2609.07807",
+        "2609.07811", "2609.09136", "2609.09385", "2609.11241", "2609.11833",
+        "2609.13038", "2609.13130", "2609.15118", "2609.15321", "2609.17196",
+        "2609.18564", "2609.21011", "2609.22063", "2609.22739", "2609.23096",
+        "2609.23477", "2609.23691", "2609.25114", "2609.26570", "2609.26698",
+        "2609.28616", "2609.28740", "2609.28819"
+      ]
+    },
+    {
+      "id": "2609.33952",
+      "layoutRank": 104,
+      "arxivId": "2609.33952",
+      "title": "Sub-MeV gamma-ray lines from an endothermic interpretation of the LZ recoil candidate",
+      "authors": ["Maíra Dutra", "Jacinto P. Neto", "Clarissa Siqueira"],
+      "published": "2026-09-27",
+      "updated": "2026-09-27",
+      "url": "https://arxiv.org/abs/2609.33952",
+      "role": "diagnostic",
+      "primaryIsland": "multimessenger",
+      "islands": ["multimessenger", "endothermic", "constraints"],
+      "tags": [
+        "sub-MeV gamma-ray line",
+        "endothermic dark matter",
+        "excited-state decay",
+        "COSI"
+      ],
+      "summary": "Endothermic up-scattering sets a mass splitting that can also fix the energy of a radiative excited-state decay; the benchmark produces a sub-MeV gamma-ray line in the projected reach of COSI.",
+      "takeaway": "A photon line near the inelastic splitting would provide an independent multi-messenger test if the recoil candidate persists.",
+      "x": 30.57,
+      "y": 58.95,
+      "cites": [
+        "2609.01475", "2609.01504", "2609.01583", "2609.01590", "2609.01592",
+        "2609.01892", "2609.02608", "2609.02775", "2609.02807", "2609.02823",
+        "2609.02868", "2609.04144", "2609.04175", "2609.04181", "2609.04185",
+        "2609.04186", "2609.04673", "2609.05204", "2609.06153", "2609.06890",
+        "2609.07451", "2609.07800", "2609.07811", "2609.08993", "2609.09015",
+        "2609.09107", "2609.10453", "2609.11600", "2609.13130", "2609.15742",
+        "2609.17196", "2609.17935", "2609.21444"
+      ]
+    },
+    {
+      "id": "2609.34230",
+      "layoutRank": 105,
+      "arxivId": "2609.34230",
+      "title": "Freeze-in of anapole and charge-radius inelastic dark matter: X-ray probes of a decoupled vector portal",
+      "authors": ["Krzysztof Jodłowski", "Chih-Ting Lu"],
+      "published": "2026-09-28",
+      "updated": "2026-09-28",
+      "url": "https://arxiv.org/abs/2609.34230",
+      "role": "explanation",
+      "primaryIsland": "exothermic",
+      "islands": ["exothermic", "multimessenger", "constraints"],
+      "tags": [
+        "transition anapole",
+        "charge-radius operator",
+        "freeze-in",
+        "X-ray constraints"
+      ],
+      "summary": "Freeze-in through transition anapole or charge-radius operators leaves a long-lived excited state whose exothermic down-scattering can explain the LZ recoil, while its three-photon decay is tested by NuSTAR and INTEGRAL/SPI.",
+      "takeaway": "The same excited-state population connects an exothermic direct-detection signal to X-ray limits and the reheating history.",
+      "x": 92.03,
+      "y": 65.74,
+      "cites": ["2609.02823", "2609.05204", "2609.06153"]
+    },
+    {
+      "id": "2609.35650",
+      "layoutRank": 106,
+      "arxivId": "2609.35650",
+      "title": "The LZ event with a two-state dark matter halo",
+      "authors": ["Vinicius Oliveira"],
+      "published": "2026-09-28",
+      "updated": "2026-09-28",
+      "url": "https://arxiv.org/abs/2609.35650",
+      "role": "diagnostic",
+      "primaryIsland": "constraints",
+      "islands": ["constraints", "endothermic", "exothermic"],
+      "tags": [
+        "two-state halo",
+        "excited-state fraction",
+        "likelihood reconstruction",
+        "exothermic dominance"
+      ],
+      "summary": "After reproducing the published LZ inference, the paper adds a surviving excited-state halo fraction and finds that even small fractions can make exothermic scattering dominate, sharply lowering the cross section inferred from the candidate.",
+      "takeaway": "The event-level inference changes qualitatively when both dark states populate the halo, so one-state limits cannot be applied unchanged.",
+      "x": 53.3,
+      "y": 66.61,
+      "cites": [
+        "2609.01475", "2609.01504", "2609.01583", "2609.01590", "2609.01592",
+        "2609.02608", "2609.02775", "2609.02807", "2609.02823", "2609.04175",
+        "2609.04185", "2609.05204", "2609.05291", "2609.06153", "2609.06756",
+        "2609.06890", "2609.07800", "2609.07807", "2609.08712", "2609.08993",
+        "2609.09015", "2609.09037", "2609.09136", "2609.09138", "2609.09230",
+        "2609.09385", "2609.10453", "2609.10491", "2609.10827", "2609.11600",
+        "2609.12045", "2609.13130", "2609.14799", "2609.15027", "2609.15321",
+        "2609.15600", "2609.15714", "2609.15742", "2609.15782", "2609.15933",
+        "2609.17196", "2609.17412", "2609.18564", "2609.21444", "2609.23096",
+        "2609.24982", "2609.24988", "2609.26570"
+      ]
+    },
+    {
+      "id": "2609.35737",
+      "layoutRank": 107,
+      "arxivId": "2609.35737",
+      "title": "GAIA meets LZ: a high velocity tail-tale sign for dark matter",
+      "authors": ["Anirban Das", "Subhabrata Majumdar", "Manibrata Sen", "Amogh Srivastav"],
+      "published": "2026-09-28",
+      "updated": "2026-09-28",
+      "url": "https://arxiv.org/abs/2609.35737",
+      "role": "diagnostic",
+      "primaryIsland": "constraints",
+      "islands": ["constraints", "endothermic", "exothermic"],
+      "tags": [
+        "Gaia halo model",
+        "high-velocity tail",
+        "Large Magellanic Cloud",
+        "astrophysical uncertainty"
+      ],
+      "summary": "A Gaia-informed Milky Way model has a lower escape speed and thinner high-velocity tail than the standard halo, pushing the endothermic fit toward larger cross sections and smaller splittings while leaving exothermic scattering comparatively stable.",
+      "takeaway": "Galactic phase-space assumptions materially reshape the endothermic interpretation, and the Large Magellanic Cloud can reopen part of the high-speed tail.",
+      "x": 80.95,
+      "y": 91.69,
+      "cites": [
+        "2609.01475", "2609.01504", "2609.01583", "2609.01590", "2609.01892",
+        "2609.02505", "2609.02608", "2609.02775", "2609.02807", "2609.02823",
+        "2609.02868", "2609.04144", "2609.04163", "2609.04175", "2609.04181",
+        "2609.04185", "2609.04186", "2609.04673", "2609.05204", "2609.05291",
+        "2609.06153", "2609.06171", "2609.06571", "2609.06640", "2609.06750",
+        "2609.06756", "2609.06760", "2609.06825", "2609.06890", "2609.06909",
+        "2609.07138", "2609.07225", "2609.07451", "2609.07742", "2609.07800",
+        "2609.07807", "2609.07811", "2609.08712", "2609.08893", "2609.08993",
+        "2609.09015", "2609.09037", "2609.09107", "2609.09136", "2609.09138",
+        "2609.09230", "2609.09385", "2609.10453", "2609.10491", "2609.10504",
+        "2609.10636", "2609.10827", "2609.11600", "2609.11833", "2609.12045",
+        "2609.13038", "2609.14799", "2609.15027", "2609.15118", "2609.15321",
+        "2609.15600", "2609.15634", "2609.15714", "2609.15742", "2609.15933",
+        "2609.15985", "2609.16529", "2609.17196", "2609.17412", "2609.17935",
+        "2609.18564", "2609.19174", "2609.21444", "2609.21823", "2609.30255"
       ]
     }
   ]

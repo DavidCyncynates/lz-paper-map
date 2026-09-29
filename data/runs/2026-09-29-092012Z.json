@@ -1,0 +1,1444 @@
+{
+  "schemaVersion": 1,
+  "runId": "2026-09-29-092012Z",
+  "runAt": "2026-09-29T09:20:12Z",
+  "scanWindow": {
+    "previousSuccessfulScan": "2026-09-28T09:15:53Z",
+    "overlapStart": "2026-09-21T09:15:53Z",
+    "coverageComplete": true,
+    "catalogTimestampAdvanced": true,
+    "categoryAppearances": 1170,
+    "uniqueVersionlessIds": 919,
+    "note": "Live recent pages covered announcement groups September 23-29 (no groups September 26-27): 814 category appearances and 641 unique IDs. September 21-22 groups, no longer live on recent pages, were carried from complete prior audits: 356 appearances. The September 29 group contained 238 appearances and 193 unique IDs."
+  },
+  "listingCoverage": [
+    {
+      "category": "hep-ph",
+      "url": "https://arxiv.org/list/hep-ph/recent?show=2000",
+      "currentMonthUrl": "https://arxiv.org/list/hep-ph/current?show=2000",
+      "overlapEntries": 325,
+      "dateGroups": {
+        "2026-09-29": 66,
+        "2026-09-28": 23,
+        "2026-09-25": 42,
+        "2026-09-24": 48,
+        "2026-09-23": 44,
+        "2026-09-22": 69,
+        "2026-09-21": 33
+      }
+    },
+    {
+      "category": "hep-ex",
+      "url": "https://arxiv.org/list/hep-ex/recent?show=2000",
+      "currentMonthUrl": "https://arxiv.org/list/hep-ex/current?show=2000",
+      "overlapEntries": 117,
+      "dateGroups": {
+        "2026-09-29": 21,
+        "2026-09-28": 7,
+        "2026-09-25": 12,
+        "2026-09-24": 13,
+        "2026-09-23": 26,
+        "2026-09-22": 25,
+        "2026-09-21": 13
+      }
+    },
+    {
+      "category": "hep-th",
+      "url": "https://arxiv.org/list/hep-th/recent?show=2000",
+      "currentMonthUrl": "https://arxiv.org/list/hep-th/current?show=2000",
+      "overlapEntries": 330,
+      "dateGroups": {
+        "2026-09-29": 72,
+        "2026-09-28": 31,
+        "2026-09-25": 45,
+        "2026-09-24": 33,
+        "2026-09-23": 49,
+        "2026-09-22": 68,
+        "2026-09-21": 32
+      }
+    },
+    {
+      "category": "astro-ph.HE",
+      "url": "https://arxiv.org/list/astro-ph.HE/recent?show=2000",
+      "currentMonthUrl": "https://arxiv.org/list/astro-ph.HE/current?show=2000",
+      "overlapEntries": 231,
+      "dateGroups": {
+        "2026-09-29": 40,
+        "2026-09-28": 24,
+        "2026-09-25": 30,
+        "2026-09-24": 40,
+        "2026-09-23": 28,
+        "2026-09-22": 42,
+        "2026-09-21": 27
+      }
+    },
+    {
+      "category": "astro-ph.CO",
+      "url": "https://arxiv.org/list/astro-ph.CO/recent?show=2000",
+      "currentMonthUrl": "https://arxiv.org/list/astro-ph.CO/current?show=2000",
+      "overlapEntries": 167,
+      "dateGroups": {
+        "2026-09-29": 39,
+        "2026-09-28": 14,
+        "2026-09-25": 20,
+        "2026-09-24": 21,
+        "2026-09-23": 26,
+        "2026-09-22": 27,
+        "2026-09-21": 20
+      }
+    }
+  ],
+  "abstractPagesOpened": {
+    "urlPattern": "https://arxiv.org/abs/{id}",
+    "newListingAbstracts": 193,
+    "newListingIds": [
+      "2609.29992",
+      "2609.31739",
+      "2609.31762",
+      "2609.31774",
+      "2609.31791",
+      "2609.31809",
+      "2609.31819",
+      "2609.31820",
+      "2609.31825",
+      "2609.31828",
+      "2609.31829",
+      "2609.31830",
+      "2609.31833",
+      "2609.31834",
+      "2609.31835",
+      "2609.31836",
+      "2609.31842",
+      "2609.31845",
+      "2609.31850",
+      "2609.31852",
+      "2609.31862",
+      "2609.31866",
+      "2609.31867",
+      "2609.31879",
+      "2609.31884",
+      "2609.31928",
+      "2609.31944",
+      "2609.32022",
+      "2609.32037",
+      "2609.32054",
+      "2609.32059",
+      "2609.32063",
+      "2609.32071",
+      "2609.32086",
+      "2609.32096",
+      "2609.32127",
+      "2609.32139",
+      "2609.32164",
+      "2609.32171",
+      "2609.32200",
+      "2609.32202",
+      "2609.32212",
+      "2609.32225",
+      "2609.32266",
+      "2609.32284",
+      "2609.32306",
+      "2609.32307",
+      "2609.32324",
+      "2609.32347",
+      "2609.32419",
+      "2609.32435",
+      "2609.32451",
+      "2609.32497",
+      "2609.32531",
+      "2609.32554",
+      "2609.32563",
+      "2609.32571",
+      "2609.32572",
+      "2609.32582",
+      "2609.32586",
+      "2609.32608",
+      "2609.32624",
+      "2609.32649",
+      "2609.32702",
+      "2609.32726",
+      "2609.32748",
+      "2609.32800",
+      "2609.32865",
+      "2609.32866",
+      "2609.32873",
+      "2609.32874",
+      "2609.32878",
+      "2609.32986",
+      "2609.33029",
+      "2609.33031",
+      "2609.33032",
+      "2609.33151",
+      "2609.33188",
+      "2609.33198",
+      "2609.33199",
+      "2609.33231",
+      "2609.33364",
+      "2609.33448",
+      "2609.33452",
+      "2609.33453",
+      "2609.33514",
+      "2609.33596",
+      "2609.33606",
+      "2609.33673",
+      "2609.33690",
+      "2609.33809",
+      "2609.33817",
+      "2609.33821",
+      "2609.33825",
+      "2609.33869",
+      "2609.33877",
+      "2609.33908",
+      "2609.33917",
+      "2609.33921",
+      "2609.33942",
+      "2609.33952",
+      "2609.33990",
+      "2609.34038",
+      "2609.34073",
+      "2609.34084",
+      "2609.34102",
+      "2609.34155",
+      "2609.34230",
+      "2609.34239",
+      "2609.34248",
+      "2609.34323",
+      "2609.34324",
+      "2609.34338",
+      "2609.34364",
+      "2609.34405",
+      "2609.34443",
+      "2609.34500",
+      "2609.34508",
+      "2609.34529",
+      "2609.34533",
+      "2609.34568",
+      "2609.34615",
+      "2609.34644",
+      "2609.34696",
+      "2609.34698",
+      "2609.34726",
+      "2609.34734",
+      "2609.34777",
+      "2609.34788",
+      "2609.34811",
+      "2609.34816",
+      "2609.34820",
+      "2609.34837",
+      "2609.34858",
+      "2609.34909",
+      "2609.34917",
+      "2609.34937",
+      "2609.34940",
+      "2609.34945",
+      "2609.34947",
+      "2609.34957",
+      "2609.34984",
+      "2609.34989",
+      "2609.34999",
+      "2609.35024",
+      "2609.35045",
+      "2609.35057",
+      "2609.35071",
+      "2609.35093",
+      "2609.35132",
+      "2609.35133",
+      "2609.35135",
+      "2609.35148",
+      "2609.35164",
+      "2609.35165",
+      "2609.35208",
+      "2609.35222",
+      "2609.35253",
+      "2609.35299",
+      "2609.35317",
+      "2609.35321",
+      "2609.35330",
+      "2609.35344",
+      "2609.35373",
+      "2609.35423",
+      "2609.35452",
+      "2609.35455",
+      "2609.35458",
+      "2609.35468",
+      "2609.35495",
+      "2609.35503",
+      "2609.35509",
+      "2609.35519",
+      "2609.35533",
+      "2609.35546",
+      "2609.35604",
+      "2609.35650",
+      "2609.35653",
+      "2609.35661",
+      "2609.35688",
+      "2609.35697",
+      "2609.35705",
+      "2609.35713",
+      "2609.35720",
+      "2609.35722",
+      "2609.35723",
+      "2609.35729",
+      "2609.35730",
+      "2609.35733",
+      "2609.35737",
+      "2609.35755",
+      "2609.35756",
+      "2609.35757"
+    ],
+    "mappedSubmissionHistories": 102,
+    "authorSearchUnmappedHitsScreened": 50,
+    "authorSearchUnmappedIds": [
+      "2209.01200",
+      "2510.27022",
+      "2602.09962",
+      "2602.24089",
+      "2605.04824",
+      "2606.20990",
+      "2606.27739",
+      "2606.28632",
+      "2609.19794",
+      "2609.20140",
+      "2609.24074",
+      "2609.24205",
+      "2609.24325",
+      "2609.24863",
+      "2609.24899",
+      "2609.25158",
+      "2609.25363",
+      "2609.25560",
+      "2609.25753",
+      "2609.25875",
+      "2609.25904",
+      "2609.26924",
+      "2609.27149",
+      "2609.27383",
+      "2609.27467",
+      "2609.27616",
+      "2609.28288",
+      "2609.28652",
+      "2609.30221",
+      "2609.30247",
+      "2609.30737",
+      "2609.30988",
+      "2609.31590",
+      "2609.31619",
+      "2609.32226",
+      "2609.32483",
+      "2609.32577",
+      "2609.32592",
+      "2609.32600",
+      "2609.32758",
+      "2609.33145",
+      "2609.33157",
+      "2609.33229",
+      "2609.33251",
+      "2609.33514",
+      "2609.33606",
+      "2609.33757",
+      "2609.33937",
+      "2609.34095",
+      "2609.35720"
+    ],
+    "additionalSearchAndReferenceCandidates": [
+      "2609.31850",
+      "2609.33198",
+      "2609.33877",
+      "2609.33514",
+      "2510.27022",
+      "2602.09962",
+      "2605.04824",
+      "2609.28652"
+    ]
+  },
+  "searchCoverage": {
+    "searches": [
+      {
+        "query": "LZ",
+        "url": "https://arxiv.org/search/?query=LZ&searchtype=all&abstracts=show&order=-announced_date_first&size=200",
+        "hitCount": 624,
+        "returnedCount": 200,
+        "completed": true
+      },
+      {
+        "query": "LUX-ZEPLIN",
+        "url": "https://arxiv.org/search/?query=LUX-ZEPLIN&searchtype=all&abstracts=show&order=-announced_date_first&size=200",
+        "hitCount": 215,
+        "returnedCount": 200,
+        "completed": true
+      },
+      {
+        "query": "\"LZ event\"",
+        "url": "https://arxiv.org/search/?query=%22LZ+event%22&searchtype=all&abstracts=show&order=-announced_date_first&size=200",
+        "hitCount": 34,
+        "returnedCount": 34,
+        "completed": true
+      },
+      {
+        "query": "\"one event observed at LZ\"",
+        "url": "https://arxiv.org/search/?query=%22one+event+observed+at+LZ%22&searchtype=all&abstracts=show&order=-announced_date_first&size=200",
+        "hitCount": 1,
+        "returnedCount": 1,
+        "completed": true
+      },
+      {
+        "query": "\"xenon recoil\"",
+        "url": "https://arxiv.org/search/?query=%22xenon+recoil%22&searchtype=all&abstracts=show&order=-announced_date_first&size=200",
+        "hitCount": 7,
+        "returnedCount": 7,
+        "completed": true
+      },
+      {
+        "query": "\"xenon recoils\"",
+        "url": "https://arxiv.org/search/?query=%22xenon+recoils%22&searchtype=all&abstracts=show&order=-announced_date_first&size=200",
+        "hitCount": 7,
+        "returnedCount": 7,
+        "completed": true
+      },
+      {
+        "query": "\"high-energy nuclear recoil\"",
+        "url": "https://arxiv.org/search/?query=%22high-energy+nuclear+recoil%22&searchtype=all&abstracts=show&order=-announced_date_first&size=200",
+        "hitCount": 26,
+        "returnedCount": 26,
+        "completed": true
+      },
+      {
+        "query": "\"248 keV\"",
+        "url": "https://arxiv.org/search/?query=%22248+keV%22&searchtype=all&abstracts=show&order=-announced_date_first&size=200",
+        "hitCount": 44,
+        "returnedCount": 44,
+        "completed": true
+      },
+      {
+        "query": "LZ230616",
+        "url": "https://arxiv.org/search/?query=LZ230616&searchtype=all&abstracts=show&order=-announced_date_first&size=200",
+        "hitCount": 8,
+        "returnedCount": 8,
+        "completed": true
+      },
+      {
+        "query": "2609.02823",
+        "url": "https://arxiv.org/abs/2609.02823",
+        "hitCount": 1,
+        "returnedCount": 1,
+        "completed": true
+      },
+      {
+        "query": "\"Search for dark matter particle interactions in an extended nuclear recoil energy window with the LUX-ZEPLIN (LZ) experiment\"",
+        "url": "https://arxiv.org/search/?query=%22Search+for+dark+matter+particle+interactions+in+an+extended+nuclear+recoil+energy+window+with+the+LUX-ZEPLIN+%28LZ%29+experiment%22&searchtype=all&abstracts=show&order=-announced_date_first&size=200",
+        "hitCount": 1,
+        "returnedCount": 1,
+        "completed": true
+      }
+    ],
+    "overlapComplete": true,
+    "note": "All required all-field/abstract searches were inspected. The ID search resolved directly to the official abstract page."
+  },
+  "citationDiscovery": {
+    "url": "https://inspirehep.net/literature?sort=mostrecent&size=100&page=1&q=refersto%3Arecid%3A3199115",
+    "page2Url": "https://inspirehep.net/literature?sort=mostrecent&size=100&page=2&q=refersto%3Arecid%3A3199115",
+    "hitCount": 106,
+    "ids": [
+      "2609.33952",
+      "2609.33869",
+      "2609.32435",
+      "2609.29462",
+      "2609.30255",
+      "2609.28129",
+      "2609.28218",
+      "2609.28415",
+      "2609.28616",
+      "2609.28819",
+      "2609.28740",
+      "2609.25723",
+      "2609.26545",
+      "2609.26570",
+      "2609.26698",
+      "2609.26876",
+      "2609.26870",
+      "2609.24988",
+      "2609.24982",
+      "2609.23477",
+      "2609.23691",
+      "2609.25114",
+      "2609.22739",
+      "2609.23096",
+      "2609.21444",
+      "2609.21823",
+      "2609.22063",
+      "2609.21011",
+      "2609.18564",
+      "2609.18790",
+      "2609.17196",
+      "2609.17412",
+      "2609.16529",
+      "2609.17935",
+      "2609.15027",
+      "2609.15118",
+      "2609.15413",
+      "2609.15321",
+      "2609.15600",
+      "2609.15742",
+      "2609.15634",
+      "2609.15782",
+      "2609.15985",
+      "2609.15933",
+      "2609.15714",
+      "2609.19174",
+      "2609.14799",
+      "2609.13038",
+      "2609.11600",
+      "2609.11833",
+      "2609.12045",
+      "2609.09830",
+      "2609.10491",
+      "2609.10504",
+      "2609.10453",
+      "2609.10636",
+      "2609.10827",
+      "2609.08893",
+      "2609.08712",
+      "2609.08771",
+      "2609.08808",
+      "2609.08993",
+      "2609.09015",
+      "2609.09037",
+      "2609.09138",
+      "2609.09107",
+      "2609.09136",
+      "2609.09385",
+      "2609.06909",
+      "2609.06890",
+      "2609.07138",
+      "2609.07225",
+      "2609.07451",
+      "2609.07800",
+      "2609.07811",
+      "2609.07742",
+      "2609.07807",
+      "2609.09230",
+      "2609.06571",
+      "2609.06640",
+      "2609.06760",
+      "2609.06756",
+      "2609.06750",
+      "2609.06825",
+      "2609.06171",
+      "2609.06153",
+      "2609.04673",
+      "2609.05291",
+      "2609.05204",
+      "2609.04144",
+      "2609.04186",
+      "2609.04163",
+      "2609.04181",
+      "2609.04185",
+      "2609.04175",
+      "2609.02608",
+      "2609.02775",
+      "2609.02807",
+      "2609.02505",
+      "2609.02868",
+      "2609.02994",
+      "2609.01475",
+      "2609.01583",
+      "2609.01590",
+      "2609.01504",
+      "2609.01892"
+    ],
+    "newRelevantIds": [
+      "2609.32435",
+      "2609.33869",
+      "2609.33952"
+    ],
+    "note": "INSPIRE was used only to discover candidate IDs linked from the official arXiv record; relevance, metadata, and outgoing citations were verified on official arXiv pages."
+  },
+  "authorSearches": {
+    "selection": "All 15 authors of today's six additions plus the Monday weekly rotation of 39 mapped response-paper authors (layoutRank modulo 7 equals 1).",
+    "searchCount": 54,
+    "searches": [
+      {
+        "author": "Aditya Ghosh",
+        "lanes": [
+          "weekly-rotation"
+        ],
+        "hitCount": 105,
+        "url": "https://arxiv.org/search/?query=Aditya+Ghosh&searchtype=author&abstracts=show&order=-announced_date_first&size=200"
+      },
+      {
+        "author": "Alessandro Strumia",
+        "lanes": [
+          "weekly-rotation"
+        ],
+        "hitCount": 213,
+        "url": "https://arxiv.org/search/?query=Alessandro+Strumia&searchtype=author&abstracts=show&order=-announced_date_first&size=200"
+      },
+      {
+        "author": "Amogh Srivastav",
+        "lanes": [
+          "new-paper"
+        ],
+        "hitCount": 4,
+        "url": "https://arxiv.org/search/?query=Amogh+Srivastav&searchtype=author&abstracts=show&order=-announced_date_first&size=200"
+      },
+      {
+        "author": "Anirban Das",
+        "lanes": [
+          "new-paper"
+        ],
+        "hitCount": 129,
+        "url": "https://arxiv.org/search/?query=Anirban+Das&searchtype=author&abstracts=show&order=-announced_date_first&size=200"
+      },
+      {
+        "author": "Ayan Chattaraj",
+        "lanes": [
+          "new-paper"
+        ],
+        "hitCount": 5,
+        "url": "https://arxiv.org/search/?query=Ayan+Chattaraj&searchtype=author&abstracts=show&order=-announced_date_first&size=200"
+      },
+      {
+        "author": "Bea Noether",
+        "lanes": [
+          "weekly-rotation"
+        ],
+        "hitCount": 11,
+        "url": "https://arxiv.org/search/?query=Bea+Noether&searchtype=author&abstracts=show&order=-announced_date_first&size=200"
+      },
+      {
+        "author": "Benjamin R. Safdi",
+        "lanes": [
+          "weekly-rotation"
+        ],
+        "hitCount": 95,
+        "url": "https://arxiv.org/search/?query=Benjamin+R.+Safdi&searchtype=author&abstracts=show&order=-announced_date_first&size=200"
+      },
+      {
+        "author": "Biswajit Karmakar",
+        "lanes": [
+          "weekly-rotation"
+        ],
+        "hitCount": 42,
+        "url": "https://arxiv.org/search/?query=Biswajit+Karmakar&searchtype=author&abstracts=show&order=-announced_date_first&size=200"
+      },
+      {
+        "author": "C. Pallis",
+        "lanes": [
+          "new-paper"
+        ],
+        "hitCount": 94,
+        "url": "https://arxiv.org/search/?query=C.+Pallis&searchtype=author&abstracts=show&order=-announced_date_first&size=200"
+      },
+      {
+        "author": "Chih-Ting Lu",
+        "lanes": [
+          "new-paper"
+        ],
+        "hitCount": 68,
+        "url": "https://arxiv.org/search/?query=Chih-Ting+Lu&searchtype=author&abstracts=show&order=-announced_date_first&size=200"
+      },
+      {
+        "author": "Chris Kelso",
+        "lanes": [
+          "weekly-rotation"
+        ],
+        "hitCount": 33,
+        "url": "https://arxiv.org/search/?query=Chris+Kelso&searchtype=author&abstracts=show&order=-announced_date_first&size=200"
+      },
+      {
+        "author": "Clarissa Siqueira",
+        "lanes": [
+          "new-paper"
+        ],
+        "hitCount": 26,
+        "url": "https://arxiv.org/search/?query=Clarissa+Siqueira&searchtype=author&abstracts=show&order=-announced_date_first&size=200"
+      },
+      {
+        "author": "Dan Hooper",
+        "lanes": [
+          "weekly-rotation"
+        ],
+        "hitCount": 286,
+        "url": "https://arxiv.org/search/?query=Dan+Hooper&searchtype=author&abstracts=show&order=-announced_date_first&size=200"
+      },
+      {
+        "author": "David Delepine",
+        "lanes": [
+          "weekly-rotation"
+        ],
+        "hitCount": 73,
+        "url": "https://arxiv.org/search/?query=David+Delepine&searchtype=author&abstracts=show&order=-announced_date_first&size=200"
+      },
+      {
+        "author": "Debasish Borah",
+        "lanes": [
+          "weekly-rotation"
+        ],
+        "hitCount": 182,
+        "url": "https://arxiv.org/search/?query=Debasish+Borah&searchtype=author&abstracts=show&order=-announced_date_first&size=200"
+      },
+      {
+        "author": "Hitoshi Murayama",
+        "lanes": [
+          "weekly-rotation"
+        ],
+        "hitCount": 299,
+        "url": "https://arxiv.org/search/?query=Hitoshi+Murayama&searchtype=author&abstracts=show&order=-announced_date_first&size=200"
+      },
+      {
+        "author": "Hong-Jian He",
+        "lanes": [
+          "weekly-rotation"
+        ],
+        "hitCount": 126,
+        "url": "https://arxiv.org/search/?query=Hong-Jian+He&searchtype=author&abstracts=show&order=-announced_date_first&size=200"
+      },
+      {
+        "author": "Howard Baer",
+        "lanes": [
+          "weekly-rotation"
+        ],
+        "hitCount": 249,
+        "url": "https://arxiv.org/search/?query=Howard+Baer&searchtype=author&abstracts=show&order=-announced_date_first&size=200"
+      },
+      {
+        "author": "Ilumi Chavez",
+        "lanes": [
+          "weekly-rotation"
+        ],
+        "hitCount": 1,
+        "url": "https://arxiv.org/search/?query=Ilumi+Chavez&searchtype=author&abstracts=show&order=-announced_date_first&size=200"
+      },
+      {
+        "author": "J. Julio",
+        "lanes": [
+          "weekly-rotation"
+        ],
+        "hitCount": 2824,
+        "url": "https://arxiv.org/search/?query=J.+Julio&searchtype=author&abstracts=show&order=-announced_date_first&size=200"
+      },
+      {
+        "author": "Jacinto P. Neto",
+        "lanes": [
+          "new-paper"
+        ],
+        "hitCount": 10,
+        "url": "https://arxiv.org/search/?query=Jacinto+P.+Neto&searchtype=author&abstracts=show&order=-announced_date_first&size=200"
+      },
+      {
+        "author": "Jie Sheng",
+        "lanes": [
+          "weekly-rotation"
+        ],
+        "hitCount": 317,
+        "url": "https://arxiv.org/search/?query=Jie+Sheng&searchtype=author&abstracts=show&order=-announced_date_first&size=200"
+      },
+      {
+        "author": "Jin Min Yang",
+        "lanes": [
+          "weekly-rotation"
+        ],
+        "hitCount": 1256,
+        "url": "https://arxiv.org/search/?query=Jin+Min+Yang&searchtype=author&abstracts=show&order=-announced_date_first&size=200"
+      },
+      {
+        "author": "Kairui Zhang",
+        "lanes": [
+          "weekly-rotation"
+        ],
+        "hitCount": 63,
+        "url": "https://arxiv.org/search/?query=Kairui+Zhang&searchtype=author&abstracts=show&order=-announced_date_first&size=200"
+      },
+      {
+        "author": "Krzysztof Jodłowski",
+        "lanes": [
+          "new-paper"
+        ],
+        "hitCount": 21,
+        "url": "https://arxiv.org/search/?query=Krzysztof+Jod%C5%82owski&searchtype=author&abstracts=show&order=-announced_date_first&size=200"
+      },
+      {
+        "author": "Liangliang Su",
+        "lanes": [
+          "weekly-rotation"
+        ],
+        "hitCount": 38,
+        "url": "https://arxiv.org/search/?query=Liangliang+Su&searchtype=author&abstracts=show&order=-announced_date_first&size=200"
+      },
+      {
+        "author": "Manibrata Sen",
+        "lanes": [
+          "new-paper"
+        ],
+        "hitCount": 61,
+        "url": "https://arxiv.org/search/?query=Manibrata+Sen&searchtype=author&abstracts=show&order=-announced_date_first&size=200"
+      },
+      {
+        "author": "Mattia Di Mauro",
+        "lanes": [
+          "weekly-rotation"
+        ],
+        "hitCount": 101,
+        "url": "https://arxiv.org/search/?query=Mattia+Di+Mauro&searchtype=author&abstracts=show&order=-announced_date_first&size=200"
+      },
+      {
+        "author": "Maíra Dutra",
+        "lanes": [
+          "new-paper"
+        ],
+        "hitCount": 18,
+        "url": "https://arxiv.org/search/?query=Ma%C3%ADra+Dutra&searchtype=author&abstracts=show&order=-announced_date_first&size=200"
+      },
+      {
+        "author": "Mohammad Aghaie",
+        "lanes": [
+          "weekly-rotation"
+        ],
+        "hitCount": 8,
+        "url": "https://arxiv.org/search/?query=Mohammad+Aghaie&searchtype=author&abstracts=show&order=-announced_date_first&size=200"
+      },
+      {
+        "author": "Narendra Sahu",
+        "lanes": [
+          "weekly-rotation"
+        ],
+        "hitCount": 110,
+        "url": "https://arxiv.org/search/?query=Narendra+Sahu&searchtype=author&abstracts=show&order=-announced_date_first&size=200"
+      },
+      {
+        "author": "Nicholas L. Rodd",
+        "lanes": [
+          "weekly-rotation"
+        ],
+        "hitCount": 78,
+        "url": "https://arxiv.org/search/?query=Nicholas+L.+Rodd&searchtype=author&abstracts=show&order=-announced_date_first&size=200"
+      },
+      {
+        "author": "P. Uttayarat",
+        "lanes": [
+          "weekly-rotation"
+        ],
+        "hitCount": 38,
+        "url": "https://arxiv.org/search/?query=P.+Uttayarat&searchtype=author&abstracts=show&order=-announced_date_first&size=200"
+      },
+      {
+        "author": "Partha Kumar Paul",
+        "lanes": [
+          "weekly-rotation"
+        ],
+        "hitCount": 28,
+        "url": "https://arxiv.org/search/?query=Partha+Kumar+Paul&searchtype=author&abstracts=show&order=-announced_date_first&size=200"
+      },
+      {
+        "author": "Pritam Das",
+        "lanes": [
+          "weekly-rotation"
+        ],
+        "hitCount": 57,
+        "url": "https://arxiv.org/search/?query=Pritam+Das&searchtype=author&abstracts=show&order=-announced_date_first&size=200"
+      },
+      {
+        "author": "R. Primulando",
+        "lanes": [
+          "weekly-rotation"
+        ],
+        "hitCount": 27,
+        "url": "https://arxiv.org/search/?query=R.+Primulando&searchtype=author&abstracts=show&order=-announced_date_first&size=200"
+      },
+      {
+        "author": "Rahul Srivastava",
+        "lanes": [
+          "new-paper"
+        ],
+        "hitCount": 233,
+        "url": "https://arxiv.org/search/?query=Rahul+Srivastava&searchtype=author&abstracts=show&order=-announced_date_first&size=200"
+      },
+      {
+        "author": "Salvador Centelles Chuliá",
+        "lanes": [
+          "new-paper"
+        ],
+        "hitCount": 32,
+        "url": "https://arxiv.org/search/?query=Salvador+Centelles+Chuli%C3%A1&searchtype=author&abstracts=show&order=-announced_date_first&size=200"
+      },
+      {
+        "author": "Satyabrata Mahapatra",
+        "lanes": [
+          "weekly-rotation"
+        ],
+        "hitCount": 39,
+        "url": "https://arxiv.org/search/?query=Satyabrata+Mahapatra&searchtype=author&abstracts=show&order=-announced_date_first&size=200"
+      },
+      {
+        "author": "Shaaban Khalil",
+        "lanes": [
+          "weekly-rotation"
+        ],
+        "hitCount": 173,
+        "url": "https://arxiv.org/search/?query=Shaaban+Khalil&searchtype=author&abstracts=show&order=-announced_date_first&size=200"
+      },
+      {
+        "author": "Shashwat Sharma",
+        "lanes": [
+          "weekly-rotation"
+        ],
+        "hitCount": 29,
+        "url": "https://arxiv.org/search/?query=Shashwat+Sharma&searchtype=author&abstracts=show&order=-announced_date_first&size=200"
+      },
+      {
+        "author": "Subhabrata Majumdar",
+        "lanes": [
+          "new-paper"
+        ],
+        "hitCount": 87,
+        "url": "https://arxiv.org/search/?query=Subhabrata+Majumdar&searchtype=author&abstracts=show&order=-announced_date_first&size=200"
+      },
+      {
+        "author": "Sujit Kumar Sahoo",
+        "lanes": [
+          "weekly-rotation"
+        ],
+        "hitCount": 26,
+        "url": "https://arxiv.org/search/?query=Sujit+Kumar+Sahoo&searchtype=author&abstracts=show&order=-announced_date_first&size=200"
+      },
+      {
+        "author": "Surabhi Srivastava",
+        "lanes": [
+          "new-paper"
+        ],
+        "hitCount": 80,
+        "url": "https://arxiv.org/search/?query=Surabhi+Srivastava&searchtype=author&abstracts=show&order=-announced_date_first&size=200"
+      },
+      {
+        "author": "Thong T.Q. Nguyen",
+        "lanes": [
+          "weekly-rotation"
+        ],
+        "hitCount": 0,
+        "url": "https://arxiv.org/search/?query=Thong+T.Q.+Nguyen&searchtype=author&abstracts=show&order=-announced_date_first&size=200"
+      },
+      {
+        "author": "Tim Linden",
+        "lanes": [
+          "weekly-rotation"
+        ],
+        "hitCount": 215,
+        "url": "https://arxiv.org/search/?query=Tim+Linden&searchtype=author&abstracts=show&order=-announced_date_first&size=200"
+      },
+      {
+        "author": "Tracy R. Slatyer",
+        "lanes": [
+          "weekly-rotation"
+        ],
+        "hitCount": 104,
+        "url": "https://arxiv.org/search/?query=Tracy+R.+Slatyer&searchtype=author&abstracts=show&order=-announced_date_first&size=200"
+      },
+      {
+        "author": "Vernon Barger",
+        "lanes": [
+          "weekly-rotation"
+        ],
+        "hitCount": 215,
+        "url": "https://arxiv.org/search/?query=Vernon+Barger&searchtype=author&abstracts=show&order=-announced_date_first&size=200"
+      },
+      {
+        "author": "Vinicius Oliveira",
+        "lanes": [
+          "new-paper"
+        ],
+        "hitCount": 124,
+        "url": "https://arxiv.org/search/?query=Vinicius+Oliveira&searchtype=author&abstracts=show&order=-announced_date_first&size=200"
+      },
+      {
+        "author": "Weishuang Linda Xu",
+        "lanes": [
+          "weekly-rotation"
+        ],
+        "hitCount": 21,
+        "url": "https://arxiv.org/search/?query=Weishuang+Linda+Xu&searchtype=author&abstracts=show&order=-announced_date_first&size=200"
+      },
+      {
+        "author": "Wen-Na Yang",
+        "lanes": [
+          "weekly-rotation"
+        ],
+        "hitCount": 7,
+        "url": "https://arxiv.org/search/?query=Wen-Na+Yang&searchtype=author&abstracts=show&order=-announced_date_first&size=200"
+      },
+      {
+        "author": "Yu-Chen Wang",
+        "lanes": [
+          "weekly-rotation"
+        ],
+        "hitCount": 88,
+        "url": "https://arxiv.org/search/?query=Yu-Chen+Wang&searchtype=author&abstracts=show&order=-announced_date_first&size=200"
+      },
+      {
+        "author": "Yue Zhao",
+        "lanes": [
+          "weekly-rotation"
+        ],
+        "hitCount": 2638,
+        "url": "https://arxiv.org/search/?query=Yue+Zhao&searchtype=author&abstracts=show&order=-announced_date_first&size=200"
+      },
+      {
+        "author": "Zi-Tong Fan",
+        "lanes": [
+          "weekly-rotation"
+        ],
+        "hitCount": 2,
+        "url": "https://arxiv.org/search/?query=Zi-Tong+Fan&searchtype=author&abstracts=show&order=-announced_date_first&size=200"
+      }
+    ],
+    "currentWindowUnmappedIdsOpened": [
+      "2209.01200",
+      "2510.27022",
+      "2602.09962",
+      "2602.24089",
+      "2605.04824",
+      "2606.20990",
+      "2606.27739",
+      "2606.28632",
+      "2609.19794",
+      "2609.20140",
+      "2609.24074",
+      "2609.24205",
+      "2609.24325",
+      "2609.24863",
+      "2609.24899",
+      "2609.25158",
+      "2609.25363",
+      "2609.25560",
+      "2609.25753",
+      "2609.25875",
+      "2609.25904",
+      "2609.26924",
+      "2609.27149",
+      "2609.27383",
+      "2609.27467",
+      "2609.27616",
+      "2609.28288",
+      "2609.28652",
+      "2609.30221",
+      "2609.30247",
+      "2609.30737",
+      "2609.30988",
+      "2609.31590",
+      "2609.31619",
+      "2609.32226",
+      "2609.32483",
+      "2609.32577",
+      "2609.32592",
+      "2609.32600",
+      "2609.32758",
+      "2609.33145",
+      "2609.33157",
+      "2609.33229",
+      "2609.33251",
+      "2609.33514",
+      "2609.33606",
+      "2609.33757",
+      "2609.33937",
+      "2609.34095",
+      "2609.35720"
+    ],
+    "note": "All public arXiv author-field searches completed. Transient rate limits were resolved by pacing; every returned current-window unmapped hit was screened."
+  },
+  "uniqueCandidates": {
+    "count": 240,
+    "ids": [
+      "2209.01200",
+      "2510.27022",
+      "2602.09962",
+      "2602.24089",
+      "2605.04824",
+      "2606.20990",
+      "2606.27739",
+      "2606.28632",
+      "2609.19794",
+      "2609.20140",
+      "2609.24074",
+      "2609.24205",
+      "2609.24325",
+      "2609.24863",
+      "2609.24899",
+      "2609.25158",
+      "2609.25363",
+      "2609.25560",
+      "2609.25753",
+      "2609.25875",
+      "2609.25904",
+      "2609.26924",
+      "2609.27149",
+      "2609.27383",
+      "2609.27467",
+      "2609.27616",
+      "2609.28288",
+      "2609.28652",
+      "2609.29992",
+      "2609.30221",
+      "2609.30247",
+      "2609.30737",
+      "2609.30988",
+      "2609.31590",
+      "2609.31619",
+      "2609.31739",
+      "2609.31762",
+      "2609.31774",
+      "2609.31791",
+      "2609.31809",
+      "2609.31819",
+      "2609.31820",
+      "2609.31825",
+      "2609.31828",
+      "2609.31829",
+      "2609.31830",
+      "2609.31833",
+      "2609.31834",
+      "2609.31835",
+      "2609.31836",
+      "2609.31842",
+      "2609.31845",
+      "2609.31850",
+      "2609.31852",
+      "2609.31862",
+      "2609.31866",
+      "2609.31867",
+      "2609.31879",
+      "2609.31884",
+      "2609.31928",
+      "2609.31944",
+      "2609.32022",
+      "2609.32037",
+      "2609.32054",
+      "2609.32059",
+      "2609.32063",
+      "2609.32071",
+      "2609.32086",
+      "2609.32096",
+      "2609.32127",
+      "2609.32139",
+      "2609.32164",
+      "2609.32171",
+      "2609.32200",
+      "2609.32202",
+      "2609.32212",
+      "2609.32225",
+      "2609.32226",
+      "2609.32266",
+      "2609.32284",
+      "2609.32306",
+      "2609.32307",
+      "2609.32324",
+      "2609.32347",
+      "2609.32419",
+      "2609.32435",
+      "2609.32451",
+      "2609.32483",
+      "2609.32497",
+      "2609.32531",
+      "2609.32554",
+      "2609.32563",
+      "2609.32571",
+      "2609.32572",
+      "2609.32577",
+      "2609.32582",
+      "2609.32586",
+      "2609.32592",
+      "2609.32600",
+      "2609.32608",
+      "2609.32624",
+      "2609.32649",
+      "2609.32702",
+      "2609.32726",
+      "2609.32748",
+      "2609.32758",
+      "2609.32800",
+      "2609.32865",
+      "2609.32866",
+      "2609.32873",
+      "2609.32874",
+      "2609.32878",
+      "2609.32986",
+      "2609.33029",
+      "2609.33031",
+      "2609.33032",
+      "2609.33145",
+      "2609.33151",
+      "2609.33157",
+      "2609.33188",
+      "2609.33198",
+      "2609.33199",
+      "2609.33229",
+      "2609.33231",
+      "2609.33251",
+      "2609.33364",
+      "2609.33448",
+      "2609.33452",
+      "2609.33453",
+      "2609.33514",
+      "2609.33596",
+      "2609.33606",
+      "2609.33673",
+      "2609.33690",
+      "2609.33757",
+      "2609.33809",
+      "2609.33817",
+      "2609.33821",
+      "2609.33825",
+      "2609.33869",
+      "2609.33877",
+      "2609.33908",
+      "2609.33917",
+      "2609.33921",
+      "2609.33937",
+      "2609.33942",
+      "2609.33952",
+      "2609.33990",
+      "2609.34038",
+      "2609.34073",
+      "2609.34084",
+      "2609.34095",
+      "2609.34102",
+      "2609.34155",
+      "2609.34230",
+      "2609.34239",
+      "2609.34248",
+      "2609.34323",
+      "2609.34324",
+      "2609.34338",
+      "2609.34364",
+      "2609.34405",
+      "2609.34443",
+      "2609.34500",
+      "2609.34508",
+      "2609.34529",
+      "2609.34533",
+      "2609.34568",
+      "2609.34615",
+      "2609.34644",
+      "2609.34696",
+      "2609.34698",
+      "2609.34726",
+      "2609.34734",
+      "2609.34777",
+      "2609.34788",
+      "2609.34811",
+      "2609.34816",
+      "2609.34820",
+      "2609.34837",
+      "2609.34858",
+      "2609.34909",
+      "2609.34917",
+      "2609.34937",
+      "2609.34940",
+      "2609.34945",
+      "2609.34947",
+      "2609.34957",
+      "2609.34984",
+      "2609.34989",
+      "2609.34999",
+      "2609.35024",
+      "2609.35045",
+      "2609.35057",
+      "2609.35071",
+      "2609.35093",
+      "2609.35132",
+      "2609.35133",
+      "2609.35135",
+      "2609.35148",
+      "2609.35164",
+      "2609.35165",
+      "2609.35208",
+      "2609.35222",
+      "2609.35253",
+      "2609.35299",
+      "2609.35317",
+      "2609.35321",
+      "2609.35330",
+      "2609.35344",
+      "2609.35373",
+      "2609.35423",
+      "2609.35452",
+      "2609.35455",
+      "2609.35458",
+      "2609.35468",
+      "2609.35495",
+      "2609.35503",
+      "2609.35509",
+      "2609.35519",
+      "2609.35533",
+      "2609.35546",
+      "2609.35604",
+      "2609.35650",
+      "2609.35653",
+      "2609.35661",
+      "2609.35688",
+      "2609.35697",
+      "2609.35705",
+      "2609.35713",
+      "2609.35720",
+      "2609.35722",
+      "2609.35723",
+      "2609.35729",
+      "2609.35730",
+      "2609.35733",
+      "2609.35737",
+      "2609.35755",
+      "2609.35756",
+      "2609.35757"
+    ],
+    "included": [
+      {
+        "id": "2609.32435",
+        "reason": "Builds an elastic O6 Majoron-portal/scotogenic explanation of this 248 keV LZ candidate and tests it against solar capture.",
+        "url": "https://arxiv.org/abs/2609.32435"
+      },
+      {
+        "id": "2609.33869",
+        "reason": "Interprets this event with a heavy Higgsino in a low-reheating/modulus cosmology and evaluates the associated relic-density requirements.",
+        "url": "https://arxiv.org/abs/2609.33869"
+      },
+      {
+        "id": "2609.33952",
+        "reason": "Proposes a sub-MeV gamma-line test of the endothermic interpretation of this event with COSI.",
+        "url": "https://arxiv.org/abs/2609.33952"
+      },
+      {
+        "id": "2609.34230",
+        "reason": "Uses transition anapole and charge-radius freeze-in dark matter whose excited-state down-scattering can explain this event, with X-ray constraints.",
+        "url": "https://arxiv.org/abs/2609.34230"
+      },
+      {
+        "id": "2609.35650",
+        "reason": "Reconstructs the LZ inference for a two-state halo and shows when exothermic down-scattering dominates the candidate rate.",
+        "url": "https://arxiv.org/abs/2609.35650"
+      },
+      {
+        "id": "2609.35737",
+        "reason": "Quantifies Gaia-informed halo and Large Magellanic Cloud effects on the endothermic and exothermic fits to this candidate.",
+        "url": "https://arxiv.org/abs/2609.35737"
+      }
+    ],
+    "ambiguousCandidates": []
+  },
+  "nearMissExclusions": [
+    {
+      "id": "2609.31850",
+      "reason": "Studies white-dwarf probes of inelastic dark matter at MeV splittings but does not analyze the LZ candidate.",
+      "url": "https://arxiv.org/abs/2609.31850"
+    },
+    {
+      "id": "2609.33198",
+      "reason": "Reports a XENONnT solar-chameleon search in low-energy electronic recoils, unrelated to the 248 keV nuclear recoil.",
+      "url": "https://arxiv.org/abs/2609.33198"
+    },
+    {
+      "id": "2609.33877",
+      "reason": "Studies solar-neutrino oscillations and future XLZD reach, not this event.",
+      "url": "https://arxiv.org/abs/2609.33877"
+    },
+    {
+      "id": "2609.33514",
+      "reason": "Generic collider dark-matter work with no substantive analysis of this event.",
+      "url": "https://arxiv.org/abs/2609.33514"
+    },
+    {
+      "id": "2510.27022",
+      "reason": "Generic ultralight-dark-matter gravitational-wave search; author-field revision hit only.",
+      "url": "https://arxiv.org/abs/2510.27022"
+    },
+    {
+      "id": "2602.09962",
+      "reason": "Generic light-dark-matter cosmology; author-field revision hit only.",
+      "url": "https://arxiv.org/abs/2602.09962"
+    },
+    {
+      "id": "2605.04824",
+      "reason": "Generic singlet-doublet dark matter and leptogenesis; author-field revision hit only.",
+      "url": "https://arxiv.org/abs/2605.04824"
+    },
+    {
+      "id": "2609.28652",
+      "reason": "Gaia catalogue work that does not analyze this event.",
+      "url": "https://arxiv.org/abs/2609.28652"
+    }
+  ],
+  "revisionChecks": {
+    "submissionHistoriesChecked": 102,
+    "changed": [],
+    "note": "Every mapped abstract-page submission history matched the stored latest revision date; no revision required a catalog change."
+  },
+  "citationReconciliation": {
+    "scope": "Complete current official arXiv HTML reference lists for all six newly mapped papers; the weekly full-catalog reconciliation is next due Sunday.",
+    "checkedPaperCount": 6,
+    "completeReferenceCount": 600,
+    "existingPaperChanges": [],
+    "evidence": [
+      {
+        "id": "2609.32435",
+        "url": "https://arxiv.org/html/2609.32435",
+        "completeReferenceCount": 85,
+        "mappedCitationCount": 41
+      },
+      {
+        "id": "2609.33869",
+        "url": "https://arxiv.org/html/2609.33869",
+        "completeReferenceCount": 181,
+        "mappedCitationCount": 43
+      },
+      {
+        "id": "2609.33952",
+        "url": "https://arxiv.org/html/2609.33952",
+        "completeReferenceCount": 58,
+        "mappedCitationCount": 33
+      },
+      {
+        "id": "2609.34230",
+        "url": "https://arxiv.org/html/2609.34230",
+        "completeReferenceCount": 65,
+        "mappedCitationCount": 3
+      },
+      {
+        "id": "2609.35650",
+        "url": "https://arxiv.org/html/2609.35650",
+        "completeReferenceCount": 64,
+        "mappedCitationCount": 48
+      },
+      {
+        "id": "2609.35737",
+        "url": "https://arxiv.org/html/2609.35737",
+        "completeReferenceCount": 147,
+        "mappedCitationCount": 75
+      }
+    ],
+    "normalization": "Explicit citations to the official LZ result are stored as versionless 2609.02823.",
+    "uncertainEdges": []
+  },
+  "changes": {
+    "addedPaperIds": [
+      "2609.32435",
+      "2609.33869",
+      "2609.33952",
+      "2609.34230",
+      "2609.35650",
+      "2609.35737"
+    ],
+    "revisedPaperIds": [],
+    "candidateLogChanged": false,
+    "preserved": "All 102 established paper records, their order, summaries, takeaways, roles, islands, coordinates, and layoutRank values were preserved. The six additions were appended with new layoutRank values 102-107."
+  },
+  "validation": {
+    "catalogValidator": "passed: 108 papers and 9 islands",
+    "typecheck": "passed",
+    "lint": "passed",
+    "layoutTests": "passed: 11",
+    "dateRangeTests": "passed: 7",
+    "citationSizeTests": "passed: 3",
+    "themeTests": "passed: 7",
+    "seoTests": "passed: 3",
+    "productionBuild": "passed: 109 prerendered routes and sitemap for 108 papers",
+    "semanticDiff": "passed: all 102 established paper records and all non-paper catalog structures are byte-equivalent after canonical JSON sorting; new ranks are unique and append-only; every stored citation is sorted, unique, versionless, and targets a mapped paper",
+    "gitDiff": "passed: only data/landscape.json and this audit are modified for publication"
+  }
+}
