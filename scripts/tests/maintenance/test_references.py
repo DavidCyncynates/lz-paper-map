@@ -73,6 +73,19 @@ class BibliographyParserTests(unittest.TestCase):
         )
         self.assertNotIn("2609.99999", snapshot.references)
 
+    def test_legacy_identifier_is_not_truncated_after_a_hyphen(self) -> None:
+        document = """
+        <html><head>
+          <link rel="canonical" href="https://arxiv.org/html/2609.20001v1">
+        </head><body>
+          <section class="ltx_bibliography"><h2>References</h2><ol>
+            <li>Legacy preprint astro-ph/0610433.</li>
+          </ol></section>
+        </body></html>
+        """
+        snapshot = parse_bibliography_html(document, expected_id="2609.20001")
+        self.assertEqual(snapshot.references, ("astro-ph/0610433",))
+
     def test_recognized_empty_bibliography_is_complete(self) -> None:
         snapshot = parse_bibliography_html(
             fixture("references_empty.html"), expected_id="2609.20002"
@@ -88,6 +101,143 @@ class BibliographyParserTests(unittest.TestCase):
         self.assertEqual(snapshot.version, 1)
         self.assertEqual(snapshot.references, ("2609.02823",))
         self.assertIn("watermark", snapshot.identity_sources)
+
+    def test_prefers_substantive_references_over_reverse_citation_list(self) -> None:
+        snapshot = parse_bibliography_html(
+            fixture("references_reverse_citations.html"),
+            expected_id="2609.33869",
+        )
+        self.assertEqual(snapshot.version, 1)
+        self.assertEqual(snapshot.references, ("2501.12345", "2609.02823"))
+        self.assertEqual(snapshot.bibliography_containers, 2)
+        self.assertNotIn("2609.99998", snapshot.references)
+        self.assertNotIn("2609.99999", snapshot.references)
+
+    def test_normalizes_official_lz_preprint_aliases(self) -> None:
+        title_document = """
+        <html><head>
+          <link rel="canonical" href="https://arxiv.org/html/2609.01475v1">
+        </head><body>
+          <section class="ltx_bibliography"><h2>References</h2><ol>
+            <li>Search for dark matter particle interactions in an extended
+              nuclear recoil energy window with the LUX-ZEPLIN (LZ) experiment.</li>
+          </ol></section>
+        </body></html>
+        """
+        url_document = """
+        <html><head>
+          <link rel="canonical" href="https://arxiv.org/html/2609.01475v1">
+        </head><body>
+          <section class="ltx_bibliography"><h2>References</h2><ol>
+            <li><a href="https://lz.lbl.gov/wp-content/uploads/sites/6/2026/08/LZ_Preprint_260901_Dark_Matter_EFT_Nuclear_Recoil_Search_at_Higher_Energies.pdf">
+              collaboration manuscript</a></li>
+          </ol></section>
+        </body></html>
+        """
+        for document in (title_document, url_document):
+            snapshot = parse_bibliography_html(document, expected_id="2609.01475")
+            self.assertEqual(snapshot.references, ("2609.02823",))
+
+    def test_lz_preprint_filename_on_another_host_is_not_an_alias(self) -> None:
+        document = """
+        <html><head>
+          <link rel="canonical" href="https://arxiv.org/html/2609.01475v1">
+        </head><body>
+          <section class="ltx_bibliography"><h2>References</h2><ol>
+            <li><a href="https://example.test/LZ_Preprint_260901_Dark_Matter_EFT_Nuclear_Recoil_Search_at_Higher_Energies.pdf">
+              unrelated mirror</a></li>
+          </ol></section>
+        </body></html>
+        """
+        snapshot = parse_bibliography_html(document, expected_id="2609.01475")
+        self.assertEqual(snapshot.references, ())
+
+    def test_does_not_infer_lz_alias_from_generic_recoil_language(self) -> None:
+        document = """
+        <html><head>
+          <link rel="canonical" href="https://arxiv.org/html/2609.01475v1">
+        </head><body>
+          <section class="ltx_bibliography"><h2>References</h2><ol>
+            <li>An unrelated low-recoil LUX-ZEPLIN dark-matter search.</li>
+          </ol></section>
+        </body></html>
+        """
+        snapshot = parse_bibliography_html(document, expected_id="2609.01475")
+        self.assertEqual(snapshot.references, ())
+
+    def test_reverse_citation_list_without_real_references_fails_closed(self) -> None:
+        document = """
+        <html><head>
+          <link rel="canonical" href="https://arxiv.org/html/2609.33869v1">
+        </head><body>
+          <section id="bib" class="ltx_bibliography">
+            <h2>References</h2><ul><li>
+              <span class="ltx_tag_bibitem">[1]</span>
+              <span class="ltx_bib_cited">Cited by: <a href="#S1">section 1</a></span>
+            </li></ul>
+          </section>
+        </body></html>
+        """
+        with self.assertRaisesRegex(BibliographyParseError, "reverse citation"):
+            parse_bibliography_html(document, expected_id="2609.33869")
+
+    def test_multiple_substantive_references_sections_are_merged(self) -> None:
+        document = """
+        <html><head>
+          <link rel="canonical" href="https://arxiv.org/html/2609.33869v1">
+        </head><body>
+          <section><h2>References</h2>
+            <li class="ltx_bibitem">First, arXiv:2609.02823.</li>
+          </section>
+          <section><h2>References</h2>
+            <li class="ltx_bibitem">Second, arXiv:2501.12345.</li>
+          </section>
+        </body></html>
+        """
+        snapshot = parse_bibliography_html(document, expected_id="2609.33869")
+        self.assertEqual(snapshot.references, ("2501.12345", "2609.02823"))
+
+    def test_empty_unmarked_bibitem_fails_closed_as_malformed(self) -> None:
+        document = """
+        <html><head>
+          <link rel="canonical" href="https://arxiv.org/html/2609.33869v1">
+        </head><body>
+          <section><h2>References</h2>
+            <li class="ltx_bibitem"><span class="ltx_tag_bibitem">[1]</span></li>
+          </section>
+        </body></html>
+        """
+        with self.assertRaisesRegex(BibliographyParseError, "malformed"):
+            parse_bibliography_html(document, expected_id="2609.33869")
+
+    def test_nonempty_plain_list_without_reference_content_fails_closed(self) -> None:
+        document = """
+        <html><head>
+          <link rel="canonical" href="https://arxiv.org/html/2609.33869v1">
+        </head><body>
+          <section class="ltx_bibliography"><h2>References</h2><ol>
+            <li><span class="ltx_tag_bibitem">[1]</span></li>
+          </ol></section>
+        </body></html>
+        """
+        with self.assertRaisesRegex(BibliographyParseError, "malformed"):
+            parse_bibliography_html(document, expected_id="2609.33869")
+
+    def test_incomplete_recognized_bibliography_is_not_silently_ignored(self) -> None:
+        document = """
+        <html><head>
+          <link rel="canonical" href="https://arxiv.org/html/2609.33869v1">
+        </head><body>
+          <section class="ltx_bibliography"><ol>
+            <li>Unheaded entry, arXiv:2609.99999.</li>
+          </ol></section>
+          <section><h2>References</h2>
+            <li class="ltx_bibitem">Visible entry, arXiv:2609.02823.</li>
+          </section>
+        </body></html>
+        """
+        with self.assertRaisesRegex(BibliographyParseError, "malformed"):
+            parse_bibliography_html(document, expected_id="2609.33869")
 
     def test_missing_bibliography_container_fails_closed(self) -> None:
         with self.assertRaisesRegex(

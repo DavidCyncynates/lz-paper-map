@@ -44,7 +44,7 @@ REFERENCE_BUNDLE_SCHEMA_VERSION = 1
 _SPACE = re.compile(r"\s+")
 _ID_BODY = r"(?:\d{4}\.\d{4,5}|[a-z][a-z0-9.\-]+/\d{7})(?:v\d+)?"
 _BARE_ARXIV_ID = re.compile(
-    rf"(?i)(?<![a-z0-9.])(?P<id>{_ID_BODY})(?![a-z0-9/])"
+    rf"(?i)(?<![a-z0-9.\-])(?P<id>{_ID_BODY})(?![a-z0-9/])"
 )
 _LABELED_ARXIV_ID = re.compile(
     rf"(?i)\barxiv\s*(?::|\.)\s*(?P<id>{_ID_BODY})(?![a-z0-9/])"
@@ -53,6 +53,7 @@ _ARXIV_PATH_ID = re.compile(
     rf"(?i)/(?:abs|pdf|html)/(?P<id>{_ID_BODY})(?:\.pdf)?(?:/)?$"
 )
 _DOI_ARXIV_ID = re.compile(rf"(?i)/arxiv\.(?P<id>{_ID_BODY})(?:[/?#]|$)")
+_REFERENCE_LABEL_PREFIX = re.compile(r"^\s*\[[^]]+\]\s*")
 _VERSIONED_ID = re.compile(
     r"(?i)(?:^|/)(?:abs|pdf|html)/(?P<id>"
     + _ID_BODY
@@ -61,6 +62,23 @@ _VERSIONED_ID = re.compile(
 _BIBLIOGRAPHY_IDS = frozenset(("bib", "bibliography", "references", "reference-list"))
 _BIBLIOGRAPHY_CLASSES = frozenset(
     ("ltx_bibliography", "bibliography", "reference-list", "references")
+)
+_BIBLIOGRAPHY_ITEM_CLASS = "ltx_bibitem"
+_REVERSE_CITATION_CLASS = "ltx_bib_cited"
+_BIBLIOGRAPHY_LABEL_CLASSES = frozenset(
+    ("ltx_bib_key", "ltx_role_refnum", "ltx_tag_bibitem")
+)
+_HEADING_ELEMENTS = frozenset(("h1", "h2", "h3", "h4", "h5", "h6"))
+_LIST_ELEMENTS = frozenset(("ol", "ul"))
+_OFFICIAL_LZ_ARXIV_ID = "2609.02823"
+_OFFICIAL_LZ_PREPRINT_PATH = (
+    "lz_preprint_260901_dark_matter_eft_nuclear_recoil_search_at_higher_energies.pdf"
+)
+_OFFICIAL_LZ_REFERENCE_TITLES = (
+    "search for dark matter particle interactions in an extended nuclear recoil "
+    "energy window with the lux-zeplin (lz) experiment",
+    "search for dark matter interactions at high recoil energy with the "
+    "lux-zeplin experiment",
 )
 _IDENTITY_CONTAINER_IDS = frozenset(
     ("arxiv-id", "arxiv_id", "watermark", "watermark-tl", "watermark-tr")
@@ -96,6 +114,15 @@ def _clean_text(value: str) -> str:
     return _SPACE.sub(" ", value).strip()
 
 
+def _has_reference_content(text_parts: Iterable[str], hrefs: Iterable[str]) -> bool:
+    text = _REFERENCE_LABEL_PREFIX.sub("", _clean_text(" ".join(text_parts)))
+    if text.casefold().startswith("cited by:"):
+        return False
+    if text:
+        return True
+    return any(not href.strip().startswith("#") for href in hrefs)
+
+
 def _ids_from_href(href: str) -> list[str]:
     """Extract explicit arXiv identifiers from one reference link."""
 
@@ -112,6 +139,30 @@ def _ids_from_href(href: str) -> list[str]:
         values.append(doi_match.group("id"))
     values.extend(match.group("id") for match in _LABELED_ARXIV_ID.finditer(decoded))
     return values
+
+
+def _has_official_lz_reference(text: str, hrefs: Iterable[str]) -> bool:
+    """Recognize the public pre-arXiv form of the mapped LZ observation.
+
+    Several papers appeared before the collaboration deposited arXiv:2609.02823
+    and therefore cite the same manuscript by its LZ-hosted PDF or exact title.
+    Keeping this narrow alias here preserves citation lineage without asking the
+    model to infer an edge from prose.
+    """
+
+    normalized_text = _clean_text(text).casefold()
+    if any(title in normalized_text for title in _OFFICIAL_LZ_REFERENCE_TITLES):
+        return True
+    for href in hrefs:
+        parsed = urllib.parse.urlsplit(urllib.parse.unquote(href.strip()))
+        if (
+            parsed.scheme.casefold() == "https"
+            and (parsed.hostname or "").casefold() == "lz.lbl.gov"
+            and parsed.path.rstrip("/").rsplit("/", 1)[-1].casefold()
+            == _OFFICIAL_LZ_PREPRINT_PATH
+        ):
+            return True
+    return False
 
 
 def _identity_from_url(value: str) -> tuple[str, int | None] | None:
@@ -137,39 +188,194 @@ def _recognized_bibliography(attributes: Mapping[str, str]) -> bool:
     )
 
 
+@dataclasses.dataclass
+class _BibliographyItem:
+    text: list[str] = dataclasses.field(default_factory=list)
+    hrefs: list[str] = dataclasses.field(default_factory=list)
+    saw_reverse_citation: bool = False
+
+    @property
+    def has_reference_content(self) -> bool:
+        return _has_reference_content(self.text, self.hrefs)
+
+
+@dataclasses.dataclass
+class _BibliographyCandidate:
+    recognized: bool
+    headings: list[list[str]] = dataclasses.field(default_factory=list)
+    items: list[_BibliographyItem] = dataclasses.field(default_factory=list)
+    list_count: int = 0
+    list_item_count: int = 0
+    list_text: list[str] = dataclasses.field(default_factory=list)
+    list_hrefs: list[str] = dataclasses.field(default_factory=list)
+    reverse_citation_blocks: int = 0
+    closed: bool = False
+
+    @property
+    def heading(self) -> str | None:
+        headings = [_clean_text(" ".join(parts)) for parts in self.headings]
+        if len(headings) != 1:
+            return None
+        return headings[0]
+
+    @property
+    def is_bibliography_signal(self) -> bool:
+        return self.recognized or self.heading == "References"
+
+    @property
+    def substantive_items(self) -> list[_BibliographyItem]:
+        return [item for item in self.items if item.has_reference_content]
+
+    @property
+    def has_malformed_items(self) -> bool:
+        return any(
+            not item.has_reference_content and not item.saw_reverse_citation
+            for item in self.items
+        )
+
+    @property
+    def is_reverse_only(self) -> bool:
+        if self.items:
+            return all(
+                item.saw_reverse_citation and not item.has_reference_content
+                for item in self.items
+            )
+        return bool(self.reverse_citation_blocks) and not _has_reference_content(
+            self.list_text, self.list_hrefs
+        )
+
+    @property
+    def is_complete(self) -> bool:
+        if not self.closed or self.heading != "References":
+            return False
+        if self.items:
+            return bool(self.substantive_items) and not self.has_malformed_items
+        if not self.recognized or self.list_count != 1 or self.is_reverse_only:
+            return False
+        if self.list_item_count == 0:
+            return True
+        return _has_reference_content(self.list_text, self.list_hrefs)
+
+    def extraction_input(self) -> tuple[list[str], list[str]]:
+        if self.items:
+            items = self.substantive_items
+            return (
+                [href for item in items for href in item.hrefs],
+                [text for item in items for text in item.text],
+            )
+        return self.list_hrefs, self.list_text
+
+
+@dataclasses.dataclass(frozen=True)
+class _ParserFrame:
+    tag: str
+    identity_container: bool
+    candidate_started: int | None
+    heading_candidate: int | None
+    list_candidate: int | None
+    inside_reverse_citation: bool
+    inside_bibliography_label: bool
+
+
 class _BibliographyParser(html.parser.HTMLParser):
     def __init__(self) -> None:
         super().__init__(convert_charrefs=True)
-        self.stack: list[tuple[str, bool, bool]] = []
-        self.container_count = 0
-        self.bibliography_text: list[str] = []
-        self.bibliography_hrefs: list[str] = []
+        self.stack: list[_ParserFrame] = []
+        self.candidates: list[_BibliographyCandidate] = []
+        self.open_candidates: list[int] = []
+        self.active_item: tuple[int, _BibliographyItem] | None = None
         self.identity_candidates: list[tuple[str, int | None, str]] = []
         self.identity_text: list[str] = []
 
     @property
-    def inside_bibliography(self) -> bool:
-        return bool(self.stack and self.stack[-1][1])
+    def current_candidate(self) -> int | None:
+        return self.open_candidates[-1] if self.open_candidates else None
 
     @property
     def inside_identity_container(self) -> bool:
-        return bool(self.stack and self.stack[-1][2])
+        return bool(self.stack and self.stack[-1].identity_container)
+
+    @property
+    def container_count(self) -> int:
+        return sum(candidate.is_bibliography_signal for candidate in self.candidates)
+
+    @property
+    def bibliography_candidates(self) -> list[_BibliographyCandidate]:
+        return [
+            candidate
+            for candidate in self.candidates
+            if candidate.is_bibliography_signal
+        ]
 
     def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
         tag = tag.casefold()
         attributes = {key.casefold(): value or "" for key, value in attrs}
         self._consume_identity(tag, attributes)
         recognized = _recognized_bibliography(attributes)
-        inside = self.inside_bibliography or recognized
         identity_container = self.inside_identity_container or self._is_identity_container(
             attributes
         )
-        if recognized:
-            self.container_count += 1
-        if inside and tag == "a" and attributes.get("href"):
-            self.bibliography_hrefs.append(attributes["href"])
+        candidate_started = self._start_candidate(tag, recognized)
+        candidate_index = self.current_candidate
+        if recognized and candidate_index is not None:
+            self.candidates[candidate_index].recognized = True
+
+        classes = frozenset(attributes.get("class", "").casefold().split())
+        inside_reverse_citation = bool(
+            (self.stack and self.stack[-1].inside_reverse_citation)
+            or _REVERSE_CITATION_CLASS in classes
+        )
+        inside_bibliography_label = bool(
+            (self.stack and self.stack[-1].inside_bibliography_label)
+            or classes.intersection(_BIBLIOGRAPHY_LABEL_CLASSES)
+        )
+
+        heading_candidate = self.stack[-1].heading_candidate if self.stack else None
+        if tag in _HEADING_ELEMENTS and candidate_index is not None:
+            self.candidates[candidate_index].headings.append([])
+            heading_candidate = candidate_index
+
+        list_candidate = self.stack[-1].list_candidate if self.stack else None
+        if tag in _LIST_ELEMENTS and candidate_index is not None:
+            candidate = self.candidates[candidate_index]
+            candidate.list_count += 1
+            list_candidate = candidate_index
+        if tag == "li" and list_candidate is not None:
+            self.candidates[list_candidate].list_item_count += 1
+
+        if tag == "li" and _BIBLIOGRAPHY_ITEM_CLASS in classes:
+            self._finish_active_item()
+            if candidate_index is not None:
+                item = _BibliographyItem()
+                self.candidates[candidate_index].items.append(item)
+                self.active_item = (candidate_index, item)
+        if (
+            _REVERSE_CITATION_CLASS in classes
+            and candidate_index is not None
+        ):
+            self.candidates[candidate_index].reverse_citation_blocks += 1
+            if self.active_item is not None and self.active_item[0] == candidate_index:
+                self.active_item[1].saw_reverse_citation = True
+
+        self._consume_href(
+            tag,
+            attributes,
+            candidate_index=candidate_index,
+            list_candidate=list_candidate,
+            excluded=inside_reverse_citation or inside_bibliography_label,
+        )
         if tag not in _VOID_ELEMENTS:
-            self.stack.append((tag, inside, identity_container))
+            self.stack.append(
+                _ParserFrame(
+                    tag=tag,
+                    identity_container=identity_container,
+                    candidate_started=candidate_started,
+                    heading_candidate=heading_candidate,
+                    list_candidate=list_candidate,
+                    inside_reverse_citation=inside_reverse_citation,
+                    inside_bibliography_label=inside_bibliography_label,
+                )
+            )
 
     def handle_startendtag(
         self, tag: str, attrs: list[tuple[str, str | None]]
@@ -178,25 +384,122 @@ class _BibliographyParser(html.parser.HTMLParser):
         attributes = {key.casefold(): value or "" for key, value in attrs}
         self._consume_identity(tag, attributes)
         recognized = _recognized_bibliography(attributes)
-        if recognized:
-            self.container_count += 1
-        if (self.inside_bibliography or recognized) and tag == "a" and attributes.get(
-            "href"
+        candidate_started = self._start_candidate(tag, recognized)
+        candidate_index = self.current_candidate
+        if recognized and candidate_index is not None:
+            self.candidates[candidate_index].recognized = True
+        classes = frozenset(attributes.get("class", "").casefold().split())
+        list_candidate = self.stack[-1].list_candidate if self.stack else None
+        if tag == "li" and list_candidate is not None:
+            self.candidates[list_candidate].list_item_count += 1
+        if (
+            _REVERSE_CITATION_CLASS in classes
+            and candidate_index is not None
         ):
-            self.bibliography_hrefs.append(attributes["href"])
+            self.candidates[candidate_index].reverse_citation_blocks += 1
+            if self.active_item is not None and self.active_item[0] == candidate_index:
+                self.active_item[1].saw_reverse_citation = True
+        excluded = bool(
+            (self.stack and self.stack[-1].inside_reverse_citation)
+            or (self.stack and self.stack[-1].inside_bibliography_label)
+            or _REVERSE_CITATION_CLASS in classes
+            or classes.intersection(_BIBLIOGRAPHY_LABEL_CLASSES)
+        )
+        self._consume_href(
+            tag,
+            attributes,
+            candidate_index=candidate_index,
+            list_candidate=list_candidate,
+            excluded=excluded,
+        )
+        if candidate_started is not None:
+            self._close_candidate(candidate_started)
 
     def handle_endtag(self, tag: str) -> None:
         tag = tag.casefold()
         for index in range(len(self.stack) - 1, -1, -1):
-            if self.stack[index][0] == tag:
+            if self.stack[index].tag == tag:
+                removed = self.stack[index:]
+                if any(frame.tag == "li" for frame in removed):
+                    self._finish_active_item()
+                for frame in reversed(removed[1:]):
+                    if frame.candidate_started is not None:
+                        self._abandon_candidate(frame.candidate_started)
+                if self.stack[index].candidate_started is not None:
+                    self._close_candidate(self.stack[index].candidate_started)
                 del self.stack[index:]
                 break
 
     def handle_data(self, data: str) -> None:
-        if self.inside_bibliography:
-            self.bibliography_text.append(data)
+        if self.stack:
+            frame = self.stack[-1]
+            if frame.heading_candidate is not None:
+                headings = self.candidates[frame.heading_candidate].headings
+                if headings:
+                    headings[-1].append(data)
+            excluded = (
+                frame.inside_reverse_citation or frame.inside_bibliography_label
+            )
+            if not excluded and frame.list_candidate is not None:
+                self.candidates[frame.list_candidate].list_text.append(data)
+            if not excluded and self.active_item is not None:
+                candidate_index, item = self.active_item
+                if candidate_index == self.current_candidate:
+                    item.text.append(data)
         if self.inside_identity_container:
             self.identity_text.append(data)
+
+    def _start_candidate(self, tag: str, recognized: bool) -> int | None:
+        if tag != "section" and not recognized:
+            return None
+        if tag != "section" and self.open_candidates:
+            return None
+        candidate_index = len(self.candidates)
+        self.candidates.append(
+            _BibliographyCandidate(recognized=recognized)
+        )
+        self.open_candidates.append(candidate_index)
+        return candidate_index
+
+    def _close_candidate(self, candidate_index: int) -> None:
+        if self.active_item is not None and self.active_item[0] == candidate_index:
+            self._finish_active_item()
+        if candidate_index in self.open_candidates:
+            while self.open_candidates:
+                current = self.open_candidates.pop()
+                self.candidates[current].closed = current == candidate_index
+                if current == candidate_index:
+                    break
+
+    def _abandon_candidate(self, candidate_index: int) -> None:
+        if self.active_item is not None and self.active_item[0] == candidate_index:
+            self._finish_active_item()
+        if candidate_index in self.open_candidates:
+            while self.open_candidates:
+                current = self.open_candidates.pop()
+                self.candidates[current].closed = False
+                if current == candidate_index:
+                    break
+
+    def _finish_active_item(self) -> None:
+        self.active_item = None
+
+    def _consume_href(
+        self,
+        tag: str,
+        attributes: Mapping[str, str],
+        *,
+        candidate_index: int | None,
+        list_candidate: int | None,
+        excluded: bool,
+    ) -> None:
+        href = attributes.get("href") if tag == "a" else None
+        if not href or excluded:
+            return
+        if list_candidate is not None:
+            self.candidates[list_candidate].list_hrefs.append(href)
+        if self.active_item is not None and self.active_item[0] == candidate_index:
+            self.active_item[1].hrefs.append(href)
 
     @staticmethod
     def _is_identity_container(attributes: Mapping[str, str]) -> bool:
@@ -361,9 +664,14 @@ def parse_bibliography_html(
 ) -> BibliographySnapshot:
     """Parse one complete arXiv HTML bibliography.
 
-    Bare identifiers are considered only inside a recognized bibliography.
-    Document identity is independently established from canonical metadata,
-    not from links in the bibliography itself.
+    A complete candidate needs an exact ``References`` heading plus either
+    substantive LaTeXML bibliography items or one explicit list inside a
+    recognized bibliography container.  Reverse ``Cited by`` blocks are not
+    reference evidence. Bare identifiers are considered only inside the
+    selected candidates. Multiple structurally complete References sections in the same
+    exact-version document (for example, main text plus supplement) are merged.
+    Document identity is independently established from canonical metadata, not
+    from links in the bibliography itself.
     """
 
     parser = _BibliographyParser()
@@ -422,16 +730,42 @@ def parse_bibliography_html(
             )
         version = next(iter(versions))
 
+    candidates = parser.bibliography_candidates
+    if any(not candidate.closed for candidate in candidates):
+        raise BibliographyParseError("unterminated bibliography candidate")
+    malformed = [
+        candidate
+        for candidate in candidates
+        if not candidate.is_complete and not candidate.is_reverse_only
+    ]
+    if malformed:
+        raise BibliographyParseError("malformed References section")
+    complete = [candidate for candidate in candidates if candidate.is_complete]
+    if not complete:
+        if any(candidate.is_reverse_only for candidate in candidates):
+            raise BibliographyParseError(
+                "bibliography contains only reverse citation entries"
+            )
+        raise BibliographyParseError("no complete References section")
+    bibliography_hrefs: list[str] = []
+    bibliography_parts: list[str] = []
+    for candidate in complete:
+        candidate_hrefs, candidate_parts = candidate.extraction_input()
+        bibliography_hrefs.extend(candidate_hrefs)
+        bibliography_parts.extend(candidate_parts)
+
     raw_ids: list[str] = []
-    for href in parser.bibliography_hrefs:
+    for href in bibliography_hrefs:
         raw_ids.extend(_ids_from_href(href))
-    bibliography_text = _clean_text(" ".join(parser.bibliography_text))
+    bibliography_text = _clean_text(" ".join(bibliography_parts))
     raw_ids.extend(
         match.group("id") for match in _LABELED_ARXIV_ID.finditer(bibliography_text)
     )
     raw_ids.extend(
         match.group("id") for match in _BARE_ARXIV_ID.finditer(bibliography_text)
     )
+    if _has_official_lz_reference(bibliography_text, bibliography_hrefs):
+        raw_ids.append(_OFFICIAL_LZ_ARXIV_ID)
     references = tuple(canonical_arxiv_ids(raw_ids))
     identity_sources = tuple(
         sorted({source for _id, _version, source in parser.identity_candidates})
