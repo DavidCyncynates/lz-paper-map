@@ -54,6 +54,9 @@ _ARXIV_PATH_ID = re.compile(
 )
 _DOI_ARXIV_ID = re.compile(rf"(?i)/arxiv\.(?P<id>{_ID_BODY})(?:[/?#]|$)")
 _REFERENCE_LABEL_PREFIX = re.compile(r"^\s*\[[^]]+\]\s*")
+_SPLIT_LEGACY_ARCHIVE = re.compile(
+    r"(?i)\b(?P<prefix>[a-z][a-z0-9.]*-)\s+(?P<suffix>[a-z][a-z0-9.\-]*/\d{7}(?:v\d+)?)\b"
+)
 _VERSIONED_ID = re.compile(
     r"(?i)(?:^|/)(?:abs|pdf|html)/(?P<id>"
     + _ID_BODY
@@ -112,6 +115,15 @@ class BibliographyParseError(ParseError):
 
 def _clean_text(value: str) -> str:
     return _SPACE.sub(" ", value).strip()
+
+
+def _normalize_bibliography_text(value: str) -> str:
+    """Undo a narrow LaTeXML space insertion inside legacy arXiv archives."""
+
+    cleaned = _clean_text(value)
+    return _SPLIT_LEGACY_ARCHIVE.sub(
+        lambda match: match.group("prefix") + match.group("suffix"), cleaned
+    )
 
 
 def _has_reference_content(text_parts: Iterable[str], hrefs: Iterable[str]) -> bool:
@@ -757,7 +769,7 @@ def parse_bibliography_html(
     raw_ids: list[str] = []
     for href in bibliography_hrefs:
         raw_ids.extend(_ids_from_href(href))
-    bibliography_text = _clean_text(" ".join(bibliography_parts))
+    bibliography_text = _normalize_bibliography_text(" ".join(bibliography_parts))
     raw_ids.extend(
         match.group("id") for match in _LABELED_ARXIV_ID.finditer(bibliography_text)
     )
