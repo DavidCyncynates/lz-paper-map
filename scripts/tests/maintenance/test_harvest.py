@@ -134,6 +134,18 @@ class ParserTests(unittest.TestCase):
         self.assertTrue(reached)
         self.assertIsNotNone(page.next_url)
 
+    def test_exact_id_search_accepts_verified_abstract_redirect(self) -> None:
+        exact_url = SEARCH_URL.replace("query=LZ", "query=2609.10001")
+        page = parse_search_page(fixture("harvest_abstract_v2.html"), url=exact_url)
+        self.assertEqual(page.ids, ("2609.10001",))
+        self.assertIsNone(page.next_url)
+        self.assertEqual(page.total_results, 1)
+
+    def test_exact_id_search_rejects_mismatched_abstract_redirect(self) -> None:
+        exact_url = SEARCH_URL.replace("query=LZ", "query=2609.99999")
+        with self.assertRaisesRegex(ParseError, "identity mismatch"):
+            parse_search_page(fixture("harvest_abstract_v2.html"), url=exact_url)
+
     def test_malformed_search_fails_closed(self) -> None:
         with self.assertRaises(ParseError):
             parse_search_page(fixture("harvest_search_malformed.html"), url=SEARCH_URL)
