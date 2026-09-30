@@ -1,8 +1,8 @@
 {
   "schemaVersion": 2,
   "title": "LZ high-recoil literature landscape",
-  "updatedAt": "2026-09-29",
-  "lastSuccessfulScan": "2026-09-29T09:20:12Z",
+  "updatedAt": "2026-09-30",
+  "lastSuccessfulScan": "2026-09-30T09:46:25Z",
   "event": {
     "energyKev": 248,
     "statisticalUncertaintyKev": 23,
@@ -12,7 +12,7 @@
   },
   "citationData": {
     "source": "arXiv reference lists",
-    "checkedAt": "2026-09-29",
+    "checkedAt": "2026-09-30",
     "scope": "Citations between papers in this map",
     "note": "References to the official LZ preprint are normalized to arXiv:2609.02823."
   },
@@ -2731,7 +2731,7 @@
       "title": "Nuclear Recoils from Invisible Neutron-Pair Annihilation and the LZ event",
       "authors": ["Junseok Lee", "Fuminobu Takahashi", "Yu-Dai Tsai"],
       "published": "2026-09-10",
-      "updated": "2026-09-10",
+      "updated": "2026-09-29",
       "url": "https://arxiv.org/abs/2609.12045",
       "role": "explanation",
       "primaryIsland": "absorption",
@@ -2746,7 +2746,18 @@
       "takeaway": "Turns the event into a nuclear-disappearance line with isotope and companion-signal cross-checks.",
       "x": 34.72,
       "y": 40.23,
-      "cites": ["2609.02823", "2609.09037"]
+      "cites": [
+        "2609.01475", "2609.01504", "2609.01583", "2609.01590", "2609.01592",
+        "2609.01892", "2609.02505", "2609.02608", "2609.02775", "2609.02807",
+        "2609.02823", "2609.02868", "2609.04144", "2609.04163", "2609.04175",
+        "2609.04181", "2609.04185", "2609.04186", "2609.04673", "2609.05204",
+        "2609.05291", "2609.06153", "2609.06171", "2609.06571", "2609.06640",
+        "2609.06750", "2609.06756", "2609.06760", "2609.06825", "2609.06890",
+        "2609.06909", "2609.07138", "2609.07225", "2609.07451", "2609.07742",
+        "2609.07800", "2609.07807", "2609.07811", "2609.08712", "2609.08893",
+        "2609.08993", "2609.09015", "2609.09037", "2609.09107", "2609.09136",
+        "2609.09138", "2609.09230", "2609.09385"
+      ]
     },
     {
       "id": "2609.13038",
@@ -5191,6 +5202,159 @@
         "2609.15600", "2609.15634", "2609.15714", "2609.15742", "2609.15933",
         "2609.15985", "2609.16529", "2609.17196", "2609.17412", "2609.17935",
         "2609.18564", "2609.19174", "2609.21444", "2609.21823", "2609.30255"
+      ]
+    },
+    {
+      "id": "2609.36184",
+      "layoutRank": 108,
+      "arxivId": "2609.36184",
+      "title": "LMC-Perturbed LZ Dark Matter Landscape",
+      "authors": ["Nassim Bozorgnia", "Samantha Contreras", "Graciela B. Gelmini", "Alvine C. Kamaha", "Javier Reynoso-Cordova", "Yongheng Xu"],
+      "published": "2026-09-28",
+      "updated": "2026-09-28",
+      "url": "https://arxiv.org/abs/2609.36184",
+      "role": "diagnostic",
+      "primaryIsland": "constraints",
+      "islands": ["constraints", "endothermic", "elastic"],
+      "tags": [
+        "Large Magellanic Cloud",
+        "high-velocity tail",
+        "endothermic dark matter",
+        "halo uncertainty"
+      ],
+      "summary": "The authors propagate a Large-Magellanic-Cloud-enhanced high-speed tail through a range of event interpretations, finding sizeable shifts for endothermic models while elastic candidates are comparatively stable.",
+      "takeaway": "LMC-induced halo structure changes which inelastic splittings remain viable and strengthens the case for model-specific astrophysical treatment.",
+      "x": 68.32,
+      "y": 96.0,
+      "cites": [
+        "2609.01504", "2609.01583", "2609.01590", "2609.02608", "2609.02775",
+        "2609.02823", "2609.04175", "2609.04181", "2609.04673", "2609.05204",
+        "2609.06153", "2609.06571", "2609.06890", "2609.07138", "2609.07225",
+        "2609.09107", "2609.10453", "2609.15321", "2609.15985", "2609.17196",
+        "2609.17412", "2609.18564", "2609.21011", "2609.21444", "2609.21823",
+        "2609.22739", "2609.23477", "2609.24982", "2609.24988", "2609.25723",
+        "2609.26570", "2609.26870"
+      ]
+    },
+    {
+      "id": "2609.36814",
+      "layoutRank": 109,
+      "arxivId": "2609.36814",
+      "title": "Does the High-Energy LUX--ZEPLIN Event Suggest Hyperfine Atomic Dark Matter?",
+      "authors": ["Prolay Chanda", "Bhaskar Das", "Sagnik Mukherjee"],
+      "published": "2026-09-29",
+      "updated": "2026-09-29",
+      "url": "https://arxiv.org/abs/2609.36814",
+      "role": "explanation",
+      "primaryIsland": "endothermic",
+      "islands": ["endothermic", "constraints", "multimessenger"],
+      "tags": [
+        "atomic dark matter",
+        "hyperfine excitation",
+        "target hierarchy",
+        "annual modulation"
+      ],
+      "summary": "The authors fit the recoil with hyperfine excitation of TeV-scale hydrogen-like atomic dark matter at a roughly 340 keV splitting, placing xenon near threshold on the high-speed halo tail.",
+      "takeaway": "The atomic benchmark predicts a sharp target hierarchy, large annual modulation, and enhanced reach when the Large Magellanic Cloud is included.",
+      "x": 51.18,
+      "y": 35.97,
+      "cites": [
+        "2609.01475", "2609.01504", "2609.01583", "2609.01590", "2609.01892",
+        "2609.02608", "2609.02775", "2609.02807", "2609.02823", "2609.02868",
+        "2609.04144", "2609.04163", "2609.04175", "2609.04181", "2609.04185",
+        "2609.04186", "2609.04673", "2609.05204", "2609.06153", "2609.06171",
+        "2609.06571", "2609.06640", "2609.06756", "2609.06760", "2609.06825",
+        "2609.06890", "2609.06909", "2609.07138", "2609.07225", "2609.07451",
+        "2609.07742", "2609.07800", "2609.07807", "2609.07811", "2609.08893",
+        "2609.08993", "2609.09015", "2609.09107", "2609.09136", "2609.09138",
+        "2609.09385", "2609.10491", "2609.10827", "2609.15742", "2609.23477",
+        "2609.24988", "2609.28819"
+      ]
+    },
+    {
+      "id": "2609.37545",
+      "layoutRank": 110,
+      "arxivId": "2609.37545",
+      "title": "Endothermic Dark Matter at LZ from a Decaying Parent",
+      "authors": ["Yongsoo Jho", "Sanghwan Kim", "Seong Chan Park"],
+      "published": "2026-09-29",
+      "updated": "2026-09-29",
+      "url": "https://arxiv.org/abs/2609.37545",
+      "role": "explanation",
+      "primaryIsland": "endothermic",
+      "islands": ["endothermic", "multimessenger", "constraints"],
+      "tags": [
+        "decaying parent",
+        "boosted flux",
+        "endothermic scattering",
+        "target thresholds"
+      ],
+      "summary": "A long-lived Galactic parent supplies boosted ground-state particles that upscatter endothermically on xenon; an explicit benchmark peaks at 248.5 keV and fixes the lifetime-cross-section normalization.",
+      "takeaway": "A decay-produced flux removes the need for the ordinary halo tail but leaves testable elastic-scattering and target-threshold requirements.",
+      "x": 43.21,
+      "y": 45.24,
+      "cites": [
+        "2609.01475", "2609.01504", "2609.01583", "2609.01590", "2609.01592",
+        "2609.01892", "2609.02505", "2609.02608", "2609.02775", "2609.02807",
+        "2609.02823", "2609.02868", "2609.04144", "2609.04163", "2609.04175",
+        "2609.04181", "2609.04185", "2609.04186", "2609.04673", "2609.05204",
+        "2609.05291", "2609.06153", "2609.06171", "2609.06571", "2609.06640",
+        "2609.06750", "2609.06756", "2609.06760", "2609.06825", "2609.06890",
+        "2609.06909", "2609.07138", "2609.07225", "2609.07451", "2609.07742",
+        "2609.07800", "2609.07807", "2609.07811", "2609.08712", "2609.08893",
+        "2609.08993", "2609.09015", "2609.09037", "2609.09107", "2609.09136",
+        "2609.09138", "2609.09230", "2609.09385", "2609.10453", "2609.10491",
+        "2609.10504", "2609.10636", "2609.10827", "2609.11600", "2609.11833",
+        "2609.12045", "2609.13038", "2609.14799", "2609.15027", "2609.15118",
+        "2609.15321", "2609.15413", "2609.15600", "2609.15634", "2609.15714",
+        "2609.15742", "2609.15782", "2609.15933", "2609.15985", "2609.16529",
+        "2609.17196", "2609.17412", "2609.17935", "2609.18564", "2609.19174",
+        "2609.21011", "2609.21444", "2609.21823", "2609.22063", "2609.22739",
+        "2609.23096", "2609.23477", "2609.23691", "2609.24982", "2609.24988",
+        "2609.25114", "2609.25723", "2609.26570", "2609.26698"
+      ]
+    },
+    {
+      "id": "2609.37561",
+      "layoutRank": 111,
+      "arxivId": "2609.37561",
+      "title": "Decaying Dark Matter for the Exothermic Recoil at LZ",
+      "authors": ["Yongsoo Jho", "Sanghwan Kim", "Seong Chan Park"],
+      "published": "2026-09-29",
+      "updated": "2026-09-29",
+      "url": "https://arxiv.org/abs/2609.37561",
+      "role": "explanation",
+      "primaryIsland": "exothermic",
+      "islands": ["exothermic", "multimessenger", "constraints"],
+      "tags": [
+        "decaying parent",
+        "exothermic scattering",
+        "recoil line",
+        "gamma-ray constraint"
+      ],
+      "summary": "A slowly decaying halo parent continually replenishes an excited GeV-scale state whose exothermic downscattering yields a narrow xenon line without a low-energy tail.",
+      "takeaway": "Normalizing the line to one event predicts a higher-energy argon recoil and ties the viable mass range to radiative-decay limits.",
+      "x": 90.87,
+      "y": 61.22,
+      "cites": [
+        "2609.01475", "2609.01504", "2609.01583", "2609.01590", "2609.01892",
+        "2609.02608", "2609.02775", "2609.02807", "2609.02823", "2609.02868",
+        "2609.04144", "2609.04163", "2609.04175", "2609.04181", "2609.04185",
+        "2609.04186", "2609.04673", "2609.05204", "2609.05291", "2609.06153",
+        "2609.06171", "2609.06571", "2609.06640", "2609.06750", "2609.06756",
+        "2609.06760", "2609.06825", "2609.06890", "2609.06909", "2609.07138",
+        "2609.07225", "2609.07451", "2609.07742", "2609.07800", "2609.07807",
+        "2609.07811", "2609.08712", "2609.08893", "2609.08993", "2609.09015",
+        "2609.09037", "2609.09107", "2609.09136", "2609.09138", "2609.09230",
+        "2609.09385", "2609.10453", "2609.10491", "2609.10504", "2609.10636",
+        "2609.10827", "2609.11600", "2609.11833", "2609.12045", "2609.13038",
+        "2609.14799", "2609.15027", "2609.15118", "2609.15321", "2609.15413",
+        "2609.15600", "2609.15634", "2609.15714", "2609.15742", "2609.15782",
+        "2609.15933", "2609.15985", "2609.16529", "2609.17196", "2609.17412",
+        "2609.17935", "2609.18564", "2609.19174", "2609.21011", "2609.21444",
+        "2609.21823", "2609.22063", "2609.22739", "2609.23096", "2609.23477",
+        "2609.23691", "2609.24982", "2609.24988", "2609.25114", "2609.25723",
+        "2609.26570", "2609.26698"
       ]
     }
   ]
