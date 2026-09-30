@@ -36,8 +36,17 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      - name: Check generated catalog and map artifacts
+        run: pnpm check:generated
+
       - name: Validate the paper catalog
         run: python scripts/update_papers.py --validate-only
+
+      - name: Test incremental maintenance state
+        run: pnpm test:maintenance
+
+      - name: Test generated catalog index
+        run: pnpm test:catalog-index
 
       - name: Check types
         run: pnpm typecheck
@@ -47,6 +56,9 @@ jobs:
 
       - name: Test hierarchical map layout
         run: pnpm test:layout
+
+      - name: Test generated map layouts
+        run: pnpm test:layout-artifact
 
       - name: Test publication date filtering
         run: pnpm test:date-range

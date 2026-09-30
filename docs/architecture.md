@@ -17,25 +17,37 @@ ordinary version-controlled data changes.
 
 ```text
 public arXiv listings, abstract pages, HTML, and PDFs
+plus newest-first INSPIRE citation results (candidate IDs only)
+      │
+      ▼
+rate-limited collector + durable task-local SQLite ledger
+      │
+      ▼
+compact new/revised-paper review bundle
       │
       ▼
 local scheduled Codex review in an isolated worktree
       │
       ▼
-reference verification + schema checks + stable placement
+reference verification + generated indexes and layouts
       │
       ▼
 review pull request ── human merge ── GitHub Pages deployment
 ```
 
-There is no database or production server. The browser reads the committed
-catalog in `data/landscape.json`, and the build exports plain static assets.
+There is no production database or server. The private SQLite ledger is a
+rebuildable maintenance cache outside ephemeral worktrees; it is not shipped to
+readers and is not an editorial source of truth. The browser reads the
+committed catalog and deterministic artifacts under `data/generated/`, and the
+build exports plain static assets.
 Project-site builds prefix asset URLs with the repository name and then flatten
 the generated asset folder so GitHub Pages can mount the artifact at that path.
 
 ## Trust boundaries
 
 - arXiv is authoritative for identifiers, titles, authors, dates, and links.
+- INSPIRE's public literature interface is used only to discover IDs citing the
+  official LZ record; every candidate is verified against arXiv.
 - The scheduled task may propose only relevance, role, existing island
   membership, tags, a neutral summary, and a short inclusion rationale.
 - Citation edges are checked separately against arXiv paper reference lists.
@@ -54,11 +66,13 @@ the generated asset folder so GitHub Pages can mount the artifact at that path.
 ## Catalog and taxonomy
 
 `data/landscape.json` is the single source of truth for this first, small
-corpus. Every paper stores canonical arXiv metadata, a role, one primary island,
-up to two secondary islands, tags, machine-assisted explanatory text, stable
-coordinates, and the mapped paper IDs that its reference list cites. Reverse
-“cited by” lists are derived from those directional citations rather than stored
-separately.
+corpus. Every paper stores canonical arXiv metadata including a positive exact
+`arxivVersion`, a role, one primary island, up to two secondary islands, tags,
+machine-assisted explanatory text, stable coordinates, and the mapped paper IDs
+that its exact-version reference list cites. Reverse
+“cited by” lists, incoming counts, and normalized search text are materialized
+in a generated index. Its catalog digest is checked before each build; server
+code also rebuilds it safely in memory if a stale artifact is encountered.
 
 The first atlas uses nine fixed islands:
 
@@ -80,18 +94,22 @@ separate, discussed atlas revision.
 
 Researchers should be able to build a mental map over time. For that reason,
 the browser never runs a random or continuously moving force layout, and the
-scheduled task does not rewrite existing semantic coordinates.
+scheduled task does not rewrite existing semantic coordinates. Layouts for both
+uniform and citation-sized dots are generated before publication and committed
+as a versioned artifact; changing the toggle swaps coordinate tables.
 
 Each island keeps a fixed semantic seed rather than a fixed visible boundary. A
 new paper is attracted mostly toward its primary island and partly toward any
 secondary islands. A hash of the arXiv ID provides deterministic jitter;
 collision checks find the first unoccupied position. Existing coordinates remain
-pinned as semantic anchors. At display time, a deterministic hierarchical solve
-first assembles each primary island independently. Its label and paper dots have
-short-range collision repulsion, while weak center attraction and authored
-coordinate springs preserve a compact, recognizable local arrangement. An exact
-minimum enclosing circle is calculated over the settled paper discs and all four
-corners of the measured label, then padded to form the visible island.
+pinned as semantic anchors. During artifact generation, a deterministic
+hierarchical solve first assembles each primary island independently. Its label
+and paper dots have short-range collision repulsion, while weak center attraction
+and authored coordinate springs preserve a compact, recognizable local
+arrangement. Collision candidates come from a uniform spatial grid instead of
+an all-pairs scan. A fixed-seed incremental smallest-enclosing-disc solver wraps
+the settled paper discs and all four corners of a conservative fixed label box,
+then verifies containment in one final linear pass and adds visual padding.
 
 Every paper has an immutable, contiguous `layoutRank` assigned when it enters
 the catalog. During a local collision, the higher-ranked record absorbs most of
@@ -109,18 +127,18 @@ springs toward their semantic anchors, attract gently toward the map centroid,
 and repel at short range so their shaded regions cannot overlap. The LZ result
 and its label participate as one additional collision circle, but that circle is
 not drawn. Children translate with their island and are never rotated, scaled,
-or independently re-solved during this outer pass. Only the settled result is
-rendered: there is no visible animation, and filtering does not reflow the map.
-The browser reveals spatial geometry only after the actual label and dot extents
-have been measured and both solver levels report convergence. If the available
-world cannot satisfy containment, separation, or canvas bounds, the map stays
-mounted but hidden so it can recover after a resize; an accessible message sends
-the reader to the matching list view instead of displaying misleading overlaps.
+or independently re-solved during this outer pass. Only the generated settled
+result is rendered: there is no visible animation, font-measurement solve, or
+filter reflow. Generation fails closed if containment, separation, or canvas
+bounds do not validate in either mode. The previously published artifact and
+list view remain available rather than displaying misleading overlaps.
 
 Secondary memberships remain searchable and inform semantic placement, but do
 not duplicate a paper across physical islands. Adding a paper can enlarge its
 primary circle and trigger deterministic repacking without changing the
-committed semantic coordinates.
+committed semantic coordinates. Generated artifacts are keyed by catalog and
+solver versions; future per-island caches can reuse unaffected local solves
+without changing the public file format.
 
 The map lives on a larger two-dimensional stage that can be scrolled, dragged,
 and zoomed. This gives dense families room to breathe while preserving a
@@ -128,13 +146,13 @@ viewport-height interface and a stable coordinate system.
 
 The shaded island circles are restrained, borderless visual regions rather than
 inferred statistical confidence areas; the experimental anchor does not need a
-visible circle. Dot size is uniform by default. An optional “citations on this
-map” mode derives incoming counts from the full verified mapped citation graph
-and scales perceived dot area with a bounded `log(1 + citations)` transform from
-12–28 pixels. The fixed scale keeps additions from resizing every existing dot,
-and the two-stage solver reruns with the resulting radii so dots, labels, and
-island circles remain separated. These are not global scholarly citation totals
-or a proxy for evidence strength.
+visible circle. The default “citations on this map” mode derives incoming counts
+from the full verified mapped citation graph and scales perceived dot area with
+a bounded `log(1 + citations)` transform from 12–28 pixels. A uniform-size
+toggle remains available. The fixed citation scale keeps additions from
+resizing every existing dot. Each mode has its own generated layout, so dots,
+labels, and island circles remain separated. These are not global scholarly
+citation totals or a proxy for evidence strength.
 
 The detail panel lists the complete “cites” and “cited by” relationships among
 mapped papers. Keeping citation lineage out of the spatial canvas avoids
@@ -145,25 +163,28 @@ from producing a starburst of lines.
 
 At 11:00 Europe/Rome every day, the scheduled task:
 
-1. completely enumerates the relevant public arXiv new/recent listings over a
-   seven-day overlap and reads every plausibly related abstract, without
-   requiring LZ language in the title;
-2. searches broad standalone event phrases and identifiers, citation neighbors,
-   and new-paper authors as independent discovery lanes;
-3. deduplicates results by versionless arXiv ID and checks known abstract pages
-   for new revisions;
-4. conservatively screens genuinely new or revised records for relevance to the
-   isolated 248 keV candidate;
-5. verifies outgoing citations from each affected paper's current arXiv HTML
-   reference list or PDF reference section;
-6. on Sundays, reconciles the reference lists of every mapped paper to repair
-   older omissions as well as changes associated with new revisions;
-7. validates taxonomy references, URLs, coordinates, roles, and citation IDs;
-8. records per-lane coverage and refuses to advance the successful-scan
-   timestamp if a listing, pagination step, search, or discovery lane was
-   incomplete;
-9. writes a concise source audit when data changes; and
-10. opens a new pull request for human review.
+1. starts an atomic ledger run and plans coverage from the private completed
+   cursor, not from the website's public update date;
+2. fetches recent public HTML pages politely, records immutable announcement
+   batches, and reuses unchanged batches in the overlap window;
+3. advances the newest-first INSPIRE citation-neighbor frontier and the arXiv
+   broad-phrase, exact observation identifier/title, and unique-author search
+   frontiers only after complete coverage, while bounded overlapping category
+   listings independently catch mapped-paper replacements; known IDs resurfacing
+   in either path are hydrated to detect exact-version revisions;
+4. fetches metadata for previously unseen IDs and arXiv versions, then emits a
+   compact candidate bundle rather than placing raw pages or the full catalog in
+   model context;
+5. conservatively reviews those genuinely new or revised records for relevance
+   to the isolated 248 keV candidate;
+6. stores each affected paper's complete explicit arXiv reference set by version
+   and derives mapped outgoing and reverse citation edges locally;
+7. regenerates catalog and dual-layout artifacts and validates taxonomy, stable
+   ranks, coordinates, citations, artifact digests, and geometry;
+8. atomically completes all required lanes—even on a no-change day—or promotes
+   no cursors if any lane was deferred, throttled, malformed, or incomplete;
+9. writes a concise delta audit and opens a pull request only when public facts
+   or the human-review queue changed.
 
 Existing human-reviewed summaries, island memberships, coordinates, and layout
 ranks remain fixed. New records are appended with the next rank. When a revision
@@ -175,8 +196,9 @@ fresh static build and GitHub Pages deployment. When a maintenance pull request
 remains open, later scans pause to avoid overwriting reviewer edits or newer
 corrections on `main`.
 
-Uncertain candidates retain their source update date for human review. A later
-arXiv revision may make them eligible for a new assessment.
+Uncertain and excluded decisions are keyed by paper version and evidence hash.
+A later arXiv revision therefore becomes eligible for a new assessment without
+re-reviewing unchanged versions.
 
 ## Research interface
 
@@ -197,20 +219,21 @@ endorsement nor peer review.
 Every meaningful scan writes a manifest under `data/runs/` with its timestamp,
 per-lane coverage, public source pages, changed records, citation evidence, and
 validation results. The candidate log preserves uncertain suggestions. Git
-history then records exactly what a reviewer accepted. Catalog validation also
+history then records exactly what a reviewer accepted. No-change coverage and
+resumable checkpoints remain private in the task-local ledger, preventing audit
+files and model memory from growing on routine days. Catalog validation also
 requires layout ranks to be unique, contiguous integers, preventing a missing or
 reused stability identity from reaching the site.
 
-The pure solver and conservative current-catalog geometry fixtures are checked
-in CI in both sizing modes: every primary paper and label corner must remain
-inside its circle, all nine packing bodies (including the hidden LZ body) must
-remain separated and within the world, and reversing input order must produce
-byte-identical geometry. The suite also covers citation counting and scaling,
-scale-safe exact circles, dense/coincident bodies, invalid geometry, an
-impossible viewport, and the displacement caused by adding one later paper,
-including an older-ID backfill and an edge-growing placement. Runtime
-convergence checks cover the browser's measured font and focus extents, which
-cannot be known exactly in the Node-only fixture.
+CI verifies generated catalog and layout digests before building. The pure
+solver and current-catalog artifacts are checked in both sizing modes: every
+primary paper and fixed label box must remain inside its circle, all nine
+packing bodies (including the hidden LZ body) must remain separated, and input
+reordering must produce byte-identical geometry. Stress fixtures cover thousands
+of enclosing bodies and hundreds of island nodes, dense/coincident bodies,
+invalid geometry, impossible viewports, older-ID backfills, and edge-driven
+growth. Ledger tests cover immutable evidence, fail-closed lane completion,
+no-change cursors, reference snapshots, author deduplication, and safe recovery.
 
 The next useful upgrades are manual field locks, a contribution/correction form
 backed by GitHub Issues, and embeddings for suggesting conceptual neighbors

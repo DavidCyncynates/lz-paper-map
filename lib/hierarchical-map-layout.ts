@@ -79,7 +79,6 @@ type PackedIsland = LayoutCircle & {
 };
 
 const INNER_ITERATIONS = 260;
-const INNER_CLEANUP_MIN_ITERATIONS = 720;
 const INNER_CLEANUP_MAX_ITERATIONS = 1200;
 const OUTER_ITERATIONS = 300;
 const OUTER_CLEANUP_MAX_ITERATIONS = 5000;
@@ -372,8 +371,8 @@ function isBetterCircle(candidate: LayoutCircle, current: LayoutCircle | null) {
   return candidate.y < current.y;
 }
 
-function findMinimumEnclosingCircle(
-  bodies: readonly EnclosingBody[],
+function minimumCircleForSupport(
+  support: readonly EnclosingBody[],
 ): LayoutCircle {
   let best: LayoutCircle | null = null;
   const consider = (candidate: LayoutCircle) => {
@@ -382,51 +381,150 @@ function findMinimumEnclosingCircle(
       Number.isFinite(candidate.y) &&
       Number.isFinite(candidate.radius) &&
       candidate.radius >= 0 &&
-      containsEveryBody(candidate, bodies) &&
+      containsEveryBody(candidate, support) &&
       isBetterCircle(candidate, best)
     ) {
       best = candidate;
     }
   };
 
-  for (const body of bodies) {
+  for (const body of support) {
     consider({ x: body.x, y: body.y, radius: body.radius });
   }
-  for (let firstIndex = 0; firstIndex < bodies.length; firstIndex += 1) {
+  for (let firstIndex = 0; firstIndex < support.length; firstIndex += 1) {
     for (
       let secondIndex = firstIndex + 1;
-      secondIndex < bodies.length;
+      secondIndex < support.length;
       secondIndex += 1
     ) {
-      consider(circleFromPair(bodies[firstIndex], bodies[secondIndex]));
+      consider(circleFromPair(support[firstIndex], support[secondIndex]));
     }
   }
-  for (let firstIndex = 0; firstIndex < bodies.length; firstIndex += 1) {
-    for (
-      let secondIndex = firstIndex + 1;
-      secondIndex < bodies.length;
-      secondIndex += 1
-    ) {
-      for (
-        let thirdIndex = secondIndex + 1;
-        thirdIndex < bodies.length;
-        thirdIndex += 1
-      ) {
-        for (const circle of circlesFromTriple(
-          bodies[firstIndex],
-          bodies[secondIndex],
-          bodies[thirdIndex],
-        )) {
-          consider(circle);
-        }
-      }
+  if (support.length === 3) {
+    for (const circle of circlesFromTriple(
+      support[0],
+      support[1],
+      support[2],
+    )) {
+      consider(circle);
     }
   }
 
   if (!best) {
-    throw new Error('Unable to compute an exact minimum enclosing circle.');
+    throw new Error('Unable to compute a minimum circle for its support set.');
   }
   return best;
+}
+
+function shuffleDeterministically<T>(values: readonly T[]) {
+  const shuffled = [...values];
+  // A fixed-seed Fisher-Yates shuffle gives the randomized incremental
+  // algorithm its expected-linear behavior while keeping snapshots stable.
+  let state = 0x9e3779b9;
+  for (let index = shuffled.length - 1; index > 0; index -= 1) {
+    state ^= state << 13;
+    state ^= state >>> 17;
+    state ^= state << 5;
+    const swapIndex = (state >>> 0) % (index + 1);
+    [shuffled[index], shuffled[swapIndex]] = [
+      shuffled[swapIndex],
+      shuffled[index],
+    ];
+  }
+  return shuffled;
+}
+
+function extendEnclosingBasis(
+  basis: readonly EnclosingBody[],
+  body: EnclosingBody,
+) {
+  const bodyCircle = { x: body.x, y: body.y, radius: body.radius };
+  if (containsEveryBody(bodyCircle, basis)) return [body];
+
+  for (const basisBody of basis) {
+    const pairCircle = minimumCircleForSupport([basisBody, body]);
+    if (
+      !containsBody(bodyCircle, basisBody) &&
+      containsEveryBody(pairCircle, basis)
+    ) {
+      return [basisBody, body];
+    }
+  }
+
+  for (let firstIndex = 0; firstIndex < basis.length - 1; firstIndex += 1) {
+    const first = basis[firstIndex];
+    for (
+      let secondIndex = firstIndex + 1;
+      secondIndex < basis.length;
+      secondIndex += 1
+    ) {
+      const second = basis[secondIndex];
+      const firstSecondCircle = minimumCircleForSupport([first, second]);
+      const firstBodyCircle = minimumCircleForSupport([first, body]);
+      const secondBodyCircle = minimumCircleForSupport([second, body]);
+      if (
+        containsBody(firstSecondCircle, body) ||
+        containsBody(firstBodyCircle, second) ||
+        containsBody(secondBodyCircle, first)
+      ) {
+        continue;
+      }
+      const tripleCircle = minimumCircleForSupport([first, second, body]);
+      if (containsEveryBody(tripleCircle, basis)) {
+        return [first, second, body];
+      }
+    }
+  }
+
+  throw new Error('Unable to extend the minimum enclosing circle support.');
+}
+
+function findMinimumEnclosingCircle(
+  bodies: readonly EnclosingBody[],
+): LayoutCircle {
+  const ordered = shuffleDeterministically(bodies);
+  let basis: EnclosingBody[] = [];
+  let circle: LayoutCircle | null = null;
+  let index = 0;
+
+  // Randomized incremental basis construction for circles. Extending a basis
+  // resets the scan, but the basis never exceeds the three bodies that define
+  // a two-dimensional enclosing circle, giving expected-linear behavior.
+  while (index < ordered.length) {
+    const body = ordered[index];
+    if (circle && containsBody(circle, body)) {
+      index += 1;
+      continue;
+    }
+    basis = extendEnclosingBasis(basis, body);
+    circle = minimumCircleForSupport(basis);
+    index = 0;
+  }
+
+  if (!circle) {
+    throw new Error('Unable to compute an exact minimum enclosing circle.');
+  }
+
+  // Verify the result once in linear time. Floating-point tangencies can miss
+  // containment by a few ulps; increasing only the radius repairs that
+  // numerical noise without a second combinatorial pass.
+  let requiredRadius = circle.radius;
+  for (const body of bodies) {
+    requiredRadius = Math.max(
+      requiredRadius,
+      Math.hypot(circle.x - body.x, circle.y - body.y) + body.radius,
+    );
+  }
+  const repairTolerance =
+    MEC_EPSILON *
+    256 *
+    Math.max(1, requiredRadius, Math.abs(circle.x), Math.abs(circle.y));
+  if (requiredRadius - circle.radius > repairTolerance) {
+    throw new Error(
+      'Incremental minimum enclosing circle verification failed.',
+    );
+  }
+  return { ...circle, radius: requiredRadius };
 }
 
 /**
@@ -458,15 +556,15 @@ export function createMinimumEnclosingCircle(
         first.radius - second.radius,
     );
   const origin = { x: bodies[0].x, y: bodies[0].y };
-  const scale = Math.max(
-    ...bodies.map((body) =>
-      Math.max(
-        Math.abs(body.x - origin.x),
-        Math.abs(body.y - origin.y),
-        body.radius,
-      ),
-    ),
-  );
+  let scale = 0;
+  for (const body of bodies) {
+    scale = Math.max(
+      scale,
+      Math.abs(body.x - origin.x),
+      Math.abs(body.y - origin.y),
+      body.radius,
+    );
+  }
   if (scale === 0) {
     return { x: origin.x, y: origin.y, radius: 0 };
   }
@@ -528,6 +626,66 @@ function circleRectangleExitVector(
   return candidates[0];
 }
 
+function forEachNearbyPaperPair(
+  papers: readonly InternalPaper[],
+  interactionPadding: number,
+  visit: (first: InternalPaper, second: InternalPaper) => void,
+) {
+  if (papers.length < 2) return;
+  let maximumRadius = 0;
+  for (const paper of papers) {
+    maximumRadius = Math.max(maximumRadius, paper.radius);
+  }
+  // Any interacting pair is at most this far apart. With a cell of the same
+  // size, such a pair must occupy the same cell or one of its eight neighbors.
+  const cellSize = Math.max(1, maximumRadius * 2 + interactionPadding);
+  const horizontalCells: number[] = [];
+  const verticalCells: number[] = [];
+  const buckets = new Map<string, number[]>();
+  const keyFor = (horizontalCell: number, verticalCell: number) =>
+    `${horizontalCell}:${verticalCell}`;
+
+  for (let index = 0; index < papers.length; index += 1) {
+    const paper = papers[index];
+    const horizontalCell = Math.floor(paper.x / cellSize);
+    const verticalCell = Math.floor(paper.y / cellSize);
+    horizontalCells.push(horizontalCell);
+    verticalCells.push(verticalCell);
+    const key = keyFor(horizontalCell, verticalCell);
+    const bucket = buckets.get(key);
+    if (bucket) bucket.push(index);
+    else buckets.set(key, [index]);
+  }
+
+  // Visit candidates in the same (firstIndex, secondIndex) order as the old
+  // all-pairs loop. This keeps the deterministic relaxation result stable.
+  for (let firstIndex = 0; firstIndex < papers.length; firstIndex += 1) {
+    const candidates: number[] = [];
+    for (
+      let horizontalOffset = -1;
+      horizontalOffset <= 1;
+      horizontalOffset += 1
+    ) {
+      for (let verticalOffset = -1; verticalOffset <= 1; verticalOffset += 1) {
+        const bucket = buckets.get(
+          keyFor(
+            horizontalCells[firstIndex] + horizontalOffset,
+            verticalCells[firstIndex] + verticalOffset,
+          ),
+        );
+        if (!bucket) continue;
+        for (const secondIndex of bucket) {
+          if (secondIndex > firstIndex) candidates.push(secondIndex);
+        }
+      }
+    }
+    candidates.sort((first, second) => first - second);
+    for (const secondIndex of candidates) {
+      visit(papers[firstIndex], papers[secondIndex]);
+    }
+  }
+}
+
 function addInnerCollisions(
   papers: InternalPaper[],
   label: InternalLabel,
@@ -537,50 +695,50 @@ function addInnerCollisions(
   includeSoftRepulsion: boolean,
   spacingScale: number,
 ) {
-  for (let firstIndex = 0; firstIndex < papers.length; firstIndex += 1) {
-    const first = papers[firstIndex];
-    for (
-      let secondIndex = firstIndex + 1;
-      secondIndex < papers.length;
-      secondIndex += 1
-    ) {
-      const second = papers[secondIndex];
-      let horizontalDistance = second.x - first.x;
-      let verticalDistance = second.y - first.y;
-      let distance = Math.hypot(horizontalDistance, verticalDistance);
-      if (distance < LAYOUT_EPSILON) {
-        const direction = deterministicDirection(first.id, second.id);
-        horizontalDistance = direction.x;
-        verticalDistance = direction.y;
-        distance = 1;
-      }
-      const preferredDistance =
-        first.radius + second.radius + PAPER_GAP * spacingScale;
-      const repulsionLimit =
-        preferredDistance + PAPER_REPULSION_RANGE * spacingScale;
-      if (distance >= repulsionLimit) continue;
-      const collisionCorrection =
-        Math.max(0, preferredDistance - distance) * 0.68;
-      const softRepulsion = includeSoftRepulsion
-        ? Math.max(0, repulsionLimit - Math.max(distance, preferredDistance)) *
-          0.035
-        : 0;
-      const correction = (collisionCorrection + softRepulsion) * alpha;
-      const unitX = horizontalDistance / distance;
-      const unitY = verticalDistance / distance;
-      const firstMovement = paperMovement.get(first.id) as LayoutPoint;
-      const secondMovement = paperMovement.get(second.id) as LayoutPoint;
-      // Catalog order is append-only. Giving the later-added paper most of a
-      // collision correction keeps an established island stable, including
-      // when the addition is a backfilled paper with an older arXiv ID.
-      const olderShare = 0.04;
-      const newerShare = 1 - olderShare;
-      firstMovement.x -= unitX * correction * olderShare;
-      firstMovement.y -= unitY * correction * olderShare;
-      secondMovement.x += unitX * correction * newerShare;
-      secondMovement.y += unitY * correction * newerShare;
+  let maximumPenetration = 0;
+  const interactionPadding =
+    PAPER_GAP * spacingScale +
+    (includeSoftRepulsion ? PAPER_REPULSION_RANGE * spacingScale : 0);
+  forEachNearbyPaperPair(papers, interactionPadding, (first, second) => {
+    let horizontalDistance = second.x - first.x;
+    let verticalDistance = second.y - first.y;
+    let distance = Math.hypot(horizontalDistance, verticalDistance);
+    if (distance < LAYOUT_EPSILON) {
+      const direction = deterministicDirection(first.id, second.id);
+      horizontalDistance = direction.x;
+      verticalDistance = direction.y;
+      distance = 1;
     }
-  }
+    const preferredDistance =
+      first.radius + second.radius + PAPER_GAP * spacingScale;
+    maximumPenetration = Math.max(
+      maximumPenetration,
+      preferredDistance - distance,
+    );
+    const repulsionLimit =
+      preferredDistance + PAPER_REPULSION_RANGE * spacingScale;
+    if (distance >= repulsionLimit) return;
+    const collisionCorrection =
+      Math.max(0, preferredDistance - distance) * 0.68;
+    const softRepulsion = includeSoftRepulsion
+      ? Math.max(0, repulsionLimit - Math.max(distance, preferredDistance)) *
+        0.035
+      : 0;
+    const correction = (collisionCorrection + softRepulsion) * alpha;
+    const unitX = horizontalDistance / distance;
+    const unitY = verticalDistance / distance;
+    const firstMovement = paperMovement.get(first.id) as LayoutPoint;
+    const secondMovement = paperMovement.get(second.id) as LayoutPoint;
+    // Catalog order is append-only. Giving the later-added paper most of a
+    // collision correction keeps an established island stable, including
+    // when the addition is a backfilled paper with an older arXiv ID.
+    const olderShare = 0.04;
+    const newerShare = 1 - olderShare;
+    firstMovement.x -= unitX * correction * olderShare;
+    firstMovement.y -= unitY * correction * olderShare;
+    secondMovement.x += unitX * correction * newerShare;
+    secondMovement.y += unitY * correction * newerShare;
+  });
 
   for (const paper of papers) {
     const horizontalDistance = paper.x - label.x;
@@ -595,6 +753,10 @@ function addInnerCollisions(
       paper.id,
     );
     if (!exitVector) continue;
+    maximumPenetration = Math.max(
+      maximumPenetration,
+      Math.hypot(exitVector.x, exitVector.y),
+    );
     const movement = paperMovement.get(paper.id) as LayoutPoint;
     const correctionScale = 0.74 * alpha;
     movement.x += exitVector.x * correctionScale * 0.82;
@@ -602,6 +764,7 @@ function addInnerCollisions(
     labelMovement.x -= exitVector.x * correctionScale * 0.18;
     labelMovement.y -= exitVector.y * correctionScale * 0.18;
   }
+  return Math.max(0, maximumPenetration);
 }
 
 function relaxIslandContents(
@@ -673,7 +836,7 @@ function relaxIslandContents(
       papers.map((paper) => [paper.id, { x: 0, y: 0 }]),
     );
     const labelMovement = { x: 0, y: 0 };
-    addInnerCollisions(
+    const maximumPenetration = addInnerCollisions(
       papers,
       label,
       paperMovement,
@@ -689,13 +852,7 @@ function relaxIslandContents(
     }
     label.x += clamp(labelMovement.x, -MAX_INNER_STEP, MAX_INNER_STEP);
     label.y += clamp(labelMovement.y, -MAX_INNER_STEP, MAX_INNER_STEP);
-    // Preserve the established layout through the previous cleanup budget,
-    // then continue only when a growing island still needs numerical headroom.
-    if (
-      iteration + 1 >= INNER_CLEANUP_MIN_ITERATIONS &&
-      measureInnerOverlap({ papers, label }, spacingScale) <=
-        INNER_CLEANUP_TARGET
-    ) {
+    if (maximumPenetration <= INNER_CLEANUP_TARGET) {
       break;
     }
   }
@@ -1046,14 +1203,10 @@ function measureInnerOverlap(
   spacingScale: number,
 ) {
   let maximumOverlap = 0;
-  for (let firstIndex = 0; firstIndex < island.papers.length; firstIndex += 1) {
-    const first = island.papers[firstIndex];
-    for (
-      let secondIndex = firstIndex + 1;
-      secondIndex < island.papers.length;
-      secondIndex += 1
-    ) {
-      const second = island.papers[secondIndex];
+  forEachNearbyPaperPair(
+    island.papers,
+    PAPER_GAP * spacingScale,
+    (first, second) => {
       maximumOverlap = Math.max(
         maximumOverlap,
         first.radius +
@@ -1061,7 +1214,9 @@ function measureInnerOverlap(
           PAPER_GAP * spacingScale -
           Math.hypot(first.x - second.x, first.y - second.y),
       );
-    }
+    },
+  );
+  for (const first of island.papers) {
     const horizontalDistance = Math.max(
       Math.abs(first.x - island.label.x) - island.label.width / 2,
       0,

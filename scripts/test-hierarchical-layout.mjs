@@ -189,6 +189,41 @@ test('minimum enclosing circle handles labels and three-body support', () => {
   near(translatedRectangle.radius, 5, 1e-5);
 });
 
+test('minimum enclosing circle scales to thousands of mixed bodies deterministically', () => {
+  const center = { x: 123.5, y: -67.25 };
+  const supportRadius = 250;
+  const supportBodyRadius = 3;
+  const bodies = Array.from({ length: 5_000 }, (_, index) => {
+    const angle = index * 2.399963229728653;
+    if (index < 720) {
+      return {
+        x: center.x + Math.cos(angle) * supportRadius,
+        y: center.y + Math.sin(angle) * supportRadius,
+        radius: supportBodyRadius,
+      };
+    }
+    const distance = 20 + ((index * 7919) % 18_000) / 100;
+    return {
+      x: center.x + Math.cos(angle) * distance,
+      y: center.y + Math.sin(angle) * distance,
+      radius: (index % 13) / 2,
+    };
+  });
+
+  const circle = createMinimumEnclosingCircle(bodies);
+  const reversed = createMinimumEnclosingCircle([...bodies].reverse());
+  assert.ok(circle && reversed);
+  near(circle.x, center.x, 1e-8);
+  near(circle.y, center.y, 1e-8);
+  near(circle.radius, supportRadius + supportBodyRadius, 1e-8);
+  assert.deepEqual(circle, reversed);
+  for (const body of bodies) {
+    assert.ok(
+      circleDistance(circle, body) + body.radius <= circle.radius + 1e-8,
+    );
+  }
+});
+
 test('current catalog is contained, separated, bounded, and deterministic', () => {
   const { papers, labels, islands, labelSizes } = currentCatalogInputs();
   const options = {
@@ -866,6 +901,67 @@ test('dense local bodies and the hidden observation participate in packing', () 
     circleDistance(idea, source) + 1e-3 >=
       idea.radius + source.radius + 14 * 0.82,
   );
+});
+
+test('large islands remain separated and deterministic', () => {
+  const count = 600;
+  const columns = 30;
+  const papers = Array.from({ length: count }, (_, index) => ({
+    id: `stress-${String(index).padStart(4, '0')}`,
+    islandId: 'stress',
+    stabilityRank: index,
+    x: 3_000 + ((index % columns) - columns / 2) * 25,
+    y: 3_000 + (Math.floor(index / columns) - count / columns / 2) * 25,
+    radius: 5,
+  }));
+  const labels = [
+    {
+      id: 'stress',
+      islandId: 'stress',
+      x: 3_000,
+      y: 3_000,
+      width: 140,
+      height: 34,
+    },
+  ];
+  const islands = [{ id: 'stress', x: 3_000, y: 3_000 }];
+  const options = { islandPadding: 24, outerGap: 16 };
+  const layout = createHierarchicalMapLayout(
+    6_000,
+    6_000,
+    papers,
+    labels,
+    islands,
+    options,
+  );
+  const reversed = createHierarchicalMapLayout(
+    6_000,
+    6_000,
+    [...papers].reverse(),
+    labels,
+    islands,
+    options,
+  );
+
+  assert.equal(layout.diagnostics.converged, true);
+  assert.ok(layout.diagnostics.maxInnerOverlap <= EPSILON);
+  assert.equal(mapSnapshot(layout), mapSnapshot(reversed));
+  for (let firstIndex = 0; firstIndex < papers.length; firstIndex += 1) {
+    const first = layout.papers.get(papers[firstIndex].id);
+    assert.ok(first);
+    for (
+      let secondIndex = firstIndex + 1;
+      secondIndex < papers.length;
+      secondIndex += 1
+    ) {
+      const second = layout.papers.get(papers[secondIndex].id);
+      assert.ok(second);
+      assert.ok(
+        circleDistance(first, second) + EPSILON >=
+          papers[firstIndex].radius + papers[secondIndex].radius + PAPER_GAP,
+      );
+    }
+  }
 });
 
 test('an impossible viewport returns finite, non-converged diagnostics', () => {
