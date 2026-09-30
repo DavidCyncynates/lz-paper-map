@@ -174,7 +174,12 @@ The automatic path reads only the official arXiv HTML bibliography. It requires
 a recognizable bibliography container and an exact paper/version identity from
 the rendered document watermark or canonical metadata. It extracts every
 explicit modern or legacy arXiv ID, including an explicit empty list when there
-are none. The whole bounded batch is validated before one atomic ledger write;
+are none. A narrow deterministic alias maps citations to the collaboration's
+pre-arXiv LZ manuscript (by its exact title or LZ-hosted PDF path) to
+`2609.02823`; no other title-based citation inference is allowed. Reverse
+`Cited by` blocks are ignored, and structurally complete References-headed
+sections are merged when a document has separate main and supplemental lists.
+The whole bounded batch is validated before one atomic ledger write;
 the `references` lane is marked only after mapped coverage is complete.
 
 If a paper has no arXiv HTML conversion, inspect its exact-version official PDF
