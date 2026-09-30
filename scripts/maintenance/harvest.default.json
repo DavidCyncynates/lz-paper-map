@@ -1,0 +1,95 @@
+{
+  "schemaVersion": 1,
+  "includeDueAuthors": true,
+  "authorLimit": 8,
+  "overlapDays": 2,
+  "reviewLimit": 500,
+  "listings": [
+    {
+      "name": "astro-ph.CO:recent",
+      "url": "https://arxiv.org/list/astro-ph.CO/recent?skip=0&show=2000"
+    },
+    {
+      "name": "astro-ph.CO:new",
+      "url": "https://arxiv.org/list/astro-ph.CO/new?skip=0&show=2000"
+    },
+    {
+      "name": "astro-ph.HE:recent",
+      "url": "https://arxiv.org/list/astro-ph.HE/recent?skip=0&show=2000"
+    },
+    {
+      "name": "astro-ph.HE:new",
+      "url": "https://arxiv.org/list/astro-ph.HE/new?skip=0&show=2000"
+    },
+    {
+      "name": "hep-ex:recent",
+      "url": "https://arxiv.org/list/hep-ex/recent?skip=0&show=2000"
+    },
+    {
+      "name": "hep-ex:new",
+      "url": "https://arxiv.org/list/hep-ex/new?skip=0&show=2000"
+    },
+    {
+      "name": "hep-ph:recent",
+      "url": "https://arxiv.org/list/hep-ph/recent?skip=0&show=2000"
+    },
+    {
+      "name": "hep-ph:new",
+      "url": "https://arxiv.org/list/hep-ph/new?skip=0&show=2000"
+    },
+    {
+      "name": "hep-th:recent",
+      "url": "https://arxiv.org/list/hep-th/recent?skip=0&show=2000"
+    },
+    {
+      "name": "hep-th:new",
+      "url": "https://arxiv.org/list/hep-th/new?skip=0&show=2000"
+    }
+  ],
+  "searches": [
+    {
+      "name": "all:LZ",
+      "url": "https://arxiv.org/search/?query=LZ&searchtype=all&abstracts=show&order=-announced_date_first&size=50"
+    },
+    {
+      "name": "all:LUX-ZEPLIN",
+      "url": "https://arxiv.org/search/?query=LUX-ZEPLIN&searchtype=all&abstracts=show&order=-announced_date_first&size=50"
+    },
+    {
+      "name": "all:LZ-event",
+      "url": "https://arxiv.org/search/?query=%22LZ+event%22&searchtype=all&abstracts=show&order=-announced_date_first&size=50"
+    },
+    {
+      "name": "all:one-event-observed-at-LZ",
+      "url": "https://arxiv.org/search/?query=%22one+event+observed+at+LZ%22&searchtype=all&abstracts=show&order=-announced_date_first&size=50"
+    },
+    {
+      "name": "all:xenon-recoil",
+      "url": "https://arxiv.org/search/?query=%22xenon+recoil%22&searchtype=all&abstracts=show&order=-announced_date_first&size=50"
+    },
+    {
+      "name": "all:xenon-recoils",
+      "url": "https://arxiv.org/search/?query=%22xenon+recoils%22&searchtype=all&abstracts=show&order=-announced_date_first&size=50"
+    },
+    {
+      "name": "all:high-energy-nuclear-recoil",
+      "url": "https://arxiv.org/search/?query=%22high-energy+nuclear+recoil%22&searchtype=all&abstracts=show&order=-announced_date_first&size=50"
+    },
+    {
+      "name": "all:248-keV",
+      "url": "https://arxiv.org/search/?query=%22248+keV%22&searchtype=all&abstracts=show&order=-announced_date_first&size=50"
+    },
+    {
+      "name": "all:LZ230616",
+      "url": "https://arxiv.org/search/?query=LZ230616&searchtype=all&abstracts=show&order=-announced_date_first&size=50"
+    },
+    {
+      "name": "all:2609.02823",
+      "url": "https://arxiv.org/search/?query=2609.02823&searchtype=all&abstracts=show&order=-announced_date_first&size=50"
+    },
+    {
+      "name": "all:official-title",
+      "url": "https://arxiv.org/search/?query=%22Search+for+dark+matter+particle+interactions+in+an+extended+nuclear+recoil+energy+window+with+the+LUX-ZEPLIN+%28LZ%29+experiment%22&searchtype=all&abstracts=show&order=-announced_date_first&size=50"
+    }
+  ]
+}

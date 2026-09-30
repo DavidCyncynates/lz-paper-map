@@ -25,22 +25,28 @@ The site is a static export hosted by GitHub Pages. A local Codex scheduled task
 reviews arXiv's public web pages after each announcement, validates any proposed
 catalog changes, and opens a pull request. It uses the signed-in Codex account,
 not an OpenAI developer API key or the arXiv API. A human merge publishes the
-update. Committed coordinates remain fixed semantic anchors. The browser first
-settles each primary island independently: dots and its label repel at short
-range while weak attraction makes the group compact. An exact padded minimum
-circle encloses that complete group. Those rigid circles are then packed by a
-second deterministic attraction-and-repulsion pass, with the unshaded LZ result
-participating as its own collision body. Later-added papers absorb most new
-local collision adjustment, limiting disruption to established groups. Each
-record has an immutable layout rank assigned when it enters the catalog, so a
-late-discovered older preprint is still treated as the newcomer and a later JSON
-reorder cannot change the map. The canvas can be scrolled, dragged, and zoomed
-without changing the underlying semantic layout; if measured geometry cannot be
-packed safely, the map stays hidden and the matching list view remains
-available.
+update.
+
+The maintenance workflow is incremental. A task-local SQLite ledger remembers
+completed announcement batches, arXiv versions, screening decisions, search and
+author cursors, and complete reference snapshots. Unchanged paper versions are
+not reviewed again, and no-change days advance the private coverage cursor
+without creating noisy website commits. The ledger is a disposable cache rather
+than an editorial authority: public changes still require fresh source evidence,
+validation, and review.
+
+Map geometry and catalog indexes are deterministic generated artifacts. Both
+uniform and citation-sized layouts are computed before publication, using
+spatially indexed collision checks and a deterministic incremental enclosing
+circle. The browser swaps stored coordinates instead of running a force solver.
+Committed semantic coordinates and immutable layout ranks remain the stable
+inputs, so later additions absorb most local movement. The canvas can be
+scrolled, dragged, and zoomed without changing the layout.
 
 The full rationale, data contract, trust boundaries, stable-layout policy, and
-failure behavior are in [docs/architecture.md](docs/architecture.md).
+failure behavior are in [docs/architecture.md](docs/architecture.md). The
+step-by-step task contract is in
+[docs/maintenance-runbook.md](docs/maintenance-runbook.md).
 
 ## Run locally
 
@@ -57,9 +63,15 @@ Useful checks:
 
 ```bash
 python3 scripts/update_papers.py --validate-only
+python3 -m scripts.maintenance --help
+pnpm generate:artifacts
+pnpm check:generated
+pnpm test:maintenance
+pnpm test:catalog-index
 pnpm typecheck
 pnpm lint
 pnpm test:layout
+pnpm test:layout-artifact
 pnpm test:date-range
 pnpm test:citation-size
 pnpm test:theme
@@ -80,15 +92,24 @@ The literature review runs as a standalone Codex desktop task every day at
 and US daylight-saving transitions do not align. The computer must be awake and
 the Codex app must be running.
 
-The task is instructed to use a dedicated worktree and public arXiv listing,
-abstract, HTML, and PDF pages. Its discovery pass enumerates the relevant
-listings, reads plausible abstracts even when their titles do not name LZ, and
-adds broad phrase, citation-neighbor, and author searches. It checks for new
-papers and revisions, verifies outgoing citations from reference lists, and
-derives “cited by” relationships from those verified outgoing citations. On
-Sundays it reconciles the full mapped citation graph, which also repairs older
-omissions. It never calls the OpenAI developer API or arXiv Atom API, and an
-incomplete discovery lane cannot advance the successful-scan timestamp.
+The task uses a dedicated worktree and a durable local maintenance ledger. A
+rate-limited collector reads public arXiv listing, search, abstract, HTML, and
+PDF pages and emits a compact bundle of only unseen or revised candidates. The
+model reviews that bundle, not the full catalog or raw result pages. Discovery
+uses a newest-first INSPIRE citation-neighbor web check, broad arXiv
+abstract/metadata phrases, exact observation identifiers and titles,
+replacement listings, and a rotating unique-author lane, so relevant papers do
+not need to name LZ in their titles. INSPIRE supplies candidate IDs only;
+official metadata and inclusion evidence still come from arXiv.
+
+Complete outgoing arXiv references are cached by paper version. Mapped `cites`
+and reverse “cited by” relationships are then derived locally, so an unchanged
+bibliography is never fetched merely because the map grew. Revisions are caught
+by the bounded overlap of new/recent category listings and by incremental broad
+and rotating author searches; known IDs surfaced there are checked for a newer
+exact arXiv version. It never calls the OpenAI developer API or arXiv Atom API,
+and an incomplete required lane cannot advance the private maintenance cursor
+or public scan timestamp.
 
 The task never publishes directly. A substantive change is proposed on a
 `codex/arxiv-daily-*` branch and pull request for human review; a no-change run
@@ -105,13 +126,18 @@ request creation will stop safely and require attention.
 
 The public catalog is [data/landscape.json](data/landscape.json). Island IDs are
 stable editorial concepts. To make a manual correction, edit the record, run
-the validation command, and commit the change. Add new records at the end with
-the next unused `layoutRank`; never change an established record's rank. The
-legacy update script remains available as a validator, but its network/API
-update mode is disabled; the scheduled task runs it only with `--validate-only`.
+the validation command, and commit the change. Every record must pin the exact
+positive `arxivVersion` used for its metadata and reference snapshot. Add new
+records at the end with the next unused `layoutRank`; never change an
+established record's rank. The legacy update script remains available as a
+validator, but its network/API update mode is disabled; the scheduled task runs
+it only with `--validate-only`.
 
 Successful scans that change data add an audit record under `data/runs/`.
 Uncertain candidates that need human judgment are retained in
-`data/candidates.json`.
+`data/candidates.json`, keyed by canonical arXiv ID, exact version, and metadata
+digest. Generated files under `data/generated/` must be refreshed with
+`pnpm generate:artifacts` whenever the catalog changes; CI rejects stale indexes
+or layouts.
 
 Thank you to arXiv for its public open-access literature pages.

@@ -36,6 +36,10 @@ MAX_NEW_CANDIDATES = 12
 MIN_INCLUDE_CONFIDENCE = 0.78
 ALLOWED_ROLES = {"observation", "explanation", "constraint", "diagnostic", "adjacent"}
 ARXIV_ID_RE = re.compile(r"(?:abs/|pdf/)(\d{4}\.\d{4,5})(?:v\d+)?")
+CANDIDATE_ARXIV_ID_RE = re.compile(
+    r"(?:\d{4}\.\d{4,5}|[a-z][a-z0-9.-]+(?:\.[A-Z]{2})?/\d{7})",
+    re.IGNORECASE,
+)
 
 
 def compact(value: str) -> str:
@@ -573,6 +577,13 @@ def validate(landscape: dict[str, Any], candidates: dict[str, Any] | None = None
         expected_url = f"https://arxiv.org/abs/{label}"
         if paper.get("url") != expected_url or paper.get("arxivId") != label:
             errors.append(f"{label}: arXiv URL or identifier is not canonical")
+        arxiv_version = paper.get("arxivVersion")
+        if (
+            not isinstance(arxiv_version, int)
+            or isinstance(arxiv_version, bool)
+            or arxiv_version <= 0
+        ):
+            errors.append(f"{label}: arxivVersion must be a positive exact version")
         if "related" in paper:
             errors.append(f"{label}: legacy related-paper links are not allowed")
         cites = paper.get("cites")
@@ -585,8 +596,50 @@ def validate(landscape: dict[str, Any], candidates: dict[str, Any] | None = None
         if not compact(paper.get("summary", "")) or not compact(paper.get("takeaway", "")):
             errors.append(f"{label}: summary and takeaway are required")
 
-    if candidates is not None and not isinstance(candidates.get("items", []), list):
-        errors.append("data/candidates.json must contain an items array")
+    if candidates is not None:
+        if candidates.get("schemaVersion") != 1:
+            errors.append("data/candidates.json schemaVersion must be 1")
+        candidate_items = candidates.get("items")
+        if not isinstance(candidate_items, list):
+            errors.append("data/candidates.json must contain an items array")
+        else:
+            candidate_keys: set[tuple[str, int, str]] = set()
+            for index, item in enumerate(candidate_items):
+                candidate_label = f"data/candidates.json item {index}"
+                if not isinstance(item, dict):
+                    errors.append(f"{candidate_label} must be an object")
+                    continue
+                candidate_id = item.get("arxivId")
+                if not isinstance(candidate_id, str) or not CANDIDATE_ARXIV_ID_RE.fullmatch(
+                    candidate_id
+                ):
+                    errors.append(f"{candidate_label}: arxivId is not canonical")
+                candidate_version = item.get("version")
+                if (
+                    not isinstance(candidate_version, int)
+                    or isinstance(candidate_version, bool)
+                    or candidate_version <= 0
+                ):
+                    errors.append(f"{candidate_label}: version must be a positive integer")
+                metadata_digest = item.get("metadataSha256")
+                if not isinstance(metadata_digest, str) or not re.fullmatch(
+                    r"[0-9a-f]{64}", metadata_digest
+                ):
+                    errors.append(
+                        f"{candidate_label}: metadataSha256 must be a lowercase SHA-256 digest"
+                    )
+                if item.get("status") != "ambiguous":
+                    errors.append(f"{candidate_label}: status must be ambiguous")
+                if (
+                    isinstance(candidate_id, str)
+                    and isinstance(candidate_version, int)
+                    and not isinstance(candidate_version, bool)
+                    and isinstance(metadata_digest, str)
+                ):
+                    key = (candidate_id.lower(), candidate_version, metadata_digest)
+                    if key in candidate_keys:
+                        errors.append(f"{candidate_label}: duplicate exact candidate version")
+                    candidate_keys.add(key)
     if errors:
         raise ValueError("Data validation failed:\n- " + "\n- ".join(errors))
 
