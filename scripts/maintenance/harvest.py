@@ -547,6 +547,21 @@ def parse_search_page(html: str, *, url: str) -> SearchPage:
     if not parser.saw_results:
         if re.search(r"(?:0|no)\s+results?", text, flags=re.I):
             return SearchPage((), None, 0)
+        # arXiv redirects an exact-ID search straight to that paper's abstract
+        # page.  Accept only a query that itself normalizes to the same exact
+        # arXiv identity, and run the full strict abstract parser before
+        # treating it as a one-row search result.
+        query_values = urllib.parse.parse_qs(
+            urllib.parse.urlsplit(url).query
+        ).get("query", [])
+        if len(query_values) == 1:
+            try:
+                identifier = normalize_arxiv_id(query_values[0])[0]
+            except ValueError:
+                identifier = None
+            if identifier is not None:
+                metadata = parse_abstract_page(html, expected_id=identifier)
+                return SearchPage((metadata["arxivId"],), None, 1)
         raise ParseError("search page has no .arxiv-result entries")
     if not parser.ids:
         raise ParseError("search result containers contain no arXiv IDs")
