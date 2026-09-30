@@ -212,6 +212,7 @@ class _ListingParser(_TextHTMLParser):
         self._saw_article_container = False
         self._depth = 0
         self._articles_depth: int | None = None
+        self._entry_depth: int | None = None
 
     def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
         if tag not in _VOID_ELEMENTS:
@@ -225,7 +226,9 @@ class _ListingParser(_TextHTMLParser):
         if element_id == "articles" or "articles" in element_class:
             self._saw_article_container = True
             self._articles_depth = self._depth
-        if tag == "a" and self._articles_depth is not None:
+        if tag == "dt" and self._articles_depth is not None:
+            self._entry_depth = self._depth
+        if tag == "a" and self._entry_depth is not None:
             identifier = _arxiv_id_from_href(attributes.get("href", ""))
             if identifier and self.current_date:
                 section = self.current_section or "recent"
@@ -244,6 +247,8 @@ class _ListingParser(_TextHTMLParser):
             self._consume_heading(heading)
             self._heading_tag = None
             self._heading_text = []
+        if self._entry_depth == self._depth:
+            self._entry_depth = None
         if self._articles_depth == self._depth:
             self._articles_depth = None
         self._depth = max(0, self._depth - 1)
