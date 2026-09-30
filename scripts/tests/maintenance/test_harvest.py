@@ -80,6 +80,13 @@ class ParserTests(unittest.TestCase):
         self.assertEqual(batches[0].ids, ("2609.20001", "2609.20002"))
         self.assertEqual(batches[1].ids, ("2609.10001",))
 
+    def test_listing_ignores_arxiv_links_inside_entry_metadata(self) -> None:
+        batches = parse_listing_page(
+            fixture("harvest_listing_complete.html"), source="hep-ph:new"
+        )
+        listed_ids = {identifier for batch in batches for identifier in batch.ids}
+        self.assertNotIn("2501.99999", listed_ids)
+
     def test_recent_listing_creates_one_batch_per_date(self) -> None:
         batches = parse_listing_page(
             fixture("harvest_recent_complete.html"), source="hep-ph:recent"
