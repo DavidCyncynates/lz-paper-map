@@ -73,18 +73,18 @@ class BibliographyParserTests(unittest.TestCase):
         )
         self.assertNotIn("2609.99999", snapshot.references)
 
-    def test_legacy_identifier_is_not_truncated_after_a_hyphen(self) -> None:
+    def test_split_legacy_archive_is_rejoined_without_truncation(self) -> None:
         document = """
         <html><head>
           <link rel="canonical" href="https://arxiv.org/html/2609.20001v1">
         </head><body>
           <section class="ltx_bibliography"><h2>References</h2><ol>
-            <li>Legacy preprint astro-ph/0610433.</li>
+            <li>Legacy preprint hep- ph/0610433.</li>
           </ol></section>
         </body></html>
         """
         snapshot = parse_bibliography_html(document, expected_id="2609.20001")
-        self.assertEqual(snapshot.references, ("astro-ph/0610433",))
+        self.assertEqual(snapshot.references, ("hep-ph/0610433",))
 
     def test_recognized_empty_bibliography_is_complete(self) -> None:
         snapshot = parse_bibliography_html(
