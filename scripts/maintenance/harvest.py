@@ -530,6 +530,13 @@ class _SearchParser(_TextHTMLParser):
     def handle_data(self, data: str) -> None:
         super().handle_data(data)
         match = re.search(r"([\d,]+)\s+results?\s+for", data, flags=re.I)
+        if match is None:
+            match = re.search(
+                r"showing\s+[\d,]+\s*[-\N{EN DASH}\N{EM DASH}]\s*[\d,]+\s+"
+                r"of\s+([\d,]+)\s+results?",
+                data,
+                flags=re.I,
+            )
         if match:
             self.total_results = int(match.group(1).replace(",", ""))
 
@@ -922,6 +929,60 @@ def _author_search_url(author: str) -> str:
     return "https://arxiv.org/search/?" + query
 
 
+def _author_catchup_search_url(author: str, start: str, end: str) -> str:
+    """Build a bounded HTML search for a previously unmonitored author.
+
+    The most-recent submission-date filter includes both new papers and later
+    versions. This lets a rotating author acquire its first frontier without
+    silently dropping work published between catalog import and its first
+    scheduled turn.
+    """
+
+    start_date = dt.date.fromisoformat(start)
+    end_date = dt.date.fromisoformat(end)
+    if start_date > end_date:
+        raise ValueError("author catch-up start cannot be after its end")
+    query = urllib.parse.urlencode(
+        {
+            "advanced": "",
+            "terms-0-operator": "AND",
+            "terms-0-term": author,
+            "terms-0-field": "author",
+            "classification-physics_archives": "all",
+            "classification-include_cross_list": "include",
+            "date-filter_by": "date_range",
+            "date-from_date": start,
+            "date-to_date": end,
+            "date-date_type": "submitted_date",
+            "abstracts": "show",
+            "size": "50",
+            "order": "-announced_date_first",
+        }
+    )
+    return "https://arxiv.org/search/advanced?" + query
+
+
+@dataclasses.dataclass(frozen=True)
+class EffectiveSearch:
+    source: SearchSource
+    author_name: str | None = None
+    bootstrap_forward: bool = False
+    catchup_window: tuple[str, str] | None = None
+    staged_cursor: dict[str, Any] | None = None
+
+
+def _author_covered_through(value: Any) -> str | None:
+    if not isinstance(value, dict) or value.get("mode") != "date-window":
+        return None
+    raw = value.get("coveredThrough")
+    if not isinstance(raw, str):
+        raise HarvestError("date-window author cursor lacks coveredThrough")
+    try:
+        return dt.date.fromisoformat(raw).isoformat()
+    except ValueError as error:
+        raise HarvestError("date-window author cursor has invalid coveredThrough") from error
+
+
 def _search_pages(
     source: SearchSource,
     client: CachedHttpClient,
@@ -1221,7 +1282,7 @@ def harvest(
         if legacy_scan and not completed_coverage and expected_latest:
             bootstrap_forward_allowed = str(legacy_scan)[:10] == expected_latest
 
-    effective_searches: list[tuple[SearchSource, str | None, bool]] = []
+    effective_searches: list[EffectiveSearch] = []
     skipped_author_cursors: list[tuple[str, dict[str, Any]]] = []
     for configured in config.searches:
         frontier = configured.frontier
@@ -1237,7 +1298,10 @@ def harvest(
                     "exhaustive=true, or a same-announcement-date legacy migration baseline"
                 )
         effective_searches.append(
-            (dataclasses.replace(configured, frontier=frontier), None, bootstrap_forward)
+            EffectiveSearch(
+                source=dataclasses.replace(configured, frontier=frontier),
+                bootstrap_forward=bootstrap_forward,
+            )
         )
 
     if config.include_due_authors:
@@ -1252,36 +1316,107 @@ def harvest(
                 )
                 continue
             frontier = _frontier_from_cursor(item.get("cursor"))
-            bootstrap_forward = not frontier and bootstrap_forward_allowed
+            covered_through = _author_covered_through(item.get("cursor"))
+            bootstrap_forward = (
+                not frontier
+                and covered_through is None
+                and bootstrap_forward_allowed
+            )
+            catchup_window = None
+            staged_cursor = None
+            source = SearchSource(
+                name=f"author:{author}",
+                url=_author_search_url(author),
+                frontier=frontier,
+                max_pages=2,
+                exhaustive=False,
+            )
             if not frontier and not bootstrap_forward:
-                raise HarvestError(
-                    f"author search {author!r} has no committed frontier and the legacy "
-                    "catalog is not current enough for a forward-only migration baseline"
+                first_seen = item.get("firstSeenAt")
+                if not first_seen:
+                    raise HarvestError(
+                        f"author search {author!r} has no committed frontier or "
+                        "durable registry start for an exhaustive catch-up"
+                    )
+                try:
+                    planned_start_date = dt.date.fromisoformat(
+                        ledger_plan["coverage"]["start"]
+                    )
+                    catchup_end_date = dt.date.fromisoformat(
+                        ledger_plan["coverage"]["end"]
+                    )
+                    if covered_through is None:
+                        catchup_anchor_date = dt.date.fromisoformat(str(first_seen)[:10])
+                    else:
+                        catchup_anchor_date = dt.date.fromisoformat(
+                            covered_through
+                        ) - dt.timedelta(days=config.overlap_days)
+                except ValueError as error:
+                    raise HarvestError(
+                        f"author search {author!r} has invalid catch-up dates"
+                    ) from error
+                catchup_start_dates = [catchup_anchor_date, planned_start_date]
+                if covered_through is None and item.get("source") == "catalog":
+                    catalog_scan = ledger.get_metadata("catalog_last_successful_scan")
+                    if catalog_scan:
+                        try:
+                            catchup_start_dates.append(
+                                dt.date.fromisoformat(str(catalog_scan)[:10])
+                            )
+                        except ValueError as error:
+                            raise HarvestError(
+                                f"author search {author!r} has an invalid catalog scan date"
+                            ) from error
+                catchup_start_date = min(catchup_start_dates)
+                catchup_window = (
+                    catchup_start_date.isoformat(),
+                    catchup_end_date.isoformat(),
                 )
+                source = SearchSource(
+                    name=f"author-catchup:{author}",
+                    url=_author_catchup_search_url(author, *catchup_window),
+                    frontier=(),
+                    max_pages=4,
+                    exhaustive=True,
+                )
+                next_covered_through = max(
+                    date
+                    for date in (covered_through, catchup_window[1])
+                    if date is not None
+                )
+                staged_cursor = {
+                    "frontier": [],
+                    "mode": "date-window",
+                    "coveredThrough": next_covered_through,
+                }
             effective_searches.append(
-                (
-                    SearchSource(
-                        name=f"author:{author}",
-                        url=_author_search_url(author),
-                        frontier=frontier,
-                        max_pages=2,
-                        exhaustive=False,
-                    ),
-                    author,
-                    bootstrap_forward,
+                EffectiveSearch(
+                    source=source,
+                    author_name=author,
+                    bootstrap_forward=bootstrap_forward,
+                    catchup_window=catchup_window,
+                    staged_cursor=staged_cursor,
                 )
             )
 
     staged_search_cursors: list[tuple[str, dict[str, Any]]] = []
     staged_author_cursors: list[tuple[str, dict[str, Any]]] = list(skipped_author_cursors)
-    for source, author_name, bootstrap_forward in effective_searches:
+    for effective in effective_searches:
+        source = effective.source
+        author_name = effective.author_name
+        bootstrap_forward = effective.bootstrap_forward
         if bootstrap_forward:
-            pages = _search_forward_baseline(source, client)
+            pages = [
+                {**page, "purpose": "frontier"}
+                for page in _search_forward_baseline(source, client)
+            ]
             new_ids: list[str] = []
             frontier_reached = False
             exhausted = False
         else:
             pages, new_ids, frontier_reached, exhausted = _search_pages(source, client)
+            purpose = "catchup" if effective.catchup_window is not None else "incremental"
+            pages = [{**page, "purpose": purpose} for page in pages]
         for page in pages:
             if ledger is not None and run_id is not None:
                 # Store a frontier-independent immutable snapshot of the page.
@@ -1329,8 +1464,12 @@ def harvest(
             # known paper may have acquired a revision outside the configured
             # listing categories, so every above-frontier hit is hydrated.
             _candidate_reason_add(reasons, identifier, f"search:{source.name}")
-        next_frontier = list(dict.fromkeys(page_id for page in pages for page_id in page["ids"]))[:10]
-        cursor_value = {"frontier": next_frontier}
+        next_frontier = list(
+            dict.fromkeys(page_id for page in pages for page_id in page["ids"])
+        )[:10]
+        cursor_value = effective.staged_cursor or {"frontier": next_frontier}
+        if effective.staged_cursor is not None:
+            cursor_value = {**cursor_value, "lastObserved": next_frontier}
         if author_name:
             staged_author_cursors.append((author_name, cursor_value))
         else:
@@ -1345,6 +1484,14 @@ def harvest(
                 "exhausted": exhausted,
                 "nextFrontier": next_frontier,
                 "bootstrapForward": bootstrap_forward,
+                "catchupWindow": (
+                    {
+                        "start": effective.catchup_window[0],
+                        "end": effective.catchup_window[1],
+                    }
+                    if effective.catchup_window is not None
+                    else None
+                ),
             }
         )
 

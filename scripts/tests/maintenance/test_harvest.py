@@ -11,6 +11,7 @@ from scripts.maintenance.harvest import (
     HarvestConfig,
     HarvestError,
     ParseError,
+    _author_catchup_search_url,
     _author_search_url,
     harvest,
     parse_abstract_page,
@@ -134,6 +135,13 @@ class ParserTests(unittest.TestCase):
         self.assertTrue(reached)
         self.assertIsNotNone(page.next_url)
 
+    def test_advanced_search_parses_showing_range_total(self) -> None:
+        advanced = fixture("harvest_search_page.html").replace(
+            "3 results for: LZ excess", "Showing 1&ndash;3 of 3 results"
+        )
+        page = parse_search_page(advanced, url=SEARCH_URL)
+        self.assertEqual(page.total_results, 3)
+
     def test_exact_id_search_accepts_verified_abstract_redirect(self) -> None:
         exact_url = SEARCH_URL.replace("query=LZ", "query=2609.10001")
         page = parse_search_page(fixture("harvest_abstract_v2.html"), url=exact_url)
@@ -200,6 +208,337 @@ class CacheTests(unittest.TestCase):
 
 
 class IntegrationTests(unittest.TestCase):
+    def test_later_author_shard_exhaustively_catches_up_before_frontier(self) -> None:
+        ada_url = _author_search_url("Ada Example")
+        catchup_url = _author_catchup_search_url(
+            "Benoit Example", "2026-09-28", "2026-10-01"
+        )
+        catchup_page = b"""<!doctype html><html><body>
+        <h1>Showing 1&ndash;1 of 1 results</h1>
+        <ol><li class=\"arxiv-result\"><a href=\"/abs/2609.20001\">arXiv</a></li></ol>
+        </body></html>"""
+        initial_config = HarvestConfig.from_json(
+            {
+                "coverageThrough": "2026-09-30",
+                "listings": [],
+                "searches": [],
+                "includeDueAuthors": True,
+                "authorLimit": 1,
+            }
+        )
+        next_config = HarvestConfig.from_json(
+            {
+                "coverageThrough": "2026-10-01",
+                "listings": [],
+                "searches": [],
+                "includeDueAuthors": True,
+                "authorLimit": 1,
+            }
+        )
+        with tempfile.TemporaryDirectory() as temporary:
+            state = Path(temporary) / "state.sqlite3"
+            landscape = Path(temporary) / "landscape.json"
+            landscape.write_text(
+                json.dumps(
+                    {
+                        "lastSuccessfulScan": "2026-09-30T09:46:25Z",
+                        "papers": [
+                            {
+                                "id": "2609.10001",
+                                "title": "Mapped paper",
+                                "authors": ["Ada Example", "Benoit Example"],
+                                "published": "2026-09-15",
+                                "updated": "2026-09-15",
+                            }
+                        ],
+                    }
+                ),
+                encoding="utf-8",
+            )
+            with Ledger(state) as ledger:
+                ledger.initialize()
+                ledger.bootstrap_landscape(landscape)
+                first_plan = ledger.plan(through="2026-09-30", author_limit=1)
+                first = ledger.start_run(
+                    kind="test",
+                    required_lanes=("listings", "searches", "authors"),
+                    coverage_start=first_plan["coverage"]["start"],
+                    coverage_end=first_plan["coverage"]["end"],
+                )
+                first_bundle = harvest(
+                    initial_config,
+                    client=CachedHttpClient(
+                        Path(temporary) / "cache-first",
+                        delay_seconds=0,
+                        opener=MappingOpener(
+                            {ada_url: fixture("harvest_search_page.html").encode()}
+                        ),
+                        sleep=lambda _seconds: None,
+                    ),
+                    ledger=ledger,
+                    run_id=first["runId"],
+                )
+                self.assertTrue(first_bundle["searches"][0]["bootstrapForward"])
+                self.assertIsNone(first_bundle["searches"][0]["catchupWindow"])
+                ledger.complete_run(
+                    run_id=first["runId"],
+                    coverage_start=first_plan["coverage"]["start"],
+                    coverage_end=first_plan["coverage"]["end"],
+                )
+
+                second_plan = ledger.plan(through="2026-10-01", author_limit=1)
+                self.assertEqual(
+                    second_plan["authorsDue"][0]["displayName"], "Benoit Example"
+                )
+                second = ledger.start_run(
+                    kind="test",
+                    required_lanes=("listings", "searches", "authors"),
+                    coverage_start=second_plan["coverage"]["start"],
+                    coverage_end=second_plan["coverage"]["end"],
+                )
+                second_bundle = harvest(
+                    next_config,
+                    client=CachedHttpClient(
+                        Path(temporary) / "cache-second",
+                        delay_seconds=0,
+                        opener=MappingOpener(
+                            {
+                                catchup_url: catchup_page,
+                                "https://arxiv.org/abs/2609.20001": fixture(
+                                    "harvest_abstract_v1.html"
+                                ).encode(),
+                            }
+                        ),
+                        sleep=lambda _seconds: None,
+                    ),
+                    ledger=ledger,
+                    run_id=second["runId"],
+                )
+                search = second_bundle["searches"][0]
+                self.assertFalse(search["bootstrapForward"])
+                self.assertEqual(
+                    search["catchupWindow"],
+                    {"start": "2026-09-28", "end": "2026-10-01"},
+                )
+                self.assertEqual(second_bundle["candidateCount"], 1)
+                self.assertEqual(
+                    second_bundle["candidates"][0]["arxivId"], "2609.20001"
+                )
+                staged = ledger.connection.execute(
+                    "SELECT value_json FROM author_cursor_updates WHERE run_id = ?",
+                    (second["runId"],),
+                ).fetchone()
+                self.assertEqual(
+                    json.loads(staged["value_json"]),
+                    {
+                        "coveredThrough": "2026-10-01",
+                        "frontier": [],
+                        "lastObserved": ["2609.20001"],
+                        "mode": "date-window",
+                    },
+                )
+
+    def test_new_author_catchup_must_exhaust_before_cursor_is_staged(self) -> None:
+        catchup_url = _author_catchup_search_url(
+            "Zed Newcomer", "2026-09-28", "2026-10-01"
+        )
+        incomplete_catchup = b"""<!doctype html><html><body>
+        <h1>Showing 1&ndash;1 of 2 results</h1>
+        <ol><li class=\"arxiv-result\"><a href=\"/abs/2609.20001\">arXiv</a></li></ol>
+        </body></html>"""
+        config = HarvestConfig.from_json(
+            {
+                "coverageThrough": "2026-10-01",
+                "listings": [],
+                "searches": [],
+                "includeDueAuthors": True,
+                "authorLimit": 1,
+            }
+        )
+        with tempfile.TemporaryDirectory() as temporary:
+            state = Path(temporary) / "state.sqlite3"
+            landscape = Path(temporary) / "landscape.json"
+            landscape.write_text(
+                json.dumps(
+                    {
+                        "lastSuccessfulScan": "2026-09-30T09:46:25Z",
+                        "papers": [
+                            {
+                                "id": "2609.10001",
+                                "title": "Mapped paper",
+                                "authors": ["Ada Example"],
+                                "published": "2026-09-15",
+                                "updated": "2026-09-15",
+                            }
+                        ],
+                    }
+                ),
+                encoding="utf-8",
+            )
+            with Ledger(state) as ledger:
+                ledger.initialize()
+                ledger.bootstrap_landscape(landscape)
+                seed = ledger.start_run(kind="test", required_lanes=("setup",))
+                ledger.stage_author_cursor(
+                    run_id=seed["runId"],
+                    author="Ada Example",
+                    value={"frontier": ["2609.10001"]},
+                )
+                ledger.set_lane(seed["runId"], "setup", "completed")
+                ledger.complete_run(
+                    run_id=seed["runId"],
+                    coverage_start="2026-09-30",
+                    coverage_end="2026-09-30",
+                )
+                document = json.loads(landscape.read_text(encoding="utf-8"))
+                document["papers"].append(
+                    {
+                        "id": "2609.20001",
+                        "title": "Newly mapped paper",
+                        "authors": ["Zed Newcomer"],
+                        "published": "2026-09-30",
+                        "updated": "2026-09-30",
+                    }
+                )
+                landscape.write_text(json.dumps(document), encoding="utf-8")
+                ledger.bootstrap_landscape(landscape)
+                plan = ledger.plan(through="2026-10-01", author_limit=1)
+                self.assertEqual(plan["authorsDue"][0]["displayName"], "Zed Newcomer")
+                run = ledger.start_run(
+                    kind="test",
+                    required_lanes=("listings", "searches", "authors"),
+                    coverage_start=plan["coverage"]["start"],
+                    coverage_end=plan["coverage"]["end"],
+                )
+                with self.assertRaisesRegex(
+                    HarvestError, "exhausted after 1 unique IDs, but the page states 2"
+                ):
+                    harvest(
+                        config,
+                        client=CachedHttpClient(
+                            Path(temporary) / "cache",
+                            delay_seconds=0,
+                            opener=MappingOpener(
+                                {
+                                    catchup_url: incomplete_catchup,
+                                }
+                            ),
+                            sleep=lambda _seconds: None,
+                        ),
+                        ledger=ledger,
+                        run_id=run["runId"],
+                    )
+                staged = ledger.connection.execute(
+                    "SELECT COUNT(*) FROM author_cursor_updates WHERE run_id = ?",
+                    (run["runId"],),
+                ).fetchone()[0]
+                self.assertEqual(staged, 0)
+
+    def test_date_window_author_cursor_advances_only_after_completion(self) -> None:
+        catchup_url = _author_catchup_search_url(
+            "Ada Example", "2026-09-29", "2026-10-02"
+        )
+        zero_results = b"""<!doctype html><html><body>
+        <h1>0 results for: Ada Example</h1>
+        </body></html>"""
+        config = HarvestConfig.from_json(
+            {
+                "coverageThrough": "2026-10-02",
+                "listings": [],
+                "searches": [],
+                "includeDueAuthors": True,
+                "authorLimit": 1,
+            }
+        )
+        with tempfile.TemporaryDirectory() as temporary:
+            state = Path(temporary) / "state.sqlite3"
+            landscape = Path(temporary) / "landscape.json"
+            landscape.write_text(
+                json.dumps(
+                    {
+                        "lastSuccessfulScan": "2026-09-30T09:46:25Z",
+                        "papers": [
+                            {
+                                "id": "2609.10001",
+                                "title": "Mapped paper",
+                                "authors": ["Ada Example"],
+                                "published": "2026-09-15",
+                                "updated": "2026-09-15",
+                            }
+                        ],
+                    }
+                ),
+                encoding="utf-8",
+            )
+            with Ledger(state) as ledger:
+                ledger.initialize()
+                ledger.bootstrap_landscape(landscape)
+                seed = ledger.start_run(kind="test", required_lanes=("setup",))
+                ledger.stage_author_cursor(
+                    run_id=seed["runId"],
+                    author="Ada Example",
+                    value={
+                        "frontier": [],
+                        "mode": "date-window",
+                        "coveredThrough": "2026-10-01",
+                        "lastObserved": [],
+                    },
+                )
+                ledger.set_lane(seed["runId"], "setup", "completed")
+                ledger.complete_run(
+                    run_id=seed["runId"],
+                    coverage_start="2026-09-29",
+                    coverage_end="2026-10-01",
+                )
+                plan = ledger.plan(through="2026-10-02", author_limit=1)
+                run = ledger.start_run(
+                    kind="test",
+                    required_lanes=("listings", "searches", "authors"),
+                    coverage_start=plan["coverage"]["start"],
+                    coverage_end=plan["coverage"]["end"],
+                )
+                bundle = harvest(
+                    config,
+                    client=CachedHttpClient(
+                        Path(temporary) / "cache",
+                        delay_seconds=0,
+                        opener=MappingOpener({catchup_url: zero_results}),
+                        sleep=lambda _seconds: None,
+                    ),
+                    ledger=ledger,
+                    run_id=run["runId"],
+                )
+                self.assertEqual(
+                    bundle["searches"][0]["catchupWindow"],
+                    {"start": "2026-09-29", "end": "2026-10-02"},
+                )
+                self.assertEqual(
+                    ledger.get_author_cursor("Ada Example")["coveredThrough"],
+                    "2026-10-01",
+                )
+                staged = ledger.connection.execute(
+                    "SELECT value_json FROM author_cursor_updates WHERE run_id = ?",
+                    (run["runId"],),
+                ).fetchone()
+                self.assertEqual(
+                    json.loads(staged["value_json"]),
+                    {
+                        "coveredThrough": "2026-10-02",
+                        "frontier": [],
+                        "lastObserved": [],
+                        "mode": "date-window",
+                    },
+                )
+                ledger.complete_run(
+                    run_id=run["runId"],
+                    coverage_start=plan["coverage"]["start"],
+                    coverage_end=plan["coverage"]["end"],
+                )
+                self.assertEqual(
+                    ledger.get_author_cursor("Ada Example")["coveredThrough"],
+                    "2026-10-02",
+                )
+
     def test_zero_entry_category_can_close_current_coverage(self) -> None:
         zero_url = "https://arxiv.org/list/hep-ex/new?skip=0&show=2000"
         config = HarvestConfig.from_json(

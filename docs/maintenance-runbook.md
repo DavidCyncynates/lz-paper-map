@@ -124,6 +124,16 @@ revisions, so revision detection is part of these bounded discovery lanes rather
 than a separate full-catalog scan. The output contains only unseen or changed
 versions surfaced by the targeted discovery lanes.
 
+An author that has not yet received a committed frontier is initialized
+lazily. The collector exhaustively searches that author's most-recent
+submission dates from the earlier of the registry start or planned overlap
+through the run's coverage end, then stages a date-window cursor. Later turns
+resume from that author's own covered-through date with overlap. The bounded
+catch-up is candidate-producing and must exhaust before its cursor can be
+staged. This per-author migration keeps rotation bounded without dropping
+papers or revisions while later author shards wait for their first turn, and
+it never advances past the run's declared coverage window.
+
 If arXiv throttles, a page is malformed, a search cannot reach its frontier,
 or the candidate limit is exceeded, abort the run. Do not promote cursors or
 fall back to an incomplete result.

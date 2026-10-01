@@ -2140,7 +2140,13 @@ class Ledger:
         start = min(end, last_date) - dt.timedelta(days=overlap_days)
         authors = self.connection.execute(
             """
-            SELECT r.author_key, r.display_name, a.updated_at, a.value_json
+            SELECT
+                r.author_key,
+                r.display_name,
+                r.first_seen_at,
+                r.source,
+                a.updated_at,
+                a.value_json
             FROM author_registry r
             LEFT JOIN authors a ON a.author_key = r.author_key
             ORDER BY a.updated_at IS NOT NULL, a.updated_at, r.author_key
@@ -2160,6 +2166,8 @@ class Ledger:
                 {
                     "authorKey": row["author_key"],
                     "displayName": row["display_name"],
+                    "firstSeenAt": row["first_seen_at"],
+                    "source": row["source"],
                     "lastCompletedAt": row["updated_at"],
                     "cursor": (
                         json.loads(row["value_json"])

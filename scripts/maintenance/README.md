@@ -65,6 +65,14 @@ rotating author-search frontiers, then compares their exact observed versions.
 Successful harvests mark the listing, search, and author lanes that provide this
 revision coverage.
 
+Frontiers for rotating authors are initialized per author rather than by one
+global migration run. When a registered author first becomes due, the harvester
+exhaustively checks the bounded most-recent-submission date window since that
+author entered the registry (including the planned overlap). A covered-through
+cursor is staged only after that catch-up succeeds, so a later author shard
+cannot be stranded, silently skip work published while it waited, or advance
+past the run's declared coverage window.
+
 Example no-change completion:
 
 ```sh
