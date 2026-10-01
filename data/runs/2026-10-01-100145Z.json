@@ -1,0 +1,103 @@
+{
+  "schemaVersion": 1,
+  "runId": "533c866b-094f-418e-b729-b720fbfafd69",
+  "runAt": "2026-10-01T10:01:45Z",
+  "scanWindow": {
+    "previousSuccessfulScan": "2026-09-30T09:46:25Z",
+    "overlapStart": "2026-09-28",
+    "coverageEnd": "2026-10-01",
+    "coverageComplete": true,
+    "note": "Recovery run after fixing lazy per-author frontier initialization; all listing, search, author, citation-discovery, and reference lanes completed before cursor promotion."
+  },
+  "discovery": {
+    "logicalRequests": 51,
+    "networkRequests": 51,
+    "notModifiedHits": 17,
+    "retries": 0,
+    "candidateCount": 6
+  },
+  "added": [
+    {
+      "id": "2609.38316",
+      "version": 1,
+      "title": "Constraints on Complex Electroweak WIMPs from Solar Capture",
+      "reason": "Directly constrains electroweak-multiplet interpretations of the LZ high-recoil event using solar capture and IceCube.",
+      "url": "https://arxiv.org/abs/2609.38316v1"
+    },
+    {
+      "id": "2609.39529",
+      "version": 1,
+      "title": "Supermassive charged gravitinos and the Lux-Zeplin event",
+      "reason": "Direct alternative explanation of the event using fractionally charged supermassive gravitino dark matter.",
+      "url": "https://arxiv.org/abs/2609.39529v1"
+    },
+    {
+      "id": "2609.40234",
+      "version": 1,
+      "title": "Interpreting the High-Recoil LUX-ZEPLIN Event with Bino-/Singlino-like and Higgsino Dark Matter",
+      "reason": "Direct supersymmetric interpretations using elastic neutralinos and endothermic Higgsinos.",
+      "url": "https://arxiv.org/abs/2609.40234v1"
+    }
+  ],
+  "excluded": [
+    {
+      "id": "2609.35720",
+      "reason": "Type Iax supernova observations; unrelated author-search result."
+    },
+    {
+      "id": "2609.38304",
+      "reason": "Nearby-supernova survey science; unrelated author-search result."
+    },
+    {
+      "id": "2609.40347",
+      "reason": "Self-supervised video representation learning; unrelated author-search result."
+    }
+  ],
+  "citationReconciliation": {
+    "coverageComplete": true,
+    "missingSnapshotIds": [],
+    "staleSnapshotIds": [],
+    "evidence": [
+      {
+        "id": "2609.38316",
+        "version": 1,
+        "completeReferenceCount": 119,
+        "mappedCitationCount": 98,
+        "url": "https://arxiv.org/html/2609.38316v1"
+      },
+      {
+        "id": "2609.39529",
+        "version": 1,
+        "completeReferenceCount": 1,
+        "mappedCitationCount": 1,
+        "url": "https://arxiv.org/html/2609.39529v1"
+      },
+      {
+        "id": "2609.40234",
+        "version": 1,
+        "completeReferenceCount": 87,
+        "mappedCitationCount": 18,
+        "url": "https://arxiv.org/html/2609.40234v1"
+      }
+    ]
+  },
+  "changes": {
+    "addedPaperIds": ["2609.38316", "2609.39529", "2609.40234"],
+    "revisedPaperIds": [],
+    "preserved": "All 112 established records retain their metadata, editorial fields, coordinates, and layout ranks; the additions use contiguous ranks 112-114."
+  },
+  "validation": {
+    "catalogValidator": "passed: 115 papers and 9 islands",
+    "maintenanceTests": "passed: 95",
+    "catalogIndexTests": "passed: 4",
+    "layoutTests": "passed: 13",
+    "layoutArtifactTests": "passed: 5",
+    "dateRangeTests": "passed: 7",
+    "citationSizeTests": "passed: 3",
+    "themeTests": "passed: 7",
+    "seoTests": "passed: 3 plus 115 generated paper pages and sitemap entries",
+    "typecheck": "passed",
+    "lint": "passed",
+    "productionBuild": "passed: 116 prerendered routes and sitemap for 115 papers"
+  }
+}
