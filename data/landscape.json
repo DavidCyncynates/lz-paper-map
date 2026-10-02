@@ -5056,11 +5056,11 @@
       "id": "2609.29462",
       "layoutRank": 100,
       "arxivId": "2609.29462",
-      "arxivVersion": 1,
+      "arxivVersion": 2,
       "title": "Limits on Primordial Black Hole Evaporation from LUX-ZEPLIN",
       "authors": ["Jitumani Kalita"],
       "published": "2026-09-24",
-      "updated": "2026-09-24",
+      "updated": "2026-10-01",
       "url": "https://arxiv.org/abs/2609.29462",
       "role": "constraint",
       "primaryIsland": "constraints",
@@ -5075,7 +5075,12 @@
       "takeaway": "The event cannot be explained by contemporary PBH evaporation in the tested class, but the same low-energy null result yields stringent limits on light primordial-black-hole abundance.",
       "x": 66.16,
       "y": 91.91,
-      "cites": ["2609.02823"]
+      "cites": [
+        "2609.02823", "2609.04186", "2609.06825", "2609.07451", "2609.07800",
+        "2609.07807", "2609.10504", "2609.13130", "2609.14799", "2609.15027",
+        "2609.15118", "2609.15985", "2609.17412", "2609.21823", "2609.23096",
+        "2609.24982", "2609.36814"
+      ]
     },
     {
       "id": "2609.30255",
@@ -5568,6 +5573,95 @@
         "2609.02775", "2609.02823", "2609.04163", "2609.04175", "2609.06760",
         "2609.07807", "2609.07811", "2609.08712", "2609.08993", "2609.09385",
         "2609.11241", "2609.11833", "2609.15321"
+      ]
+    },
+    {
+      "id": "2610.00226",
+      "layoutRank": 115,
+      "arxivId": "2610.00226",
+      "arxivVersion": 1,
+      "title": "Thermal Higgsino Dark Matter in GmSUGRA for the LZ Event and Solar-Neutrino Constraint",
+      "authors": ["Imtiaz Khan", "Waqas Ahmed", "Tianjun Li", "Shabbar Raza", "Ali Muhammad"],
+      "published": "2026-09-22",
+      "updated": "2026-09-22",
+      "url": "https://arxiv.org/abs/2610.00226",
+      "role": "explanation",
+      "primaryIsland": "higgsino",
+      "islands": ["higgsino", "constraints", "endothermic"],
+      "tags": [
+        "thermal Higgsino",
+        "GmSUGRA",
+        "solar capture",
+        "neutralino splitting"
+      ],
+      "summary": "The authors embed a thermal Higgsino with a sub-MeV neutral-state splitting in a GmSUGRA construction, identifying the part of the high-scale branch that overlaps the LZ high-recoil kinematics.",
+      "takeaway": "The LZ-motivated splitting arises dynamically in the model, although the full-density few-hundred-keV region is disfavored by current solar-capture reinterpretations while larger splittings remain viable.",
+      "x": 83.3,
+      "y": 25.7,
+      "cites": [
+        "2609.01504", "2609.01583", "2609.01590", "2609.01892", "2609.02775",
+        "2609.02823", "2609.02868", "2609.04144", "2609.04163", "2609.04175",
+        "2609.06760", "2609.06909", "2609.07138", "2609.07807", "2609.07811",
+        "2609.08893", "2609.09230", "2609.09385", "2609.10491", "2609.15321",
+        "2609.15634", "2609.22739"
+      ]
+    },
+    {
+      "id": "2610.00645",
+      "layoutRank": 116,
+      "arxivId": "2610.00645",
+      "arxivVersion": 1,
+      "title": "Inelastic Dark Matter from a Higher-Dimensional Operator: The LUX-ZEPLIN High-Recoil Event and Thermal Relic",
+      "authors": ["Debajyoti Choudhury", "Jaydeb Das", "Divya Sachdeva"],
+      "published": "2026-09-30",
+      "updated": "2026-09-30",
+      "url": "https://arxiv.org/abs/2610.00645",
+      "role": "explanation",
+      "primaryIsland": "endothermic",
+      "islands": ["endothermic", "constraints"],
+      "tags": [
+        "dimension-six operator",
+        "endothermic scattering",
+        "thermal relic",
+        "soft symmetry breaking"
+      ],
+      "summary": "A fermionic dark sector uses one dimension-six Standard-Model operator and a small soft symmetry-breaking term to generate endothermic scattering concentrated at high xenon recoil energy.",
+      "takeaway": "For roughly 0.2–1 TeV dark matter, the construction can fit the LZ event while producing the observed thermal relic abundance without tuning the inelastic splitting by hand.",
+      "x": 68.0,
+      "y": 56.0,
+      "cites": [
+        "2609.01504", "2609.02823", "2609.04175", "2609.09138", "2609.09385",
+        "2609.10491"
+      ]
+    },
+    {
+      "id": "2610.01613",
+      "layoutRank": 117,
+      "arxivId": "2610.01613",
+      "arxivVersion": 1,
+      "title": "From the LZ Event to Grand Unification: Heavy Higgsinos and Proton Decay",
+      "authors": ["Shihwen Hor", "Natsumi Nagata", "Tsutomu T. Yanagida"],
+      "published": "2026-10-01",
+      "updated": "2026-10-01",
+      "url": "https://arxiv.org/abs/2610.01613",
+      "role": "explanation",
+      "primaryIsland": "higgsino",
+      "islands": ["higgsino", "constraints", "multimessenger"],
+      "tags": [
+        "heavy Higgsino",
+        "supersymmetric SU(5)",
+        "gauge unification",
+        "proton decay"
+      ],
+      "summary": "The paper places an approximately 100 TeV Higgsino with a roughly 400 keV splitting in minimal supersymmetric SU(5), using GUT-scale thresholds to retain viable gauge unification and proton stability.",
+      "takeaway": "The heavy-Higgsino route around the solar-capture tension connects the LZ event to a proton-decay signal that could be tested by the next generation of large detectors.",
+      "x": 91.5,
+      "y": 42.0,
+      "cites": [
+        "2609.01504", "2609.01583", "2609.01590", "2609.01892", "2609.02775",
+        "2609.02823", "2609.04163", "2609.06760", "2609.07807", "2609.07811",
+        "2609.08712", "2609.09385", "2609.11241", "2609.11833", "2609.18564",
+        "2609.23691", "2609.28740", "2609.33869", "2609.38316", "2609.40234"
       ]
     }
   ]

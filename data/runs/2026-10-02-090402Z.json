@@ -1,0 +1,110 @@
+{
+  "schemaVersion": 1,
+  "runId": "c3dd2b75-a308-4677-9920-cc7484a921e1",
+  "runAt": "2026-10-02T09:04:02Z",
+  "scanWindow": {
+    "previousSuccessfulScan": "2026-10-01T10:01:45Z",
+    "overlapStart": "2026-09-29",
+    "coverageEnd": "2026-10-02",
+    "coverageComplete": true,
+    "note": "All listing, search, rotating-author, citation-discovery, and exact-version reference lanes completed before cursor promotion."
+  },
+  "discovery": {
+    "inspireDisplayedResults": 122,
+    "inspireNewIds": ["2610.01613"],
+    "logicalRequests": 50,
+    "networkRequests": 50,
+    "notModifiedHits": 18,
+    "retries": 0,
+    "candidateCount": 4
+  },
+  "added": [
+    {
+      "id": "2610.00226",
+      "version": 1,
+      "title": "Thermal Higgsino Dark Matter in GmSUGRA for the LZ Event and Solar-Neutrino Constraint",
+      "reason": "Directly realizes the LZ-motivated sub-MeV Higgsino splitting in GmSUGRA and evaluates the associated solar-neutrino constraint.",
+      "url": "https://arxiv.org/abs/2610.00226v1"
+    },
+    {
+      "id": "2610.00645",
+      "version": 1,
+      "title": "Inelastic Dark Matter from a Higher-Dimensional Operator: The LUX-ZEPLIN High-Recoil Event and Thermal Relic",
+      "reason": "Direct endothermic dark-matter explanation of the LZ high-recoil event with a dimension-six operator and thermal relic abundance.",
+      "url": "https://arxiv.org/abs/2610.00645v1"
+    },
+    {
+      "id": "2610.01613",
+      "version": 1,
+      "title": "From the LZ Event to Grand Unification: Heavy Higgsinos and Proton Decay",
+      "reason": "Direct heavy-Higgsino interpretation of the LZ event connected to GUT thresholds and testable proton-decay predictions.",
+      "url": "https://arxiv.org/abs/2610.01613v1"
+    }
+  ],
+  "revised": [
+    {
+      "id": "2609.29462",
+      "fromVersion": 1,
+      "toVersion": 2,
+      "assessment": "The revision remains directly relevant and preserves the established title, authors, role, placement, tags, summary, and takeaway; only exact-version metadata and the verified citation snapshot changed.",
+      "url": "https://arxiv.org/abs/2609.29462v2"
+    }
+  ],
+  "excluded": [],
+  "citationReconciliation": {
+    "coverageComplete": true,
+    "edgeCount": 3241,
+    "missingSnapshotIds": [],
+    "staleSnapshotIds": [],
+    "evidence": [
+      {
+        "id": "2609.29462",
+        "version": 2,
+        "completeReferenceCount": 77,
+        "mappedCitationCount": 17,
+        "url": "https://arxiv.org/html/2609.29462v2"
+      },
+      {
+        "id": "2610.00226",
+        "version": 1,
+        "completeReferenceCount": 47,
+        "mappedCitationCount": 22,
+        "url": "https://arxiv.org/html/2610.00226v1"
+      },
+      {
+        "id": "2610.00645",
+        "version": 1,
+        "completeReferenceCount": 11,
+        "mappedCitationCount": 6,
+        "url": "https://arxiv.org/html/2610.00645v1"
+      },
+      {
+        "id": "2610.01613",
+        "version": 1,
+        "completeReferenceCount": 71,
+        "mappedCitationCount": 20,
+        "url": "https://arxiv.org/html/2610.01613v1"
+      }
+    ]
+  },
+  "changes": {
+    "addedPaperIds": ["2610.00226", "2610.00645", "2610.01613"],
+    "revisedPaperIds": ["2609.29462"],
+    "preserved": "All 115 established records retain their order, summaries, takeaways, roles, island memberships, tags, coordinates, and layout ranks. The three additions use contiguous ranks 115-117."
+  },
+  "validation": {
+    "catalogValidator": "passed: 118 papers and 9 islands",
+    "generatedArtifacts": "passed: catalog index and both map layouts are current",
+    "maintenanceTests": "passed: 95",
+    "catalogIndexTests": "passed: 4",
+    "layoutTests": "passed: 13",
+    "layoutArtifactTests": "passed: 5",
+    "typecheck": "passed",
+    "lint": "passed",
+    "productionBuild": "passed: 119 prerendered routes and sitemap for 118 papers"
+  },
+  "judgmentCalls": [
+    "The version-2 PBH paper did not require editorial-field changes because its established summary and placement still accurately describe the revised paper.",
+    "The higher-dimensional-operator paper was placed in the existing endothermic island; its authored coordinate was kept near related models and adjusted slightly so the append-only stability fixture remained within tolerance."
+  ]
+}
