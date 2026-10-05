@@ -1,8 +1,8 @@
 {
   "schemaVersion": 2,
   "title": "LZ high-recoil literature landscape",
-  "updatedAt": "2026-10-01",
-  "lastSuccessfulScan": "2026-10-01T10:01:45Z",
+  "updatedAt": "2026-10-05",
+  "lastSuccessfulScan": "2026-10-05T09:08:26Z",
   "event": {
     "energyKev": 248,
     "statisticalUncertaintyKev": 23,
@@ -12,7 +12,7 @@
   },
   "citationData": {
     "source": "arXiv reference lists",
-    "checkedAt": "2026-10-01",
+    "checkedAt": "2026-10-05",
     "scope": "Citations between papers in this map",
     "note": "References to the official LZ preprint are normalized to arXiv:2609.02823."
   },
@@ -1909,14 +1909,14 @@
       "id": "2609.08993",
       "layoutRank": 41,
       "arxivId": "2609.08993",
-      "arxivVersion": 1,
+      "arxivVersion": 2,
       "title": "A Vector-Like Lepton Interpretation of the High-Energy Nuclear Recoil Candidate in LUX-ZEPLIN",
       "authors": [
         "Fatemeh Elahi",
         "Pedro Schwaller"
       ],
       "published": "2026-09-08",
-      "updated": "2026-09-08",
+      "updated": "2026-10-02",
       "url": "https://arxiv.org/abs/2609.08993",
       "role": "explanation",
       "primaryIsland": "elastic",
@@ -1936,15 +1936,27 @@
       "y": 88.03,
       "cites": [
         "2609.01504",
+        "2609.01592",
+        "2609.01892",
         "2609.02505",
+        "2609.02608",
         "2609.02775",
         "2609.02807",
         "2609.02823",
         "2609.04144",
+        "2609.04163",
         "2609.04175",
         "2609.04181",
         "2609.04185",
-        "2609.04186"
+        "2609.04186",
+        "2609.04673",
+        "2609.05204",
+        "2609.06571",
+        "2609.06825",
+        "2609.07138",
+        "2609.07807",
+        "2609.09385",
+        "2609.11833"
       ]
     },
     {
@@ -5662,6 +5674,34 @@
         "2609.02823", "2609.04163", "2609.06760", "2609.07807", "2609.07811",
         "2609.08712", "2609.09385", "2609.11241", "2609.11833", "2609.18564",
         "2609.23691", "2609.28740", "2609.33869", "2609.38316", "2609.40234"
+      ]
+    },
+    {
+      "id": "2610.03692",
+      "layoutRank": 118,
+      "arxivId": "2610.03692",
+      "arxivVersion": 1,
+      "title": "Higgsino dark matter compatible with the LUX-ZEPLIN high-energy nuclear-recoil event and IceCube constraints",
+      "authors": ["Katherine Freese", "Dionysios P. Theodosopoulos"],
+      "published": "2026-10-02",
+      "updated": "2026-10-02",
+      "url": "https://arxiv.org/abs/2610.03692",
+      "role": "explanation",
+      "primaryIsland": "higgsino",
+      "islands": ["higgsino", "constraints", "endothermic"],
+      "tags": [
+        "Higgsino dark matter",
+        "IceCube",
+        "Large Magellanic Cloud",
+        "high-energy sideband"
+      ],
+      "summary": "The authors jointly analyze the LZ recoil and IceCube solar-neutrino limits for inelastic Higgsinos, varying the Galactic high-speed tail, solar cooling assumptions, and use of the empty LZ high-energy sideband.",
+      "takeaway": "Compatibility is assumption dependent near the thermal 1.1 TeV benchmark, while heavier Higgsinos retain broad event-compatible regions across the tested solar and halo scenarios.",
+      "x": 87.8,
+      "y": 16.3,
+      "cites": [
+        "2609.01504", "2609.01583", "2609.01590", "2609.01892", "2609.02775",
+        "2609.02823", "2609.04175", "2609.07807", "2609.09385", "2609.11833"
       ]
     }
   ]
