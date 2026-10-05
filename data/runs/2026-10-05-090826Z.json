@@ -1,0 +1,85 @@
+{
+  "schemaVersion": 1,
+  "runId": "fcef28eb-8847-4994-a508-9fadcef78bc0",
+  "runAt": "2026-10-05T09:08:26Z",
+  "scanWindow": {
+    "previousSuccessfulScan": "2026-10-01T10:01:45Z",
+    "overlapStart": "2026-09-30",
+    "coverageEnd": "2026-10-05",
+    "coverageComplete": true,
+    "note": "All listing, search, rotating-author, citation-discovery, and exact-version reference lanes completed before cursor promotion."
+  },
+  "discovery": {
+    "inspireDisplayedResults": 123,
+    "inspireNewIds": ["2610.03692"],
+    "listingPages": 10,
+    "targetedSearches": 11,
+    "rotatingAuthorCatchups": 8,
+    "logicalRequests": 51,
+    "networkRequests": 51,
+    "notModifiedHits": 21,
+    "retries": 0,
+    "candidateCount": 2
+  },
+  "added": [
+    {
+      "id": "2610.03692",
+      "version": 1,
+      "title": "Higgsino dark matter compatible with the LUX-ZEPLIN high-energy nuclear-recoil event and IceCube constraints",
+      "reason": "Directly analyzes whether inelastic Higgsino dark matter can fit the isolated LZ recoil while satisfying IceCube, sideband, solar-cooling, and halo-tail constraints.",
+      "url": "https://arxiv.org/abs/2610.03692v1"
+    }
+  ],
+  "revised": [
+    {
+      "id": "2609.08993",
+      "fromVersion": 1,
+      "toVersion": 2,
+      "assessment": "The revision remains directly relevant and preserves the established title, authors, role, placement, tags, summary, takeaway, coordinates, and layout rank; only exact-version metadata and the verified citation snapshot changed.",
+      "url": "https://arxiv.org/abs/2609.08993v2"
+    }
+  ],
+  "excluded": [],
+  "citationReconciliation": {
+    "coverageComplete": true,
+    "edgeCount": 3263,
+    "missingSnapshotIds": [],
+    "staleSnapshotIds": [],
+    "evidence": [
+      {
+        "id": "2609.08993",
+        "version": 2,
+        "completeReferenceCount": 58,
+        "mappedCitationCount": 22,
+        "url": "https://arxiv.org/html/2609.08993v2"
+      },
+      {
+        "id": "2610.03692",
+        "version": 1,
+        "completeReferenceCount": 45,
+        "mappedCitationCount": 10,
+        "url": "https://arxiv.org/html/2610.03692v1"
+      }
+    ]
+  },
+  "changes": {
+    "addedPaperIds": ["2610.03692"],
+    "revisedPaperIds": ["2609.08993"],
+    "preserved": "All 118 established records retain their order, summaries, takeaways, roles, island memberships, tags, coordinates, and layout ranks. The addition uses the next contiguous rank, 118."
+  },
+  "validation": {
+    "catalogValidator": "passed: 119 papers and 9 islands",
+    "generatedArtifacts": "passed: catalog index and both map layouts are current",
+    "maintenanceTests": "passed: 95",
+    "catalogIndexTests": "passed: 4",
+    "layoutTests": "passed: 13",
+    "layoutArtifactTests": "passed: 5",
+    "typecheck": "passed",
+    "lint": "passed",
+    "productionBuild": "passed: 120 prerendered routes and sitemap for 119 papers"
+  },
+  "judgmentCalls": [
+    "The version-2 vector-like-lepton paper did not require editorial-field changes because its established summary and elastic/constraints placement still accurately describe the revised mechanism and its solar-neutrino tests.",
+    "The new Higgsino-IceCube likelihood study was placed in the existing Higgsino island with constraints and endothermic secondary memberships; its neutral summary foregrounds the dependence on halo, cooling, and sideband assumptions."
+  ]
+}
