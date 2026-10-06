@@ -1,0 +1,121 @@
+{
+  "schemaVersion": 1,
+  "runId": "18f9f2bf-1359-4a58-89da-6b0c08c17ede",
+  "runAt": "2026-10-06T09:12:55Z",
+  "scanWindow": {
+    "previousSuccessfulScan": "2026-10-05T09:08:26Z",
+    "overlapStart": "2026-10-03",
+    "coverageEnd": "2026-10-06",
+    "coverageComplete": true,
+    "note": "All listing, search, rotating-author, citation-discovery, exact-version screening, and reference lanes completed before cursor promotion."
+  },
+  "discovery": {
+    "inspireDisplayedResults": 125,
+    "inspireNewIds": ["2610.05893"],
+    "listingPages": 10,
+    "targetedSearches": 11,
+    "rotatingAuthorCatchups": 8,
+    "logicalRequests": 52,
+    "networkRequests": 52,
+    "notModifiedHits": 13,
+    "retries": 0,
+    "candidateCount": 11
+  },
+  "added": [
+    {
+      "id": "2610.05893",
+      "version": 1,
+      "title": "Environment-Dependent Annihilation of Axion-Coupled Higgsino Dark Matter",
+      "reason": "Directly develops an axion-coupled Higgsino scenario with an appreciable inelastic terrestrial rate and explicit implications for the LZ high-recoil candidate.",
+      "url": "https://arxiv.org/abs/2610.05893v1"
+    },
+    {
+      "id": "2610.06756",
+      "version": 1,
+      "title": "One Event, Two Frontiers: From LZ to LHC",
+      "reason": "Directly evaluates elastic dark-matter interpretations of the LZ 248 keV event against LHC monojet constraints.",
+      "url": "https://arxiv.org/abs/2610.06756v1"
+    }
+  ],
+  "revised": [
+    {
+      "id": "2609.09015",
+      "fromVersion": 1,
+      "toVersion": 2,
+      "assessment": "The revision remains directly relevant and preserves the established role, placement, tags, summary, takeaway, coordinates, and layout rank; exact metadata and verified citations were refreshed.",
+      "url": "https://arxiv.org/abs/2609.09015v2"
+    },
+    {
+      "id": "2609.13130",
+      "fromVersion": 1,
+      "toVersion": 2,
+      "assessment": "The revision remains directly relevant and preserves all established editorial fields; exact-version metadata and citations were refreshed.",
+      "url": "https://arxiv.org/abs/2609.13130v2"
+    },
+    {
+      "id": "2609.21823",
+      "fromVersion": 1,
+      "toVersion": 2,
+      "assessment": "The revision adds Thong T. Q. Nguyen to the arXiv author list while preserving the established editorial fields; exact-version citations were refreshed.",
+      "url": "https://arxiv.org/abs/2609.21823v2"
+    },
+    {
+      "id": "2609.36814",
+      "fromVersion": 1,
+      "toVersion": 2,
+      "assessment": "The revision remains directly relevant and the established summary already covers its target-hierarchy, modulation, and Large Magellanic Cloud conclusions.",
+      "url": "https://arxiv.org/abs/2609.36814v2"
+    }
+  ],
+  "ambiguous": [
+    {
+      "id": "2609.06640",
+      "version": 2,
+      "metadataSha256": "dc8e028a73ed545bb2784ac8f73e58c121ddd48d0ff227a9358f7c7abda50379",
+      "reason": "Version 2 is clearly relevant but materially changes the title, author list, and scientific claims underlying the established human-reviewed summary. The public record remains pinned to v1 and its v1 citation snapshot pending editorial review.",
+      "url": "https://arxiv.org/abs/2609.06640v2"
+    }
+  ],
+  "excluded": [
+    {"id": "2512.13587", "version": 3, "reason": "JUNO neutrino texture study unrelated to the LZ recoil candidate."},
+    {"id": "2610.00458", "version": 1, "reason": "General QCD-axion reheating study unrelated to the LZ recoil candidate."},
+    {"id": "2610.00522", "version": 1, "reason": "General charged-scalar portal study unrelated to the LZ recoil candidate."},
+    {"id": "2610.04983", "version": 1, "reason": "Black-hole magnetohydrodynamics paper surfaced by a text collision."}
+  ],
+  "citationReconciliation": {
+    "coverageComplete": true,
+    "edgeCount": 3457,
+    "missingSnapshotIds": [],
+    "staleSnapshotIds": [],
+    "evidence": [
+      {"id": "2609.09015", "version": 2, "completeReferenceCount": 78, "mappedCitationCount": 36, "url": "https://arxiv.org/html/2609.09015v2"},
+      {"id": "2609.13130", "version": 2, "completeReferenceCount": 78, "mappedCitationCount": 34, "url": "https://arxiv.org/html/2609.13130v2"},
+      {"id": "2609.21823", "version": 2, "completeReferenceCount": 143, "mappedCitationCount": 100, "url": "https://arxiv.org/html/2609.21823v2"},
+      {"id": "2609.36814", "version": 2, "completeReferenceCount": 100, "mappedCitationCount": 85, "url": "https://arxiv.org/html/2609.36814v2"},
+      {"id": "2610.05893", "version": 1, "completeReferenceCount": 83, "mappedCitationCount": 28, "url": "https://arxiv.org/html/2610.05893v1"},
+      {"id": "2610.06756", "version": 1, "completeReferenceCount": 103, "mappedCitationCount": 72, "url": "https://arxiv.org/html/2610.06756v1"}
+    ]
+  },
+  "changes": {
+    "addedPaperIds": ["2610.05893", "2610.06756"],
+    "revisedPaperIds": ["2609.09015", "2609.13130", "2609.21823", "2609.36814"],
+    "candidateLogIds": ["2609.06640v2"],
+    "preserved": "All 119 established records retain their order, summaries, takeaways, roles, island memberships, tags, coordinates, and layout ranks. The additions use the next contiguous ranks, 119 and 120."
+  },
+  "validation": {
+    "catalogValidator": "passed: 121 papers and 9 islands",
+    "generatedArtifacts": "passed: catalog index and both map layouts are current",
+    "maintenanceTests": "passed: 95",
+    "catalogIndexTests": "passed: 4",
+    "layoutTests": "passed: 13",
+    "layoutArtifactTests": "passed: 5",
+    "typecheck": "passed",
+    "lint": "passed",
+    "productionBuild": "passed: 122 prerendered routes and sitemap for 121 papers"
+  },
+  "judgmentCalls": [
+    "The new axion-coupled Higgsino paper was placed in the existing Higgsino island with constraints and adjacent-signals memberships because its mechanism links terrestrial inelastic scattering to solar-neutrino evasion and halo gamma rays.",
+    "The new LHC-recast paper was placed in Tests & tensions with Elastic portals membership because its main result constrains, rather than proposes, the event-favored elastic operators.",
+    "The 2609.06640v2 revision was not advanced automatically: its title, authorship, and central multi-messenger claim changed enough to make the established summary inaccurate, so the catalog remains pinned to v1 and a human-review candidate was added."
+  ]
+}
