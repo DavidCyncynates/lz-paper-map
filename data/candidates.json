@@ -1,4 +1,14 @@
 {
   "schemaVersion": 1,
-  "items": []
+  "items": [
+    {
+      "arxivId": "2609.06640",
+      "version": 2,
+      "metadataSha256": "dc8e028a73ed545bb2784ac8f73e58c121ddd48d0ff227a9358f7c7abda50379",
+      "status": "ambiguous",
+      "title": "A Common $\\sim$55 GeV Inelastic Dark Matter Origin of the LZ, Fermi-LAT, and AMS-02 Excesses and Paleo-Detector Prospects",
+      "reason": "Version 2 is clearly relevant but materially changes the title, author list, and scientific claims underlying the established human-reviewed summary; review the editorial fields before advancing the catalog version.",
+      "sourceUrl": "https://arxiv.org/abs/2609.06640v2"
+    }
+  ]
 }
