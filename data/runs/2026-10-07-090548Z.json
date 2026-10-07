@@ -1,0 +1,106 @@
+{
+  "schemaVersion": 1,
+  "runId": "12982234-6027-4001-82f7-fa0a6070d46c",
+  "runAt": "2026-10-07T09:05:48Z",
+  "scanWindow": {
+    "previousSuccessfulScan": "2026-10-05T09:08:26Z",
+    "overlapStart": "2026-10-04",
+    "coverageEnd": "2026-10-07",
+    "coverageComplete": true,
+    "note": "All listing, search, rotating-author, citation-discovery, exact-version screening, and reference lanes completed before cursor promotion."
+  },
+  "discovery": {
+    "inspireDisplayedResults": 127,
+    "inspireNewIds": ["2610.08648"],
+    "listingPages": 10,
+    "targetedSearches": 11,
+    "rotatingAuthorCatchups": 8,
+    "logicalRequests": 47,
+    "networkRequests": 47,
+    "notModifiedHits": 14,
+    "retries": 0,
+    "candidateCount": 5
+  },
+  "added": [
+    {
+      "id": "2610.08648",
+      "version": 1,
+      "title": "Testing Dark Matter Coscattering with the High-Energy LZ Recoil",
+      "reason": "Directly interprets the LZ high-energy recoil with endothermic singlet-doublet dark matter whose relic abundance is set by coscattering.",
+      "url": "https://arxiv.org/abs/2610.08648v1"
+    }
+  ],
+  "revised": [
+    {
+      "id": "2609.15742",
+      "fromVersion": 1,
+      "toVersion": 2,
+      "assessment": "The revision remains directly relevant and preserves the established role, placement, islands, tags, summary, takeaway, coordinates, and layout rank; exact metadata and verified citations were refreshed.",
+      "url": "https://arxiv.org/abs/2609.15742v2"
+    }
+  ],
+  "ambiguous": [],
+  "excluded": [
+    {
+      "id": "2603.08231",
+      "version": 2,
+      "reason": "Paralinguistic speech transfer study unrelated to the LZ nuclear-recoil candidate."
+    },
+    {
+      "id": "2609.18790",
+      "version": 2,
+      "reason": "General k-essence cosmology study with no substantive connection to the isolated LZ recoil candidate."
+    },
+    {
+      "id": "2610.08241",
+      "version": 1,
+      "reason": "Quantum-process coherence experiment unrelated to the LZ nuclear-recoil candidate."
+    }
+  ],
+  "citationReconciliation": {
+    "coverageComplete": true,
+    "edgeCount": 3449,
+    "missingSnapshotIds": [],
+    "staleSnapshotIds": [],
+    "evidence": [
+      {
+        "id": "2609.15742",
+        "version": 2,
+        "completeReferenceCount": 64,
+        "mappedCitationCount": 7,
+        "url": "https://arxiv.org/pdf/2609.15742v2",
+        "method": "Manual exact-version PDF snapshot covering both the main and supplemental reference lists because no arXiv HTML conversion was available."
+      },
+      {
+        "id": "2610.08648",
+        "version": 1,
+        "completeReferenceCount": 70,
+        "mappedCitationCount": 43,
+        "url": "https://arxiv.org/html/2610.08648v1"
+      }
+    ]
+  },
+  "changes": {
+    "addedPaperIds": ["2610.08648"],
+    "revisedPaperIds": ["2609.15742"],
+    "candidateLogIds": [],
+    "preserved": "All 121 established records retain their order, summaries, takeaways, roles, island memberships, tags, coordinates, and layout ranks. The accepted revision changes only exact arXiv metadata and verified citations, and the addition uses the next contiguous rank, 121."
+  },
+  "validation": {
+    "catalogValidator": "passed: 122 papers and 9 islands",
+    "generatedArtifacts": "passed: catalog index and both map layouts are current",
+    "maintenanceTests": "passed: 95",
+    "catalogIndexTests": "passed: 4",
+    "layoutTests": "passed: 13",
+    "layoutArtifactTests": "passed: 5",
+    "typecheck": "passed",
+    "lint": "passed",
+    "productionBuild": "passed: 123 prerendered routes and sitemap for 122 papers"
+  },
+  "judgmentCalls": [
+    "The new coscattering paper was placed in the existing Endothermic DM island with Tests & tensions membership because its approximately 100 keV up-scattering transition connects the LZ recoil directly to conversion-driven freeze-out and relic-compatible parameter coverage.",
+    "The new paper received semantic coordinates (84.0, 39.0), an open edge of the existing Endothermic DM region that preserves established coordinates and passes the dense append-only layout stress test.",
+    "ArXiv has no HTML conversion for 2609.15742v2, so its complete 64-ID reference snapshot was verified from the official exact-version PDF, including both the main and supplemental bibliographies.",
+    "The pre-existing 2609.06640v2 human-review item remains unchanged; its public catalog record and citations stay pinned to v1 pending editorial review."
+  ]
+}
