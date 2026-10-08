@@ -95,7 +95,7 @@ const islands = [
   {
     id: 'boosted',
     label: 'Boosted & nonstandard fluxes',
-    shortLabel: 'Boosted / nonstandard flux',
+    shortLabel: 'Boosted / non-virial',
     kicker: 'non-virial projectiles',
     summary:
       'Cosmic rays, dark-sector decays, Hawking emission, or other sources supply a non-virial incident population energetic enough to generate the high recoil; the scattering operator is secondary to the unusual flux.',
@@ -108,8 +108,8 @@ const islands = [
   {
     id: 'neutrino',
     label: 'Neutrino-initiated recoils',
-    shortLabel: 'Neutrino initiated',
-    kicker: 'νN → χN',
+    shortLabel: 'Neutrino recoils',
+    kicker: 'atmospheric / exotic ν',
     summary:
       'Atmospheric or exotic neutrinos, rather than halo dark matter, initiate the xenon process; thresholds, resonant conversion, or new interactions are used to produce an isolated high-energy recoil.',
     color: '#5f8090',
@@ -121,8 +121,8 @@ const islands = [
   {
     id: 'electroweak',
     label: 'Electroweak inelastic DM',
-    shortLabel: 'Electroweak inelastic DM',
-    kicker: 'multiplets & off-diagonal Z',
+    shortLabel: 'Electroweak DM',
+    kicker: 'split states · weak currents',
     summary:
       'Nearly degenerate electroweak states—including Higgsinos, inert doublets, singlet–doublet mixtures, and other multiplets—up-scatter with a few-hundred-keV transition central to the recoil.',
     color: '#5e7465',
@@ -134,7 +134,7 @@ const islands = [
   {
     id: 'endothermic',
     label: 'Other endothermic DM',
-    shortLabel: 'Other endothermic DM',
+    shortLabel: 'Endothermic DM',
     kicker: 'up-scattering',
     summary:
       'Dark matter outside the electroweak-multiplet family up-scatters into a heavier state, spending kinetic energy on a typically few-hundred-keV splitting and selecting the halo’s fastest particles.',
@@ -160,7 +160,7 @@ const islands = [
   {
     id: 'elastic',
     label: 'Elastic high-recoil DM',
-    shortLabel: 'Elastic high recoil',
+    shortLabel: 'Elastic DM',
     kicker: 'hard scattering spectra',
     summary:
       'Virialized halo dark matter scatters without a state transition; momentum or spin dependence, nuclear interference, form factors, screening, or unusual masses and couplings harden the recoil spectrum.',
@@ -173,8 +173,8 @@ const islands = [
   {
     id: 'comparisons',
     label: 'Comparisons & systematics',
-    shortLabel: 'Comparisons & systematics',
-    kicker: 'models, halos & sidebands',
+    shortLabel: 'Comparisons',
+    kicker: 'sidebands · halos · nuclei',
     summary:
       'These papers compare several explanations or study uncertainties that cut across them, including LZ sidebands, halo structure, xenon nuclear response, other targets, and model-independent inference.',
     color: '#8d625f',

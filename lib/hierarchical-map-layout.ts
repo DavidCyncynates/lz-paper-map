@@ -89,7 +89,9 @@ const INNER_PACKING_DENSITY = 0.58;
 const INNER_SEMANTIC_ANGLE_BLEND = 0.06;
 const INNER_MAX_SEMANTIC_ANGLE_SHIFT = Math.PI / 18;
 const GOLDEN_ANGLE = Math.PI * (3 - Math.sqrt(5));
-const OUTER_ANCHOR_STRENGTH = 0.038;
+// Keep established island centers anchored as a single island grows so a
+// routine catalog append does not ripple across the rest of the atlas.
+const OUTER_ANCHOR_STRENGTH = 0.05;
 const OBSERVATION_ANCHOR_STRENGTH = 0.1;
 const OBSERVATION_MOBILITY = 0.25;
 const OUTER_COHESION_STRENGTH = 0.006;

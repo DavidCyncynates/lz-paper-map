@@ -45,6 +45,10 @@ import {
 } from '@/lib/map-camera';
 import {
   canonicalIslandLabelSize,
+  ISLAND_LABEL_KICKER_FONT_SIZE_PX,
+  ISLAND_LABEL_KICKER_LINE_HEIGHT_PX,
+  ISLAND_LABEL_TITLE_FONT_SIZE_PX,
+  ISLAND_LABEL_TITLE_LINE_HEIGHT_PX,
   islandLabelAnchor,
   mapPaperDiameter,
   type MapLayoutMode,
@@ -1959,6 +1963,7 @@ export function LzLandscape() {
                         type="button"
                         className={`island-label ${summaryEdgeClass} ${summaryVerticalClass} ${mapLayoutReady ? '' : 'is-measuring'} ${hasVisiblePaper ? '' : 'is-dimmed'}`}
                         data-island-label={island.id}
+                        aria-label={`${island.label}: ${island.kicker}`}
                         aria-hidden={!mapLayoutReady || !hasVisiblePaper}
                         aria-describedby={summaryId}
                         key={`label-${island.id}`}
@@ -1971,17 +1976,33 @@ export function LzLandscape() {
                         style={
                           {
                             '--island-color': island.color,
+                            '--island-label-title-font-size': `${ISLAND_LABEL_TITLE_FONT_SIZE_PX}px`,
+                            '--island-label-title-line-height': `${ISLAND_LABEL_TITLE_LINE_HEIGHT_PX}px`,
+                            '--island-label-kicker-font-size': `${ISLAND_LABEL_KICKER_FONT_SIZE_PX}px`,
+                            '--island-label-kicker-line-height': `${ISLAND_LABEL_KICKER_LINE_HEIGHT_PX}px`,
                             left: `${position.x}%`,
                             top: `${position.y}%`,
                             width: `${labelSize.width}px`,
-                            minHeight: `${labelSize.height}px`,
+                            height: `${labelSize.height}px`,
                           } as React.CSSProperties
                         }
                       >
-                        <span className="island-label-title">
-                          {island.label}
+                        <span className="island-label-copy">
+                          <span
+                            className="island-label-title"
+                            aria-hidden="true"
+                          >
+                            {labelSize.titleLines.map((line, lineIndex) => (
+                              <span
+                                className="island-label-title-line"
+                                key={`${island.id}-title-line-${lineIndex}`}
+                              >
+                                {line}
+                              </span>
+                            ))}
+                          </span>
+                          <small aria-hidden="true">{island.kicker}</small>
                         </span>
-                        <small>{island.kicker}</small>
                         <span
                           className="island-summary"
                           id={summaryId}

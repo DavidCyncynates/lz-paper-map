@@ -10,6 +10,7 @@ import {
   citationDiameter,
   incomingCitationCounts,
 } from '../lib/paper-citation-size.ts';
+import { canonicalIslandLabelSize } from '../lib/map-layout-config.ts';
 
 const EPSILON = 1e-3;
 const WIDTH = 1160;
@@ -73,14 +74,7 @@ function currentCatalogInputs(sizeMode = 'uniform') {
   const labelSizes = new Map(
     landscape.islands.map((island) => [
       island.id,
-      {
-        width: Math.max(
-          92,
-          island.label.length * 7.4 + 8,
-          island.kicker.length * 5.5 + 8,
-        ),
-        height: 34,
-      },
+      canonicalIslandLabelSize(island),
     ]),
   );
   const citationCounts = incomingCitationCounts(landscape.papers);
@@ -121,6 +115,34 @@ function currentCatalogInputs(sizeMode = 'uniform') {
   }));
   return { papers, labels, islands, labelSizes };
 }
+
+test('island label geometry wraps long titles at deterministic word boundaries', () => {
+  const wrapped = canonicalIslandLabelSize({
+    label: 'Absorption & nucleon disappearance',
+    kicker: 'rest mass → recoil',
+  });
+  assert.deepEqual(wrapped.titleLines, [
+    'Absorption & nucleon',
+    'disappearance',
+  ]);
+  assert.equal(wrapped.height, 50);
+  assert.ok(
+    wrapped.width < 'Absorption & nucleon disappearance'.length * 7.4 + 8,
+  );
+
+  const conjunction = canonicalIslandLabelSize({
+    label: 'Comparisons & systematics',
+    kicker: 'sidebands · halos · nuclei',
+  });
+  assert.deepEqual(conjunction.titleLines, ['Comparisons &', 'systematics']);
+
+  const short = canonicalIslandLabelSize({
+    label: 'Exothermic DM',
+    kicker: 'down-scattering',
+  });
+  assert.deepEqual(short.titleLines, ['Exothermic DM']);
+  assert.equal(short.height, 34);
+});
 
 test('minimum enclosing circle handles analytic disc fixtures', () => {
   const single = createMinimumEnclosingCircle([{ x: 3, y: -2, radius: 4 }]);
