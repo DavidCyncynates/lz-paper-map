@@ -4,18 +4,34 @@ import { absoluteSiteUrl, SITE_URL } from '@/lib/site-url';
 import './globals.css';
 
 const socialImage = absoluteSiteUrl('og.png');
+const siteTitle = 'LZ Paper Map: 248 keV Papers & Summaries | LUX-ZEPLIN';
+const siteDescription =
+  'A searchable map of LZ papers about the 248 keV LUX-ZEPLIN high-recoil candidate, with concise summaries, physics categories and citation lineage.';
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: 'LUX-ZEPLIN 248 keV Paper Map — High-Recoil Literature',
-  description:
-    'A living research map of papers responding to the September 2026 LUX-ZEPLIN 248 keV high-energy nuclear-recoil candidate.',
+  title: siteTitle,
+  description: siteDescription,
+  applicationName: 'LZ Paper Map',
+  creator: 'David Cyncynates',
+  publisher: 'David Cyncynates',
   alternates: { canonical: SITE_URL },
-  robots: { index: true, follow: true },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+      'max-video-preview': -1,
+    },
+  },
   openGraph: {
-    title: 'LUX-ZEPLIN 248 keV Paper Map',
-    description:
-      'A living map of the literature responding to LZ’s isolated high-recoil candidate.',
+    title: siteTitle,
+    description: siteDescription,
+    siteName: 'LZ Paper Map',
+    locale: 'en_US',
     type: 'website',
     url: SITE_URL,
     images: [
@@ -29,9 +45,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'LUX-ZEPLIN 248 keV Paper Map',
-    description:
-      'A living map of the literature responding to LZ’s isolated high-recoil candidate.',
+    title: siteTitle,
+    description: siteDescription,
     images: [socialImage],
   },
 };

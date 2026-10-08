@@ -26,15 +26,13 @@ test('lists the map and every catalog paper exactly once', () => {
   assert.equal(entries.length, catalog.papers.length + 1);
   assert.equal(new Set(urls).size, urls.length);
   assert.equal(urls[0], DEFAULT_SITE_URL);
+  assert.equal(entries[0].lastModified, catalog.updatedAt);
   for (const paper of catalog.papers) {
     const entry = entries.find((candidate) =>
       candidate.url.endsWith(`/papers/${paper.id}/`),
     );
-    assert.ok(
-      entry,
-      `Missing sitemap entry for ${paper.id}`,
-    );
-    assert.equal(entry.lastModified, paper.updated);
+    assert.ok(entry, `Missing sitemap entry for ${paper.id}`);
+    assert.equal(entry.lastModified, undefined);
   }
 });
 
@@ -46,6 +44,7 @@ test('renders absolute, escaped XML sitemap entries', () => {
   assert.match(xml, /^<\?xml version="1\.0" encoding="UTF-8"\?>/);
   assert.match(xml, /https:\/\/davidcyncynates\.github\.io\/lz-paper-map\//);
   assert.match(xml, /paper%26one/);
-  assert.match(xml, /<lastmod>2026-09-11<\/lastmod>/);
+  assert.match(xml, /<lastmod>2026-09-12<\/lastmod>/);
+  assert.equal((xml.match(/<lastmod>/g) ?? []).length, 1);
   assert.doesNotMatch(xml, /localhost/);
 });

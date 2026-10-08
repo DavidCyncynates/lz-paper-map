@@ -7,15 +7,12 @@ type CatalogHeaderProps = {
   mapHref: string;
 };
 
-export function CatalogHeader({
-  homeHref,
-  mapHref,
-}: CatalogHeaderProps) {
+export function CatalogHeader({ homeHref, mapHref }: CatalogHeaderProps) {
   return (
     <header className={styles.header}>
       <a className={styles.brand} href={mapHref}>
         <strong>LZ Paper Map</strong>
-        <span>High-recoil literature</span>
+        <span>248 keV papers &amp; summaries</span>
       </a>
       <nav className={styles.headerLinks} aria-label="Paper navigation">
         <a href={mapHref}>Map</a>

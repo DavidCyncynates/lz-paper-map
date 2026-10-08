@@ -41,20 +41,32 @@ export async function generateMetadata({
   const description = metadataDescription(paper.summary);
   const canonical = paperDetailUrl(paper.id);
   const socialImage = absoluteSiteUrl('og.png');
+  const title = `${paper.title} — Summary | LZ Paper Map`;
 
   return {
-    title: `${paper.title} | LZ High-Recoil Paper Map`,
+    title,
     description,
     authors: paper.authors.map((name) => ({ name })),
     alternates: { canonical },
-    robots: { index: true, follow: true },
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        'max-image-preview': 'large',
+        'max-snippet': -1,
+        'max-video-preview': -1,
+      },
+    },
     openGraph: {
-      title: paper.title,
+      title,
       description,
+      siteName: 'LZ Paper Map',
+      locale: 'en_US',
       type: 'article',
       url: canonical,
       publishedTime: paper.published,
-      modifiedTime: paper.updated,
       images: [
         {
           url: socialImage,
@@ -66,7 +78,7 @@ export async function generateMetadata({
     },
     twitter: {
       card: 'summary_large_image',
-      title: paper.title,
+      title,
       description,
       images: [socialImage],
     },
@@ -94,18 +106,27 @@ export default async function PaperPage({ params }: PaperPageProps) {
   const articleJsonLd = {
     '@context': 'https://schema.org',
     '@type': 'WebPage',
+    '@id': canonical,
     name: paper.title,
     description: paper.summary,
     url: canonical,
+    inLanguage: 'en',
+    breadcrumb: {
+      '@id': `${canonical}#breadcrumb`,
+    },
     isPartOf: {
       '@type': 'CollectionPage',
-      name: 'LUX-ZEPLIN 248 keV Paper Map',
+      name: 'LZ Paper Map: 248 keV Papers & Summaries',
       url: SITE_URL,
     },
     mainEntity: {
       '@type': 'ScholarlyArticle',
+      '@id': paper.url,
+      url: paper.url,
+      mainEntityOfPage: canonical,
       headline: paper.title,
       description: paper.summary,
+      inLanguage: 'en',
       author: paper.authors.map((name) => ({
         '@type': /\b(?:collaboration|consortium)\b/i.test(name)
           ? 'Organization'
@@ -116,9 +137,33 @@ export default async function PaperPage({ params }: PaperPageProps) {
       dateModified: paper.updated,
       identifier: `arXiv:${paper.arxivId}`,
       sameAs: paper.url,
+      isPartOf: {
+        '@type': 'CollectionPage',
+        name: 'LZ Paper Map',
+        url: SITE_URL,
+      },
       keywords: paper.tags,
-      citation: cites.map((citedPaper) => paperDetailUrl(citedPaper.id)),
+      citation: cites.map((citedPaper) => citedPaper.url),
     },
+  };
+  const breadcrumbJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    '@id': `${canonical}#breadcrumb`,
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'LZ Paper Map',
+        item: SITE_URL,
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: paper.title,
+        item: canonical,
+      },
+    ],
   };
 
   return (
@@ -126,6 +171,10 @@ export default async function PaperPage({ params }: PaperPageProps) {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: serializeJsonLd(articleJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: serializeJsonLd(breadcrumbJsonLd) }}
       />
       <CatalogHeader
         homeHref="../../../"
