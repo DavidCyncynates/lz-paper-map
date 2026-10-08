@@ -4,10 +4,15 @@ import test from 'node:test';
 import {
   centeredMapStage,
   clampMapScale,
+  dampMapWheelScale,
   DEFAULT_MAP_MAX_SCALE,
   DEFAULT_MAP_MIN_SCALE,
+  DEFAULT_MAP_WHEEL_DAMPING_TIME_CONSTANT_MS,
+  DEFAULT_MAP_WHEEL_EXPONENT_LIMIT,
+  DEFAULT_MAP_WHEEL_SENSITIVITY,
   fitMapCamera,
   fitMapScale,
+  mapWheelTargetScale,
   transformMapBetweenAnchors,
   zoomMapAtAnchor,
 } from '../lib/map-camera.ts';
@@ -83,6 +88,85 @@ test('scale clamping honors default and custom bounds', () => {
       { padding: 24, minScale: 0.35 },
     ),
     0.35,
+  );
+});
+
+test('wheel deltas create gentle reciprocal log-scale targets', () => {
+  const zoomIn = mapWheelTargetScale(1, -100);
+  const zoomOut = mapWheelTargetScale(1, 100);
+
+  near(zoomIn, Math.exp(100 * DEFAULT_MAP_WHEEL_SENSITIVITY));
+  near(zoomOut, Math.exp(-100 * DEFAULT_MAP_WHEEL_SENSITIVITY));
+  near(zoomIn * zoomOut, 1);
+});
+
+test('wheel targets clamp each event and the resulting map scale', () => {
+  near(
+    mapWheelTargetScale(1, -100_000),
+    Math.exp(DEFAULT_MAP_WHEEL_EXPONENT_LIMIT),
+  );
+  near(
+    mapWheelTargetScale(1, 100_000),
+    Math.exp(-DEFAULT_MAP_WHEEL_EXPONENT_LIMIT),
+  );
+  near(mapWheelTargetScale(2.45, -100_000), DEFAULT_MAP_MAX_SCALE);
+  near(mapWheelTargetScale(0.16, 100_000), DEFAULT_MAP_MIN_SCALE);
+  near(
+    mapWheelTargetScale(1.9, -1_000, {
+      minScale: 0.5,
+      maxScale: 2,
+      sensitivity: 0.01,
+      exponentLimit: 0.1,
+    }),
+    2,
+  );
+});
+
+test('wheel damping is time-based and honors reduced motion', () => {
+  const oneInterval = dampMapWheelScale(1, 2, 60);
+  near(
+    oneInterval,
+    2 - Math.exp(-60 / DEFAULT_MAP_WHEEL_DAMPING_TIME_CONSTANT_MS),
+  );
+
+  const firstInterval = dampMapWheelScale(1, 2, 20);
+  const splitIntervals = dampMapWheelScale(firstInterval, 2, 40);
+  near(splitIntervals, oneInterval);
+  near(dampMapWheelScale(1, 2, 0), 1);
+  near(dampMapWheelScale(1, 2, 1, { reducedMotion: true }), 2);
+});
+
+test('wheel helpers validate finite inputs and configuration', () => {
+  assert.throws(
+    () => mapWheelTargetScale(1, Number.NaN),
+    /Map wheel delta must be finite/,
+  );
+  assert.throws(
+    () => mapWheelTargetScale(0, 10),
+    /Current map scale must be finite and positive/,
+  );
+  assert.throws(
+    () => mapWheelTargetScale(1, 10, { sensitivity: -0.1 }),
+    /Map wheel sensitivity must be finite and non-negative/,
+  );
+  assert.throws(
+    () =>
+      mapWheelTargetScale(1, 10, {
+        exponentLimit: Number.POSITIVE_INFINITY,
+      }),
+    /Map wheel exponent limit must be finite and non-negative/,
+  );
+  assert.throws(
+    () => dampMapWheelScale(1, 2, Number.NaN),
+    /Map wheel elapsed time must be finite and non-negative/,
+  );
+  assert.throws(
+    () => dampMapWheelScale(1, Number.POSITIVE_INFINITY, 16),
+    /Target map scale must be finite and positive/,
+  );
+  assert.throws(
+    () => dampMapWheelScale(1, 2, 16, { timeConstantMs: 0 }),
+    /Map wheel damping time constant must be finite and positive/,
   );
 });
 

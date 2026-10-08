@@ -37,6 +37,9 @@ export const DEFAULT_MAP_MIN_SCALE = 0.15;
 export const DEFAULT_MAP_MAX_SCALE = 2.5;
 export const DEFAULT_MAP_FIT_PADDING = 24;
 export const DEFAULT_MAP_MAXIMUM_FIT_SCALE = 1;
+export const DEFAULT_MAP_WHEEL_SENSITIVITY = 0.00135;
+export const DEFAULT_MAP_WHEEL_EXPONENT_LIMIT = 0.18;
+export const DEFAULT_MAP_WHEEL_DAMPING_TIME_CONSTANT_MS = 60;
 
 const CAMERA_EPSILON = 1e-9;
 
@@ -86,6 +89,94 @@ export function clampMapScale(scale: number, bounds: MapCameraBounds = {}) {
   }
   const { minScale, maxScale } = resolvedBounds(bounds);
   return clamp(scale, minScale, maxScale);
+}
+
+export type MapWheelTargetScaleOptions = MapCameraBounds & {
+  /** Log-scale change applied for each normalized wheel pixel. */
+  sensitivity?: number;
+  /** Maximum absolute log-scale change accepted from a single wheel event. */
+  exponentLimit?: number;
+};
+
+export type DampMapWheelScaleOptions = MapCameraBounds & {
+  /** Exponential smoothing time constant in milliseconds. */
+  timeConstantMs?: number;
+  /** Skip interpolation for people who prefer reduced motion. */
+  reducedMotion?: boolean;
+};
+
+/**
+ * Converts a normalized wheel delta into a bounded zoom target. Working in
+ * log scale makes equal upward and downward deltas reciprocal, while the
+ * per-event exponent limit prevents a single coarse wheel event from causing
+ * a disorienting jump.
+ */
+export function mapWheelTargetScale(
+  currentScale: number,
+  deltaPixels: number,
+  options: MapWheelTargetScaleOptions = {},
+) {
+  assertFinitePositive(currentScale, 'Current map scale');
+  assertFinite(deltaPixels, 'Map wheel delta');
+  const sensitivity = options.sensitivity ?? DEFAULT_MAP_WHEEL_SENSITIVITY;
+  const exponentLimit =
+    options.exponentLimit ?? DEFAULT_MAP_WHEEL_EXPONENT_LIMIT;
+  assertFiniteNonnegative(sensitivity, 'Map wheel sensitivity');
+  assertFiniteNonnegative(exponentLimit, 'Map wheel exponent limit');
+
+  const bounds = resolvedBounds(options);
+  const boundedCurrentScale = clamp(
+    currentScale,
+    bounds.minScale,
+    bounds.maxScale,
+  );
+  const exponent = clamp(
+    -deltaPixels * sensitivity,
+    -exponentLimit,
+    exponentLimit,
+  );
+  const unboundedTarget = boundedCurrentScale * Math.exp(exponent);
+  return clamp(unboundedTarget, bounds.minScale, bounds.maxScale);
+}
+
+/**
+ * Advances a wheel-zoom scale toward its target using time-based exponential
+ * damping. The result is independent of frame rate: two successive intervals
+ * have the same effect as one interval of their combined duration.
+ */
+export function dampMapWheelScale(
+  currentScale: number,
+  targetScale: number,
+  elapsedMs: number,
+  options: DampMapWheelScaleOptions = {},
+) {
+  assertFinitePositive(currentScale, 'Current map scale');
+  assertFinitePositive(targetScale, 'Target map scale');
+  assertFiniteNonnegative(elapsedMs, 'Map wheel elapsed time');
+  const timeConstantMs =
+    options.timeConstantMs ?? DEFAULT_MAP_WHEEL_DAMPING_TIME_CONSTANT_MS;
+  assertFinitePositive(timeConstantMs, 'Map wheel damping time constant');
+
+  const bounds = resolvedBounds(options);
+  const boundedCurrentScale = clamp(
+    currentScale,
+    bounds.minScale,
+    bounds.maxScale,
+  );
+  const boundedTargetScale = clamp(
+    targetScale,
+    bounds.minScale,
+    bounds.maxScale,
+  );
+  if (options.reducedMotion) return boundedTargetScale;
+
+  const retainedDifference = Math.exp(-elapsedMs / timeConstantMs);
+  return clamp(
+    boundedTargetScale +
+      (boundedCurrentScale - boundedTargetScale) * retainedDifference,
+    bounds.minScale,
+    bounds.maxScale,
+  );
 }
 
 /**

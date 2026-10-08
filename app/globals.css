@@ -893,6 +893,7 @@ a {
   left: 50%;
   top: 50%;
   transform-origin: center;
+  will-change: transform;
 }
 
 .map-canvas.is-layout-hidden {
