@@ -15,7 +15,9 @@ const catalog = JSON.parse(
 
 test('normalizes the public project URL with one trailing slash', () => {
   assert.equal(
-    normalizeSiteUrl(`${DEFAULT_SITE_URL}///?ignored=yes#fragment`),
+    normalizeSiteUrl(
+      'https://DavidCyncynates.GitHub.io/lz-paper-map///?ignored=yes#fragment',
+    ),
     DEFAULT_SITE_URL,
   );
 });
