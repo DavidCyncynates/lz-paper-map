@@ -35,10 +35,11 @@ import {
   type HierarchicalLayoutDiagnostics,
 } from '@/lib/hierarchical-map-layout';
 import {
-  clampMapScale,
+  dampMapWheelScale,
   DEFAULT_MAP_MAX_SCALE,
   DEFAULT_MAP_MIN_SCALE,
   fitMapCamera,
+  mapWheelTargetScale,
   type MapCameraState,
   transformMapBetweenAnchors,
   zoomMapAtAnchor,
@@ -395,14 +396,17 @@ export function LzLandscape() {
   );
   const [dateError, setDateError] = useState<DateEndpoint | null>(null);
   const [selectedId, setSelectedId] = useState(landscape.papers[0].id);
-  const [zoom, setZoom] = useState(1);
   const [viewMode, setViewMode] = useState<ViewMode>('map');
   const [nodeSizeMode, setNodeSizeMode] = useState<NodeSizeMode>('citations');
   const [isPanning, setIsPanning] = useState(false);
   const [tooltipPlacement, setTooltipPlacement] =
     useState<TooltipPlacement | null>(null);
   const mapViewportRef = useRef<HTMLElement>(null);
+  const mapStageRef = useRef<HTMLDivElement>(null);
   const mapCanvasRef = useRef<HTMLDivElement>(null);
+  const zoomOutputRef = useRef<HTMLOutputElement>(null);
+  const zoomOutButtonRef = useRef<HTMLButtonElement>(null);
+  const zoomInButtonRef = useRef<HTMLButtonElement>(null);
   const mapFallbackButtonRef = useRef<HTMLButtonElement>(null);
   const listViewButtonRef = useRef<HTMLButtonElement>(null);
   const dateFilterRef = useRef<HTMLDivElement>(null);
@@ -420,7 +424,12 @@ export function LzLandscape() {
     scrollTop: 0,
   });
   const cameraFrameRef = useRef<number | null>(null);
+  const cameraApplyingRef = useRef(false);
   const cameraScrollBehaviorRef = useRef<ScrollBehavior>('auto');
+  const wheelTargetScaleRef = useRef<number | null>(null);
+  const wheelAnchorRef = useRef<MapPoint | null>(null);
+  const wheelFrameTimeRef = useRef<number | null>(null);
+  const pinchUpdatePendingRef = useRef(false);
   const cameraInitializedRef = useRef(false);
   const cameraIsFitRef = useRef(true);
   const revealedPaperRef = useRef<string | null>(null);
@@ -685,19 +694,18 @@ export function LzLandscape() {
 
     const restoreOrFit = () => {
       if (!cameraInitializedRef.current || cameraIsFitRef.current) {
-        fitMapToViewport('auto');
+        fitMapToViewport('auto', true);
       } else {
-        commitMapCamera(cameraRef.current, 'auto');
+        commitMapCamera(cameraRef.current, 'auto', true);
       }
     };
     const refitIfNeeded = () => {
       if (cameraIsFitRef.current) fitMapToViewport('auto');
     };
-    const frame = requestAnimationFrame(restoreOrFit);
+    restoreOrFit();
     const observer = new ResizeObserver(refitIfNeeded);
     observer.observe(viewport);
     return () => {
-      cancelAnimationFrame(frame);
       observer.disconnect();
     };
     // The camera function closes over the same world dimensions listed here;
@@ -718,16 +726,26 @@ export function LzLandscape() {
           : event.deltaMode === WheelEvent.DOM_DELTA_PAGE
             ? event.deltaY * viewport.clientHeight
             : event.deltaY;
-      const exponent = Math.max(-0.35, Math.min(0.35, -deltaPixels * 0.002));
-      const nextScale = clampMapScale(
-        cameraRef.current.scale * Math.exp(exponent),
+      const currentCamera = readMapCamera(viewport);
+      cameraRef.current = currentCamera;
+      const targetScale = mapWheelTargetScale(
+        wheelTargetScaleRef.current ?? currentCamera.scale,
+        deltaPixels,
       );
-      if (Math.abs(nextScale - cameraRef.current.scale) < 1e-6) return;
+      const targetWillMoveCamera =
+        Math.abs(targetScale - currentCamera.scale) >= 1e-6;
+      if (!targetWillMoveCamera && wheelTargetScaleRef.current === null) {
+        return;
+      }
       event.preventDefault();
-      zoomAtViewportPoint(nextScale, {
+      wheelTargetScaleRef.current = targetScale;
+      wheelAnchorRef.current = {
         x: event.clientX - bounds.left,
         y: event.clientY - bounds.top,
-      });
+      };
+      cameraInitializedRef.current = true;
+      cameraIsFitRef.current = false;
+      scheduleMapCameraFrame();
     };
     viewport.addEventListener('wheel', zoomWithWheel, { passive: false });
     return () => viewport.removeEventListener('wheel', zoomWithWheel);
@@ -741,6 +759,8 @@ export function LzLandscape() {
       if (cameraFrameRef.current !== null) {
         cancelAnimationFrame(cameraFrameRef.current);
       }
+      cancelWheelZoom();
+      pinchUpdatePendingRef.current = false;
       if (activationSuppressionTimerRef.current !== null) {
         window.clearTimeout(activationSuppressionTimerRef.current);
       }
@@ -752,7 +772,9 @@ export function LzLandscape() {
     if (viewMode === 'map' && mapLayoutReady) return;
     touchPointersRef.current.clear();
     pinchGestureRef.current = null;
+    pinchUpdatePendingRef.current = false;
     panGestureRef.current = null;
+    cancelWheelZoom();
     resetMapActivationSuppression();
     let isCurrent = true;
     queueMicrotask(() => {
@@ -832,8 +854,9 @@ export function LzLandscape() {
       const position = paperPositions.get(selectedPaper.id);
       if (!viewport || !position) return;
 
-      const scaledWidth = mapWorldWidth * zoom;
-      const scaledHeight = mapWorldHeight * zoom;
+      const cameraScale = cameraRef.current.scale;
+      const scaledWidth = mapWorldWidth * cameraScale;
+      const scaledHeight = mapWorldHeight * cameraScale;
       const stageWidth = Math.max(viewport.clientWidth, scaledWidth);
       const stageHeight = Math.max(viewport.clientHeight, scaledHeight);
       const paperX =
@@ -872,7 +895,6 @@ export function LzLandscape() {
     visiblePapers.length,
     mapWorldHeight,
     mapWorldWidth,
-    zoom,
   ]);
 
   useEffect(() => {
@@ -1002,7 +1024,7 @@ export function LzLandscape() {
   }
 
   function readMapCamera(viewport: HTMLElement): MapCameraState {
-    return cameraFrameRef.current !== null
+    return cameraFrameRef.current !== null || cameraApplyingRef.current
       ? cameraRef.current
       : {
           scale: cameraRef.current.scale,
@@ -1040,6 +1062,8 @@ export function LzLandscape() {
   }
 
   function beginPinchGesture(viewport: HTMLElement) {
+    cancelWheelZoom();
+    pinchUpdatePendingRef.current = false;
     const touches = [...touchPointersRef.current.entries()].slice(0, 2);
     if (touches.length < 2) {
       pinchGestureRef.current = null;
@@ -1075,6 +1099,11 @@ export function LzLandscape() {
       panGestureRef.current = null;
       setIsPanning(false);
       return;
+    }
+
+    if (viewport && pinchUpdatePendingRef.current) {
+      resolvePendingPinchCamera(viewport);
+      scheduleMapCameraFrame();
     }
 
     const endingPan = panGestureRef.current;
@@ -1122,8 +1151,9 @@ export function LzLandscape() {
     const rightRoom = viewportBounds.right - nodeBounds.right;
     const topRoom = nodeBounds.top - viewportBounds.top;
     const bottomRoom = viewportBounds.bottom - nodeBounds.bottom;
-    const centeredTooltipRoom = 126 * zoom;
-    const verticalTooltipRoom = 108 * zoom;
+    const cameraScale = cameraRef.current.scale;
+    const centeredTooltipRoom = 126 * cameraScale;
+    const verticalTooltipRoom = 108 * cameraScale;
     const nextPlacement: TooltipPlacement = {
       paperId,
       horizontal:
@@ -1147,28 +1177,163 @@ export function LzLandscape() {
     setTooltipPlacement(nextPlacement);
   }
 
-  function commitMapCamera(
-    nextCamera: MapCameraState,
-    behavior: ScrollBehavior = 'auto',
+  function cancelWheelZoom() {
+    wheelTargetScaleRef.current = null;
+    wheelAnchorRef.current = null;
+    wheelFrameTimeRef.current = null;
+  }
+
+  function resolvePendingPinchCamera(viewport: HTMLElement) {
+    if (!pinchUpdatePendingRef.current) return;
+    pinchUpdatePendingRef.current = false;
+    const pinch = pinchGestureRef.current;
+    if (!pinch) return;
+    const first = touchPointersRef.current.get(pinch.pointerIds[0]);
+    const second = touchPointersRef.current.get(pinch.pointerIds[1]);
+    if (!first || !second) return;
+    const nextMidpoint = midpoint(first, second);
+    const nextDistance = Math.max(1, pointDistance(first, second));
+    cameraRef.current = transformMapBetweenAnchors({
+      viewport: {
+        width: viewport.clientWidth,
+        height: viewport.clientHeight,
+      },
+      world: { width: mapWorldWidth, height: mapWorldHeight },
+      current: pinch.startCamera,
+      nextScale: pinch.startCamera.scale * (nextDistance / pinch.startDistance),
+      currentAnchor: pinch.startMidpoint,
+      nextAnchor: nextMidpoint,
+    });
+    cameraScrollBehaviorRef.current = 'auto';
+    cameraInitializedRef.current = true;
+    cameraIsFitRef.current = false;
+  }
+
+  function applyMapCamera(
+    viewport: HTMLElement,
+    target: MapCameraState,
+    behavior: ScrollBehavior,
   ) {
-    cameraRef.current = nextCamera;
-    cameraScrollBehaviorRef.current = behavior;
-    setZoom(nextCamera.scale);
-    if (cameraFrameRef.current !== null) return;
-    cameraFrameRef.current = requestAnimationFrame(() => {
-      cameraFrameRef.current = null;
-      const viewport = mapViewportRef.current;
-      if (!viewport) return;
-      const target = cameraRef.current;
+    cameraApplyingRef.current = true;
+    try {
+      const stage = mapStageRef.current;
+      if (stage) {
+        stage.style.width = `${mapWorldWidth * target.scale}px`;
+        stage.style.height = `${mapWorldHeight * target.scale}px`;
+      }
+      const canvas = mapCanvasRef.current;
+      if (canvas) {
+        canvas.style.transform = `translate(-50%, -50%) scale(${target.scale})`;
+      }
+      if (zoomOutputRef.current) {
+        zoomOutputRef.current.value = `${Math.round(target.scale * 100)}%`;
+      }
+      if (zoomOutButtonRef.current) {
+        zoomOutButtonRef.current.disabled =
+          !mapLayoutReady || target.scale <= DEFAULT_MAP_MIN_SCALE + 1e-3;
+      }
+      if (zoomInButtonRef.current) {
+        zoomInButtonRef.current.disabled =
+          !mapLayoutReady || target.scale >= DEFAULT_MAP_MAX_SCALE - 1e-3;
+      }
       viewport.scrollTo({
         left: target.scrollLeft,
         top: target.scrollTop,
-        behavior: motionSafeScrollBehavior(cameraScrollBehaviorRef.current),
+        behavior: motionSafeScrollBehavior(behavior),
       });
-    });
+    } finally {
+      cameraApplyingRef.current = false;
+    }
   }
 
-  function fitMapToViewport(behavior: ScrollBehavior = 'smooth') {
+  function flushMapCameraFrame(timestamp: number) {
+    const viewport = mapViewportRef.current;
+    if (!viewport) {
+      cameraFrameRef.current = null;
+      return;
+    }
+
+    resolvePendingPinchCamera(viewport);
+    let continueWheelAnimation = false;
+    const wheelTargetScale = wheelTargetScaleRef.current;
+    const wheelAnchor = wheelAnchorRef.current;
+    if (wheelTargetScale !== null && wheelAnchor) {
+      const previousTime = wheelFrameTimeRef.current;
+      const elapsedMs =
+        previousTime === null
+          ? 1000 / 60
+          : Math.max(0, timestamp - previousTime);
+      const currentCamera = cameraRef.current;
+      const dampedScale = dampMapWheelScale(
+        currentCamera.scale,
+        wheelTargetScale,
+        elapsedMs,
+        {
+          reducedMotion: window.matchMedia?.('(prefers-reduced-motion: reduce)')
+            .matches,
+        },
+      );
+      const reachedTarget =
+        Math.abs(Math.log(dampedScale / wheelTargetScale)) < 0.001;
+      cameraRef.current = zoomMapAtAnchor({
+        viewport: {
+          width: viewport.clientWidth,
+          height: viewport.clientHeight,
+        },
+        world: { width: mapWorldWidth, height: mapWorldHeight },
+        current: currentCamera,
+        nextScale: reachedTarget ? wheelTargetScale : dampedScale,
+        anchor: wheelAnchor,
+      });
+      cameraScrollBehaviorRef.current = 'auto';
+      wheelFrameTimeRef.current = timestamp;
+      if (reachedTarget) {
+        cancelWheelZoom();
+      } else {
+        continueWheelAnimation = true;
+      }
+    }
+
+    applyMapCamera(
+      viewport,
+      cameraRef.current,
+      cameraScrollBehaviorRef.current,
+    );
+    cameraFrameRef.current = null;
+    if (continueWheelAnimation || pinchUpdatePendingRef.current) {
+      scheduleMapCameraFrame();
+    }
+  }
+
+  function scheduleMapCameraFrame() {
+    if (cameraFrameRef.current !== null) return;
+    cameraFrameRef.current = requestAnimationFrame(flushMapCameraFrame);
+  }
+
+  function commitMapCamera(
+    nextCamera: MapCameraState,
+    behavior: ScrollBehavior = 'auto',
+    immediate = false,
+  ) {
+    cancelWheelZoom();
+    cameraRef.current = nextCamera;
+    cameraScrollBehaviorRef.current = behavior;
+    if (!immediate) {
+      scheduleMapCameraFrame();
+      return;
+    }
+    if (cameraFrameRef.current !== null) {
+      cancelAnimationFrame(cameraFrameRef.current);
+      cameraFrameRef.current = null;
+    }
+    const viewport = mapViewportRef.current;
+    if (viewport) applyMapCamera(viewport, nextCamera, behavior);
+  }
+
+  function fitMapToViewport(
+    behavior: ScrollBehavior = 'smooth',
+    immediate = false,
+  ) {
     const viewport = mapViewportRef.current;
     if (!viewport) return;
     cameraInitializedRef.current = true;
@@ -1179,6 +1344,7 @@ export function LzLandscape() {
         { width: mapWorldWidth, height: mapWorldHeight },
       ),
       behavior,
+      immediate,
     );
   }
 
@@ -1607,28 +1773,26 @@ export function LzLandscape() {
                   </Button>
                   <div className="zoom-controls" aria-label="Map zoom controls">
                     <Button
+                      ref={zoomOutButtonRef}
                       variant="outline"
                       size="icon-sm"
                       aria-label="Zoom out"
                       aria-keyshortcuts="-"
-                      disabled={
-                        !mapLayoutReady || zoom <= DEFAULT_MAP_MIN_SCALE + 1e-3
-                      }
+                      disabled={!mapLayoutReady}
                       onClick={() => changeZoom(-1)}
                     >
                       <Minus />
                     </Button>
-                    <output aria-live="polite">
-                      {Math.round(zoom * 100)}%
+                    <output ref={zoomOutputRef} aria-label="Map zoom level">
+                      100%
                     </output>
                     <Button
+                      ref={zoomInButtonRef}
                       variant="outline"
                       size="icon-sm"
                       aria-label="Zoom in"
                       aria-keyshortcuts="+"
-                      disabled={
-                        !mapLayoutReady || zoom >= DEFAULT_MAP_MAX_SCALE - 1e-3
-                      }
+                      disabled={!mapLayoutReady}
                       onClick={() => changeZoom(1)}
                     >
                       <Plus />
@@ -1689,6 +1853,7 @@ export function LzLandscape() {
                 if (!mapLayoutReady) return;
                 if (event.button !== 0) return;
                 if (event.pointerType === 'touch') {
+                  cancelWheelZoom();
                   if (touchPointersRef.current.size === 0) {
                     resetMapActivationSuppression();
                   }
@@ -1716,6 +1881,7 @@ export function LzLandscape() {
                   }
                   return;
                 }
+                cancelWheelZoom();
                 resetMapActivationSuppression();
                 const target = event.target;
                 if (
@@ -1740,7 +1906,11 @@ export function LzLandscape() {
               onScroll={() => {
                 if (!mapLayoutReady) return;
                 const viewport = mapViewportRef.current;
-                if (viewport && cameraFrameRef.current === null) {
+                if (
+                  viewport &&
+                  cameraFrameRef.current === null &&
+                  !cameraApplyingRef.current
+                ) {
                   cameraRef.current = {
                     scale: cameraRef.current.scale,
                     scrollLeft: viewport.scrollLeft,
@@ -1777,29 +1947,8 @@ export function LzLandscape() {
                     }
                     event.preventDefault();
                     brieflySuppressMapActivation();
-                    const nextMidpoint = midpoint(first, second);
-                    const nextDistance = Math.max(
-                      1,
-                      pointDistance(first, second),
-                    );
-                    const nextCamera = transformMapBetweenAnchors({
-                      viewport: {
-                        width: event.currentTarget.clientWidth,
-                        height: event.currentTarget.clientHeight,
-                      },
-                      world: {
-                        width: mapWorldWidth,
-                        height: mapWorldHeight,
-                      },
-                      current: pinch.startCamera,
-                      nextScale:
-                        pinch.startCamera.scale *
-                        (nextDistance / pinch.startDistance),
-                      currentAnchor: pinch.startMidpoint,
-                      nextAnchor: nextMidpoint,
-                    });
-                    cameraInitializedRef.current = true;
-                    commitMapCamera(nextCamera);
+                    pinchUpdatePendingRef.current = true;
+                    scheduleMapCameraFrame();
                     return;
                   }
                 }
@@ -1856,9 +2005,10 @@ export function LzLandscape() {
             >
               <div
                 className="map-stage"
+                ref={mapStageRef}
                 style={{
-                  width: mapWorldWidth * zoom,
-                  height: mapWorldHeight * zoom,
+                  width: mapWorldWidth,
+                  height: mapWorldHeight,
                 }}
               >
                 <div
@@ -1869,7 +2019,7 @@ export function LzLandscape() {
                   style={{
                     width: mapWorldWidth,
                     height: mapWorldHeight,
-                    transform: `translate(-50%, -50%) scale(${zoom})`,
+                    transform: 'translate(-50%, -50%) scale(1)',
                   }}
                 >
                   <svg
