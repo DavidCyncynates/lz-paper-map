@@ -17,6 +17,8 @@ export type HierarchicalLabelAnchor = LayoutPoint & {
 export type HierarchicalIslandAnchor = LayoutPoint & {
   id: string;
   observation?: boolean;
+  semanticWidth?: number;
+  semanticHeight?: number;
 };
 
 export type LayoutCircle = LayoutPoint & { radius: number };
@@ -82,11 +84,11 @@ const INNER_ITERATIONS = 260;
 const INNER_CLEANUP_MAX_ITERATIONS = 1200;
 const OUTER_ITERATIONS = 300;
 const OUTER_CLEANUP_MAX_ITERATIONS = 5000;
-const INNER_INITIAL_SCALE = 0.85;
-const INNER_CENTER_STRENGTH = 0.007;
-const INNER_SEMANTIC_STRENGTH = 0.1;
-const LABEL_CENTER_STRENGTH = 0.008;
-const LABEL_SEMANTIC_STRENGTH = 0.12;
+const INNER_TARGET_STRENGTH = 0.085;
+const INNER_PACKING_DENSITY = 0.58;
+const INNER_SEMANTIC_ANGLE_BLEND = 0.06;
+const INNER_MAX_SEMANTIC_ANGLE_SHIFT = Math.PI / 18;
+const GOLDEN_ANGLE = Math.PI * (3 - Math.sqrt(5));
 const OUTER_ANCHOR_STRENGTH = 0.038;
 const OBSERVATION_ANCHOR_STRENGTH = 0.1;
 const OBSERVATION_MOBILITY = 0.25;
@@ -106,6 +108,7 @@ const LAYOUT_EPSILON = 1e-6;
 const LAYOUT_TOLERANCE = 1e-3;
 const INNER_CLEANUP_TARGET = 5e-4;
 const OUTER_CLEANUP_TARGET = 5e-4;
+const CONTENT_RADIUS_RESERVE_STEP = 16;
 const CANVAS_EXPANSION_STEP = 8;
 const MEC_EPSILON = 1e-10;
 
@@ -189,6 +192,12 @@ function assertFiniteGeometry(
     if (
       !Number.isFinite(island.x) ||
       !Number.isFinite(island.y) ||
+      (island.semanticWidth !== undefined &&
+        (!Number.isFinite(island.semanticWidth) ||
+          island.semanticWidth <= 0)) ||
+      (island.semanticHeight !== undefined &&
+        (!Number.isFinite(island.semanticHeight) ||
+          island.semanticHeight <= 0)) ||
       !labelIslandIds.has(island.id)
     ) {
       throw new Error(`Invalid or incomplete island ${island.id}.`);
@@ -196,10 +205,69 @@ function assertFiniteGeometry(
   }
 }
 
-function comparePaperStability(first: InternalPaper, second: InternalPaper) {
-  return (
-    first.stabilityRank - second.stabilityRank || compareIds(first, second)
+function normalizeAngle(angle: number) {
+  return Math.atan2(Math.sin(angle), Math.cos(angle));
+}
+
+function compactPaperTargets(
+  island: HierarchicalIslandAnchor,
+  paperAnchors: readonly HierarchicalPaperAnchor[],
+  label: Pick<HierarchicalLabelAnchor, 'width' | 'height'>,
+  spacingScale: number,
+) {
+  const orderedPapers = [...paperAnchors].sort(
+    (first, second) =>
+      first.stabilityRank - second.stabilityRank || compareIds(first, second),
   );
+  const phaseVector = deterministicDirection(island.id, 'compact-packing-v3');
+  const phase = Math.atan2(phaseVector.y, phaseVector.x);
+  const semanticWidth = island.semanticWidth ?? 1;
+  const semanticHeight = island.semanticHeight ?? 1;
+  let occupiedArea = 0;
+
+  return orderedPapers.map((paper, index) => {
+    const expandedRadius = paper.radius + (PAPER_GAP * spacingScale) / 2;
+    occupiedArea += Math.PI * expandedRadius * expandedRadius;
+    const compactAngle = phase + index * GOLDEN_ANGLE;
+    const semanticHorizontal = (paper.x - island.x) / semanticWidth;
+    const semanticVertical = (paper.y - island.y) / semanticHeight;
+    const hasSemanticDirection =
+      Math.hypot(semanticHorizontal, semanticVertical) > LAYOUT_EPSILON;
+    const semanticAngle = hasSemanticDirection
+      ? Math.atan2(semanticVertical, semanticHorizontal)
+      : compactAngle;
+    const semanticShift = clamp(
+      normalizeAngle(semanticAngle - compactAngle) * INNER_SEMANTIC_ANGLE_BLEND,
+      -INNER_MAX_SEMANTIC_ANGLE_SHIFT,
+      INNER_MAX_SEMANTIC_ANGLE_SHIFT,
+    );
+    const angle = compactAngle + semanticShift;
+    const horizontalDirection = Math.cos(angle);
+    const verticalDirection = Math.sin(angle);
+    const labelClearance = paper.radius + LABEL_GAP * spacingScale;
+    const horizontalExit =
+      Math.abs(horizontalDirection) > LAYOUT_EPSILON
+        ? (label.width / 2 + labelClearance) / Math.abs(horizontalDirection)
+        : Number.POSITIVE_INFINITY;
+    const verticalExit =
+      Math.abs(verticalDirection) > LAYOUT_EPSILON
+        ? (label.height / 2 + labelClearance) / Math.abs(verticalDirection)
+        : Number.POSITIVE_INFINITY;
+    const labelExitRadius = Math.min(horizontalExit, verticalExit);
+    const areaRadius = Math.sqrt(
+      occupiedArea / (Math.PI * INNER_PACKING_DENSITY),
+    );
+    const targetRadius = Math.max(areaRadius, labelExitRadius);
+    const targetX = horizontalDirection * targetRadius;
+    const targetY = verticalDirection * targetRadius;
+    return {
+      ...paper,
+      x: targetX,
+      y: targetY,
+      semanticX: targetX,
+      semanticY: targetY,
+    };
+  });
 }
 
 function validateNonnegativeOption(
@@ -774,21 +842,22 @@ function relaxIslandContents(
   spacingScale: number,
   padding: number,
 ): PackedIsland {
-  const papers: InternalPaper[] = paperAnchors
-    .map((paper) => {
-      const semanticX = (paper.x - island.x) * INNER_INITIAL_SCALE;
-      const semanticY = (paper.y - island.y) * INNER_INITIAL_SCALE;
-      return { ...paper, x: semanticX, y: semanticY, semanticX, semanticY };
-    })
-    .sort(comparePaperStability);
-  const labelSemanticX = labelAnchor.x - island.x;
-  const labelSemanticY = labelAnchor.y - island.y;
+  // Papers first receive prefix-stable sunflower targets. Appending a paper
+  // therefore never changes an established target, while the golden-angle
+  // sequence fills a disc instead of preserving the source map's aspect
+  // ratio. The old semantic coordinates survive only as a small angular cue.
+  const papers: InternalPaper[] = compactPaperTargets(
+    island,
+    paperAnchors,
+    labelAnchor,
+    spacingScale,
+  );
   const label: InternalLabel = {
     ...labelAnchor,
-    x: labelSemanticX,
-    y: labelSemanticY,
-    semanticX: labelSemanticX,
-    semanticY: labelSemanticY,
+    x: 0,
+    y: 0,
+    semanticX: 0,
+    semanticY: 0,
   };
 
   for (let iteration = 0; iteration < INNER_ITERATIONS; iteration += 1) {
@@ -800,15 +869,9 @@ function relaxIslandContents(
     const labelMovement = { x: 0, y: 0 };
     for (const paper of papers) {
       const movement = paperMovement.get(paper.id) as LayoutPoint;
-      movement.x += -paper.x * INNER_CENTER_STRENGTH;
-      movement.y += -paper.y * INNER_CENTER_STRENGTH;
-      movement.x += (paper.semanticX - paper.x) * INNER_SEMANTIC_STRENGTH;
-      movement.y += (paper.semanticY - paper.y) * INNER_SEMANTIC_STRENGTH;
+      movement.x += (paper.semanticX - paper.x) * INNER_TARGET_STRENGTH;
+      movement.y += (paper.semanticY - paper.y) * INNER_TARGET_STRENGTH;
     }
-    labelMovement.x += -label.x * LABEL_CENTER_STRENGTH;
-    labelMovement.y += -label.y * LABEL_CENTER_STRENGTH;
-    labelMovement.x += (label.semanticX - label.x) * LABEL_SEMANTIC_STRENGTH;
-    labelMovement.y += (label.semanticY - label.y) * LABEL_SEMANTIC_STRENGTH;
     addInnerCollisions(
       papers,
       label,
@@ -900,13 +963,20 @@ function relaxIslandContents(
   label.y -= enclosure.y;
   label.semanticX -= enclosure.x;
   label.semanticY -= enclosure.y;
+  // Small additions should normally consume reserved room instead of making
+  // every other island re-pack. The hidden observation keeps its exact size;
+  // visible islands reserve at most one small bucket of radial headroom.
+  const contentRadius = island.observation
+    ? enclosure.radius
+    : Math.ceil(enclosure.radius / CONTENT_RADIUS_RESERVE_STEP) *
+      CONTENT_RADIUS_RESERVE_STEP;
 
   return {
     id: island.id,
     x: island.x + enclosure.x,
     y: island.y + enclosure.y,
-    radius: enclosure.radius + padding,
-    contentRadius: enclosure.radius,
+    radius: contentRadius + padding,
+    contentRadius,
     padding,
     anchorX: island.x + enclosure.x,
     anchorY: island.y + enclosure.y,

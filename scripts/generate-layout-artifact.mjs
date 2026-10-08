@@ -99,6 +99,8 @@ function generateMode(mode, citationCounts) {
       id: island.id,
       x: (anchor.x / 100) * MAP_WORLD_WIDTH,
       y: (anchor.y / 100) * MAP_WORLD_HEIGHT,
+      semanticWidth: (island.width / 100) * MAP_WORLD_WIDTH,
+      semanticHeight: (island.height / 100) * MAP_WORLD_HEIGHT,
       observation: island.id === 'observation',
     };
   });

@@ -60,6 +60,9 @@ jobs:
       - name: Test generated map layouts
         run: pnpm test:layout-artifact
 
+      - name: Test map camera math
+        run: pnpm test:map-camera
+
       - name: Test publication date filtering
         run: pnpm test:date-range
 

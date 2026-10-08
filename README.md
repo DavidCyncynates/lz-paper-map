@@ -36,12 +36,14 @@ than an editorial authority: public changes still require fresh source evidence,
 validation, and review.
 
 Map geometry and catalog indexes are deterministic generated artifacts. Both
-uniform and citation-sized layouts are computed before publication, using
-spatially indexed collision checks and a deterministic incremental enclosing
-circle. The browser swaps stored coordinates instead of running a force solver.
-Committed semantic coordinates and immutable layout ranks remain the stable
-inputs, so later additions absorb most local movement. The canvas can be
-scrolled, dragged, and zoomed without changing the layout.
+uniform and citation-sized layouts are computed before publication. A
+prefix-stable golden-angle packer makes each island compact, spatially indexed
+collision checks enforce clearance, and a deterministic incremental enclosing
+circle wraps the result. The browser swaps stored coordinates instead of
+running a force solver. Committed semantic coordinates and immutable layout
+ranks remain the stable inputs, so later additions absorb most local movement.
+The independent camera fits, scrolls, drags, wheel-zooms, and supports native
+one-finger pan and two-finger pinch gestures without changing the layout.
 
 The full rationale, data contract, trust boundaries, stable-layout policy, and
 failure behavior are in [docs/architecture.md](docs/architecture.md). The
@@ -72,6 +74,7 @@ pnpm typecheck
 pnpm lint
 pnpm test:layout
 pnpm test:layout-artifact
+pnpm test:map-camera
 pnpm test:date-range
 pnpm test:citation-size
 pnpm test:theme
