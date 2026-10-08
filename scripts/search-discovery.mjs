@@ -11,15 +11,10 @@ export function normalizeSiteUrl(value = DEFAULT_SITE_URL) {
 
 export function sitemapEntries(catalog, siteUrl = DEFAULT_SITE_URL) {
   const root = normalizeSiteUrl(siteUrl);
-  const collectionLastModified = catalog.updatedAt;
   return [
-    { url: root, lastModified: collectionLastModified },
+    { url: root, lastModified: catalog.updatedAt },
     ...catalog.papers.map((paper) => ({
-      url: new URL(
-        `papers/${encodeURIComponent(paper.id)}/`,
-        root,
-      ).toString(),
-      lastModified: paper.updated,
+      url: new URL(`papers/${encodeURIComponent(paper.id)}/`, root).toString(),
     })),
   ];
 }
@@ -36,10 +31,12 @@ function escapeXml(value) {
 export function renderSitemap(catalog, siteUrl = DEFAULT_SITE_URL) {
   const entries = sitemapEntries(catalog, siteUrl);
   const urls = entries
-    .map(
-      ({ url, lastModified }) =>
-        `  <url>\n    <loc>${escapeXml(url)}</loc>\n    <lastmod>${escapeXml(lastModified)}</lastmod>\n  </url>`,
-    )
+    .map(({ url, lastModified }) => {
+      const lastModifiedLine = lastModified
+        ? `\n    <lastmod>${escapeXml(lastModified)}</lastmod>`
+        : '';
+      return `  <url>\n    <loc>${escapeXml(url)}</loc>${lastModifiedLine}\n  </url>`;
+    })
     .join('\n');
 
   return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls}\n</urlset>\n`;

@@ -7,19 +7,36 @@ export default function Home() {
   const collectionJsonLd = {
     '@context': 'https://schema.org',
     '@type': 'CollectionPage',
-    name: 'LUX-ZEPLIN 248 keV Paper Map',
+    name: 'LZ Paper Map: 248 keV Papers & Summaries',
+    alternateName: 'LUX-ZEPLIN 248 keV Paper Map',
     description:
-      'A living research map of papers responding to the September 2026 LUX-ZEPLIN high-energy nuclear-recoil candidate.',
+      'A searchable map of LZ papers about the 248 keV LUX-ZEPLIN high-recoil candidate, with concise summaries, physics categories and citation lineage.',
     url: SITE_URL,
+    dateModified: landscape.updatedAt,
+    inLanguage: 'en',
+    creator: {
+      '@type': 'Person',
+      name: 'David Cyncynates',
+      url: 'https://davidcyncynates.github.io/',
+    },
     isPartOf: {
       '@type': 'WebSite',
       name: 'David Cyncynates',
       url: 'https://davidcyncynates.github.io/',
     },
     about: [
-      'LUX-ZEPLIN experiment',
-      '248 keV nuclear-recoil candidate',
-      'dark matter phenomenology',
+      {
+        '@type': 'Thing',
+        name: 'LUX-ZEPLIN experiment',
+      },
+      {
+        '@type': 'Thing',
+        name: '248 keV nuclear-recoil candidate',
+      },
+      {
+        '@type': 'Thing',
+        name: 'Dark matter phenomenology',
+      },
     ],
     mainEntity: {
       '@type': 'ItemList',

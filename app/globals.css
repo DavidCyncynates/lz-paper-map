@@ -155,16 +155,18 @@ a {
   text-decoration: none;
 }
 
-.brand > span:last-child {
+.brand > div:last-child {
   display: grid;
   gap: 1px;
 }
 
-.brand strong {
+.brand h1 {
+  margin: 0;
   font-family: var(--font-serif-display);
   font-size: 18px;
   font-weight: 600;
   letter-spacing: -0.015em;
+  line-height: 1.15;
 }
 
 .brand small {

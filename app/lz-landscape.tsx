@@ -1426,9 +1426,6 @@ export function LzLandscape() {
 
   return (
     <main className="app-shell">
-      <h1 className="sr-only">
-        LUX-ZEPLIN 248 keV high-recoil candidate literature map
-      </h1>
       <header className="topbar">
         <a className="brand" href="#top" aria-label="LZ Paper Map home">
           <span className="brand-mark" aria-hidden="true">
@@ -1436,10 +1433,10 @@ export function LzLandscape() {
             <span />
             <span />
           </span>
-          <span>
-            <strong>LZ Paper Map</strong>
-            <small>High-recoil literature</small>
-          </span>
+          <div>
+            <h1>LZ Paper Map</h1>
+            <small>248 keV papers &amp; summaries</small>
+          </div>
         </a>
 
         <div className="topbar-meta">
@@ -1684,9 +1681,10 @@ export function LzLandscape() {
           <div className="reading-key">
             <p className="nav-label">How to read the map</p>
             <p>
-              Nearby dots share mechanisms, particles, or phenomenology. Each
-              sits in one primary island; roles and test channels remain
-              searchable as tags.
+              This map collects papers responding to LUX-ZEPLIN&apos;s isolated
+              248 keV high-recoil candidate. Nearby dots share mechanisms,
+              particles, or phenomenology; select one for a concise summary and
+              citation lineage.
             </p>
             <div>
               <span className="key-node key-node--source" />
@@ -1700,6 +1698,11 @@ export function LzLandscape() {
 
           <details className="method-summary" id="method">
             <summary>Method &amp; caveats</summary>
+            <p>
+              The source result is one isolated 248 keV candidate (LZ230616),
+              also discussed as the LZ high-recoil event or LZ excess; it is not
+              a discovery.
+            </p>
             <p>
               A scheduled review scans arXiv listings, abstracts, paper text,
               and reference trails for work about this specific event. Metadata
