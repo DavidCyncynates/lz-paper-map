@@ -65,29 +65,31 @@ the generated asset folder so GitHub Pages can mount the artifact at that path.
 
 ## Catalog and taxonomy
 
-`data/landscape.json` is the single source of truth for this first, small
-corpus. Every paper stores canonical arXiv metadata including a positive exact
-`arxivVersion`, a role, one primary island, up to two secondary islands, tags,
+`data/landscape.json` is the single source of truth for the public corpus. Every
+paper stores canonical arXiv metadata including a positive exact
+`arxivVersion`, a role, exactly one primary island membership, tags,
 machine-assisted explanatory text, stable coordinates, and the mapped paper IDs
 that its exact-version reference list cites. Reverse
 “cited by” lists, incoming counts, and normalized search text are materialized
 in a generated index. Its catalog digest is checked before each build; server
 code also rebuilds it safely in memory if a stale artifact is encountered.
 
-The first atlas uses nine fixed islands:
+Taxonomy revision `2026-10-08` uses eight analytical islands plus the
+experimental anchor:
 
 1. the LZ observation;
-2. dark-matter absorption;
-3. adjacent and multi-messenger signals;
-4. neutrino-initiated new physics;
-5. Higgsino and electroweak dark matter;
-6. endothermic dark matter;
+2. absorption and nucleon disappearance;
+3. boosted and nonstandard fluxes;
+4. neutrino-initiated recoils;
+5. electroweak inelastic dark matter;
+6. other endothermic dark matter;
 7. exothermic dark matter;
-8. elastic momentum-dependent portals; and
-9. constraints and discriminants.
+8. elastic high-recoil dark matter; and
+9. comparisons and systematics.
 
-The taxonomy is deliberately human-owned. The scheduled task cannot create,
-rename, split, or delete an island. A proposed taxonomy change should be a
+The exact definitions and tie-break rules live in `docs/taxonomy.md`. The
+taxonomy is deliberately human-owned. The scheduled task cannot create,
+rename, split, merge, or delete an island. A proposed taxonomy change must be a
 separate, discussed atlas revision.
 
 ## Stable layout
@@ -109,9 +111,10 @@ island. Short-range collision repulsion then enforces paper and label clearance.
 Collision candidates come from a uniform spatial grid instead of an all-pairs
 scan. A fixed-seed incremental smallest-enclosing-disc solver wraps the settled
 paper discs and all four corners of a conservative fixed label box, then
-verifies containment in one final linear pass. Visible islands reserve at most
-one 16-pixel radial bucket before visual padding is added, allowing most routine
-additions to consume local headroom without moving the outer atlas.
+verifies containment in one final linear pass. The exact enclosing radius grows
+continuously with the contents; separate visual padding supplies breathing room
+without introducing stepwise boundary jumps that would unnecessarily re-pack
+the outer atlas.
 
 Every paper has an immutable, contiguous `layoutRank` assigned when it enters
 the catalog. During a local collision, the higher-ranked record absorbs most of
@@ -135,13 +138,13 @@ filter reflow. Generation fails closed if containment, separation, or canvas
 bounds do not validate in either mode. The previously published artifact and
 list view remain available rather than displaying misleading overlaps.
 
-Secondary memberships remain searchable, but do not duplicate a paper across
-physical islands. Adding a paper appends one new local target without changing
-the established prefix or the committed semantic coordinates. If reserved room
-is exhausted, its primary circle can grow and trigger deterministic outer
-repacking. Generated artifacts are keyed by catalog and solver versions; future
-per-island caches can reuse unaffected local solves without changing the public
-file format.
+Roles, model families, and test channels remain searchable through paper
+metadata, but do not duplicate a paper across physical islands. Adding a paper
+appends one new local target without changing the established prefix or the
+committed semantic coordinates. If reserved room is exhausted, its primary
+circle can grow and trigger deterministic outer repacking. Generated artifacts
+are keyed by catalog, taxonomy, and solver versions; future per-island caches
+can reuse unaffected local solves without changing the public file format.
 
 The map lives on a larger two-dimensional stage with a separate camera layer.
 It initially fits the whole atlas to the available viewport, refits while that

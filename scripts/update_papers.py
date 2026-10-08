@@ -524,6 +524,16 @@ def validate(landscape: dict[str, Any], candidates: dict[str, Any] | None = None
     errors: list[str] = []
     if landscape.get("schemaVersion") != 2:
         errors.append("landscape schemaVersion must be 2")
+    taxonomy_revision = landscape.get("taxonomyRevision")
+    if not isinstance(taxonomy_revision, str) or not re.fullmatch(
+        r"\d{4}-\d{2}-\d{2}", taxonomy_revision
+    ):
+        errors.append("taxonomyRevision must be an ISO date (YYYY-MM-DD)")
+    else:
+        try:
+            datetime.strptime(taxonomy_revision, "%Y-%m-%d")
+        except ValueError:
+            errors.append("taxonomyRevision must be an ISO date (YYYY-MM-DD)")
     citation_data = landscape.get("citationData")
     if not isinstance(citation_data, dict):
         errors.append("citationData must describe citation provenance")
@@ -534,12 +544,30 @@ def validate(landscape: dict[str, Any], candidates: dict[str, Any] | None = None
             errors.append("citationData.scope is required")
         if not re.fullmatch(r"\d{4}-\d{2}-\d{2}", citation_data.get("checkedAt", "")):
             errors.append("citationData.checkedAt must be an ISO date")
-    island_ids = [island.get("id") for island in landscape.get("islands", [])]
+    island_records = landscape.get("islands", [])
+    if not isinstance(island_records, list):
+        errors.append("islands must be an array")
+        island_records = []
+    island_ids: list[str] = []
+    for index, island in enumerate(island_records):
+        if not isinstance(island, dict):
+            errors.append(f"island {index} must be an object")
+            continue
+        island_id = island.get("id")
+        if not isinstance(island_id, str) or not compact(island_id):
+            errors.append(f"island {index}: id is required")
+            continue
+        if not re.fullmatch(r"[a-z][a-z0-9-]*", island_id):
+            errors.append(f"{island_id}: island id must be lowercase and slug-safe")
+        island_ids.append(island_id)
     if len(island_ids) != len(set(island_ids)):
         errors.append("island IDs must be unique")
-    for island in landscape.get("islands", []):
+    for island in island_records:
+        if not isinstance(island, dict):
+            continue
         label = island.get("id", "<missing-island-id>")
-        if not compact(island.get("summary", "")):
+        summary = island.get("summary", "")
+        if not isinstance(summary, str) or not compact(summary):
             errors.append(f"{label}: island summary is required")
     valid_islands = set(island_ids)
     paper_ids = [paper.get("id") for paper in landscape.get("papers", [])]
@@ -559,17 +587,30 @@ def validate(landscape: dict[str, Any], candidates: dict[str, Any] | None = None
     ):
         errors.append("paper layoutRank values must be unique contiguous integers from zero")
 
+    primary_islands: set[str] = set()
     for paper in landscape.get("papers", []):
         label = paper.get("id", "<missing-id>")
         if paper.get("role") not in ALLOWED_ROLES:
             errors.append(f"{label}: invalid role")
-        if paper.get("primaryIsland") not in valid_islands:
+        primary_island = paper.get("primaryIsland")
+        if not isinstance(primary_island, str) or primary_island not in valid_islands:
             errors.append(f"{label}: invalid primary island")
-        memberships = paper.get("islands", [])
-        if paper.get("primaryIsland") not in memberships:
-            errors.append(f"{label}: primary island is missing from memberships")
-        if any(island not in valid_islands for island in memberships):
-            errors.append(f"{label}: unknown island membership")
+        else:
+            primary_islands.add(primary_island)
+        memberships = paper.get("islands")
+        if not isinstance(memberships, list) or not memberships:
+            errors.append(f"{label}: islands must be a non-empty array")
+        elif any(not isinstance(island, str) for island in memberships):
+            errors.append(f"{label}: island memberships must be strings")
+        else:
+            if len(memberships) != 1:
+                errors.append(f"{label}: exactly one island membership is required")
+            if len(memberships) != len(set(memberships)):
+                errors.append(f"{label}: duplicate island membership")
+            if memberships[0] != primary_island:
+                errors.append(f"{label}: primary island must be the first membership")
+            if any(island not in valid_islands for island in memberships):
+                errors.append(f"{label}: unknown island membership")
         if not isinstance(paper.get("x"), (int, float)) or not 0 <= paper["x"] <= 100:
             errors.append(f"{label}: x must be between 0 and 100")
         if not isinstance(paper.get("y"), (int, float)) or not 0 <= paper["y"] <= 100:
@@ -595,6 +636,10 @@ def validate(landscape: dict[str, Any], candidates: dict[str, Any] | None = None
             errors.append(f"{label}: invalid citation reference")
         if not compact(paper.get("summary", "")) or not compact(paper.get("takeaway", "")):
             errors.append(f"{label}: summary and takeaway are required")
+
+    for island_id in island_ids:
+        if island_id not in primary_islands:
+            errors.append(f"{island_id}: no paper has this primary island")
 
     if candidates is not None:
         if candidates.get("schemaVersion") != 1:
