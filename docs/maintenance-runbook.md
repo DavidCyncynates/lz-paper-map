@@ -231,6 +231,7 @@ pnpm test:maintenance
 pnpm test:catalog-index
 pnpm test:layout
 pnpm test:layout-artifact
+pnpm test:map-camera
 pnpm typecheck
 pnpm lint
 pnpm build

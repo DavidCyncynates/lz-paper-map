@@ -35,6 +35,32 @@ function circleDistance(first, second) {
   return Math.hypot(first.x - second.x, first.y - second.y);
 }
 
+function principalAxisRatio(points) {
+  const center = points.reduce(
+    (sum, point) => ({ x: sum.x + point.x, y: sum.y + point.y }),
+    { x: 0, y: 0 },
+  );
+  center.x /= points.length;
+  center.y /= points.length;
+  let horizontalVariance = 0;
+  let verticalVariance = 0;
+  let covariance = 0;
+  for (const point of points) {
+    const horizontal = point.x - center.x;
+    const vertical = point.y - center.y;
+    horizontalVariance += horizontal * horizontal;
+    verticalVariance += vertical * vertical;
+    covariance += horizontal * vertical;
+  }
+  const trace = horizontalVariance + verticalVariance;
+  const discriminant = Math.sqrt(
+    (horizontalVariance - verticalVariance) ** 2 + 4 * covariance ** 2,
+  );
+  const major = (trace + discriminant) / 2;
+  const minor = Math.max(1e-9, (trace - discriminant) / 2);
+  return Math.sqrt(major / minor);
+}
+
 function mapSnapshot(layout) {
   return JSON.stringify({
     papers: [...layout.papers],
@@ -89,6 +115,8 @@ function currentCatalogInputs(sizeMode = 'uniform') {
     id: island.id,
     x: ((island.x + island.width * 0.5) / 100) * WIDTH,
     y: ((island.y + island.height * 0.5) / 100) * HEIGHT,
+    semanticWidth: (island.width / 100) * WIDTH,
+    semanticHeight: (island.height / 100) * HEIGHT,
     observation: island.id === 'observation',
   }));
   return { papers, labels, islands, labelSizes };
@@ -591,9 +619,10 @@ test('append-only additions preserve the established mental map, including backf
     for (const [islandId, beforeIsland] of before.islands) {
       const afterIsland = after.islands.get(islandId);
       assert.ok(afterIsland);
+      const islandDisplacement = circleDistance(beforeIsland, afterIsland);
       assert.ok(
-        circleDistance(beforeIsland, afterIsland) <= 12,
-        `${islandId} shifted too far after adding ${newPaperId}`,
+        islandDisplacement <= 12,
+        `${islandId} shifted ${islandDisplacement}px after adding ${newPaperId}; endothermic radius ${before.islands.get('endothermic')?.radius} -> ${after.islands.get('endothermic')?.radius}`,
       );
 
       const beforeLabel = before.labels.get(islandId);
@@ -959,6 +988,81 @@ test('large islands remain separated and deterministic', () => {
       assert.ok(
         circleDistance(first, second) + EPSILON >=
           papers[firstIndex].radius + papers[secondIndex].radius + PAPER_GAP,
+      );
+    }
+  }
+});
+
+test('strip-shaped semantic inputs are repacked into a compact disc', () => {
+  const papers = Array.from({ length: 48 }, (_, index) => ({
+    id: `strip-${String(index).padStart(2, '0')}`,
+    islandId: 'strip',
+    stabilityRank: index,
+    x: 180 + index * 24,
+    y: 420 + (index % 2),
+    radius: 7,
+  }));
+  const labels = [
+    {
+      id: 'strip',
+      islandId: 'strip',
+      x: 740,
+      y: 420,
+      width: 150,
+      height: 34,
+    },
+  ];
+  const islands = [
+    {
+      id: 'strip',
+      x: 740,
+      y: 420,
+      semanticWidth: 1_200,
+      semanticHeight: 160,
+    },
+  ];
+  const layout = createHierarchicalMapLayout(
+    1_480,
+    840,
+    papers,
+    labels,
+    islands,
+    { islandPadding: 24, outerGap: 16 },
+  );
+  const points = papers.map((paper) => layout.papers.get(paper.id));
+
+  assert.equal(layout.diagnostics.converged, true);
+  assert.ok(points.every(Boolean));
+  assert.ok(
+    principalAxisRatio(points) <= 1.45,
+    `Expected a compact packing, received principal-axis ratio ${principalAxisRatio(points)}`,
+  );
+});
+
+test('established catalog islands stay compact in both size modes', () => {
+  for (const sizeMode of ['uniform', 'citations']) {
+    const { papers, labels, islands } = currentCatalogInputs(sizeMode);
+    const layout = createHierarchicalMapLayout(
+      WIDTH,
+      HEIGHT,
+      papers,
+      labels,
+      islands,
+      {
+        islandPadding: ISLAND_PADDING,
+        observationPadding: OBSERVATION_PADDING,
+        outerGap: OUTER_GAP,
+      },
+    );
+    const membersByIsland = Map.groupBy(papers, (paper) => paper.islandId);
+    for (const [islandId, members] of membersByIsland) {
+      if (members.length < 10) continue;
+      const points = members.map((paper) => layout.papers.get(paper.id));
+      assert.ok(points.every(Boolean));
+      const ratio = principalAxisRatio(points);
+      assert.ok(
+        ratio <= 1.6,
+        `${islandId} is too oblong in ${sizeMode} mode (${ratio})`,
       );
     }
   }

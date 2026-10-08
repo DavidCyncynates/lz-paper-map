@@ -98,18 +98,20 @@ scheduled task does not rewrite existing semantic coordinates. Layouts for both
 uniform and citation-sized dots are generated before publication and committed
 as a versioned artifact; changing the toggle swaps coordinate tables.
 
-Each island keeps a fixed semantic seed rather than a fixed visible boundary. A
-new paper is attracted mostly toward its primary island and partly toward any
-secondary islands. A hash of the arXiv ID provides deterministic jitter;
-collision checks find the first unoccupied position. Existing coordinates remain
-pinned as semantic anchors. During artifact generation, a deterministic
-hierarchical solve first assembles each primary island independently. Its label
-and paper dots have short-range collision repulsion, while weak center attraction
-and authored coordinate springs preserve a compact, recognizable local
-arrangement. Collision candidates come from a uniform spatial grid instead of
-an all-pairs scan. A fixed-seed incremental smallest-enclosing-disc solver wraps
-the settled paper discs and all four corners of a conservative fixed label box,
-then verifies containment in one final linear pass and adds visual padding.
+Each island keeps a fixed semantic seed rather than a fixed visible boundary.
+During artifact generation, a deterministic hierarchical solve first assembles
+each primary island independently around its centered label. Papers are ordered
+by their immutable layout rank and assigned prefix-stable golden-angle targets;
+cumulative disc area determines radius, so the sequence fills a compact disc
+instead of inheriting an oblong source rectangle. Authored coordinates retain a
+small, aspect-normalized angular influence without being allowed to stretch the
+island. Short-range collision repulsion then enforces paper and label clearance.
+Collision candidates come from a uniform spatial grid instead of an all-pairs
+scan. A fixed-seed incremental smallest-enclosing-disc solver wraps the settled
+paper discs and all four corners of a conservative fixed label box, then
+verifies containment in one final linear pass. Visible islands reserve at most
+one 16-pixel radial bucket before visual padding is added, allowing most routine
+additions to consume local headroom without moving the outer atlas.
 
 Every paper has an immutable, contiguous `layoutRank` assigned when it enters
 the catalog. During a local collision, the higher-ranked record absorbs most of
@@ -133,16 +135,25 @@ filter reflow. Generation fails closed if containment, separation, or canvas
 bounds do not validate in either mode. The previously published artifact and
 list view remain available rather than displaying misleading overlaps.
 
-Secondary memberships remain searchable and inform semantic placement, but do
-not duplicate a paper across physical islands. Adding a paper can enlarge its
-primary circle and trigger deterministic repacking without changing the
-committed semantic coordinates. Generated artifacts are keyed by catalog and
-solver versions; future per-island caches can reuse unaffected local solves
-without changing the public file format.
+Secondary memberships remain searchable, but do not duplicate a paper across
+physical islands. Adding a paper appends one new local target without changing
+the established prefix or the committed semantic coordinates. If reserved room
+is exhausted, its primary circle can grow and trigger deterministic outer
+repacking. Generated artifacts are keyed by catalog and solver versions; future
+per-island caches can reuse unaffected local solves without changing the public
+file format.
 
-The map lives on a larger two-dimensional stage that can be scrolled, dragged,
-and zoomed. This gives dense families room to breathe while preserving a
-viewport-height interface and a stable coordinate system.
+The map lives on a larger two-dimensional stage with a separate camera layer.
+It initially fits the whole atlas to the available viewport, refits while that
+fit state is active and the viewport changes size, and supports mouse drag or
+one-finger touch panning. Zoom spans 15–250%, stays anchored to the cursor,
+pinch midpoint, or viewport center, and is available through ordinary wheel or
+trackpad scrolling, two-finger pinching, buttons, keyboard shortcuts, and
+double-click. The lower bound lets the fit control
+contain the complete atlas even on narrow screens. The fit control changes only
+the camera and never clears research filters. This gives dense families room to
+breathe while preserving a viewport-height interface and stable world
+coordinates.
 
 The shaded island circles are restrained, borderless visual regions rather than
 inferred statistical confidence areas; the experimental anchor does not need a
@@ -229,11 +240,15 @@ CI verifies generated catalog and layout digests before building. The pure
 solver and current-catalog artifacts are checked in both sizing modes: every
 primary paper and fixed label box must remain inside its circle, all nine
 packing bodies (including the hidden LZ body) must remain separated, and input
-reordering must produce byte-identical geometry. Stress fixtures cover thousands
-of enclosing bodies and hundreds of island nodes, dense/coincident bodies,
-invalid geometry, impossible viewports, older-ID backfills, and edge-driven
-growth. Ledger tests cover immutable evidence, fail-closed lane completion,
-no-change cursors, reference snapshots, author deduplication, and safe recovery.
+reordering must produce byte-identical geometry. Compactness gates cover both a
+deliberately strip-shaped fixture and every established island with at least ten
+papers. Stress fixtures cover thousands of enclosing bodies and hundreds of
+island nodes, dense/coincident bodies, invalid geometry, impossible viewports,
+older-ID backfills, and edge-driven growth. Separate camera tests cover padded
+fit, scale bounds, centered stages, anchor-preserving wheel and pinch zoom,
+combined pinch translation, and edge clamping.
+Ledger tests cover immutable evidence, fail-closed lane completion, no-change
+cursors, reference snapshots, author deduplication, and safe recovery.
 
 The next useful upgrades are manual field locks, a contribution/correction form
 backed by GitHub Issues, and embeddings for suggesting conceptual neighbors

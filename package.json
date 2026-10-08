@@ -22,13 +22,14 @@
     "test:catalog-index": "node --test scripts/test-catalog-index.mjs",
     "test:layout": "node --experimental-strip-types --test scripts/test-hierarchical-layout.mjs",
     "test:layout-artifact": "node --experimental-strip-types --test scripts/test-map-layout-artifact.mjs",
+    "test:map-camera": "node --experimental-strip-types --test scripts/test-map-camera.mjs",
     "test:maintenance": "python3 -m unittest discover -s scripts/tests/maintenance -p 'test_*.py'",
     "test:date-range": "node --experimental-strip-types --test scripts/test-paper-date-range.mjs",
     "test:citation-size": "node --experimental-strip-types --test scripts/test-paper-citation-size.mjs",
     "test:theme": "node --experimental-strip-types --test scripts/test-color-theme.mjs",
     "test:seo": "node --test scripts/test-search-discovery.mjs",
     "check:seo": "node scripts/check-search-artifact.mjs",
-    "lint": "oxlint app lib scripts/generate-catalog-index.mjs scripts/generate-layout-artifact.mjs scripts/prepare-pages.mjs scripts/search-discovery.mjs scripts/check-search-artifact.mjs scripts/test-catalog-index.mjs scripts/test-color-theme.mjs scripts/test-hierarchical-layout.mjs scripts/test-map-layout-artifact.mjs scripts/test-paper-date-range.mjs scripts/test-paper-citation-size.mjs scripts/test-search-discovery.mjs components/theme-toggle.tsx components/ui/button.tsx components/ui/input.tsx",
+    "lint": "oxlint app lib scripts/generate-catalog-index.mjs scripts/generate-layout-artifact.mjs scripts/prepare-pages.mjs scripts/search-discovery.mjs scripts/check-search-artifact.mjs scripts/test-catalog-index.mjs scripts/test-color-theme.mjs scripts/test-hierarchical-layout.mjs scripts/test-map-camera.mjs scripts/test-map-layout-artifact.mjs scripts/test-paper-date-range.mjs scripts/test-paper-citation-size.mjs scripts/test-search-discovery.mjs components/theme-toggle.tsx components/ui/button.tsx components/ui/input.tsx",
     "format": "oxfmt"
   },
   "dependencies": {

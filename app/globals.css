@@ -814,11 +814,13 @@ a {
 }
 
 .zoom-controls button {
+  width: 29px;
+  height: 29px;
   border-color: #d8d4c9;
   background: rgba(255, 255, 255, 0.55);
 }
 
-.zoom-controls span {
+.zoom-controls output {
   width: 38px;
   color: #858a83;
   text-align: center;
@@ -850,7 +852,7 @@ a {
   overscroll-behavior: contain;
   scrollbar-color: rgba(87, 101, 94, 0.34) transparent;
   scrollbar-width: thin;
-  touch-action: pan-x pan-y;
+  touch-action: none;
 }
 
 .map-viewport:not(.is-layout-ready) {
@@ -891,7 +893,6 @@ a {
   left: 50%;
   top: 50%;
   transform-origin: center;
-  transition: transform 220ms ease;
 }
 
 .map-canvas.is-layout-hidden {
@@ -1796,8 +1797,22 @@ a {
     padding-inline: 3px;
   }
 
-  .zoom-controls span {
+  .map-toolbar > div:first-child {
     display: none;
+  }
+
+  .map-tools {
+    width: 100%;
+    justify-content: flex-end;
+  }
+
+  .zoom-controls output {
+    display: none;
+  }
+
+  .zoom-controls button {
+    width: 36px;
+    height: 36px;
   }
 
   .map-footer span:first-child {
@@ -1853,7 +1868,11 @@ a {
    change only the surrounding ink, paper, and contrast relationships. */
 :root.dark .app-shell {
   background:
-    radial-gradient(circle at 48% 42%, rgba(139, 119, 90, 0.075), transparent 38%),
+    radial-gradient(
+      circle at 48% 42%,
+      rgba(139, 119, 90, 0.075),
+      transparent 38%
+    ),
     var(--background);
 }
 
@@ -1873,7 +1892,7 @@ a {
 :root.dark .method-summary,
 :root.dark .map-toolbar,
 :root.dark .map-footer,
-:root.dark .zoom-controls span,
+:root.dark .zoom-controls output,
 :root.dark .node-tooltip small,
 :root.dark .empty-map,
 :root.dark .empty-list,
@@ -2085,7 +2104,11 @@ a {
 :root.dark .paper-list {
   border-color: rgba(232, 228, 220, 0.13);
   background:
-    radial-gradient(circle at 50% 46%, rgba(116, 100, 76, 0.1), transparent 50%),
+    radial-gradient(
+      circle at 50% 46%,
+      rgba(116, 100, 76, 0.1),
+      transparent 50%
+    ),
     #1e1f1c;
   box-shadow:
     inset 0 1px 0 rgba(241, 237, 229, 0.035),

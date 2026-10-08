@@ -1,9 +1,10 @@
 'use client';
 
-/* oxlint-disable jsx-a11y/no-noninteractive-tabindex -- The scrollable map needs a keyboard focus target so arrow and page keys can pan it. */
+/* oxlint-disable jsx-a11y/no-noninteractive-tabindex, jsx-a11y/no-noninteractive-element-interactions -- The scrollable map is an intentionally keyboard- and pointer-operable viewport. */
 
 import {
   type MouseEvent as ReactMouseEvent,
+  type KeyboardEvent as ReactKeyboardEvent,
   useEffect,
   useLayoutEffect,
   useMemo,
@@ -17,9 +18,9 @@ import {
   ExternalLink,
   List,
   Map as MapIcon,
+  Maximize2,
   Minus,
   Plus,
-  RotateCcw,
   Search,
   Sparkles,
 } from 'lucide-react';
@@ -33,6 +34,15 @@ import {
   type HierarchicalIslandLayout,
   type HierarchicalLayoutDiagnostics,
 } from '@/lib/hierarchical-map-layout';
+import {
+  clampMapScale,
+  DEFAULT_MAP_MAX_SCALE,
+  DEFAULT_MAP_MIN_SCALE,
+  fitMapCamera,
+  type MapCameraState,
+  transformMapBetweenAnchors,
+  zoomMapAtAnchor,
+} from '@/lib/map-camera';
 import {
   canonicalIslandLabelSize,
   islandLabelAnchor,
@@ -75,6 +85,13 @@ type PanGesture = {
   startY: number;
   scrollLeft: number;
   scrollTop: number;
+  active: boolean;
+};
+type PinchGesture = {
+  pointerIds: [number, number];
+  startDistance: number;
+  startMidpoint: MapPoint;
+  startCamera: MapCameraState;
 };
 type TooltipPlacement = {
   paperId: string;
@@ -156,12 +173,26 @@ function motionSafeScrollBehavior(preferred: ScrollBehavior): ScrollBehavior {
   }
   return preferred;
 }
+
+function midpoint(first: MapPoint, second: MapPoint): MapPoint {
+  return {
+    x: (first.x + second.x) / 2,
+    y: (first.y + second.y) / 2,
+  };
+}
+
+function pointDistance(first: MapPoint, second: MapPoint) {
+  return Math.hypot(second.x - first.x, second.y - first.y);
+}
+
 function paperNodeDiameter(paper: Paper, mode: NodeSizeMode) {
-  return mapPaperDiameter(
+  const diameter = mapPaperDiameter(
     paper,
     mode,
     MAPPED_CITATION_COUNTS.get(paper.id) ?? 0,
   );
+  // Keep SSR and browser style strings identical across JavaScript runtimes.
+  return Math.round(diameter * 1000) / 1000;
 }
 
 function dateLabel(value: string) {
@@ -375,23 +406,23 @@ export function LzLandscape() {
   const fromDateInputRef = useRef<HTMLInputElement>(null);
   const dateRangeRef = useRef(dateRange);
   const panGestureRef = useRef<PanGesture | null>(null);
+  const touchPointersRef = useRef(new Map<number, MapPoint>());
+  const pinchGestureRef = useRef<PinchGesture | null>(null);
+  const suppressMapActivationRef = useRef(false);
+  const activationSuppressionTimerRef = useRef<number | null>(null);
+  const cameraRef = useRef<MapCameraState>({
+    scale: 1,
+    scrollLeft: 0,
+    scrollTop: 0,
+  });
+  const cameraFrameRef = useRef<number | null>(null);
+  const cameraScrollBehaviorRef = useRef<ScrollBehavior>('auto');
+  const cameraInitializedRef = useRef(false);
+  const cameraIsFitRef = useRef(true);
   const revealedPaperRef = useRef<string | null>(null);
   const detailTitleRef = useRef<HTMLHeadingElement>(null);
   const focusDetailAfterCitation = useRef(false);
   dateRangeRef.current = dateRange;
-
-  useLayoutEffect(() => {
-    if (viewMode !== 'map') return;
-    const frame = requestAnimationFrame(() => {
-      const viewport = mapViewportRef.current;
-      if (!viewport) return;
-      viewport.scrollTo({
-        left: Math.max(0, (viewport.scrollWidth - viewport.clientWidth) / 2),
-        top: Math.max(0, (viewport.scrollHeight - viewport.clientHeight) / 2),
-      });
-    });
-    return () => cancelAnimationFrame(frame);
-  }, [viewMode]);
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -643,6 +674,91 @@ export function LzLandscape() {
   const mapLayoutReady = hierarchicalLayout.diagnostics.converged;
   const mapLayoutUnavailable = !mapLayoutReady;
 
+  useLayoutEffect(() => {
+    if (viewMode !== 'map' || !mapLayoutReady) return;
+    const viewport = mapViewportRef.current;
+    if (!viewport) return;
+
+    const restoreOrFit = () => {
+      if (!cameraInitializedRef.current || cameraIsFitRef.current) {
+        fitMapToViewport('auto');
+      } else {
+        commitMapCamera(cameraRef.current, 'auto');
+      }
+    };
+    const refitIfNeeded = () => {
+      if (cameraIsFitRef.current) fitMapToViewport('auto');
+    };
+    const frame = requestAnimationFrame(restoreOrFit);
+    const observer = new ResizeObserver(refitIfNeeded);
+    observer.observe(viewport);
+    return () => {
+      cancelAnimationFrame(frame);
+      observer.disconnect();
+    };
+    // The camera function closes over the same world dimensions listed here;
+    // its mutable camera state lives in refs and must not restart observation.
+    // oxlint-disable-next-line react-hooks/exhaustive-deps
+  }, [mapLayoutReady, mapWorldHeight, mapWorldWidth, viewMode]);
+
+  useEffect(() => {
+    if (viewMode !== 'map' || !mapLayoutReady) return;
+    const viewport = mapViewportRef.current;
+    if (!viewport) return;
+    const zoomWithWheel = (event: WheelEvent) => {
+      if (event.deltaY === 0) return;
+      const bounds = viewport.getBoundingClientRect();
+      const deltaPixels =
+        event.deltaMode === WheelEvent.DOM_DELTA_LINE
+          ? event.deltaY * 16
+          : event.deltaMode === WheelEvent.DOM_DELTA_PAGE
+            ? event.deltaY * viewport.clientHeight
+            : event.deltaY;
+      const exponent = Math.max(-0.35, Math.min(0.35, -deltaPixels * 0.002));
+      const nextScale = clampMapScale(
+        cameraRef.current.scale * Math.exp(exponent),
+      );
+      if (Math.abs(nextScale - cameraRef.current.scale) < 1e-6) return;
+      event.preventDefault();
+      zoomAtViewportPoint(nextScale, {
+        x: event.clientX - bounds.left,
+        y: event.clientY - bounds.top,
+      });
+    };
+    viewport.addEventListener('wheel', zoomWithWheel, { passive: false });
+    return () => viewport.removeEventListener('wheel', zoomWithWheel);
+    // The native listener needs current geometry, while camera state itself is
+    // ref-backed so wheel events can compose within a single animation frame.
+    // oxlint-disable-next-line react-hooks/exhaustive-deps
+  }, [mapLayoutReady, mapWorldHeight, mapWorldWidth, viewMode]);
+
+  useEffect(
+    () => () => {
+      if (cameraFrameRef.current !== null) {
+        cancelAnimationFrame(cameraFrameRef.current);
+      }
+      if (activationSuppressionTimerRef.current !== null) {
+        window.clearTimeout(activationSuppressionTimerRef.current);
+      }
+    },
+    [],
+  );
+
+  useEffect(() => {
+    if (viewMode === 'map' && mapLayoutReady) return;
+    touchPointersRef.current.clear();
+    pinchGestureRef.current = null;
+    panGestureRef.current = null;
+    resetMapActivationSuppression();
+    let isCurrent = true;
+    queueMicrotask(() => {
+      if (isCurrent) setIsPanning(false);
+    });
+    return () => {
+      isCurrent = false;
+    };
+  }, [mapLayoutReady, viewMode]);
+
   useEffect(() => {
     if (!mapLayoutUnavailable) return;
     console.error(
@@ -697,10 +813,7 @@ export function LzLandscape() {
   });
 
   useEffect(() => {
-    if (viewMode !== 'map') {
-      revealedPaperRef.current = null;
-      return;
-    }
+    if (viewMode !== 'map') return;
     const revealKey = `${nodeSizeMode}:${selectedPaper.id}`;
     if (
       !mapLayoutReady ||
@@ -884,10 +997,113 @@ export function LzLandscape() {
     setDateFilterOpen((open) => !open);
   }
 
-  function finishPan(pointerId: number) {
+  function readMapCamera(viewport: HTMLElement): MapCameraState {
+    return cameraFrameRef.current !== null
+      ? cameraRef.current
+      : {
+          scale: cameraRef.current.scale,
+          scrollLeft: viewport.scrollLeft,
+          scrollTop: viewport.scrollTop,
+        };
+  }
+
+  function resetMapActivationSuppression() {
+    suppressMapActivationRef.current = false;
+    if (activationSuppressionTimerRef.current !== null) {
+      window.clearTimeout(activationSuppressionTimerRef.current);
+      activationSuppressionTimerRef.current = null;
+    }
+  }
+
+  function brieflySuppressMapActivation() {
+    suppressMapActivationRef.current = true;
+    if (activationSuppressionTimerRef.current !== null) {
+      window.clearTimeout(activationSuppressionTimerRef.current);
+    }
+    activationSuppressionTimerRef.current = window.setTimeout(() => {
+      suppressMapActivationRef.current = false;
+      activationSuppressionTimerRef.current = null;
+    }, 450);
+  }
+
+  function pointerViewportPoint(
+    viewport: HTMLElement,
+    clientX: number,
+    clientY: number,
+  ): MapPoint {
+    const bounds = viewport.getBoundingClientRect();
+    return { x: clientX - bounds.left, y: clientY - bounds.top };
+  }
+
+  function beginPinchGesture(viewport: HTMLElement) {
+    const touches = [...touchPointersRef.current.entries()].slice(0, 2);
+    if (touches.length < 2) {
+      pinchGestureRef.current = null;
+      return;
+    }
+    const [[firstId, first], [secondId, second]] = touches;
+    const startCamera = readMapCamera(viewport);
+    cameraRef.current = startCamera;
+    pinchGestureRef.current = {
+      pointerIds: [firstId, secondId],
+      startDistance: Math.max(1, pointDistance(first, second)),
+      startMidpoint: midpoint(first, second),
+      startCamera,
+    };
+    panGestureRef.current = null;
+    cameraInitializedRef.current = true;
+    cameraIsFitRef.current = false;
+    brieflySuppressMapActivation();
+    for (const pointerId of [firstId, secondId]) {
+      if (!viewport.hasPointerCapture(pointerId)) {
+        viewport.setPointerCapture(pointerId);
+      }
+    }
+    setIsPanning(true);
+  }
+
+  function finishMapPointer(pointerId: number, isTouch: boolean) {
     const viewport = mapViewportRef.current;
+    if (!isTouch) {
+      if (viewport?.hasPointerCapture(pointerId)) {
+        viewport.releasePointerCapture(pointerId);
+      }
+      panGestureRef.current = null;
+      setIsPanning(false);
+      return;
+    }
+
+    const endingPan = panGestureRef.current;
+    const endedActiveGesture =
+      pinchGestureRef.current !== null ||
+      (endingPan?.pointerId === pointerId && endingPan.active);
+    touchPointersRef.current.delete(pointerId);
     if (viewport?.hasPointerCapture(pointerId)) {
       viewport.releasePointerCapture(pointerId);
+    }
+    if (endedActiveGesture) brieflySuppressMapActivation();
+    pinchGestureRef.current = null;
+    if (viewport && touchPointersRef.current.size >= 2) {
+      beginPinchGesture(viewport);
+      return;
+    }
+    const remainingTouch = touchPointersRef.current.entries().next().value as
+      | [number, MapPoint]
+      | undefined;
+    if (viewport && remainingTouch) {
+      const [remainingId, point] = remainingTouch;
+      const currentCamera = readMapCamera(viewport);
+      cameraRef.current = currentCamera;
+      panGestureRef.current = {
+        pointerId: remainingId,
+        startX: point.x,
+        startY: point.y,
+        scrollLeft: currentCamera.scrollLeft,
+        scrollTop: currentCamera.scrollTop,
+        active: true,
+      };
+      setIsPanning(true);
+      return;
     }
     panGestureRef.current = null;
     setIsPanning(false);
@@ -927,54 +1143,115 @@ export function LzLandscape() {
     setTooltipPlacement(nextPlacement);
   }
 
-  function centerMap(behavior: ScrollBehavior = 'smooth') {
-    const viewport = mapViewportRef.current;
-    if (!viewport) return;
-    viewport.scrollTo({
-      left: Math.max(0, (viewport.scrollWidth - viewport.clientWidth) / 2),
-      top: Math.max(0, (viewport.scrollHeight - viewport.clientHeight) / 2),
-      behavior: motionSafeScrollBehavior(behavior),
-    });
-  }
-
-  function changeZoom(step: number) {
-    const nextZoom = Math.min(1.45, Math.max(0.85, zoom + step));
-    if (nextZoom === zoom) return;
-    const viewport = mapViewportRef.current;
-    const centerX = viewport
-      ? (viewport.scrollLeft + viewport.clientWidth / 2) /
-        Math.max(viewport.clientWidth, mapWorldWidth * zoom)
-      : 0.5;
-    const centerY = viewport
-      ? (viewport.scrollTop + viewport.clientHeight / 2) /
-        Math.max(viewport.clientHeight, mapWorldHeight * zoom)
-      : 0.5;
-
-    setZoom(nextZoom);
-    requestAnimationFrame(() => {
-      const currentViewport = mapViewportRef.current;
-      if (!currentViewport) return;
-      const nextWidth = Math.max(
-        currentViewport.clientWidth,
-        mapWorldWidth * nextZoom,
-      );
-      const nextHeight = Math.max(
-        currentViewport.clientHeight,
-        mapWorldHeight * nextZoom,
-      );
-      currentViewport.scrollTo({
-        left: centerX * nextWidth - currentViewport.clientWidth / 2,
-        top: centerY * nextHeight - currentViewport.clientHeight / 2,
+  function commitMapCamera(
+    nextCamera: MapCameraState,
+    behavior: ScrollBehavior = 'auto',
+  ) {
+    cameraRef.current = nextCamera;
+    cameraScrollBehaviorRef.current = behavior;
+    setZoom(nextCamera.scale);
+    if (cameraFrameRef.current !== null) return;
+    cameraFrameRef.current = requestAnimationFrame(() => {
+      cameraFrameRef.current = null;
+      const viewport = mapViewportRef.current;
+      if (!viewport) return;
+      const target = cameraRef.current;
+      viewport.scrollTo({
+        left: target.scrollLeft,
+        top: target.scrollTop,
+        behavior: motionSafeScrollBehavior(cameraScrollBehaviorRef.current),
       });
     });
   }
 
-  function resetMap() {
-    setZoom(1);
-    setQuery('');
-    setActiveIsland('all');
-    resetDateRange();
-    requestAnimationFrame(() => requestAnimationFrame(() => centerMap()));
+  function fitMapToViewport(behavior: ScrollBehavior = 'smooth') {
+    const viewport = mapViewportRef.current;
+    if (!viewport) return;
+    cameraInitializedRef.current = true;
+    cameraIsFitRef.current = true;
+    commitMapCamera(
+      fitMapCamera(
+        { width: viewport.clientWidth, height: viewport.clientHeight },
+        { width: mapWorldWidth, height: mapWorldHeight },
+      ),
+      behavior,
+    );
+  }
+
+  function zoomAtViewportPoint(
+    nextScale: number,
+    anchor: MapPoint,
+    behavior: ScrollBehavior = 'auto',
+  ) {
+    const viewport = mapViewportRef.current;
+    if (!viewport || !mapLayoutReady) return;
+    const pendingCamera = cameraFrameRef.current !== null;
+    const currentCamera = pendingCamera
+      ? cameraRef.current
+      : {
+          scale: cameraRef.current.scale,
+          scrollLeft: viewport.scrollLeft,
+          scrollTop: viewport.scrollTop,
+        };
+    const nextCamera = zoomMapAtAnchor({
+      viewport: {
+        width: viewport.clientWidth,
+        height: viewport.clientHeight,
+      },
+      world: { width: mapWorldWidth, height: mapWorldHeight },
+      current: currentCamera,
+      nextScale,
+      anchor,
+    });
+    if (Math.abs(nextCamera.scale - currentCamera.scale) < 1e-6) return;
+    cameraInitializedRef.current = true;
+    cameraIsFitRef.current = false;
+    commitMapCamera(nextCamera, behavior);
+  }
+
+  function changeZoom(direction: -1 | 1) {
+    const viewport = mapViewportRef.current;
+    if (!viewport) return;
+    const factor = direction > 0 ? 1.2 : 1 / 1.2;
+    zoomAtViewportPoint(cameraRef.current.scale * factor, {
+      x: viewport.clientWidth / 2,
+      y: viewport.clientHeight / 2,
+    });
+  }
+
+  function handleMapKeyDown(event: ReactKeyboardEvent<HTMLElement>) {
+    if (
+      viewMode !== 'map' ||
+      !mapLayoutReady ||
+      event.defaultPrevented ||
+      event.ctrlKey ||
+      event.metaKey ||
+      event.altKey
+    ) {
+      return;
+    }
+    if (event.key === '+' || event.key === '=') {
+      event.preventDefault();
+      changeZoom(1);
+    } else if (event.key === '-') {
+      event.preventDefault();
+      changeZoom(-1);
+    } else if (event.key === '0' || event.key.toLocaleLowerCase('en') === 'f') {
+      event.preventDefault();
+      fitMapToViewport();
+    } else if (
+      event.target === mapViewportRef.current &&
+      [
+        'ArrowUp',
+        'ArrowDown',
+        'ArrowLeft',
+        'ArrowRight',
+        'PageUp',
+        'PageDown',
+      ].includes(event.key)
+    ) {
+      cameraIsFitRef.current = false;
+    }
   }
 
   return (
@@ -1270,7 +1547,11 @@ export function LzLandscape() {
           </details>
         </aside>
 
-        <section className="map-panel" aria-label="Paper landscape">
+        <section
+          className="map-panel"
+          aria-label="Paper landscape"
+          onKeyDown={handleMapKeyDown}
+        >
           <div className="map-toolbar">
             <div>
               <span className="live-dot" />
@@ -1325,29 +1606,39 @@ export function LzLandscape() {
                       variant="outline"
                       size="icon-sm"
                       aria-label="Zoom out"
-                      disabled={!mapLayoutReady || zoom <= 0.86}
-                      onClick={() => changeZoom(-0.15)}
+                      aria-keyshortcuts="-"
+                      disabled={
+                        !mapLayoutReady || zoom <= DEFAULT_MAP_MIN_SCALE + 1e-3
+                      }
+                      onClick={() => changeZoom(-1)}
                     >
                       <Minus />
                     </Button>
-                    <span>{Math.round(zoom * 100)}%</span>
+                    <output aria-live="polite">
+                      {Math.round(zoom * 100)}%
+                    </output>
                     <Button
                       variant="outline"
                       size="icon-sm"
                       aria-label="Zoom in"
-                      disabled={!mapLayoutReady || zoom >= 1.44}
-                      onClick={() => changeZoom(0.15)}
+                      aria-keyshortcuts="+"
+                      disabled={
+                        !mapLayoutReady || zoom >= DEFAULT_MAP_MAX_SCALE - 1e-3
+                      }
+                      onClick={() => changeZoom(1)}
                     >
                       <Plus />
                     </Button>
                     <Button
                       variant="ghost"
                       size="icon-sm"
-                      aria-label="Reset map"
+                      aria-label="Fit the full map in view"
+                      aria-keyshortcuts="0 f"
+                      title="Fit map (0 or F)"
                       disabled={!mapLayoutReady}
-                      onClick={resetMap}
+                      onClick={() => fitMapToViewport()}
                     >
-                      <RotateCcw />
+                      <Maximize2 />
                     </Button>
                   </div>
                 </>
@@ -1362,7 +1653,7 @@ export function LzLandscape() {
               tabIndex={mapLayoutReady ? 0 : -1}
               aria-label={
                 mapLayoutReady
-                  ? 'Scrollable paper map. Scroll or drag the background to explore.'
+                  ? 'Interactive paper map. Drag to move and scroll or pinch to zoom.'
                   : mapLayoutUnavailable
                     ? hierarchicalLayout.errorMessage
                       ? 'Paper map temporarily unavailable.'
@@ -1371,9 +1662,9 @@ export function LzLandscape() {
               }
               aria-describedby={mapLayoutReady ? 'map-pan-help' : undefined}
               aria-busy={!mapLayoutReady}
-              onPointerDown={(event) => {
+              aria-keyshortcuts="+ - 0 f"
+              onDoubleClick={(event) => {
                 if (!mapLayoutReady) return;
-                if (event.button !== 0 || event.pointerType === 'touch') return;
                 const target = event.target;
                 if (
                   target instanceof Element &&
@@ -1381,12 +1672,62 @@ export function LzLandscape() {
                 ) {
                   return;
                 }
+                const bounds = event.currentTarget.getBoundingClientRect();
+                zoomAtViewportPoint(
+                  cameraRef.current.scale * (event.shiftKey ? 1 / 1.35 : 1.35),
+                  {
+                    x: event.clientX - bounds.left,
+                    y: event.clientY - bounds.top,
+                  },
+                );
+              }}
+              onPointerDown={(event) => {
+                if (!mapLayoutReady) return;
+                if (event.button !== 0) return;
+                if (event.pointerType === 'touch') {
+                  if (touchPointersRef.current.size === 0) {
+                    resetMapActivationSuppression();
+                  }
+                  const point = pointerViewportPoint(
+                    event.currentTarget,
+                    event.clientX,
+                    event.clientY,
+                  );
+                  touchPointersRef.current.set(event.pointerId, point);
+                  setTooltipPlacement(null);
+                  if (touchPointersRef.current.size >= 2) {
+                    beginPinchGesture(event.currentTarget);
+                  } else {
+                    const currentCamera = readMapCamera(event.currentTarget);
+                    cameraRef.current = currentCamera;
+                    panGestureRef.current = {
+                      pointerId: event.pointerId,
+                      startX: point.x,
+                      startY: point.y,
+                      scrollLeft: currentCamera.scrollLeft,
+                      scrollTop: currentCamera.scrollTop,
+                      active: false,
+                    };
+                    setIsPanning(true);
+                  }
+                  return;
+                }
+                resetMapActivationSuppression();
+                const target = event.target;
+                if (
+                  target instanceof Element &&
+                  target.closest('.paper-node, .island-label')
+                ) {
+                  return;
+                }
+                cameraIsFitRef.current = false;
                 panGestureRef.current = {
                   pointerId: event.pointerId,
                   startX: event.clientX,
                   startY: event.clientY,
                   scrollLeft: event.currentTarget.scrollLeft,
                   scrollTop: event.currentTarget.scrollTop,
+                  active: true,
                 };
                 setTooltipPlacement(null);
                 event.currentTarget.setPointerCapture(event.pointerId);
@@ -1394,6 +1735,14 @@ export function LzLandscape() {
               }}
               onScroll={() => {
                 if (!mapLayoutReady) return;
+                const viewport = mapViewportRef.current;
+                if (viewport && cameraFrameRef.current === null) {
+                  cameraRef.current = {
+                    scale: cameraRef.current.scale,
+                    scrollLeft: viewport.scrollLeft,
+                    scrollTop: viewport.scrollTop,
+                  };
+                }
                 if (!tooltipPlacement) return;
                 const node = mapCanvasRef.current?.querySelector<HTMLElement>(
                   `[data-paper-node="${tooltipPlacement.paperId}"]`,
@@ -1402,16 +1751,104 @@ export function LzLandscape() {
               }}
               onPointerMove={(event) => {
                 if (!mapLayoutReady) return;
+                if (event.pointerType === 'touch') {
+                  if (!touchPointersRef.current.has(event.pointerId)) return;
+                  const point = pointerViewportPoint(
+                    event.currentTarget,
+                    event.clientX,
+                    event.clientY,
+                  );
+                  touchPointersRef.current.set(event.pointerId, point);
+                  const pinch = pinchGestureRef.current;
+                  if (pinch) {
+                    const first = touchPointersRef.current.get(
+                      pinch.pointerIds[0],
+                    );
+                    const second = touchPointersRef.current.get(
+                      pinch.pointerIds[1],
+                    );
+                    if (!first || !second) {
+                      beginPinchGesture(event.currentTarget);
+                      return;
+                    }
+                    event.preventDefault();
+                    brieflySuppressMapActivation();
+                    const nextMidpoint = midpoint(first, second);
+                    const nextDistance = Math.max(
+                      1,
+                      pointDistance(first, second),
+                    );
+                    const nextCamera = transformMapBetweenAnchors({
+                      viewport: {
+                        width: event.currentTarget.clientWidth,
+                        height: event.currentTarget.clientHeight,
+                      },
+                      world: {
+                        width: mapWorldWidth,
+                        height: mapWorldHeight,
+                      },
+                      current: pinch.startCamera,
+                      nextScale:
+                        pinch.startCamera.scale *
+                        (nextDistance / pinch.startDistance),
+                      currentAnchor: pinch.startMidpoint,
+                      nextAnchor: nextMidpoint,
+                    });
+                    cameraInitializedRef.current = true;
+                    commitMapCamera(nextCamera);
+                    return;
+                  }
+                }
                 const gesture = panGestureRef.current;
                 if (!gesture || gesture.pointerId !== event.pointerId) return;
+                const currentPoint =
+                  event.pointerType === 'touch'
+                    ? (touchPointersRef.current.get(event.pointerId) ?? {
+                        x: event.clientX,
+                        y: event.clientY,
+                      })
+                    : { x: event.clientX, y: event.clientY };
+                const deltaX = currentPoint.x - gesture.startX;
+                const deltaY = currentPoint.y - gesture.startY;
+                if (event.pointerType === 'touch' && !gesture.active) {
+                  if (Math.hypot(deltaX, deltaY) <= 5) return;
+                  gesture.active = true;
+                  cameraInitializedRef.current = true;
+                  cameraIsFitRef.current = false;
+                  brieflySuppressMapActivation();
+                  if (!event.currentTarget.hasPointerCapture(event.pointerId)) {
+                    event.currentTarget.setPointerCapture(event.pointerId);
+                  }
+                }
+                if (event.pointerType === 'touch') {
+                  brieflySuppressMapActivation();
+                }
                 event.preventDefault();
-                event.currentTarget.scrollLeft =
-                  gesture.scrollLeft - (event.clientX - gesture.startX);
-                event.currentTarget.scrollTop =
-                  gesture.scrollTop - (event.clientY - gesture.startY);
+                event.currentTarget.scrollLeft = gesture.scrollLeft - deltaX;
+                event.currentTarget.scrollTop = gesture.scrollTop - deltaY;
+                cameraRef.current = {
+                  scale: cameraRef.current.scale,
+                  scrollLeft: event.currentTarget.scrollLeft,
+                  scrollTop: event.currentTarget.scrollTop,
+                };
               }}
-              onPointerUp={(event) => finishPan(event.pointerId)}
-              onPointerCancel={(event) => finishPan(event.pointerId)}
+              onPointerUp={(event) =>
+                finishMapPointer(event.pointerId, event.pointerType === 'touch')
+              }
+              onPointerCancel={(event) =>
+                finishMapPointer(event.pointerId, event.pointerType === 'touch')
+              }
+              onLostPointerCapture={(event) => {
+                const trackedTouch =
+                  event.pointerType === 'touch' &&
+                  touchPointersRef.current.has(event.pointerId);
+                const trackedPan =
+                  event.pointerType !== 'touch' &&
+                  panGestureRef.current?.pointerId === event.pointerId;
+                if (trackedTouch || trackedPan) {
+                  finishMapPointer(event.pointerId, trackedTouch);
+                }
+              }}
             >
               <div
                 className="map-stage"
@@ -1597,6 +2034,13 @@ export function LzLandscape() {
                           } as React.CSSProperties
                         }
                         onClick={(event) => {
+                          if (
+                            suppressMapActivationRef.current &&
+                            event.detail !== 0
+                          ) {
+                            event.preventDefault();
+                            return;
+                          }
                           if (!isUnmodifiedPrimaryClick(event)) return;
                           event.preventDefault();
                           selectPaper(paper.id);
@@ -1731,7 +2175,7 @@ export function LzLandscape() {
             <span id="map-pan-help">
               {viewMode === 'map'
                 ? mapLayoutReady
-                  ? 'Scroll or drag to explore · citation lineage is in the paper details.'
+                  ? 'Drag to move · scroll or pinch to zoom · 0 or F fits the map.'
                   : mapLayoutUnavailable
                     ? 'Use the list view to browse matching papers.'
                     : 'Preparing the map…'
