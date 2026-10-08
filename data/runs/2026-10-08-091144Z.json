@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "runId": "59af8238-0ba1-46e8-be28-8fb800d8822f",
+  "runAt": "2026-10-08T09:11:44Z",
+  "scanWindow": {
+    "previousSuccessfulScan": "2026-10-07T09:05:48Z",
+    "overlapStart": "2026-10-05",
+    "coverageEnd": "2026-10-08",
+    "coverageComplete": true,
+    "note": "All listing, search, rotating-author, citation-discovery, exact-version screening, and reference lanes completed before cursor promotion."
+  },
+  "discovery": {
+    "inspireDisplayedResults": 130,
+    "inspireNewIds": ["2610.09516", "2610.09753", "2610.10219"],
+    "listingPages": 10,
+    "targetedSearches": 11,
+    "rotatingAuthorCatchups": 8,
+    "logicalRequests": 46,
+    "networkRequests": 46,
+    "notModifiedHits": 11,
+    "retries": 0,
+    "candidateCount": 6
+  },
+  "added": [
+    {
+      "id": "2610.09516",
+      "version": 1,
+      "title": "Exothermic nuclear recoils from thermal quasi-pNGB dark matter",
+      "reason": "Directly models the LZ high-energy recoil as exothermic down-scattering of a thermally produced quasi-pNGB excited state.",
+      "url": "https://arxiv.org/abs/2610.09516v1"
+    },
+    {
+      "id": "2610.09753",
+      "version": 1,
+      "title": "Can Nuclear Recoils and Solar Neutrinos Resolve the Composition of Singlino-Higgsino Dark Matter?",
+      "reason": "Directly uses the LZ high-energy candidate and solar-neutrino signals to distinguish singlino-Higgsino dark-matter compositions.",
+      "url": "https://arxiv.org/abs/2610.09753v1"
+    }
+  ],
+  "revised": [
+    {
+      "id": "2609.01504",
+      "fromVersion": 2,
+      "toVersion": 3,
+      "assessment": "The revision remains directly relevant and preserves the established title, authors, role, placement, islands, tags, summary, takeaway, coordinates, layout rank, and mapped citations; only exact version metadata changed.",
+      "url": "https://arxiv.org/abs/2609.01504v3"
+    },
+    {
+      "id": "2609.10636",
+      "fromVersion": 2,
+      "toVersion": 3,
+      "assessment": "The revision remains directly relevant and preserves the established authors, role, placement, islands, tags, summary, takeaway, coordinates, and layout rank; the official title, exact version metadata, and verified citations were refreshed.",
+      "url": "https://arxiv.org/abs/2609.10636v3"
+    }
+  ],
+  "ambiguous": [],
+  "excluded": [
+    {
+      "id": "2610.02311",
+      "version": 1,
+      "reason": "Line-intensity mapping constraints on generic dark-matter–baryon interactions do not interpret or diagnose the isolated LZ high-recoil candidate."
+    },
+    {
+      "id": "2610.10219",
+      "version": 1,
+      "reason": "The paper analyzes the separate LZ-2024 light-neutralino exclusion results rather than the isolated 248 keV 2026 recoil candidate."
+    }
+  ],
+  "citationReconciliation": {
+    "coverageComplete": true,
+    "edgeCount": 3580,
+    "missingSnapshotIds": [],
+    "staleSnapshotIds": [],
+    "evidence": [
+      {
+        "id": "2609.01504",
+        "version": 3,
+        "completeReferenceCount": 122,
+        "mappedCitationCount": 2,
+        "url": "https://arxiv.org/html/2609.01504v3"
+      },
+      {
+        "id": "2609.10636",
+        "version": 3,
+        "completeReferenceCount": 23,
+        "mappedCitationCount": 15,
+        "url": "https://arxiv.org/html/2609.10636v3"
+      },
+      {
+        "id": "2610.09516",
+        "version": 1,
+        "completeReferenceCount": 39,
+        "mappedCitationCount": 12,
+        "url": "https://arxiv.org/html/2610.09516v1"
+      },
+      {
+        "id": "2610.09753",
+        "version": 1,
+        "completeReferenceCount": 137,
+        "mappedCitationCount": 112,
+        "url": "https://arxiv.org/pdf/2610.09753v1",
+        "method": "Manual exact-version PDF snapshot covering the complete main and supplemental bibliographies because no arXiv HTML conversion was available."
+      }
+    ]
+  },
+  "changes": {
+    "addedPaperIds": ["2610.09516", "2610.09753"],
+    "revisedPaperIds": ["2609.01504", "2609.10636"],
+    "candidateLogIds": [],
+    "preserved": "All 122 established records retain their order, summaries, takeaways, roles, island memberships, tags, coordinates, and layout ranks. The accepted revisions change only exact arXiv metadata and verified citations, while additions use the next contiguous ranks, 122 and 123."
+  },
+  "validation": {
+    "catalogValidator": "passed: 124 papers and 9 islands",
+    "generatedArtifacts": "passed: catalog index and both map layouts are current",
+    "maintenanceTests": "passed: 95",
+    "catalogIndexTests": "passed: 4",
+    "layoutTests": "passed: 13",
+    "layoutArtifactTests": "passed: 5",
+    "typecheck": "passed",
+    "lint": "passed",
+    "productionBuild": "passed: 125 prerendered routes and sitemap for 124 papers"
+  },
+  "judgmentCalls": [
+    "The quasi-pNGB paper was placed only in the existing Exothermic DM island because its distinctive contribution is a thermally sustained excited population that down-scatters in xenon.",
+    "The singlino-Higgsino paper was classified as a constraint in Tests & tensions, with Higgsino and Endothermic DM memberships, because it uses solar-neutrino non-observation to discriminate recoil-degenerate compositions.",
+    "The two additions received semantic coordinates (86.2, 67.8) and (61.4, 88.6), respectively, and contiguous layout ranks 122 and 123; established coordinates and ranks remain unchanged.",
+    "ArXiv has no HTML conversion for 2610.09753v1, so its complete 137-ID reference snapshot was verified across the official exact-version PDF's main and supplemental bibliographies.",
+    "The pre-existing 2609.06640v2 human-review item remains unchanged; its public catalog record and citation edges stay pinned to v1 pending editorial review."
+  ]
+}
