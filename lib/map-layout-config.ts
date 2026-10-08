@@ -16,7 +16,7 @@ export type MapLayoutIsland = {
 };
 
 export const MAP_LAYOUT_SCHEMA_VERSION = 1;
-export const MAP_LAYOUT_SOLVER_VERSION = 3;
+export const MAP_LAYOUT_SOLVER_VERSION = 4;
 export const MAP_WORLD_WIDTH = 1160;
 export const MAP_WORLD_HEIGHT = 780;
 export const FOLLOW_UP_DIAMETER_PX = 16;

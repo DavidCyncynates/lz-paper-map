@@ -12,7 +12,22 @@ import {
 function fixtureCatalog() {
   return {
     schemaVersion: 1,
+    taxonomyRevision: '2026-10-08',
     updatedAt: '2026-09-30',
+    islands: [
+      {
+        id: 'inelastic',
+        label: 'Inelastic dark matter',
+        shortLabel: 'Inelastic DM',
+        kicker: 'state-changing recoil',
+      },
+      {
+        id: 'tests',
+        label: 'Independent tests',
+        shortLabel: 'Tests',
+        kicker: 'other targets',
+      },
+    ],
     papers: [
       {
         id: 'a',
@@ -22,6 +37,7 @@ function fixtureCatalog() {
         summary: 'A 248 ± 20 keV candidate.',
         takeaway: 'Tests a dark-photon model.',
         tags: ['dark matter'],
+        islands: ['inelastic', 'tests'],
         cites: ['b', 'b', 'a', 'outside'],
       },
       {
@@ -32,6 +48,7 @@ function fixtureCatalog() {
         summary: '',
         takeaway: '',
         tags: [],
+        islands: ['tests'],
         cites: [],
       },
       {
@@ -42,6 +59,7 @@ function fixtureCatalog() {
         summary: '',
         takeaway: '',
         tags: [],
+        islands: ['inelastic'],
         cites: ['b'],
       },
     ],
@@ -87,4 +105,27 @@ test('search normalization removes diacritics and punctuation consistently', () 
     normalizeSearchText('  Café — 248 ± 20 keV; Áxion\nRECOIL  '),
     'cafe 248 20 kev axion recoil',
   );
+});
+
+test('search text includes labels for every island membership', () => {
+  const index = buildCatalogIndex(fixtureCatalog());
+  assert.match(
+    index.papers.a.searchText,
+    /inelastic dark matter inelastic dm state changing recoil/,
+  );
+  assert.match(
+    index.papers.a.searchText,
+    /independent tests tests other targets/,
+  );
+});
+
+test('taxonomy revision mismatch invalidates a generated index', () => {
+  const catalog = fixtureCatalog();
+  const index = buildCatalogIndex(catalog);
+  const revisedCatalog = structuredClone(catalog);
+  revisedCatalog.taxonomyRevision = '2026-10-09';
+
+  const validation = validateCatalogIndex(revisedCatalog, index);
+  assert.equal(validation.ok, false);
+  assert.match(validation.errors.join(' '), /taxonomy revision/);
 });

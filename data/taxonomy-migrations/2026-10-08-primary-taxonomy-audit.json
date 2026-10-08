@@ -1,0 +1,322 @@
+{
+  "schemaVersion": 1,
+  "auditDate": "2026-10-08",
+  "status": "applied",
+  "source": {
+    "path": "data/landscape.json",
+    "schemaVersion": 2,
+    "updatedAt": "2026-10-08",
+    "lastSuccessfulScan": "2026-10-08T09:11:44Z",
+    "paperCount": 124
+  },
+  "policy": "docs/taxonomy.md",
+  "categoriesBefore": [
+    { "id": "observation", "label": "The observation", "count": 1 },
+    { "id": "absorption", "label": "DM absorption", "count": 4 },
+    { "id": "multimessenger", "label": "Adjacent signals", "count": 6 },
+    { "id": "neutrino", "label": "Neutrino initiated", "count": 3 },
+    {
+      "id": "higgsino",
+      "label": "Higgsino & electroweak DM",
+      "count": 28
+    },
+    { "id": "endothermic", "label": "Endothermic DM", "count": 30 },
+    { "id": "exothermic", "label": "Exothermic DM", "count": 12 },
+    { "id": "elastic", "label": "Elastic portals", "count": 15 },
+    { "id": "constraints", "label": "Tests & tensions", "count": 25 }
+  ],
+  "categoriesAfter": [
+    { "id": "observation", "label": "The observation", "count": 1 },
+    {
+      "id": "electroweak",
+      "label": "Electroweak inelastic DM",
+      "count": 37
+    },
+    {
+      "id": "endothermic",
+      "label": "Other endothermic DM",
+      "count": 33
+    },
+    { "id": "exothermic", "label": "Exothermic DM", "count": 10 },
+    {
+      "id": "elastic",
+      "label": "Elastic high-recoil DM",
+      "count": 9
+    },
+    {
+      "id": "boosted",
+      "label": "Boosted & nonstandard fluxes",
+      "count": 7
+    },
+    {
+      "id": "absorption",
+      "label": "Absorption & nucleon disappearance",
+      "count": 4
+    },
+    {
+      "id": "neutrino",
+      "label": "Neutrino-initiated recoils",
+      "count": 3
+    },
+    {
+      "id": "comparisons",
+      "label": "Comparisons & systematics",
+      "count": 20
+    }
+  ],
+  "categoryChanges": [
+    {
+      "kind": "retained",
+      "fromId": "observation",
+      "toId": "observation",
+      "fromLabel": "The observation",
+      "toLabel": "The observation"
+    },
+    {
+      "kind": "renamed",
+      "fromId": "higgsino",
+      "toId": "electroweak",
+      "fromLabel": "Higgsino & electroweak DM",
+      "toLabel": "Electroweak inelastic DM"
+    },
+    {
+      "kind": "renamed",
+      "fromId": "endothermic",
+      "toId": "endothermic",
+      "fromLabel": "Endothermic DM",
+      "toLabel": "Other endothermic DM"
+    },
+    {
+      "kind": "retained",
+      "fromId": "exothermic",
+      "toId": "exothermic",
+      "fromLabel": "Exothermic DM",
+      "toLabel": "Exothermic DM"
+    },
+    {
+      "kind": "renamed",
+      "fromId": "elastic",
+      "toId": "elastic",
+      "fromLabel": "Elastic portals",
+      "toLabel": "Elastic high-recoil DM"
+    },
+    {
+      "kind": "introduced",
+      "fromId": null,
+      "toId": "boosted",
+      "fromLabel": null,
+      "toLabel": "Boosted & nonstandard fluxes"
+    },
+    {
+      "kind": "renamed",
+      "fromId": "absorption",
+      "toId": "absorption",
+      "fromLabel": "DM absorption",
+      "toLabel": "Absorption & nucleon disappearance"
+    },
+    {
+      "kind": "renamed",
+      "fromId": "neutrino",
+      "toId": "neutrino",
+      "fromLabel": "Neutrino initiated",
+      "toLabel": "Neutrino-initiated recoils"
+    },
+    {
+      "kind": "renamed",
+      "fromId": "constraints",
+      "toId": "comparisons",
+      "fromLabel": "Tests & tensions",
+      "toLabel": "Comparisons & systematics"
+    },
+    {
+      "kind": "retired",
+      "fromId": "multimessenger",
+      "toId": null,
+      "fromLabel": "Adjacent signals",
+      "toLabel": null,
+      "reason": "Auxiliary signals are cross-cutting test channels rather than a common recoil mechanism."
+    }
+  ],
+  "reassignmentGroups": [
+    {
+      "fromPrimary": "higgsino",
+      "toPrimary": "electroweak",
+      "reason": "Rename the model-family island to cover all inelastic electroweak multiplets accurately.",
+      "count": 28,
+      "paperIds": [
+        "2609.01504",
+        "2609.01583",
+        "2609.01590",
+        "2609.01892",
+        "2609.02505",
+        "2609.02807",
+        "2609.04144",
+        "2609.04163",
+        "2609.06571",
+        "2609.07138",
+        "2609.07451",
+        "2609.07800",
+        "2609.07811",
+        "2609.09138",
+        "2609.09385",
+        "2609.11241",
+        "2609.13038",
+        "2609.18564",
+        "2609.22063",
+        "2609.23691",
+        "2609.28129",
+        "2609.28740",
+        "2609.28819",
+        "2609.33869",
+        "2610.00226",
+        "2610.01613",
+        "2610.03692",
+        "2610.05893"
+      ]
+    },
+    {
+      "fromPrimary": "constraints",
+      "toPrimary": "electroweak",
+      "reason": "These are mechanism-specific electroweak or Higgsino studies; a constraint does not erase the physics family.",
+      "count": 9,
+      "paperIds": [
+        "2609.02775",
+        "2609.04175",
+        "2609.07807",
+        "2609.08712",
+        "2609.19174",
+        "2609.26870",
+        "2609.28218",
+        "2609.38316",
+        "2610.09753"
+      ]
+    },
+    {
+      "fromPrimary": "constraints",
+      "toPrimary": "endothermic",
+      "reason": "These papers develop or test a specific non-electroweak endothermic realization.",
+      "count": 2,
+      "paperIds": ["2609.06750", "2609.10636"]
+    },
+    {
+      "fromPrimary": "constraints",
+      "toPrimary": "elastic",
+      "reason": "These papers constrain the elastic explanation specifically rather than comparing mechanisms.",
+      "count": 2,
+      "paperIds": ["2609.21823", "2610.06756"]
+    },
+    {
+      "fromPrimary": "constraints",
+      "toPrimary": "boosted",
+      "reason": "The paper tests Hawking-produced boosted dark matter; its negative conclusion does not change the physics category.",
+      "count": 1,
+      "paperIds": ["2609.29462"]
+    },
+    {
+      "fromPrimary": "constraints",
+      "toPrimary": "comparisons",
+      "reason": "Retain genuinely model-independent, comparative, response, inference, or systematic studies in the cross-cutting category.",
+      "count": 11,
+      "paperIds": [
+        "2609.05291",
+        "2609.06760",
+        "2609.11833",
+        "2609.15634",
+        "2609.15985",
+        "2609.16529",
+        "2609.21444",
+        "2609.26698",
+        "2609.35650",
+        "2609.35737",
+        "2609.36184"
+      ]
+    },
+    {
+      "fromPrimary": "multimessenger",
+      "toPrimary": "endothermic",
+      "reason": "The auxiliary signal is secondary; the xenon-recoil mechanism is endothermic up-scattering.",
+      "count": 3,
+      "paperIds": ["2609.06640", "2609.10453", "2609.33952"]
+    },
+    {
+      "fromPrimary": "multimessenger",
+      "toPrimary": "comparisons",
+      "reason": "These papers concern contextual implications or tests rather than a shared recoil mechanism.",
+      "count": 3,
+      "paperIds": ["2609.02994", "2609.10662", "2609.15413"]
+    },
+    {
+      "fromPrimary": "elastic",
+      "toPrimary": "boosted",
+      "reason": "A non-virial incident population, rather than elasticity itself, is the essential source of the high recoil.",
+      "count": 5,
+      "paperIds": [
+        "2609.06756",
+        "2609.06890",
+        "2609.07742",
+        "2609.11600",
+        "2609.24982"
+      ]
+    },
+    {
+      "fromPrimary": "elastic",
+      "toPrimary": "comparisons",
+      "reason": "The main result compares elastic or boosted explanations with inelastic alternatives.",
+      "count": 3,
+      "paperIds": ["2609.09230", "2609.14799", "2609.40234"]
+    },
+    {
+      "fromPrimary": "endothermic",
+      "toPrimary": "boosted",
+      "reason": "The decay-produced non-virial incident flux is essential to the recoil energy.",
+      "count": 1,
+      "paperIds": ["2609.37545"]
+    },
+    {
+      "fromPrimary": "endothermic",
+      "toPrimary": "comparisons",
+      "reason": "The central result is a systematic confrontation of the Higgsino interpretation rather than a proposed endothermic model.",
+      "count": 1,
+      "paperIds": ["2609.15321"]
+    },
+    {
+      "fromPrimary": "exothermic",
+      "toPrimary": "comparisons",
+      "reason": "The central result is discrimination between mechanisms rather than an exothermic model proposal.",
+      "count": 2,
+      "paperIds": ["2609.04673", "2609.15782"]
+    }
+  ],
+  "unchangedPrimaryGroups": [
+    { "primary": "observation", "count": 1 },
+    { "primary": "absorption", "count": 4 },
+    { "primary": "neutrino", "count": 3 },
+    { "primary": "endothermic", "count": 28 },
+    { "primary": "exothermic", "count": 10 },
+    { "primary": "elastic", "count": 7 }
+  ],
+  "assertions": {
+    "baselinePaperCount": 124,
+    "targetPaperCount": 124,
+    "reassignmentGroupCount": 13,
+    "reassignedPaperCount": 71,
+    "unchangedPrimaryPaperCount": 53,
+    "paperIdsAreUniqueAcrossReassignmentGroups": true,
+    "targetCategoryCountsSumToPaperCount": true
+  },
+  "reviewFlags": [
+    {
+      "paperId": "2609.02994",
+      "issue": "Marginal direct relevance: discusses the LZ candidate but does not provide a comparable recoil fit."
+    },
+    {
+      "paperId": "2609.15413",
+      "issue": "Marginal direct relevance: connects an LZ-motivated scale to gamma rays and colliders without a quantitative recoil model."
+    }
+  ],
+  "notes": [
+    "This file is the one-time audit record; scripts/migrations/2026-10-08-taxonomy.mjs applies the recorded reassignment to data/landscape.json.",
+    "The multimessenger category is retired; gamma rays, colliders, delayed photons, paleo-detectors, and similar observables remain secondary test-channel metadata, currently recorded as tags.",
+    "Apply exceptions in reassignmentGroups before treating a renamed category as a default key migration."
+  ]
+}

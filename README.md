@@ -120,6 +120,13 @@ does nothing. If an earlier maintenance pull request is still open, the next run
 pauses instead of competing with it. The first few runs should be reviewed
 closely before considering any more permissive publication policy.
 
+The category system is human-owned. Every daily run must read
+[`docs/taxonomy.md`](docs/taxonomy.md) before screening candidates and use only
+the fixed categories and decision rules defined there. It may classify a new
+paper within that taxonomy, but it must never create, rename, split, merge, or
+delete a category. Ambiguous assignments are queued for human review rather
+than resolved by changing the map's vocabulary.
+
 The local task needs unattended access to public arXiv pages and to this GitHub
 repository. Before the first run, verify those permissions and an authenticated
 GitHub CLI session, then test one run manually. Without them, research or pull
@@ -128,10 +135,11 @@ request creation will stop safely and require attention.
 ## Editing the atlas
 
 The public catalog is [data/landscape.json](data/landscape.json). Island IDs are
-stable editorial concepts. To make a manual correction, edit the record, run
-the validation command, and commit the change. Every record must pin the exact
-positive `arxivVersion` used for its metadata and reference snapshot. Add new
-records at the end with the next unused `layoutRank`; never change an
+stable editorial concepts governed by
+[`docs/taxonomy.md`](docs/taxonomy.md). To make a manual correction, edit the
+record, run the validation command, and commit the change. Every record must pin
+the exact positive `arxivVersion` used for its metadata and reference snapshot.
+Add new records at the end with the next unused `layoutRank`; never change an
 established record's rank. The legacy update script remains available as a
 validator, but its network/API update mode is disabled; the scheduled task runs
 it only with `--validate-only`.

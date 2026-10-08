@@ -5,6 +5,14 @@ The public `data/landscape.json` file remains the website's source of truth;
 the SQLite ledger is a rebuildable private cache that prevents every daily run
 from repeating the full literature scan.
 
+This package manages evidence and run state; it is not an editorial authority.
+Before screening or annotating a candidate, a maintainer must read
+[`docs/maintenance-runbook.md`](../../docs/maintenance-runbook.md) and
+[`docs/taxonomy.md`](../../docs/taxonomy.md). Only the fixed categories in the
+taxonomy may be assigned. The maintenance task must never create, rename,
+split, merge, or delete a category automatically; an unresolved assignment is
+a human-review item.
+
 The implementation uses only the Python standard library. Run it from the
 repository root with:
 

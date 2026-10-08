@@ -265,7 +265,7 @@ function filterPapers(
 ) {
   const normalized = normalizeSearchText(query);
   return landscape.papers.filter((paper) => {
-    const inIsland = islandId === 'all' || paper.islands.includes(islandId);
+    const inIsland = islandId === 'all' || paper.primaryIsland === islandId;
     return (
       inIsland &&
       paperInDateRange(paper, dateRange) &&
@@ -1490,8 +1490,8 @@ export function LzLandscape() {
               <small>{landscape.papers.length}</small>
             </button>
             {landscape.islands.map((island) => {
-              const count = landscape.papers.filter((paper) =>
-                paper.islands.includes(island.id),
+              const count = landscape.papers.filter(
+                (paper) => paper.primaryIsland === island.id,
               ).length;
               return (
                 <button
@@ -1515,8 +1515,8 @@ export function LzLandscape() {
             <p className="nav-label">How to read the map</p>
             <p>
               Nearby dots share mechanisms, particles, or phenomenology. Each
-              sits in one primary island; secondary memberships remain in search
-              and filters.
+              sits in one primary island; roles and test channels remain
+              searchable as tags.
             </p>
             <div>
               <span className="key-node key-node--source" />

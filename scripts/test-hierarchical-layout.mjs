@@ -584,6 +584,16 @@ test('append-only additions preserve the established mental map, including backf
     assert.equal(after.diagnostics.converged, true);
     assert.equal(after.papers.size, before.papers.size + 1);
     assert.ok(after.papers.has(newPaper.id));
+    const beforeEndothermicRadius = before.islands.get('endothermic')?.radius;
+    const afterEndothermicRadius = after.islands.get('endothermic')?.radius;
+    assert.ok(
+      beforeEndothermicRadius !== undefined &&
+        afterEndothermicRadius !== undefined,
+    );
+    assert.ok(
+      afterEndothermicRadius - beforeEndothermicRadius <= 8,
+      `A routine append grew the endothermic boundary discontinuously: ${beforeEndothermicRadius} -> ${afterEndothermicRadius}`,
+    );
     for (const paper of papers) {
       const beforePoint = before.papers.get(paper.id);
       const afterPoint = after.papers.get(paper.id);

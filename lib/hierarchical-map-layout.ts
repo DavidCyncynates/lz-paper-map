@@ -108,7 +108,6 @@ const LAYOUT_EPSILON = 1e-6;
 const LAYOUT_TOLERANCE = 1e-3;
 const INNER_CLEANUP_TARGET = 5e-4;
 const OUTER_CLEANUP_TARGET = 5e-4;
-const CONTENT_RADIUS_RESERVE_STEP = 16;
 const CANVAS_EXPANSION_STEP = 8;
 const MEC_EPSILON = 1e-10;
 
@@ -963,13 +962,12 @@ function relaxIslandContents(
   label.y -= enclosure.y;
   label.semanticX -= enclosure.x;
   label.semanticY -= enclosure.y;
-  // Small additions should normally consume reserved room instead of making
-  // every other island re-pack. The hidden observation keeps its exact size;
-  // visible islands reserve at most one small bucket of radial headroom.
-  const contentRadius = island.observation
-    ? enclosure.radius
-    : Math.ceil(enclosure.radius / CONTENT_RADIUS_RESERVE_STEP) *
-      CONTENT_RADIUS_RESERVE_STEP;
+  // Preserve the exact enclosure radius. Quantized reserve buckets create a
+  // discontinuity at each bucket boundary: one routine append can otherwise
+  // make an island jump by a full bucket and unnecessarily re-pack the whole
+  // atlas. Exact radii grow continuously with their contents, while the
+  // separate visual padding still leaves breathing room around every island.
+  const contentRadius = enclosure.radius;
 
   return {
     id: island.id,
