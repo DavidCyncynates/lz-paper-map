@@ -1,0 +1,172 @@
+{
+  "schemaVersion": 1,
+  "runId": "eb2097a3-11f1-4017-af29-cccd9f4fa45e",
+  "runAt": "2026-10-09T09:28:22Z",
+  "scanWindow": {
+    "previousSuccessfulScan": "2026-10-08T09:11:44Z",
+    "overlapStart": "2026-10-06",
+    "coverageEnd": "2026-10-09",
+    "coverageComplete": true,
+    "note": "All listing, search, rotating-author, citation-discovery, exact-version screening, and reference lanes completed before cursor promotion."
+  },
+  "discovery": {
+    "inspireDisplayedResults": 131,
+    "inspireNewIds": ["2610.12443"],
+    "listingPages": 10,
+    "targetedSearches": 11,
+    "rotatingAuthorCatchups": 8,
+    "logicalRequests": 61,
+    "networkRequests": 61,
+    "notModifiedHits": 15,
+    "retries": 0,
+    "candidateCount": 18
+  },
+  "added": [
+    {
+      "id": "2610.12443",
+      "version": 1,
+      "title": "A scalar-extended ${\\rm U(1)_{L_{\\mu}-L_{\\tau}}}$ explanation of the LUX-ZEPLIN 248 keV excess",
+      "reason": "Directly models the LZ 248 keV candidate as endothermic up-scattering of scalar dark matter with a U(1) L_mu-L_tau-generated mass splitting.",
+      "url": "https://arxiv.org/abs/2610.12443v1"
+    }
+  ],
+  "revised": [
+    {
+      "id": "2609.33869",
+      "fromVersion": 1,
+      "toVersion": 2,
+      "assessment": "The revision remains directly relevant and preserves the established title, authors, role, placement, islands, tags, summary, takeaway, coordinates, and layout rank; exact version metadata and the complete verified citation snapshot were refreshed after arXiv reported references and comments added.",
+      "url": "https://arxiv.org/abs/2609.33869v2"
+    }
+  ],
+  "ambiguous": [],
+  "excluded": [
+    {
+      "id": "2506.19589",
+      "version": 2,
+      "reason": "Studies cosmological black-hole mass growth and dark energy, not the isolated LZ 248 keV recoil candidate."
+    },
+    {
+      "id": "2509.07808",
+      "version": 3,
+      "reason": "Reconstructs a strong-lensing subhalo density profile and does not interpret or diagnose the LZ recoil candidate."
+    },
+    {
+      "id": "2509.07964",
+      "version": 2,
+      "reason": "Calibrates DES Y6 lens-galaxy redshift distributions and is unrelated to the LZ recoil candidate."
+    },
+    {
+      "id": "2601.15175",
+      "version": 2,
+      "reason": "Reports DES Y6 galaxy-galaxy lensing measurements and is unrelated to the LZ recoil candidate."
+    },
+    {
+      "id": "2603.00247",
+      "version": 3,
+      "reason": "Proposes an accelerator dark-photon search without interpreting or constraining the LZ recoil candidate."
+    },
+    {
+      "id": "2603.22252",
+      "version": 2,
+      "reason": "Develops text-to-speech style transfer and is unrelated to the LZ recoil candidate."
+    },
+    {
+      "id": "2606.10018",
+      "version": 2,
+      "reason": "Measures an LHCb semileptonic branching-fraction ratio and is unrelated to the LZ recoil candidate."
+    },
+    {
+      "id": "2609.39962",
+      "version": 1,
+      "reason": "Reviews quantum algorithms for computational fluid dynamics and is unrelated to the LZ recoil candidate."
+    },
+    {
+      "id": "2609.40156",
+      "version": 1,
+      "reason": "Studies entropy-regularized optimal transport for partial identification and is unrelated to the LZ recoil candidate."
+    },
+    {
+      "id": "2610.02344",
+      "version": 1,
+      "reason": "Analyzes machine-learning representation collapse and is unrelated to the LZ recoil candidate."
+    },
+    {
+      "id": "2610.02345",
+      "version": 1,
+      "reason": "Studies neural anomaly-detector convergence and is unrelated to the LZ recoil candidate."
+    },
+    {
+      "id": "2610.03447",
+      "version": 1,
+      "reason": "Develops DES posterior-predictive consistency checks and is unrelated to the LZ recoil candidate."
+    },
+    {
+      "id": "2610.06917",
+      "version": 1,
+      "reason": "Optimizes disaggregated LLM serving and is unrelated to the LZ recoil candidate."
+    },
+    {
+      "id": "2610.07085",
+      "version": 1,
+      "reason": "Studies primordial black holes and induced gravitational waves, not the isolated LZ recoil candidate."
+    },
+    {
+      "id": "2610.09023",
+      "version": 1,
+      "reason": "Evaluates software performance change-point detection and is unrelated to the LZ recoil candidate."
+    },
+    {
+      "id": "2610.09777",
+      "version": 1,
+      "reason": "Develops robotic assembly geometry repair and is unrelated to the LZ recoil candidate."
+    }
+  ],
+  "citationReconciliation": {
+    "coverageComplete": true,
+    "edgeCount": 3636,
+    "missingSnapshotIds": [],
+    "staleSnapshotIds": [],
+    "evidence": [
+      {
+        "id": "2609.33869",
+        "version": 2,
+        "completeReferenceCount": 104,
+        "mappedCitationCount": 61,
+        "url": "https://arxiv.org/pdf/2609.33869v2",
+        "method": "Manual exact-version PDF snapshot covering the complete 108-entry bibliography because no arXiv HTML conversion was available."
+      },
+      {
+        "id": "2610.12443",
+        "version": 1,
+        "completeReferenceCount": 95,
+        "mappedCitationCount": 38,
+        "url": "https://arxiv.org/html/2610.12443v1"
+      }
+    ]
+  },
+  "changes": {
+    "addedPaperIds": ["2610.12443"],
+    "revisedPaperIds": ["2609.33869"],
+    "candidateLogIds": [],
+    "preserved": "All 124 established records retain their order, summaries, takeaways, roles, island memberships, tags, coordinates, and layout ranks. The accepted revision changes only exact arXiv metadata and verified citations; the addition uses the next contiguous rank, 124."
+  },
+  "validation": {
+    "catalogValidator": "passed: 125 papers and 9 islands",
+    "generatedArtifacts": "passed: catalog index and both map layouts are current",
+    "maintenanceTests": "passed: 103",
+    "catalogIndexTests": "passed: 6",
+    "layoutTests": "passed: 16",
+    "layoutArtifactTests": "passed: 5",
+    "mapCameraTests": "passed: 12",
+    "typecheck": "passed",
+    "lint": "passed",
+    "productionBuild": "passed: 126 prerendered routes and sitemap for 125 papers"
+  },
+  "judgmentCalls": [
+    "The new scalar U(1) paper was placed only in Other endothermic DM because the exact-version text explicitly identifies endothermic up-scattering, while the electroweak representation is not the source of the transition.",
+    "The addition received semantic coordinates (63.8, 54.2) and contiguous layout rank 124; all established coordinates and layout ranks remain unchanged.",
+    "ArXiv has no HTML conversion for 2609.33869v2, so its 108-entry bibliography was visually checked across pages 8-10 of the official exact-version PDF and recorded as a complete 104-ID snapshot.",
+    "The pre-existing 2609.06640v2 human-review item remains unchanged; its public catalog record and citation edges stay pinned to v1 pending editorial review."
+  ]
+}
