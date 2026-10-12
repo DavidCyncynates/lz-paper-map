@@ -2,8 +2,8 @@
   "schemaVersion": 2,
   "taxonomyRevision": "2026-10-08",
   "title": "LZ high-recoil literature landscape",
-  "updatedAt": "2026-10-09",
-  "lastSuccessfulScan": "2026-10-09T09:28:22Z",
+  "updatedAt": "2026-10-12",
+  "lastSuccessfulScan": "2026-10-12T08:59:18Z",
   "event": {
     "energyKev": 248,
     "statisticalUncertaintyKev": 23,
@@ -13,7 +13,7 @@
   },
   "citationData": {
     "source": "arXiv reference lists",
-    "checkedAt": "2026-10-09",
+    "checkedAt": "2026-10-12",
     "scope": "Citations between papers in this map",
     "note": "References to the official LZ preprint are normalized to arXiv:2609.02823."
   },
@@ -5643,6 +5643,40 @@
         "2609.15985", "2609.17196", "2609.18564", "2609.21011", "2609.21823",
         "2609.22063", "2609.26570", "2609.26870", "2609.28129", "2609.37561",
         "2610.00645", "2610.06756", "2610.09516"
+      ]
+    },
+    {
+      "id": "2610.13930",
+      "layoutRank": 125,
+      "arxivId": "2610.13930",
+      "arxivVersion": 1,
+      "title": "The LZ inelastic splitting as a probe of anomaly mediation",
+      "authors": ["Seung J. Lee", "Taewook Youn"],
+      "published": "2026-10-09",
+      "updated": "2026-10-09",
+      "url": "https://arxiv.org/abs/2610.13930",
+      "role": "explanation",
+      "primaryIsland": "electroweak",
+      "islands": ["electroweak"],
+      "tags": [
+        "pseudo-Dirac dark matter",
+        "MRSSM",
+        "anomaly mediation",
+        "wino coannihilation"
+      ],
+      "summary": "The authors realize mixing-suppressed pseudo-Dirac dark matter in the MRSSM, where an R-symmetric Dirac bino supplies the inelastic Z transition and wino coannihilation sets the relic abundance.",
+      "takeaway": "Connects the LZ-compatible splitting to anomaly mediation and warped stabilization while retaining tests through elastic scattering, solar neutrinos, and long-lived charged states.",
+      "x": 68.4,
+      "y": 38.0,
+      "cites": [
+        "2609.02775", "2609.02807", "2609.02823", "2609.06171", "2609.06760",
+        "2609.07138", "2609.07811", "2609.08993", "2609.09136", "2609.09138",
+        "2609.10453", "2609.10491", "2609.10636", "2609.15634", "2609.15742",
+        "2609.22739", "2609.23691", "2609.24988", "2609.25723", "2609.28129",
+        "2609.28218", "2609.28616", "2609.28740", "2609.28819", "2609.29462",
+        "2609.30255", "2609.32435", "2609.33869", "2609.33952", "2609.34230",
+        "2609.36184", "2609.40234", "2610.00226", "2610.01613", "2610.03692",
+        "2610.05893", "2610.09516"
       ]
     }
   ]

@@ -1,0 +1,91 @@
+{
+  "schemaVersion": 1,
+  "runId": "8eeace7b-35e7-4786-9ccc-c9af2075ddbb",
+  "runAt": "2026-10-12T08:59:18Z",
+  "scanWindow": {
+    "previousSuccessfulScan": "2026-10-09T09:28:22Z",
+    "overlapStart": "2026-10-07",
+    "coverageEnd": "2026-10-12",
+    "coverageComplete": true,
+    "note": "All listing, search, rotating-author, citation-discovery, exact-version screening, and reference lanes completed before cursor promotion."
+  },
+  "discovery": {
+    "inspireDisplayedResults": 133,
+    "inspireNewIds": ["2610.12889", "2610.13930"],
+    "listingPages": 10,
+    "targetedSearches": 11,
+    "rotatingAuthorCatchups": 8,
+    "logicalRequests": 45,
+    "networkRequests": 45,
+    "notModifiedHits": 13,
+    "retries": 0,
+    "candidateCount": 4
+  },
+  "added": [
+    {
+      "id": "2610.13930",
+      "version": 1,
+      "title": "The LZ inelastic splitting as a probe of anomaly mediation",
+      "reason": "Directly interprets the LZ 248 keV recoil through a mixing-suppressed inelastic electroweak Z transition and develops an MRSSM realization tied to anomaly mediation.",
+      "url": "https://arxiv.org/abs/2610.13930v1"
+    }
+  ],
+  "revised": [],
+  "ambiguous": [],
+  "excluded": [
+    {
+      "id": "2609.39158",
+      "version": 1,
+      "reason": "Studies heavy dark-baryon self-interactions across astrophysical scales and does not interpret or test the isolated LZ recoil candidate."
+    },
+    {
+      "id": "2609.39193",
+      "version": 1,
+      "reason": "Studies heavy dark-baryon self-interactions and contains no material analysis of the isolated LZ recoil candidate."
+    },
+    {
+      "id": "2610.12889",
+      "version": 1,
+      "reason": "Presents a generic recast of elastic limits for light inelastic-DM EFT operators without interpreting, constraining, or discriminating the isolated LZ recoil candidate."
+    }
+  ],
+  "citationReconciliation": {
+    "coverageComplete": true,
+    "edgeCount": 3673,
+    "missingSnapshotIds": [],
+    "staleSnapshotIds": [],
+    "evidence": [
+      {
+        "id": "2610.13930",
+        "version": 1,
+        "completeReferenceCount": 80,
+        "mappedCitationCount": 37,
+        "url": "https://arxiv.org/html/2610.13930v1"
+      }
+    ]
+  },
+  "changes": {
+    "addedPaperIds": ["2610.13930"],
+    "revisedPaperIds": [],
+    "candidateLogIds": [],
+    "preserved": "All 125 established records retain their order, exact versions, summaries, takeaways, roles, island memberships, tags, coordinates, and layout ranks. The addition uses the next contiguous rank, 125."
+  },
+  "validation": {
+    "catalogValidator": "passed: 126 papers and 9 islands",
+    "generatedArtifacts": "passed: catalog index and both map layouts are current",
+    "maintenanceTests": "passed: 103",
+    "catalogIndexTests": "passed: 6",
+    "layoutTests": "passed: 16",
+    "layoutArtifactTests": "passed: 5",
+    "mapCameraTests": "passed: 12",
+    "typecheck": "passed",
+    "lint": "passed",
+    "productionBuild": "passed: 127 prerendered routes and sitemap for 126 papers"
+  },
+  "judgmentCalls": [
+    "The new MRSSM paper was placed only in Electroweak inelastic DM because its central recoil mechanism is a pseudo-Dirac electroweak Z transition; anomaly mediation and warped stabilization generate the splitting but do not define a separate map category.",
+    "The addition received semantic coordinates (68.4, 38.0) near the authors' earlier mixing-suppressed model and contiguous layout rank 125; all established coordinates and layout ranks remain unchanged.",
+    "The generic EFT recast 2610.12889v1 cites the LZ record but was excluded because its title and abstract do not materially analyze the isolated 248 keV candidate.",
+    "The pre-existing 2609.06640v2 human-review item remains unchanged; its public catalog record and citation edges stay pinned to v1 pending editorial review."
+  ]
+}
