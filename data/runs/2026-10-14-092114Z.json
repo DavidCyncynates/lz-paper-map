@@ -1,0 +1,166 @@
+{
+  "schemaVersion": 1,
+  "runId": "0c66c07d-8a05-4599-a0da-91b71340f718",
+  "runAt": "2026-10-14T09:21:14Z",
+  "scanWindow": {
+    "previousSuccessfulScan": "2026-10-12T08:59:18Z",
+    "overlapStart": "2026-10-10",
+    "coverageEnd": "2026-10-14",
+    "coverageComplete": true,
+    "note": "All listing, search, rotating-author, citation-discovery, exact-version screening, and reference lanes completed before cursor promotion."
+  },
+  "discovery": {
+    "inspireDisplayedResults": 138,
+    "inspireNewIds": ["2610.18234", "2610.16156", "2610.15557"],
+    "listingPages": 10,
+    "targetedSearches": 11,
+    "rotatingAuthorCatchups": 8,
+    "logicalRequests": 118,
+    "networkRequests": 118,
+    "notModifiedHits": 14,
+    "retries": 0,
+    "candidateCount": 75
+  },
+  "added": [
+    {
+      "id": "2610.14178",
+      "version": 1,
+      "title": "Collider and direct detection as key probes of asymmetric dark matter: Signals from a compressed Inert Higgs doublet",
+      "reason": "Materially contextualizes the LZ high-energy recoil as an inelastic compressed inert-doublet signal and develops correlated collider and direct-detection tests.",
+      "url": "https://arxiv.org/abs/2610.14178v1"
+    },
+    {
+      "id": "2610.14188",
+      "version": 1,
+      "title": "A Comprehensive Interpretation of the LZ High-Energy Recoil Event: A Minimal $U(1)_B$ Dark Sector and Its Experimental Tests",
+      "reason": "Directly interprets the 248 keV candidate through endothermic up-scattering in a gauged-baryon-number model and quantifies complementary tests.",
+      "url": "https://arxiv.org/abs/2610.14188v1"
+    },
+    {
+      "id": "2610.15557",
+      "version": 1,
+      "title": "Modular $S_4$ Inverse Seesaw at the LZ High-Recoil Frontier",
+      "reason": "Directly models the candidate as endothermic scattering of a singlet pseudo-Dirac state in a modular inverse-seesaw construction.",
+      "url": "https://arxiv.org/abs/2610.15557v1"
+    },
+    {
+      "id": "2610.16156",
+      "version": 1,
+      "title": "Probing LZ-Motivated TeV Higgsino Dark Matter through Heavier Sparticles at LHC",
+      "reason": "Directly tests the LZ-motivated TeV Higgsino interpretation through present and projected LHC searches for heavier sparticles.",
+      "url": "https://arxiv.org/abs/2610.16156v1"
+    },
+    {
+      "id": "2610.18234",
+      "version": 1,
+      "title": "Signature of GW from the Hidden Sector in light of the Recent LZ Event",
+      "reason": "Directly explains the recoil with endothermic pseudo-Dirac dark matter and links the signal region to a hidden-sector gravitational-wave signature.",
+      "url": "https://arxiv.org/abs/2610.18234v1"
+    }
+  ],
+  "revised": [
+    {
+      "id": "2609.17935",
+      "fromVersion": 1,
+      "toVersion": 2,
+      "assessment": "The revision remains directly relevant and preserves the established title, authors, role, placement, islands, tags, summary, takeaway, coordinates, and layout rank; exact version metadata and the complete verified citation snapshot were refreshed.",
+      "url": "https://arxiv.org/abs/2609.17935v2"
+    }
+  ],
+  "ambiguous": [],
+  "excluded": {
+    "count": 69,
+    "ids": [
+      "2412.15420", "2505.08854", "2511.14208", "2601.01503", "2601.03822",
+      "2603.01777", "2603.12477", "2603.26164", "2604.21624", "2605.07872",
+      "2605.09635", "2606.05405", "2606.11593", "2606.11936", "2608.03600",
+      "2608.22533", "2609.24840", "2609.27449", "2609.27600", "2609.28294",
+      "2609.36246", "2609.37686", "2609.38269", "2609.39102", "2609.39349",
+      "2609.40195", "2610.02760", "2610.03560", "2610.03888", "2610.03948",
+      "2610.03959", "2610.04886", "2610.05261", "2610.05889", "2610.06110",
+      "2610.06129", "2610.06319", "2610.06342", "2610.06507", "2610.07054",
+      "2610.07557", "2610.08406", "2610.09055", "2610.09626", "2610.09751",
+      "2610.10479", "2610.10721", "2610.11387", "2610.11948", "2610.11952",
+      "2610.11981", "2610.12957", "2610.13097", "2610.13101", "2610.13533",
+      "2610.14067", "2610.14612", "2610.14629", "2610.14651", "2610.14702",
+      "2610.14705", "2610.15451", "2610.15833", "2610.15919", "2610.16346",
+      "2610.16908", "2610.17831", "2610.17967", "2610.18654"
+    ],
+    "reason": "Their exact-version titles and abstracts do not substantially interpret, constrain, diagnose, or contextualize the isolated LZ 248 keV recoil candidate."
+  },
+  "citationReconciliation": {
+    "coverageComplete": true,
+    "edgeCount": 3905,
+    "missingSnapshotIds": [],
+    "staleSnapshotIds": [],
+    "evidence": [
+      {
+        "id": "2609.17935",
+        "version": 2,
+        "completeReferenceCount": 73,
+        "mappedCitationCount": 54,
+        "url": "https://arxiv.org/html/2609.17935v2"
+      },
+      {
+        "id": "2610.14178",
+        "version": 1,
+        "completeReferenceCount": 99,
+        "mappedCitationCount": 16,
+        "url": "https://arxiv.org/html/2610.14178v1"
+      },
+      {
+        "id": "2610.14188",
+        "version": 1,
+        "completeReferenceCount": 85,
+        "mappedCitationCount": 35,
+        "url": "https://arxiv.org/html/2610.14188v1"
+      },
+      {
+        "id": "2610.15557",
+        "version": 1,
+        "completeReferenceCount": 52,
+        "mappedCitationCount": 35,
+        "url": "https://arxiv.org/html/2610.15557v1"
+      },
+      {
+        "id": "2610.16156",
+        "version": 1,
+        "completeReferenceCount": 104,
+        "mappedCitationCount": 73,
+        "url": "https://arxiv.org/html/2610.16156v1"
+      },
+      {
+        "id": "2610.18234",
+        "version": 1,
+        "completeReferenceCount": 112,
+        "mappedCitationCount": 60,
+        "url": "https://arxiv.org/html/2610.18234v1"
+      }
+    ]
+  },
+  "changes": {
+    "addedPaperIds": ["2610.14178", "2610.14188", "2610.15557", "2610.16156", "2610.18234"],
+    "revisedPaperIds": ["2609.17935"],
+    "candidateLogIds": [],
+    "preserved": "All 126 established records retain their order, summaries, takeaways, roles, island memberships, tags, coordinates, and layout ranks. The accepted revision changes only exact arXiv metadata and verified citations; the five additions use contiguous ranks 126 through 130."
+  },
+  "validation": {
+    "catalogValidator": "passed: 131 papers and 9 islands",
+    "generatedArtifacts": "passed: catalog index and both map layouts are current",
+    "maintenanceTests": "passed: 103",
+    "catalogIndexTests": "passed: 6",
+    "layoutTests": "passed: 16",
+    "layoutArtifactTests": "passed: 5",
+    "mapCameraTests": "passed: 12",
+    "typecheck": "passed",
+    "lint": "passed",
+    "productionBuild": "passed: 132 prerendered routes and sitemap for 131 papers"
+  },
+  "judgmentCalls": [
+    "2610.14178v1 was included as adjacent electroweak work because its central compressed inert-doublet analysis materially contextualizes the inelastic LZ interpretation, even though the paper studies a broader asymmetric-dark-matter model.",
+    "2610.14188v1, 2610.15557v1, and 2610.18234v1 were placed only in Other endothermic DM because each recoil comes from up-scattering of a non-electroweak singlet state; their gauge, flavor, and gravitational-wave settings remain secondary metadata.",
+    "2610.16156v1 was placed only in Electroweak inelastic DM as a collider constraint on the LZ-motivated TeV Higgsino scenario; the heavier sparticles are test channels rather than a new recoil category.",
+    "The additions received semantic coordinates near related mechanisms and contiguous layout ranks 126-130; all established coordinates and ranks remain unchanged.",
+    "The pre-existing 2609.06640v2 human-review item remains unchanged; its public catalog record and citation edges stay pinned to v1 pending editorial review."
+  ]
+}
