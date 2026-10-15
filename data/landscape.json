@@ -2,8 +2,8 @@
   "schemaVersion": 2,
   "taxonomyRevision": "2026-10-08",
   "title": "LZ high-recoil literature landscape",
-  "updatedAt": "2026-10-14",
-  "lastSuccessfulScan": "2026-10-14T09:21:14Z",
+  "updatedAt": "2026-10-15",
+  "lastSuccessfulScan": "2026-10-15T09:09:16Z",
   "event": {
     "energyKev": 248,
     "statisticalUncertaintyKev": 23,
@@ -13,7 +13,7 @@
   },
   "citationData": {
     "source": "arXiv reference lists",
-    "checkedAt": "2026-10-14",
+    "checkedAt": "2026-10-15",
     "scope": "Citations between papers in this map",
     "note": "References to the official LZ preprint are normalized to arXiv:2609.02823."
   },
@@ -675,11 +675,11 @@
       "id": "2609.04185",
       "layoutRank": 17,
       "arxivId": "2609.04185",
-      "arxivVersion": 1,
+      "arxivVersion": 2,
       "title": "Atmospheric neutrino up-scattering explanation of LZ 2026 excess",
       "authors": ["Sk Jeesun", "Anirban Majumdar"],
       "published": "2026-09-03",
-      "updated": "2026-09-03",
+      "updated": "2026-10-14",
       "role": "explanation",
       "primaryIsland": "neutrino",
       "islands": ["neutrino"],
@@ -695,11 +695,25 @@
       "x": 20,
       "y": 81,
       "cites": [
+        "2609.01475",
         "2609.01592",
+        "2609.01892",
         "2609.02608",
         "2609.02807",
         "2609.02823",
-        "2609.02868"
+        "2609.02868",
+        "2609.04163",
+        "2609.04181",
+        "2609.04186",
+        "2609.04673",
+        "2609.05204",
+        "2609.08712",
+        "2609.10504",
+        "2609.10827",
+        "2609.30255",
+        "2609.32435",
+        "2609.36814",
+        "2610.12443"
       ]
     },
     {
@@ -5873,6 +5887,38 @@
         "2609.15985", "2609.17196", "2609.17412", "2609.18564", "2609.21823",
         "2609.22063", "2609.24982", "2609.28129", "2609.28415", "2609.33869",
         "2609.35737", "2609.36814", "2609.37545", "2609.37561", "2610.12443"
+      ]
+    },
+    {
+      "id": "2610.18974",
+      "layoutRank": 131,
+      "arxivId": "2610.18974",
+      "arxivVersion": 1,
+      "title": "Exothermic dark-photon dark matter and the LZ high-recoil event: finite-reheating constraints",
+      "authors": ["Kuldeep Deka"],
+      "published": "2026-10-13",
+      "updated": "2026-10-13",
+      "url": "https://arxiv.org/abs/2610.18974",
+      "role": "explanation",
+      "primaryIsland": "exothermic",
+      "islands": ["exothermic"],
+      "tags": [
+        "dark photon",
+        "pseudo-Dirac dark matter",
+        "exothermic scattering",
+        "freeze-in",
+        "non-instantaneous reheating"
+      ],
+      "summary": "The author studies a freeze-in pseudo-Dirac dark sector in which a surviving excited state down-scatters through a dark photon to produce the LZ high-energy recoil, with the abundance calculated across finite-reheating histories.",
+      "takeaway": "Connects the exothermic recoil benchmark to pre-radiation production and dilution, finding viable matter-like and quartic reheating cases while the tested adiabatic-kination history fails the adopted BBN cutoff.",
+      "x": 84.8,
+      "y": 70.2,
+      "cites": [
+        "2609.01583", "2609.01590", "2609.02823", "2609.04175", "2609.04673",
+        "2609.05204", "2609.06153", "2609.09015", "2609.09385", "2609.13130",
+        "2609.15118", "2609.15634", "2609.15714", "2609.15782", "2609.15985",
+        "2609.17412", "2609.17935", "2609.21444", "2609.26570", "2609.28415",
+        "2609.33869", "2609.34230", "2609.35650", "2610.01613"
       ]
     }
   ]
