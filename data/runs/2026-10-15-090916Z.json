@@ -1,0 +1,101 @@
+{
+  "schemaVersion": 1,
+  "runId": "2846ffec-f94e-4543-be6f-7d862901ffc1",
+  "runAt": "2026-10-15T09:09:16Z",
+  "scanWindow": {
+    "previousSuccessfulScan": "2026-10-14T09:21:14Z",
+    "overlapStart": "2026-10-12",
+    "coverageEnd": "2026-10-15",
+    "coverageComplete": true,
+    "note": "All listing, search, rotating-author, citation-discovery, exact-version screening, and reference lanes completed before cursor promotion."
+  },
+  "discovery": {
+    "inspireDisplayedResults": 138,
+    "inspireNewIds": [],
+    "listingPages": 10,
+    "targetedSearches": 11,
+    "rotatingAuthorCatchups": 8,
+    "logicalRequests": 53,
+    "networkRequests": 53,
+    "notModifiedHits": 21,
+    "retries": 0,
+    "candidateCount": 4
+  },
+  "added": [
+    {
+      "id": "2610.18974",
+      "version": 1,
+      "title": "Exothermic dark-photon dark matter and the LZ high-recoil event: finite-reheating constraints",
+      "reason": "Directly interprets the 248 keV candidate through exothermic down-scattering and derives the compatible freeze-in abundance across finite-reheating histories.",
+      "url": "https://arxiv.org/abs/2610.18974v1"
+    }
+  ],
+  "revised": [
+    {
+      "id": "2609.04185",
+      "fromVersion": 1,
+      "toVersion": 2,
+      "assessment": "The revision remains directly relevant and preserves the established title, authors, role, placement, island, tags, summary, takeaway, coordinates, and layout rank; exact version metadata and the complete verified citation snapshot were refreshed.",
+      "url": "https://arxiv.org/abs/2609.04185v2"
+    }
+  ],
+  "ambiguous": [],
+  "excluded": {
+    "count": 2,
+    "ids": [
+      "2610.18971",
+      "2610.19575"
+    ],
+    "reason": "Their exact-version titles and abstracts do not substantially interpret, constrain, diagnose, or contextualize the isolated LZ 248 keV recoil candidate."
+  },
+  "citationReconciliation": {
+    "coverageComplete": true,
+    "edgeCount": 3943,
+    "missingSnapshotIds": [],
+    "staleSnapshotIds": [],
+    "evidence": [
+      {
+        "id": "2609.04185",
+        "version": 2,
+        "completeReferenceCount": 51,
+        "mappedCitationCount": 19,
+        "url": "https://arxiv.org/html/2609.04185v2"
+      },
+      {
+        "id": "2610.18974",
+        "version": 1,
+        "completeReferenceCount": 54,
+        "mappedCitationCount": 24,
+        "url": "https://arxiv.org/html/2610.18974v1"
+      }
+    ]
+  },
+  "changes": {
+    "addedPaperIds": [
+      "2610.18974"
+    ],
+    "revisedPaperIds": [
+      "2609.04185"
+    ],
+    "candidateLogIds": [],
+    "preserved": "All 131 established records retain their order, summaries, takeaways, roles, island memberships, tags, coordinates, and layout ranks. The accepted revision changes only exact arXiv metadata and verified citations; the addition uses contiguous rank 131."
+  },
+  "validation": {
+    "catalogValidator": "passed: 132 papers and 9 islands",
+    "generatedArtifacts": "passed: catalog index and both map layouts are current",
+    "maintenanceTests": "passed: 103",
+    "catalogIndexTests": "passed: 6",
+    "layoutTests": "passed: 16",
+    "layoutArtifactTests": "passed: 5",
+    "mapCameraTests": "passed: 12",
+    "typecheck": "passed",
+    "lint": "passed",
+    "productionBuild": "passed: 133 prerendered routes and sitemap for 132 papers"
+  },
+  "judgmentCalls": [
+    "2610.18974v1 was placed only in Exothermic DM because the excited-state mass splitting supplies the recoil energy; its dark-photon portal, freeze-in production, and finite-reheating histories remain secondary metadata.",
+    "The addition received a semantic coordinate near related exothermic dark-photon and freeze-in work and the next contiguous layout rank 131; all established coordinates and ranks remain unchanged.",
+    "2609.04185v2 remains in Neutrino-initiated recoils with all human-reviewed editorial fields preserved; only its exact-version date, version, and verified mapped citations changed.",
+    "The pre-existing 2609.06640v2 human-review item remains unchanged; its public catalog record and citation edges stay pinned to v1 pending editorial review."
+  ]
+}
