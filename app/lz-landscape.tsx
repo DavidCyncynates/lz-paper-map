@@ -222,6 +222,22 @@ function roleLabel(role: Paper['role']) {
 const MAX_TOOLTIP_AUTHORS = 4;
 const MAX_TOOLTIP_AUTHOR_CHARACTERS = 80;
 const MAX_VISIBLE_CITATION_ROWS = 5;
+const DATE_RANGE_URL_SYNC_DELAY_MS = 400;
+
+let didWarnAboutHistoryReplace = false;
+
+function replaceBrowserLocation(nextLocation: string) {
+  try {
+    window.history.replaceState(null, '', nextLocation);
+    return true;
+  } catch (error) {
+    if (!didWarnAboutHistoryReplace) {
+      didWarnAboutHistoryReplace = true;
+      console.warn('The shareable page URL could not be updated.', error);
+    }
+    return false;
+  }
+}
 
 function isUnmodifiedPrimaryClick(event: ReactMouseEvent<HTMLAnchorElement>) {
   return (
@@ -469,21 +485,25 @@ export function LzLandscape() {
 
   useEffect(() => {
     if (!dateRangeHydrated) return;
-    const url = new URL(window.location.href);
-    const nextParams = applyDateRangeToSearchParams(
-      url.searchParams,
-      dateRange,
-      CATALOG_DATE_BOUNDS,
-    );
-    if (nextParams.has('paper')) {
-      nextParams.set('paper', selectedId);
-    }
-    const nextSearch = nextParams.toString();
-    const nextLocation = `${url.pathname}${nextSearch ? `?${nextSearch}` : ''}${url.hash}`;
-    const currentLocation = `${url.pathname}${url.search}${url.hash}`;
-    if (nextLocation !== currentLocation) {
-      window.history.replaceState(null, '', nextLocation);
-    }
+    const timeout = window.setTimeout(() => {
+      const url = new URL(window.location.href);
+      const nextParams = applyDateRangeToSearchParams(
+        url.searchParams,
+        dateRange,
+        CATALOG_DATE_BOUNDS,
+      );
+      if (nextParams.has('paper')) {
+        nextParams.set('paper', selectedId);
+      }
+      const nextSearch = nextParams.toString();
+      const nextLocation = `${url.pathname}${nextSearch ? `?${nextSearch}` : ''}${url.hash}`;
+      const currentLocation = `${url.pathname}${url.search}${url.hash}`;
+      if (nextLocation !== currentLocation) {
+        replaceBrowserLocation(nextLocation);
+      }
+    }, DATE_RANGE_URL_SYNC_DELAY_MS);
+
+    return () => window.clearTimeout(timeout);
   }, [dateRange, dateRangeHydrated, selectedId]);
 
   useEffect(() => {
@@ -624,11 +644,7 @@ export function LzLandscape() {
             setActiveIsland('all');
             const url = new URL(window.location.href);
             url.searchParams.set('paper', paper.id);
-            window.history.replaceState(
-              null,
-              '',
-              `${url.pathname}${url.search}${url.hash}`,
-            );
+            replaceBrowserLocation(`${url.pathname}${url.search}${url.hash}`);
             return {
               arxiv_id: paper.id,
               title: paper.title,
@@ -922,11 +938,7 @@ export function LzLandscape() {
     setSelectedId(id);
     const url = new URL(window.location.href);
     url.searchParams.set('paper', id);
-    window.history.replaceState(
-      null,
-      '',
-      `${url.pathname}${url.search}${url.hash}`,
-    );
+    replaceBrowserLocation(`${url.pathname}${url.search}${url.hash}`);
   }
 
   function chooseIsland(id: string) {
