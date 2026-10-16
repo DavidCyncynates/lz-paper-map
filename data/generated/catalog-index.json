@@ -1,9 +1,9 @@
 {
   "schemaVersion": 2,
   "taxonomyRevision": "2026-10-08",
-  "catalogDigest": "sha256:e74889813119400d57830c7e33226fd848a786b27123835c901581746d52a6c0",
-  "paperCount": 132,
-  "edgeCount": 3937,
+  "catalogDigest": "sha256:1dbd2d233432ee96dafd621c202f02cfb5bc70533af5218fd3cf1ede8904386b",
+  "paperCount": 133,
+  "edgeCount": 4006,
   "papers": {
     "2609.02823": {
       "citedBy": [
@@ -137,9 +137,10 @@
         "2610.15557",
         "2610.16156",
         "2610.18234",
-        "2610.18974"
+        "2610.18974",
+        "2610.21041"
       ],
-      "incomingCitationCount": 131,
+      "incomingCitationCount": 132,
       "searchText": "search for dark matter particle interactions in an extended nuclear recoil energy window with the lux zeplin lz experiment lz extends its nuclear recoil search to roughly 270 kev and reports one event consistent with a 248 23 stat 23 sys kev recoil the maximum local significance is 3 4σ and the global significance is 2 6σ the experimental anchor one unusual event interesting enough to investigate but well below the threshold for a discovery 2609 02823 lz collaboration experiment xenon nuclear recoil eft operators observation the observation lz result 248 kev candidate"
     },
     "2609.01475": {
@@ -233,9 +234,10 @@
         "2610.14188",
         "2610.15557",
         "2610.16156",
-        "2610.18234"
+        "2610.18234",
+        "2610.21041"
       ],
-      "incomingCitationCount": 90,
+      "incomingCitationCount": 91,
       "searchText": "inelastic dark matter signature at high recoil energy in lux zeplin and cresst heavy halo dark matter scatters into a more massive state a splitting near 350 kev suppresses lower energy events and the preferred region could be tested by a planned cresst upgrade a generic endothermic explanation that shifts the recoil toward lz s high energy window 2609 01475 liangliang su jin min yang wen na yang endothermic dm terrestrial upscattering cresst heavy dark matter endothermic other endothermic dm endothermic dm up scattering"
     },
     "2609.01504": {
@@ -333,9 +335,10 @@
         "2610.14178",
         "2610.14188",
         "2610.16156",
-        "2610.18234"
+        "2610.18234",
+        "2610.21041"
       ],
-      "incomingCitationCount": 94,
+      "incomingCitationCount": 95,
       "searchText": "higgsino above the sea of fog a thermal 1 1 tev higgsino with a several hundred kev neutral state splitting can reach the event though the rate depends strongly on the uncertain high speed tail of the galactic halo places the event in a minimal thermal higgsino setting and emphasizes its astrophysical sensitivity 2609 01504 jiji fan matthew reece thermal higgsino halo tail high scale susy gauginos electroweak electroweak inelastic dm electroweak dm split states weak currents"
     },
     "2609.01583": {
@@ -443,9 +446,10 @@
         "2610.14188",
         "2610.16156",
         "2610.18234",
-        "2610.18974"
+        "2610.18974",
+        "2610.21041"
       ],
-      "incomingCitationCount": 104,
+      "incomingCitationCount": 105,
       "searchText": "higgsino dark matter interpretation of the lux zeplin 248 kev nuclear recoil event a nearly pure roughly 1 tev higgsino up scatters through an off diagonal z coupling the mass and interaction rate are largely fixed leaving the neutral state splitting to place the recoil a predictive higgsino interpretation with less freedom than a generic inelastic model 2609 01583 katherine freese dionysios p theodosopoulos higgsino off diagonal z thermal relic 350 kev splitting electroweak electroweak inelastic dm electroweak dm split states weak currents"
     },
     "2609.01590": {
@@ -541,9 +545,10 @@
         "2610.09753",
         "2610.16156",
         "2610.18234",
-        "2610.18974"
+        "2610.18974",
+        "2610.21041"
       ],
-      "incomingCitationCount": 92,
+      "incomingCitationCount": 93,
       "searchText": "tev higgsino dark matter from lz nuclear recoil to fermi lat gamma rays a 1 1 tev inelastic higgsino is connected to a mild fermi lat galactic center preference and to future gamma ray tests with h e s s and ctao connects a higgsino fit of lz to independent indirect detection channels 2609 01590 lei wu yang zhang bin zhu higgsino fermi lat gamma rays h e s s ctao electroweak electroweak inelastic dm electroweak dm split states weak currents"
     },
     "2609.01592": {
@@ -714,9 +719,10 @@
         "2610.08648",
         "2610.09753",
         "2610.16156",
-        "2610.18234"
+        "2610.18234",
+        "2610.21041"
       ],
-      "incomingCitationCount": 79,
+      "incomingCitationCount": 80,
       "searchText": "a pq symmetric high scale susy interpretation of the lz high energy recoil a 1 08 tev higgsino with a 0 3 0 35 mev splitting is embedded in high scale supersymmetry with a peccei quinn sector and mixed higgsino axion dark matter explains how the small higgsino splitting might arise inside a broader high scale theory 2609 01892 wen yin peccei quinn high scale susy higgsino axion electroweak electroweak inelastic dm electroweak dm split states weak currents"
     },
     "2609.02505": {
@@ -978,9 +984,10 @@
         "2610.14188",
         "2610.15557",
         "2610.16156",
-        "2610.18234"
+        "2610.18234",
+        "2610.21041"
       ],
-      "incomingCitationCount": 97,
+      "incomingCitationCount": 98,
       "searchText": "strong constraints on higgsino dark matter from solar capture the authors combine capture and annihilation in the sun with icecube s null result to argue for a splitting above 566 kev which would exclude the thermal higgsino interpretation of the lz event a direct challenge to the higgsino island using solar capture and neutrino telescope data 2609 02775 maxim pospelov harikrishnan ramani solar capture icecube higgsino tension inelastic dm electroweak electroweak inelastic dm electroweak dm split states weak currents"
     },
     "2609.02807": {
@@ -1152,9 +1159,10 @@
         "2610.14188",
         "2610.15557",
         "2610.16156",
-        "2610.18234"
+        "2610.18234",
+        "2610.21041"
       ],
-      "incomingCitationCount": 80,
+      "incomingCitationCount": 81,
       "searchText": "inelastic dark photon dark matter for the lux zeplin high recoil event and the galactic halo gamma ray excess a 420 gev dark photon up scatters to a heavier vector partner through a scalar mediator the same sector is arranged to retain a proposed explanation of a galactic halo gamma ray excess links the lz recoil to a second anomaly using inelastic dark photon dark matter 2609 02868 kimiko yamashita dark photon inelastic transition gamma ray excess sommerfeld enhancement endothermic other endothermic dm endothermic dm up scattering"
     },
     "2609.02994": {
@@ -1361,9 +1369,10 @@
         "2610.09753",
         "2610.14188",
         "2610.16156",
-        "2610.18234"
+        "2610.18234",
+        "2610.21041"
       ],
-      "incomingCitationCount": 78,
+      "incomingCitationCount": 79,
       "searchText": "tev higgsino interpretation of the lz high recoil event with intermediate scale electroweak gauginos a gut scale bino wino cancellation yields the required higgsino splitting with a wino near 120 tev the construction also discusses the newly raised solar capture constraints a uv level response to how a higgsino could acquire the required small splitting 2609 04163 xiaokang du fei wang higgsino bino wino cancellation high scale gauginos solar capture electroweak electroweak inelastic dm electroweak dm split states weak currents"
     },
     "2609.04175": {
@@ -1458,9 +1467,10 @@
         "2610.14188",
         "2610.16156",
         "2610.18234",
-        "2610.18974"
+        "2610.18974",
+        "2610.21041"
       ],
-      "incomingCitationCount": 91,
+      "incomingCitationCount": 92,
       "searchText": "confronting the higgsino interpretation of the lz event with the high energy sideband the authors argue that a full density thermal higgsino should also populate an empty higher energy sideband the strength of the tension depends on acceptance information that is not yet public a second major challenge to the thermal higgsino reading focused on lz s own sideband 2609 04175 nicholas l rodd benjamin r safdi tracy r slatyer weishuang linda xu high energy sideband higgsino tension acceptance nonthermal dm electroweak electroweak inelastic dm electroweak dm split states weak currents"
     },
     "2609.04181": {
@@ -1544,9 +1554,10 @@
         "2610.14188",
         "2610.15557",
         "2610.16156",
-        "2610.18234"
+        "2610.18234",
+        "2610.21041"
       ],
-      "incomingCitationCount": 80,
+      "incomingCitationCount": 81,
       "searchText": "seasonal dark matter from the lux zeplin high energy event generic endothermic dark matter near the halo s kinematic edge can fit the event and should modulate annually by more than 50 reaching nearly 100 in some regions turns the fragile halo tail dependence into a strong seasonal test 2609 04181 christopher mccabe annual modulation kinematic edge endothermic dm halo tail endothermic other endothermic dm endothermic dm up scattering"
     },
     "2609.04185": {
@@ -1617,9 +1628,10 @@
         "2609.38316",
         "2610.08648",
         "2610.16156",
-        "2610.18234"
+        "2610.18234",
+        "2610.21041"
       ],
-      "incomingCitationCount": 67,
+      "incomingCitationCount": 68,
       "searchText": "atmospheric neutrino up scattering explanation of lz 2026 excess instead of halo dark matter an atmospheric neutrino up scatters on a nucleus to create a new massive state the kinematic threshold removes lower energy recoils while leaving an isolated high energy event the incoming particle is an atmospheric neutrino rather than galactic dark matter 2609 04185 sk jeesun anirban majumdar atmospheric neutrino upscattering sterile state scalar mediator neutrino neutrino initiated recoils neutrino recoils atmospheric exotic ν"
     },
     "2609.04186": {
@@ -1702,9 +1714,10 @@
         "2610.14188",
         "2610.15557",
         "2610.16156",
-        "2610.18234"
+        "2610.18234",
+        "2610.21041"
       ],
-      "incomingCitationCount": 79,
+      "incomingCitationCount": 80,
       "searchText": "axion portal dark matter and the lux zeplin high recoil event a momentum dependent pseudoscalar interaction produces elastic nuclear recoils without relying on an inelastic state change a light pseudoscalar mediator embeds the operator in an axion portal model shows how elastic scattering can still favor high recoil when the interaction is momentum suppressed at low energy 2609 04186 james unwin axion portal pseudoscalar elastic scattering thermal freeze out elastic elastic high recoil dm elastic dm hard scattering spectra"
     },
     "2609.04673": {
@@ -1843,9 +1856,10 @@
         "2610.09753",
         "2610.16156",
         "2610.18234",
-        "2610.18974"
+        "2610.18974",
+        "2610.21041"
       ],
-      "incomingCitationCount": 66,
+      "incomingCitationCount": 67,
       "searchText": "exothermic dark matter at lz a heavier dark state down scatters and releases a 0 5 1 mev splitting allowing 30 200 gev dark matter to make a high energy recoil the model predicts still higher energy events in argon and germanium a concrete dark photon realization of down scattering with multi target predictions 2609 05204 carlos henrique de lima exothermic dm dark photon freeze in argon and germanium exothermic exothermic dm exothermic dm down scattering"
     },
     "2609.05291": {
@@ -1891,9 +1905,10 @@
         "2609.38316",
         "2610.06756",
         "2610.09753",
-        "2610.16156"
+        "2610.16156",
+        "2610.21041"
       ],
-      "incomingCitationCount": 42,
+      "incomingCitationCount": 43,
       "searchText": "inelastic from the other side xenon excitation signals in light of the lz high recoil event the authors calculate accompanying xenon nuclear excitation signals for high recoil models expected rates are generally at or below roughly ten percent of the elastic rate so much larger exposures are needed not a competing cause but a possible future way to diagnose high recoil dark matter models 2609 05291 guanhua gu lingfeng li shao song tang yongheng xu xenon excitation inelastic nucleus diagnostic signal future exposure comparisons comparisons systematics comparisons sidebands halos nuclei"
     },
     "2609.06153": {
@@ -1951,9 +1966,10 @@
         "2610.15557",
         "2610.16156",
         "2610.18234",
-        "2610.18974"
+        "2610.18974",
+        "2610.21041"
       ],
-      "incomingCitationCount": 54,
+      "incomingCitationCount": 55,
       "searchText": "exothermic dark matter and the 248 kev nuclear recoil in lux zeplin the authors model the candidate as exothermic downscattering of an excited pseudo dirac state arguing that its rate is comparatively insensitive to the halo escape speed and predicting several argon events per tonne year near 250 kev an exothermic benchmark with an argon discriminator and a long lived excited state requirement 2609 06153 howard baer vernon barger exothermic dm pseudo dirac dm dark photon argon test exothermic exothermic dm exothermic dm down scattering"
     },
     "2609.06171": {
@@ -1994,9 +2010,10 @@
         "2610.09753",
         "2610.13930",
         "2610.15557",
-        "2610.16156"
+        "2610.16156",
+        "2610.21041"
       ],
-      "incomingCitationCount": 37,
+      "incomingCitationCount": 38,
       "searchText": "inelastic dark matter and baryon flavor symmetry in light of lux zeplin lz experiment the author embeds tev scale inelastic dark matter in a broken baryon flavor gauge symmetry and identifies parameters that reproduce the lz recoil and relic density while satisfying existing collider and indirect detection bounds connects the required splitting to baryon flavor and predicts a relatively light weakly coupled gauge boson 2609 06171 hyun min lee baryon flavor pseudo dirac dm z prime relic density endothermic other endothermic dm endothermic dm up scattering"
     },
     "2609.06571": {
@@ -2083,9 +2100,10 @@
         "2609.38316",
         "2610.06756",
         "2610.09753",
-        "2610.16156"
+        "2610.16156",
+        "2610.21041"
       ],
-      "incomingCitationCount": 26,
+      "incomingCitationCount": 27,
       "searchText": "multi messenger and paleo detector probes of the lz dark matter signal the authors fit a leptophobic inelastic model to the event find no accompanying fermi lat excess and consistency with icecube and estimate an approximately 80 nm recoil track that could be sought in lead bearing paleo detectors extends an inelastic fit into multi messenger null tests and a paleo detector prediction 2609 06640 meiwen yang quan feng wu yue lin sming tsai yi zhong fan leptophobic mediator paleo detectors icecube gamma rays endothermic other endothermic dm endothermic dm up scattering"
     },
     "2609.06750": {
@@ -2162,9 +2180,10 @@
         "2610.05893",
         "2610.06756",
         "2610.09753",
-        "2610.16156"
+        "2610.16156",
+        "2610.21041"
       ],
-      "incomingCitationCount": 34,
+      "incomingCitationCount": 35,
       "searchText": "lz nuclear recoil excess from boosted light magnetic dipole dipole dark matter the authors argue that boosted light dark sector particles with magnetic dipole dipole scattering can harden the recoil spectrum reduce the unwanted low energy rate and reproduce the lz candidate with masses extending to the gev scale uses a boosted population to rescue a momentum dependent elastic spectrum without tev halo dark matter 2609 06756 jin han liang zuowei liu van que tran yongheng xu boosted dm magnetic dipole momentum dependence light dark sector boosted boosted nonstandard fluxes boosted non virial non virial projectiles"
     },
     "2609.06760": {
@@ -2271,9 +2290,10 @@
         "2609.38316",
         "2610.06756",
         "2610.09753",
-        "2610.15557"
+        "2610.15557",
+        "2610.21041"
       ],
-      "incomingCitationCount": 43,
+      "incomingCitationCount": 44,
       "searchText": "inelastic self interacting dark matter and lux zeplin 248 kev event in a dirac modular inverse seesaw the authors place an endothermic pseudo dirac self interacting dark matter fit inside a modular inverse seesaw model linking the required splitting to neutrino masses and to a possible gravitational wave signal from domain wall annihilation connects the recoil mechanism to neutrino structure self interactions and a gravitational wave signature 2609 06825 pritam das biswajit karmakar satyabrata mahapatra partha kumar paul self interacting dm inverse seesaw modular symmetry gravitational waves endothermic other endothermic dm endothermic dm up scattering"
     },
     "2609.06890": {
@@ -2322,9 +2342,10 @@
         "2610.05893",
         "2610.09753",
         "2610.14188",
-        "2610.16156"
+        "2610.16156",
+        "2610.21041"
       ],
-      "incomingCitationCount": 45,
+      "incomingCitationCount": 46,
       "searchText": "high energy nuclear recoils from boosted dark matter for the lz 248 kev event beyond the halo dependent high velocity tail the authors propose light boosted dark matter whose energy is set by dark sector masses using either momentum dependent elastic scattering or near threshold inelastic scattering to confine recoils away from both lz sidebands replaces the uncertain halo tail with a boosted flux and sharply defined recoil endpoints 2609 06890 haider alhazmi doojin kim kyoungchul kong jong chul park seodong shin boosted dm recoil endpoints pseudoscalar mediator multi target tests boosted boosted nonstandard fluxes boosted non virial non virial projectiles"
     },
     "2609.06909": {
@@ -2369,9 +2390,10 @@
         "2610.09753",
         "2610.12443",
         "2610.14188",
-        "2610.18234"
+        "2610.18234",
+        "2610.21041"
       ],
-      "incomingCitationCount": 41,
+      "incomingCitationCount": 42,
       "searchText": "inelastic b l scalar dark matter and the lux zeplin event the authors show that an inelastic scalar in a gauged b l model can match the event near a resonant thermal relic region and predict a gauge boson resonance that can test the required coupling and mass scale a resonant scalar dark matter explanation with a linked collider target 2609 06909 nobuchika okada osamu seto b l gauge symmetry scalar dm resonant annihilation collider test endothermic other endothermic dm endothermic dm up scattering"
     },
     "2609.07138": {
@@ -2464,9 +2486,10 @@
         "2610.06756",
         "2610.09753",
         "2610.12443",
-        "2610.14188"
+        "2610.14188",
+        "2610.21041"
       ],
-      "incomingCitationCount": 39,
+      "incomingCitationCount": 40,
       "searchText": "pseudo dirac inelastic dark matter in the leptophobic u 1 b model confronting the lux zeplin high recoil event with collider searches the authors use gauged baryon number to generate both dark state stability and an off diagonal current identifying lz compatible thermal benchmarks whose mediator lies close to current or projected dijet search reach an over constrained leptophobic construction that can be tested with run 3 and hl lhc dijet data 2609 07225 xin yu du wenjie huang keping xie gauged baryon number pseudo dirac dm dijet search thermal relic endothermic other endothermic dm endothermic dm up scattering"
     },
     "2609.07451": {
@@ -2555,9 +2578,10 @@
         "2609.38316",
         "2610.06756",
         "2610.09753",
-        "2610.16156"
+        "2610.16156",
+        "2610.21041"
       ],
-      "incomingCitationCount": 35,
+      "incomingCitationCount": 36,
       "searchText": "boosted dark particles and the lz nuclear recoil event the authors interpret the event as elastic scattering of a boosted dark sector particle with momentum dependent pseudoscalar interactions predicting little annual modulation no leading argon signal and complementary recoils in spinful light nuclei a boosted elastic alternative with target and modulation signatures distinct from halo inelastic dark matter 2609 07742 kristjan kannike martti raidal alessandro strumia boosted particles pseudoscalar coupling target complementarity annual modulation boosted boosted nonstandard fluxes boosted non virial non virial projectiles"
     },
     "2609.07800": {
@@ -2744,9 +2768,10 @@
         "2610.12443",
         "2610.13930",
         "2610.16156",
-        "2610.18234"
+        "2610.18234",
+        "2610.21041"
       ],
-      "incomingCitationCount": 53,
+      "incomingCitationCount": 54,
       "searchText": "higgsino dark matter interpretation of the lz high recoil event in the gnmssm with tev scale gauginos the authors show that higgsino singlino mixing in the gnmssm can produce sub mev neutralino splittings with multi tev rather than ultraheavy gauginos and present relic compatible benchmarks fitting the lz likelihood realizes the higgsino like recoil with accessible gaugino scales pending a dedicated solar capture test 2609 07811 subhadip bisal junjie cao fei li gnmssm higgsino singlino mixing tev gauginos coannihilation electroweak electroweak inelastic dm electroweak dm split states weak currents"
     },
     "2609.08712": {
@@ -2792,9 +2817,10 @@
         "2610.06756",
         "2610.09753",
         "2610.16156",
-        "2610.18234"
+        "2610.18234",
+        "2610.21041"
       ],
-      "incomingCitationCount": 42,
+      "incomingCitationCount": 43,
       "searchText": "from lux zeplin to colliders probing higgsino dark matter the authors trace the 1 1 tev higgsino interpretation to a nearly degenerate chargino with a sub centimeter track finding current lhc searches insensitive but identifying tracklet reach at future hadron and muon colliders translates the lz motivated higgsino spectrum into a short track collider signature 2609 08712 kingman cheung sin kyu kang ranjeet kumar chargino tracklet hl lhc muon collider higgsino test electroweak electroweak inelastic dm electroweak dm split states weak currents"
     },
     "2609.08893": {
@@ -2833,9 +2859,10 @@
         "2610.00226",
         "2610.06756",
         "2610.09753",
-        "2610.16156"
+        "2610.16156",
+        "2610.21041"
       ],
-      "incomingCitationCount": 35,
+      "incomingCitationCount": 36,
       "searchText": "alp mediated inelastic dark matter and the lux zeplin high recoil candidate event lz230616 the authors model two majorana states coupled through a gluonic axionlike mediator and find a narrow lz compatible spectrum near 350 gev and a 330 kev splitting while noting the large coupling product and strong halo cutoff sensitivity combines endothermic kinematics with a momentum dependent axion portal and exposes its main consistency tests 2609 08893 guan wen yuan bo zhang wen yu cao lei feng ruizhi yang axionlike mediator majorana dm momentum dependence halo sensitivity endothermic other endothermic dm endothermic dm up scattering"
     },
     "2609.08993": {
@@ -2927,9 +2954,10 @@
         "2610.12443",
         "2610.16156",
         "2610.18234",
-        "2610.18974"
+        "2610.18974",
+        "2610.21041"
       ],
-      "incomingCitationCount": 43,
+      "incomingCitationCount": 44,
       "searchText": "endothermic dark matter with a light dark photon and the lux zeplin high energy nuclear recoil candidate the authors jointly scan the lz energy likelihood and relic density for endothermic dark matter with a light kinetically mixed dark photon finding tev masses and few hundred kev splittings while highlighting late time excited state constraints a likelihood based dark photon fit whose viability depends on depleting the long lived excited state 2609 09015 pengxuan zhu giovani dalla valle garcia xuan gong wang anthony w thomas martin j white light dark photon global scan relic density excited state cosmology endothermic other endothermic dm endothermic dm up scattering"
     },
     "2609.09037": {
@@ -2963,9 +2991,10 @@
         "2610.05893",
         "2610.06756",
         "2610.08648",
-        "2610.09753"
+        "2610.09753",
+        "2610.21041"
       ],
-      "incomingCitationCount": 30,
+      "incomingCitationCount": 31,
       "searchText": "neutron disappearance and the lz nuclear recoil event the authors interpret the recoil as disappearance of a bound xenon neutron either spontaneously or through a dark matter induced reaction and derive quiet event fractions oxygen constraints and line like behavior near threshold a nuclear disappearance alternative that can be tested through target dependence and accompanying activity 2609 09037 mohammad aghaie alessandro strumia neutron disappearance nuclear de excitation oxygen constraint xenon lines absorption absorption nucleon disappearance absorption disappearance rest mass recoil"
     },
     "2609.09107": {
@@ -3006,9 +3035,10 @@
         "2610.12443",
         "2610.14178",
         "2610.14188",
-        "2610.16156"
+        "2610.16156",
+        "2610.21041"
       ],
-      "incomingCitationCount": 37,
+      "incomingCitationCount": 38,
       "searchText": "for whom the xenon recoils magnetic inelastic dark baryons the authors construct composite dark baryon dark matter with an inelastic magnetic transition find that tev scale masses and 100 500 kev splittings can fit the lz event across several halo models and predict an accompanying photon signal for some recoils a composite magnetic inelastic explanation with a coincident photon discriminator 2609 09107 pouya asadi austin batz patrick j fox samuel d homiller graham d kribs magnetic inelastic dm dark baryons transition dipole coincident photon endothermic other endothermic dm endothermic dm up scattering"
     },
     "2609.09136": {
@@ -3051,9 +3081,10 @@
         "2610.13930",
         "2610.14188",
         "2610.15557",
-        "2610.16156"
+        "2610.16156",
+        "2610.21041"
       ],
-      "incomingCitationCount": 39,
+      "incomingCitationCount": 40,
       "searchText": "a warped extra dimensional candidate for the lz 248 kev event the authors construct a warped extra dimensional pseudo dirac fermion whose localized masses naturally generate a roughly 300 kev splitting and whose dark gauge mediator can fit the lz event while evading fixed coupling higgsino tensions uses geometric suppression to obtain the splitting and decouple the rate from the minimal higgsino prediction 2609 09136 vincent s h lee lisa randall warped extra dimension pseudo dirac dm dark gauge boson solar constraints endothermic other endothermic dm endothermic dm up scattering"
     },
     "2609.09138": {
@@ -3146,9 +3177,10 @@
         "2610.00226",
         "2610.06756",
         "2610.09753",
-        "2610.16156"
+        "2610.16156",
+        "2610.21041"
       ],
-      "incomingCitationCount": 29,
+      "incomingCitationCount": 30,
       "searchText": "nuclear interference versus dark sector excitation in the 248 kev lux zeplin recoil candidate the authors compare a xenon nuclear response cancellation in elastic scattering with endothermic dark sector excitation finding sharply different argon to xenon recoil scaling and annual modulation behavior target scaling and seasonal timing can separate a nuclear response feature from an inelastic mass splitting 2609 09230 imtiaz khan salvatore capozziello g mustafa farruh atamurotov ahmadjon abdujabbarov chengxun yuan nuclear interference target scaling annual modulation xenon shell model comparisons comparisons systematics comparisons sidebands halos nuclei"
     },
     "2609.09385": {
@@ -3211,9 +3243,10 @@
         "2610.15557",
         "2610.16156",
         "2610.18234",
-        "2610.18974"
+        "2610.18974",
+        "2610.21041"
       ],
-      "incomingCitationCount": 59,
+      "incomingCitationCount": 60,
       "searchText": "heavy higgsino interpretation of the lz event the author jointly fits the lz recoil and empty high energy sideband for pure higgsino dark matter then incorporates solar capture limits and identifies an ultraheavy nonthermal region as the surviving interpretation sideband and icecube constraints push a pure higgsino explanation toward a nonthermally produced ultraheavy state 2609 09385 kevin langhoff heavy higgsino solar capture high energy sideband nonthermal cosmology electroweak electroweak inelastic dm electroweak dm split states weak currents"
     },
     "2609.10453": {
@@ -3252,9 +3285,10 @@
         "2610.12443",
         "2610.13930",
         "2610.16156",
-        "2610.18234"
+        "2610.18234",
+        "2610.21041"
       ],
-      "incomingCitationCount": 35,
+      "incomingCitationCount": 36,
       "searchText": "transition magnetic dipole dark matter and the lz230616 high recoil candidate the author fits an endothermic transition dipole model while accounting for the excited state s detector scale flight and delayed photon and compares the preferred regions with indirect detection bounds a correlated delayed photon offers a detector level test while thermal benchmark fits face strong gamma ray tension 2609 10453 yuxuan he transition magnetic dipole delayed photon sideband likelihood h e s s constraints endothermic other endothermic dm endothermic dm up scattering"
     },
     "2609.10491": {
@@ -3299,9 +3333,10 @@
         "2610.14188",
         "2610.15557",
         "2610.16156",
-        "2610.18234"
+        "2610.18234",
+        "2610.21041"
       ],
-      "incomingCitationCount": 41,
+      "incomingCitationCount": 42,
       "searchText": "inelastic dark matter and high energy recoil signatures in lz the authors use two component inelastic dark matter to explain the high recoil event in both exothermic and endothermic regimes emphasizing that down scattering can avoid reliance on the halo tail and reduce solar neutrino tension exothermic kinematics can populate the high recoil region with a smaller cross section and weaker icecube bounds 2609 10491 zi tong fan hong jian he yu chen wang yue zhao two component dark matter exothermic scattering endothermic scattering icecube constraints exothermic exothermic dm exothermic dm down scattering"
     },
     "2609.10504": {
@@ -3331,9 +3366,10 @@
         "2609.37561",
         "2609.38316",
         "2610.06756",
-        "2610.08648"
+        "2610.08648",
+        "2610.21041"
       ],
-      "incomingCitationCount": 26,
+      "incomingCitationCount": 27,
       "searchText": "can elastic neutrino scattering account for the lz230616 event the authors test standard model and exotic elastic neutrino scattering explanations including dark matter sourced neutrinos and primordial black hole evaporation against recoil kinematics lower energy events and external bounds elastic neutrino scattering cannot reproduce the isolated event in any of the scenarios examined 2609 10504 ayan chattaraj anirban majumdar dimitrios k papoulias rahul srivastava coherent neutrino scattering exotic neutrino flux primordial black holes spectral constraints neutrino neutrino initiated recoils neutrino recoils atmospheric exotic ν"
     },
     "2609.10636": {
@@ -3363,9 +3399,10 @@
         "2610.06756",
         "2610.09753",
         "2610.13930",
-        "2610.16156"
+        "2610.16156",
+        "2610.21041"
       ],
-      "incomingCitationCount": 26,
+      "incomingCitationCount": 27,
       "searchText": "solar capture and suppressed annihilation of inelastic scalar dark matter the authors fit an endothermic scalar benchmark to the event and show that a light mediator isospin interference in solar capture and a nonthermal captured population can evade the usual icecube constraint provides a concrete loophole showing that higgsino solar capture bounds need not apply to all inelastic models 2609 10636 xinxin qi hao sun inelastic scalar dm solar capture isospin interference icecube endothermic other endothermic dm endothermic dm up scattering"
     },
     "2609.10662": {
@@ -3414,9 +3451,10 @@
         "2610.09753",
         "2610.12443",
         "2610.14188",
-        "2610.18234"
+        "2610.18234",
+        "2610.21041"
       ],
-      "incomingCitationCount": 35,
+      "incomingCitationCount": 36,
       "searchText": "generalized chiral u 1 b l with inelastic scalar dark matter for the lz 248 kev event the authors embed endothermic scalar scattering in a generalized chiral u 1 b l model identifying relic density compatible parameter space and complementary collider probes of the mediator connects a small inelastic splitting and the high recoil kinematics to a testable chiral gauge model 2609 10827 ranjeet kumar hemant kumar prajapati inelastic scalar dm chiral b l z prime collider tests endothermic other endothermic dm endothermic dm up scattering"
     },
     "2609.11241": {
@@ -3479,9 +3517,10 @@
         "2610.06756",
         "2610.09753",
         "2610.14188",
-        "2610.16156"
+        "2610.16156",
+        "2610.21041"
       ],
-      "incomingCitationCount": 35,
+      "incomingCitationCount": 36,
       "searchText": "cosmic ray boosted dark matter with momentum dependent interactions can explain the lz 248 kev event the authors combine a cosmic ray boosted dark matter flux with momentum dependent nonrelativistic operators finding that mathcal o 6 and mathcal o 10 can peak the xenon recoil spectrum near 248 kev produces a hard event centered spectrum without relying on the galactic halo s fastest particles 2609 11600 matti heikinheimo niklas zimmermann cosmic ray boosted dm momentum dependence nonrelativistic eft spectral peak boosted boosted nonstandard fluxes boosted non virial non virial projectiles"
     },
     "2609.11833": {
@@ -3560,9 +3599,10 @@
         "2609.37561",
         "2609.38316",
         "2610.05893",
-        "2610.09753"
+        "2610.09753",
+        "2610.21041"
       ],
-      "incomingCitationCount": 17,
+      "incomingCitationCount": 18,
       "searchText": "nuclear recoils from invisible neutron pair annihilation and the lz event the authors interpret the candidate as bound neutron pair annihilation into an invisible scalar producing isotope dependent recoil lines and at the lz motivated mass additional lower energy xenon recoils with electromagnetic or neutron signals turns the event into a nuclear disappearance line with isotope and companion signal cross checks 2609 12045 junseok lee fuminobu takahashi yu dai tsai neutron pair annihilation invisible scalar monoenergetic recoil isotope tests absorption absorption nucleon disappearance absorption disappearance rest mass recoil"
     },
     "2609.13038": {
@@ -3647,9 +3687,10 @@
         "2610.09753",
         "2610.12443",
         "2610.16156",
-        "2610.18234"
+        "2610.18234",
+        "2610.21041"
       ],
-      "incomingCitationCount": 23,
+      "incomingCitationCount": 24,
       "searchText": "boosted or inelastic discriminating interpretations of the lz 248 kev event the authors compare boosted and endothermic explanations using common effective operators finding that inelastic spectra naturally suppress low energy recoils while boosted spectra require strong momentum dependence to do so the full recoil spectrum not just the 248 kev event can separate boosted from inelastic interpretations 2609 14799 satyabrata mahapatra partha kumar paul boosted dark matter inelastic dark matter effective operators spectral discrimination comparisons comparisons systematics comparisons sidebands halos nuclei"
     },
     "2609.15027": {
@@ -3705,9 +3746,10 @@
         "2610.12443",
         "2610.16156",
         "2610.18234",
-        "2610.18974"
+        "2610.18974",
+        "2610.21041"
       ],
-      "incomingCitationCount": 21,
+      "incomingCitationCount": 22,
       "searchText": "did lz see modified gravity the author fits endothermic freeze in dark matter to the event during a pre bbn era of modified cosmic expansion using the relic abundance together with collider and cosmological bounds to select viable histories uses the recoil as a probe of the expansion history before nucleosynthesis rather than only of particle parameters 2609 15118 basabendu barman freeze in modified expansion nonstandard cosmology inelastic scattering endothermic other endothermic dm endothermic dm up scattering"
     },
     "2609.15321": {
@@ -3746,9 +3788,10 @@
         "2609.37545",
         "2609.37561",
         "2609.38316",
-        "2610.09753"
+        "2610.09753",
+        "2610.21041"
       ],
-      "incomingCitationCount": 8,
+      "incomingCitationCount": 9,
       "searchText": "a dm candidate indicated at fermi lat and lz connection with lhc and lc prospects the authors connect the lz mass scale to a reported galactic gamma ray excess and argue for p wave annihilation through a spin 2 kaluza klein resonance emphasizing collider tests rather than constructing a quantitative recoil model a speculative multi messenger connection that shifts the test from the xenon spectrum to gamma rays and colliders 2609 15413 alain le yaouanc francois richard fermi lat kaluza klein gravitons lhc lepton collider comparisons comparisons systematics comparisons sidebands halos nuclei"
     },
     "2609.15600": {
@@ -3772,9 +3815,10 @@
         "2610.09516",
         "2610.09753",
         "2610.12443",
-        "2610.18234"
+        "2610.18234",
+        "2610.21041"
       ],
-      "incomingCitationCount": 20,
+      "incomingCitationCount": 21,
       "searchText": "effect of inelastic scalar dark matter in hidden u 1 scenario after the lz nuclear recoil the authors realize endothermic scalar scattering in a broken hidden u 1 model identify parameters that reproduce the relic abundance and event and compare the required dark photon kinetic mixing with beam dump and collider limits turns the recoil fit into a target for dark photon searches at lifetime and energy frontier experiments 2609 15600 arindam das takaaki nomura hidden u 1 scalar dark matter dark photon kinetic mixing endothermic other endothermic dm endothermic dm up scattering"
     },
     "2609.15634": {
@@ -3799,9 +3843,10 @@
         "2610.09753",
         "2610.13930",
         "2610.15557",
-        "2610.18974"
+        "2610.18974",
+        "2610.21041"
       ],
-      "incomingCitationCount": 21,
+      "incomingCitationCount": 22,
       "searchText": "xenon isotope filtering at the kinematic edge of inelastic dark matter the authors resolve the event motivated endothermic rate isotope by isotope and show that small xenon mass differences are amplified near the galactic speed cutoff materially changing the predicted isotope fractions and window rate shows that effective single isotope xenon approximations can distort predictions near the 248 kev kinematic edge 2609 15634 waqas ahmed ammara ahmad mansoor ur rehman xenon isotopes kinematic edge helm form factor halo tail comparisons comparisons systematics comparisons sidebands halos nuclei"
     },
     "2609.15714": {
@@ -3828,9 +3873,10 @@
         "2610.15557",
         "2610.16156",
         "2610.18234",
-        "2610.18974"
+        "2610.18974",
+        "2610.21041"
       ],
-      "incomingCitationCount": 23,
+      "incomingCitationCount": 24,
       "searchText": "hadrophilic inelastic freeze in dark matter in q 1 q 2 gauge extension and the high energy lz event the authors explain the recoil with exothermic dark matter coupled through a hadrophilic gauge boson and populated by freeze in after low reheating suppressing indirect signals while satisfying relic density and flavor constraints combines exothermic kinematics and feeble hadrophilic couplings to evade the usual indirect detection tension 2609 15714 xiao gang he xuan hong sk jeesun hadrophilic mediator freeze in low reheating flavor constraints exothermic exothermic dm exothermic dm down scattering"
     },
     "2609.15742": {
@@ -3859,9 +3905,10 @@
         "2610.09753",
         "2610.13930",
         "2610.16156",
-        "2610.18234"
+        "2610.18234",
+        "2610.21041"
       ],
-      "incomingCitationCount": 25,
+      "incomingCitationCount": 26,
       "searchText": "explaining the lz high energy recoil event with inelastic sneutrino dark matter in supersymmetry the authors fit the event with inelastic sneutrino dark matter in an inverse seesaw supersymmetric model and identify annihilation or coannihilation mechanisms that retain the thermal relic abundance while weakening solar neutrino signals provides supersymmetric benchmarks that survive the combined recoil solar neutrino gamma ray higgs and flavor tests considered 2609 15742 jingwei lian jin min yang sneutrino dark matter inverse seesaw solar neutrinos supersymmetry endothermic other endothermic dm endothermic dm up scattering"
     },
     "2609.15782": {
@@ -3880,9 +3927,10 @@
         "2610.09753",
         "2610.12443",
         "2610.16156",
-        "2610.18974"
+        "2610.18974",
+        "2610.21041"
       ],
-      "incomingCitationCount": 15,
+      "incomingCitationCount": 16,
       "searchText": "argon as the test of two interpretations of the lz 248 kev recoil the authors propose an argon target discriminator an exothermic pseudo dirac interpretation predicts a strong recoil line near 336 kev whereas the endothermic higgsino benchmark is kinematically inaccessible in argon a target material test gives opposite near binary predictions for exothermic and higgsino interpretations 2609 15782 howard baer vernon barger argon target exothermic line higgsino threshold deap 3600 comparisons comparisons systematics comparisons sidebands halos nuclei"
     },
     "2609.15933": {
@@ -3901,9 +3949,10 @@
         "2609.38316",
         "2610.09753",
         "2610.16156",
-        "2610.18234"
+        "2610.18234",
+        "2610.21041"
       ],
-      "incomingCitationCount": 15,
+      "incomingCitationCount": 16,
       "searchText": "dm induced neutron disappearance as the origin of the lz nuclear recoil event the authors interpret the event as dark matter annihilating a bound neutron into an invisible scalar producing daughter nucleus recoil lines and constrain an illustrative completion with collider data and accompanying nuclear de excitation searches extends nuclear disappearance explanations to dark matter induced neutron loss with line and de excitation tests 2609 15933 p uttayarat j julio r primulando neutron disappearance invisible scalar recoil lines borexino absorption absorption nucleon disappearance absorption disappearance rest mass recoil"
     },
     "2609.15985": {
@@ -3934,9 +3983,10 @@
         "2610.15557",
         "2610.16156",
         "2610.18234",
-        "2610.18974"
+        "2610.18974",
+        "2610.21041"
       ],
-      "incomingCitationCount": 27,
+      "incomingCitationCount": 28,
       "searchText": "inferring dark matter masses and interactions from high recoil energy events in lux zeplin the authors infer masses splittings and interaction classes directly from the event and empty lower energy region finding disconnected endothermic and exothermic solutions while elastic fits require momentum or spin dependent interactions a model independent posterior exposes which kinematic regimes survive the event and the missing low energy sideband 2609 15985 stefano palmisano michele tammaro andrea tesi bayesian inference two body kinematics sideband absence nonrelativistic operators comparisons comparisons systematics comparisons sidebands halos nuclei"
     },
     "2609.16529": {
@@ -3950,9 +4000,10 @@
         "2609.35737",
         "2609.37545",
         "2609.37561",
-        "2609.38316"
+        "2609.38316",
+        "2610.21041"
       ],
-      "incomingCitationCount": 10,
+      "incomingCitationCount": 11,
       "searchText": "dark matter inelastic scattering with nuclei for direct detection the authors recalculate elastic and nuclear excitation responses for xenon 129 and xenon 131 finding that the event favored effective operator can behave very differently from shell model predictions near 248 kev and in the lower energy sideband the apparent high recoil peak can depend strongly on the nuclear calculation with the compared event rate differing by up to a factor of 25 2609 16529 shao feng ge oleg titov yakun wang xenon nuclear response nuclear excitation effective operators nuclear theory uncertainty comparisons comparisons systematics comparisons sidebands halos nuclei"
     },
     "2609.17196": {
@@ -3979,9 +4030,10 @@
         "2610.09753",
         "2610.12443",
         "2610.14188",
-        "2610.18234"
+        "2610.18234",
+        "2610.21041"
       ],
-      "incomingCitationCount": 23,
+      "incomingCitationCount": 24,
       "searchText": "a possible interpretation of the lux zeplin recoil event in the 2hd a scenario the authors fit the candidate with elastic fermionic dark matter in a two higgs doublet plus pseudoscalar model using momentum dependent scattering through a light pseudoscalar while imposing relic density collider flavor and loop level direct detection constraints provides a complete elastic particle model in which the recoil selected parameters are testable through light pseudoscalar and heavy higgs searches 2609 17196 giorgio arcadi mattia di mauro abdelhak djouadi farinaldo queiroz 2hd a pseudoscalar mediator momentum dependence collider constraints elastic elastic high recoil dm elastic dm hard scattering spectra"
     },
     "2609.17412": {
@@ -4009,9 +4061,10 @@
         "2610.09753",
         "2610.16156",
         "2610.18234",
-        "2610.18974"
+        "2610.18974",
+        "2610.21041"
       ],
-      "incomingCitationCount": 24,
+      "incomingCitationCount": 25,
       "searchText": "cosmological constrained axion portal inelastic dark matter for the lz event the authors track both states of axion portal inelastic dark matter through the early universe and show that the interaction s lorentz structure selects whether today s recoil spectrum is dominated by endothermic up scattering or exothermic down scattering links the event s scattering direction to the cosmological excited state abundance with annual modulation and collider searches as discriminants 2609 17412 haipeng an fei gao jia liu minghao liu changlong xu axion like mediator excited state relic fraction dark sector conversion annual modulation endothermic other endothermic dm endothermic dm up scattering"
     },
     "2609.17935": {
@@ -4030,9 +4083,10 @@
         "2609.38316",
         "2610.09753",
         "2610.16156",
-        "2610.18974"
+        "2610.18974",
+        "2610.21041"
       ],
-      "incomingCitationCount": 15,
+      "incomingCitationCount": 16,
       "searchText": "galactic endothermic production and exothermic detection of excited dark matter implications for lux zeplin the author proposes a two step galactic mechanism in which fast ground state particles endothermically self scatter into an excited population whose exothermic scattering on xenon can produce an order one event count near the candidate energy for tev scale dark matter and sub mev splittings builds the excited component inside the present day halo then releases its splitting through exothermic xenon recoils 2609 17935 chuan yang xing excited dark matter galactic self scattering exothermic detection light scalar mediator exothermic exothermic dm exothermic dm down scattering"
     },
     "2609.18564": {
@@ -4098,9 +4152,10 @@
         "2610.09753",
         "2610.12443",
         "2610.15557",
-        "2610.16156"
+        "2610.16156",
+        "2610.21041"
       ],
-      "incomingCitationCount": 13,
+      "incomingCitationCount": 14,
       "searchText": "endothermic z portal dark matter lz lhc complementarity the authors realize endothermic majorana dark matter in a gauged b l portal where resonant coannihilation fixes a lower coupling bound while dilepton resonance searches at the lhc impose an upper bound on the event compatible parameter space turns the recoil fit into a near term collider target through complementary relic density and z resonance constraints 2609 21011 nobuchika okada digesh raut endothermic dark matter z portal b l gauge symmetry lhc complementarity endothermic other endothermic dm endothermic dm up scattering"
     },
     "2609.21444": {
@@ -4183,9 +4238,10 @@
         "2610.00226",
         "2610.09753",
         "2610.13930",
-        "2610.15557"
+        "2610.15557",
+        "2610.21041"
       ],
-      "incomingCitationCount": 14,
+      "incomingCitationCount": 15,
       "searchText": "kaluza klein dark photon mediation of inelastic dark matter at lux zeplin the authors embed singlet pseudo dirac dark matter and its few hundred kev splitting in a five dimensional dark photon model where the kaluza klein tower enhances the event rate benchmark while separating terrestrial and solar kinematics an extra dimensional mediator tower boosts an endothermic xenon signal and predicts a distinct solar capture regime 2609 22739 waqas ahmed george k leontaris kaluza klein dark photon pseudo dirac dark matter endothermic scattering solar capture endothermic other endothermic dm endothermic dm up scattering"
     },
     "2609.23096": {
@@ -4202,9 +4258,10 @@
         "2609.37561",
         "2609.38316",
         "2610.08648",
-        "2610.09753"
+        "2610.09753",
+        "2610.21041"
       ],
-      "incomingCitationCount": 13,
+      "incomingCitationCount": 14,
       "searchText": "the 248 kev lz recoil a possible hint of non sm like quark yukawa couplings with a scalar portal dark matter the author fits the recoil with two nearly degenerate vector like fermions coupled through a scalar portal requiring flavor specific departures in quark yukawa couplings that can arise from a dimension six operator below roughly 10 tev links an inelastic recoil fit to nonstandard quark yukawa couplings testable at colliders 2609 23096 bibhabasu de scalar portal vector like fermions quark yukawa couplings collider test endothermic other endothermic dm endothermic dm up scattering"
     },
     "2609.23477": {
@@ -4219,9 +4276,10 @@
         "2609.37545",
         "2609.37561",
         "2609.38316",
-        "2610.09753"
+        "2610.09753",
+        "2610.21041"
       ],
-      "incomingCitationCount": 11,
+      "incomingCitationCount": 12,
       "searchText": "the lux zeplin event as hyperfine spectroscopy of composite dark matter the authors interpret the recoil as endothermic hyperfine excitation between pseudoscalar and vector states of one composite dark hadron with a pq augmented dark qcd sector suppressing elastic scattering and depleting excited states treats the candidate as dark hadron hyperfine spectroscopy with a few hundred kev internal splitting 2609 23477 jie sheng kairui zhang composite dark matter hyperfine excitation dark qcd axion depletion endothermic other endothermic dm endothermic dm up scattering"
     },
     "2609.23691": {
@@ -4254,9 +4312,10 @@
         "2609.38316",
         "2610.06756",
         "2610.09753",
-        "2610.18234"
+        "2610.18234",
+        "2610.21041"
       ],
-      "incomingCitationCount": 13,
+      "incomingCitationCount": 14,
       "searchText": "a closer look at the lz 248 kev event through the lens of cosmic ray boosted dark matter the authors calculate cosmic ray production propagation and xenon scattering with relativistic kinematics finding that a spin dependent pseudoscalar interaction can populate the event window without filling the lower energy sideband a roughly 300 mev pseudoscalar mediator makes a cosmic ray boosted explanation viable beyond the contact limit 2609 24982 bhavesh chauhan soham sahasrabuddhe manibrata sen cosmic ray boosted dm spin dependent scattering pseudoscalar mediator relativistic kinematics boosted boosted nonstandard fluxes boosted non virial non virial projectiles"
     },
     "2609.24988": {
@@ -4274,9 +4333,10 @@
         "2610.06756",
         "2610.09753",
         "2610.13930",
-        "2610.15557"
+        "2610.15557",
+        "2610.21041"
       ],
-      "incomingCitationCount": 14,
+      "incomingCitationCount": 15,
       "searchText": "interpreting the lz 248 kev event using dark qcd the authors split the lightest baryon of a confining dark qcd theory into two majorana states through a dimension ten operator and fit endothermic scattering through a leptophobic baryon number vector mediator a composite dark baryon benchmark matches the recoil while remaining compatible with solar neutrino and dijet bounds 2609 24988 francesco sannino jessica turner dark qcd composite dark baryon majorana splitting leptophobic vector endothermic other endothermic dm endothermic dm up scattering"
     },
     "2609.25114": {
@@ -4291,9 +4351,10 @@
         "2609.38316",
         "2610.06756",
         "2610.09753",
-        "2610.15557"
+        "2610.15557",
+        "2610.21041"
       ],
-      "incomingCitationCount": 11,
+      "incomingCitationCount": 12,
       "searchText": "elastic toroidal vector dark matter through a dark photon in the lux zeplin high recoil window the authors derive the elastic xenon response of complex vector dark matter with a toroidal electromagnetic moment correlate its coherent and transverse spin tensor operators and construct a dark photon benchmark whose spectrum retains substantial weight at 248 kev an elastic tensor interaction produces a broad high recoil spectrum with linked isotope argon timing mediator and upper sideband tests 2609 25114 imtiaz khan salvatore capozziello g mustafa farkhod botirov ahmadjon abdujabbarov farruh atamurotov phongpichit channuie toroidal vector dark matter dark photon elastic tensor operators xenon isotope response elastic elastic high recoil dm elastic dm hard scattering spectra"
     },
     "2609.25723": {
@@ -4309,9 +4370,10 @@
         "2609.38316",
         "2610.06756",
         "2610.09753",
-        "2610.13930"
+        "2610.13930",
+        "2610.21041"
       ],
-      "incomingCitationCount": 12,
+      "incomingCitationCount": 13,
       "searchText": "dark diffraction at lz from a screened neutral composite baryon the authors model a neutral su 4 dark baryon whose constituent charge form factor suppresses low momentum transfer but recovers near the candidate recoil producing an elastic band pass spectrum with target dependent diffraction nodes a screened composite baryon explains the hard recoil elastically and predicts both events above the current window and movable diffraction zeros across targets 2609 25723 hyunjoo jung seong chan park composite dark matter screened charge form factor dark diffraction high energy sideband elastic elastic high recoil dm elastic dm hard scattering spectra"
     },
     "2609.26570": {
@@ -4332,9 +4394,10 @@
         "2610.09753",
         "2610.12443",
         "2610.14188",
-        "2610.18974"
+        "2610.18974",
+        "2610.21041"
       ],
-      "incomingCitationCount": 17,
+      "incomingCitationCount": 18,
       "searchText": "a simple dark matter model to explain the lz event and galactic center excess the authors propose 20 100 gev pseudo dirac dark matter coupled through a hadrophilic baryon number vector with a cosmologically long lived excited state whose roughly mev downscattering can fit the xenon recoil in the same thermal parameter space as the galactic center gamma ray excess one exothermic pseudo dirac benchmark connects the lz candidate to the galactic center excess while requiring an excited state that survives to the present halo 2609 26570 caleb gemmell dan hooper gordan krnjaic pseudo dirac dark matter exothermic scattering baryon number mediator galactic center excess exothermic exothermic dm exothermic dm down scattering"
     },
     "2609.26698": {
@@ -4365,9 +4428,10 @@
         "2610.06756",
         "2610.09753",
         "2610.12443",
-        "2610.16156"
+        "2610.16156",
+        "2610.21041"
       ],
-      "incomingCitationCount": 9,
+      "incomingCitationCount": 10,
       "searchText": "the lhc is not enough the lz high recoil event at fcc hh and a muon collider the authors translate the event motivated thermal higgsino into a broader set of nearly pure electroweak multiplets and compare disappearing track drell yan and recoil channel reach at fcc hh clic and high energy muon colliders the hl lhc cannot cover the benchmark class while future hadron and muon colliders can test most of the specified thermal multiplets 2609 26870 benedikt maier michael spannowsky future colliders electroweak multiplets disappearing tracks muon collider electroweak electroweak inelastic dm electroweak dm split states weak currents"
     },
     "2609.28129": {
@@ -4404,9 +4468,10 @@
         "2610.06756",
         "2610.09753",
         "2610.18234",
-        "2610.18974"
+        "2610.18974",
+        "2610.21041"
       ],
-      "incomingCitationCount": 6,
+      "incomingCitationCount": 7,
       "searchText": "inelastic dark matter mediated by natural dark photon the authors generate sub mev splitting in a complex scalar dark matter pair together with naturally small dark photon kinetic mixing then use exothermic nuclear downscattering to fit the event with a reduced interaction strength kinematic enhancement from exothermic scattering lets the dark photon benchmark target the lz event while weakening its solar neutrino tension 2609 28415 jie tang pei hong gu dark photon exothermic dark matter loop induced kinetic mixing icecube constraint exothermic exothermic dm exothermic dm down scattering"
     },
     "2609.28616": {
@@ -4429,9 +4494,10 @@
         "2609.38316",
         "2610.01613",
         "2610.09753",
-        "2610.13930"
+        "2610.13930",
+        "2610.21041"
       ],
-      "incomingCitationCount": 5,
+      "incomingCitationCount": 6,
       "searchText": "heavy higgsino dark matter at the scale of the vanishing higgs quartic the event specific limit of this high scale supersymmetry construction uses 100 1000 tev higgsinos roughly 10 7 gev majorana gauginos and a 330 480 kev splitting with low reheat freeze in supplying the relic abundance a much heavier nonthermal higgsino can evade the sideband and solar problems of the thermal benchmark while retaining a link to the scale where the higgs quartic vanishes 2609 28740 james unwin pev higgsino high scale supersymmetry boltzmann suppressed freeze in vanishing higgs quartic electroweak electroweak inelastic dm electroweak dm split states weak currents"
     },
     "2609.28819": {
@@ -4456,9 +4522,10 @@
         "2609.36814",
         "2609.38316",
         "2610.06756",
-        "2610.13930"
+        "2610.13930",
+        "2610.21041"
       ],
-      "incomingCitationCount": 5,
+      "incomingCitationCount": 6,
       "searchText": "limits on primordial black hole evaporation from lux zeplin the paper tests hawking boosted dark matter with momentum dependent elastic operators and endothermic transitions finding that the thermal spectrum inevitably overproduces lower energy lz recoils before reaching the 248 kev event the event cannot be explained by contemporary pbh evaporation in the tested class but the same low energy null result yields stringent limits on light primordial black hole abundance 2609 29462 jitumani kalita primordial black holes hawking boosted dark matter low energy sideband nreft boosted boosted nonstandard fluxes boosted non virial non virial projectiles"
     },
     "2609.30255": {
@@ -4472,9 +4539,10 @@
         "2609.38316",
         "2610.06756",
         "2610.08648",
-        "2610.13930"
+        "2610.13930",
+        "2610.21041"
       ],
-      "incomingCitationCount": 10,
+      "incomingCitationCount": 11,
       "searchText": "a narrow neutrino window for the lz event atmospheric neutrinos resonantly convert into a narrow n1 spectrum which then up scatters to n2 through a baryonic vector mediator the tuned energy window permits roughly 250 kev xenon recoils while staying below thresholds in lighter neutrino detector targets a two step neutrino mechanism uses target dependent thresholds to produce one xenon event without the large neutral current signal expected in oxygen or carbon detectors 2609 30255 vedran brdar dibya s chattopadhyay atmospheric neutrinos parametric resonance heavy neutral leptons baryonic vector mediator neutrino neutrino initiated recoils neutrino recoils atmospheric exotic ν"
     },
     "2609.32435": {
@@ -4589,9 +4657,10 @@
         "2610.01613",
         "2610.09753",
         "2610.14178",
-        "2610.16156"
+        "2610.16156",
+        "2610.21041"
       ],
-      "incomingCitationCount": 5,
+      "incomingCitationCount": 6,
       "searchText": "constraints on complex electroweak wimps from solar capture the authors generalize solar capture energy loss and annihilation from higgsinos to scalar and fermionic electroweak multiplets finding that icecube requires splittings above roughly 350 kev for higher representations up to 100 tev with thermal freeze out and a standard halo this excludes most electroweak multiplet explanations of the event but an lmc enhanced high speed tail can lift the lz preferred splitting above the solar bound for many multiplets 2609 38316 juan p luengas maxim pospelov harikrishnan ramani solar capture electroweak multiplets icecube large magellanic cloud electroweak electroweak inelastic dm electroweak dm split states weak currents"
     },
     "2609.39529": {
@@ -4724,6 +4793,11 @@
       "citedBy": [],
       "incomingCitationCount": 0,
       "searchText": "exothermic dark photon dark matter and the lz high recoil event finite reheating constraints the author studies a freeze in pseudo dirac dark sector in which a surviving excited state down scatters through a dark photon to produce the lz high energy recoil with the abundance calculated across finite reheating histories connects the exothermic recoil benchmark to pre radiation production and dilution finding viable matter like and quartic reheating cases while the tested adiabatic kination history fails the adopted bbn cutoff 2610 18974 kuldeep deka dark photon pseudo dirac dark matter exothermic scattering freeze in non instantaneous reheating exothermic exothermic dm exothermic dm down scattering"
+    },
+    "2610.21041": {
+      "citedBy": [],
+      "incomingCitationCount": 0,
+      "searchText": "testing the inelastic dark matter interpretation of the lz event with heavy element experiments the authors test endothermic dark matter against the lz recoil by varying the high speed halo tail and identify heavy element paleo detectors and luminous decay searches as complementary ways to measure the mass and splitting the signal fit and viability of the thermal higgsino depend strongly on unresolved high velocity structure while heavy nuclei can probe most of the event favored parameter space and break parameter degeneracies 2610 21041 peter w graham juan p luengas harikrishnan ramani samuel s y wong endothermic dark matter high velocity halo tail large magellanic cloud heavy element targets luminous detection endothermic other endothermic dm endothermic dm up scattering"
     }
   }
 }
