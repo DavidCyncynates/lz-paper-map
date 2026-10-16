@@ -2,8 +2,8 @@
   "schemaVersion": 2,
   "taxonomyRevision": "2026-10-08",
   "title": "LZ high-recoil literature landscape",
-  "updatedAt": "2026-10-15",
-  "lastSuccessfulScan": "2026-10-15T09:09:16Z",
+  "updatedAt": "2026-10-16",
+  "lastSuccessfulScan": "2026-10-16T09:03:48Z",
   "event": {
     "energyKev": 248,
     "statisticalUncertaintyKev": 23,
@@ -5919,6 +5919,52 @@
         "2609.15118", "2609.15634", "2609.15714", "2609.15782", "2609.15985",
         "2609.17412", "2609.17935", "2609.21444", "2609.26570", "2609.28415",
         "2609.33869", "2609.34230", "2609.35650", "2610.01613"
+      ]
+    },
+    {
+      "id": "2610.21041",
+      "layoutRank": 132,
+      "arxivId": "2610.21041",
+      "arxivVersion": 1,
+      "title": "Testing the inelastic dark matter interpretation of the LZ event with heavy-element experiments",
+      "authors": [
+        "Peter W. Graham",
+        "Juan P. Luengas",
+        "Harikrishnan Ramani",
+        "Samuel S. Y. Wong"
+      ],
+      "published": "2026-10-15",
+      "updated": "2026-10-15",
+      "url": "https://arxiv.org/abs/2610.21041",
+      "role": "diagnostic",
+      "primaryIsland": "endothermic",
+      "islands": ["endothermic"],
+      "tags": [
+        "endothermic dark matter",
+        "high-velocity halo tail",
+        "Large Magellanic Cloud",
+        "heavy-element targets",
+        "luminous detection"
+      ],
+      "summary": "The authors test endothermic dark matter against the LZ recoil by varying the high-speed halo tail and identify heavy-element paleo-detectors and luminous-decay searches as complementary ways to measure the mass and splitting.",
+      "takeaway": "The signal fit and viability of the thermal Higgsino depend strongly on unresolved high-velocity structure, while heavy nuclei can probe most of the event-favored parameter space and break parameter degeneracies.",
+      "x": 55.16,
+      "y": 40.41,
+      "cites": [
+        "2609.01475", "2609.01504", "2609.01583", "2609.01590", "2609.01892",
+        "2609.02775", "2609.02823", "2609.02868", "2609.04163", "2609.04175",
+        "2609.04181", "2609.04185", "2609.04186", "2609.05204", "2609.05291",
+        "2609.06153", "2609.06171", "2609.06640", "2609.06756", "2609.06825",
+        "2609.06890", "2609.06909", "2609.07225", "2609.07742", "2609.07811",
+        "2609.08712", "2609.08893", "2609.09015", "2609.09037", "2609.09107",
+        "2609.09136", "2609.09230", "2609.09385", "2609.10453", "2609.10491",
+        "2609.10504", "2609.10636", "2609.10827", "2609.11600", "2609.12045",
+        "2609.14799", "2609.15118", "2609.15413", "2609.15600", "2609.15634",
+        "2609.15714", "2609.15742", "2609.15782", "2609.15933", "2609.15985",
+        "2609.16529", "2609.17196", "2609.17412", "2609.17935", "2609.21011",
+        "2609.22739", "2609.23096", "2609.23477", "2609.24982", "2609.24988",
+        "2609.25114", "2609.25723", "2609.26570", "2609.26870", "2609.28415",
+        "2609.28740", "2609.29462", "2609.30255", "2609.38316"
       ]
     }
   ]
