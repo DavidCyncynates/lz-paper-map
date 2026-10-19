@@ -2,8 +2,8 @@
   "schemaVersion": 2,
   "taxonomyRevision": "2026-10-08",
   "title": "LZ high-recoil literature landscape",
-  "updatedAt": "2026-10-16",
-  "lastSuccessfulScan": "2026-10-16T09:03:48Z",
+  "updatedAt": "2026-10-19",
+  "lastSuccessfulScan": "2026-10-19T10:44:04Z",
   "event": {
     "energyKev": 248,
     "statisticalUncertaintyKev": 23,
@@ -13,7 +13,7 @@
   },
   "citationData": {
     "source": "arXiv reference lists",
-    "checkedAt": "2026-10-15",
+    "checkedAt": "2026-10-19",
     "scope": "Citations between papers in this map",
     "note": "References to the official LZ preprint are normalized to arXiv:2609.02823."
   },
@@ -5966,6 +5966,31 @@
         "2609.25114", "2609.25723", "2609.26570", "2609.26870", "2609.28415",
         "2609.28740", "2609.29462", "2609.30255", "2609.38316"
       ]
+    },
+    {
+      "id": "2610.23713",
+      "layoutRank": 133,
+      "arxivId": "2610.23713",
+      "arxivVersion": 1,
+      "title": "Foreground dependence of the 20 GeV Galactic halo gamma-ray excess and its proposed connection to the LUX-ZEPLIN event",
+      "authors": ["Kevork N. Abazajian", "Youyou Li", "Oscar Macias"],
+      "published": "2026-10-16",
+      "updated": "2026-10-16",
+      "url": "https://arxiv.org/abs/2610.23713",
+      "role": "diagnostic",
+      "primaryIsland": "comparisons",
+      "islands": ["comparisons"],
+      "tags": [
+        "Fermi-LAT",
+        "gamma-ray halo excess",
+        "Galactic foregrounds",
+        "multi-messenger test"
+      ],
+      "summary": "The authors test the proposed common dark-matter origin of a 20 GeV Galactic gamma-ray halo excess and the LZ high-recoil event, finding that the inferred gamma-ray component changes substantially across foreground models.",
+      "takeaway": "Foreground mismodeling can imitate part of the halo-like signal, weakening a shared smooth-halo annihilation explanation without excluding a dark-matter contribution to the remaining gamma-ray residual.",
+      "x": 43.0,
+      "y": 58.0,
+      "cites": ["2609.02823", "2609.02868"]
     }
   ]
 }
