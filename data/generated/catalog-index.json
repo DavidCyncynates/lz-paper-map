@@ -1,9 +1,9 @@
 {
   "schemaVersion": 2,
   "taxonomyRevision": "2026-10-08",
-  "catalogDigest": "sha256:1dbd2d233432ee96dafd621c202f02cfb5bc70533af5218fd3cf1ede8904386b",
-  "paperCount": 133,
-  "edgeCount": 4006,
+  "catalogDigest": "sha256:17622ef8bf44dbcd84cdcc22c9b77d0dcab2640a4fa5735092669c5cb04ddce8",
+  "paperCount": 134,
+  "edgeCount": 4008,
   "papers": {
     "2609.02823": {
       "citedBy": [
@@ -138,9 +138,10 @@
         "2610.16156",
         "2610.18234",
         "2610.18974",
-        "2610.21041"
+        "2610.21041",
+        "2610.23713"
       ],
-      "incomingCitationCount": 132,
+      "incomingCitationCount": 133,
       "searchText": "search for dark matter particle interactions in an extended nuclear recoil energy window with the lux zeplin lz experiment lz extends its nuclear recoil search to roughly 270 kev and reports one event consistent with a 248 23 stat 23 sys kev recoil the maximum local significance is 3 4σ and the global significance is 2 6σ the experimental anchor one unusual event interesting enough to investigate but well below the threshold for a discovery 2609 02823 lz collaboration experiment xenon nuclear recoil eft operators observation the observation lz result 248 kev candidate"
     },
     "2609.01475": {
@@ -1160,9 +1161,10 @@
         "2610.15557",
         "2610.16156",
         "2610.18234",
-        "2610.21041"
+        "2610.21041",
+        "2610.23713"
       ],
-      "incomingCitationCount": 81,
+      "incomingCitationCount": 82,
       "searchText": "inelastic dark photon dark matter for the lux zeplin high recoil event and the galactic halo gamma ray excess a 420 gev dark photon up scatters to a heavier vector partner through a scalar mediator the same sector is arranged to retain a proposed explanation of a galactic halo gamma ray excess links the lz recoil to a second anomaly using inelastic dark photon dark matter 2609 02868 kimiko yamashita dark photon inelastic transition gamma ray excess sommerfeld enhancement endothermic other endothermic dm endothermic dm up scattering"
     },
     "2609.02994": {
@@ -4798,6 +4800,11 @@
       "citedBy": [],
       "incomingCitationCount": 0,
       "searchText": "testing the inelastic dark matter interpretation of the lz event with heavy element experiments the authors test endothermic dark matter against the lz recoil by varying the high speed halo tail and identify heavy element paleo detectors and luminous decay searches as complementary ways to measure the mass and splitting the signal fit and viability of the thermal higgsino depend strongly on unresolved high velocity structure while heavy nuclei can probe most of the event favored parameter space and break parameter degeneracies 2610 21041 peter w graham juan p luengas harikrishnan ramani samuel s y wong endothermic dark matter high velocity halo tail large magellanic cloud heavy element targets luminous detection endothermic other endothermic dm endothermic dm up scattering"
+    },
+    "2610.23713": {
+      "citedBy": [],
+      "incomingCitationCount": 0,
+      "searchText": "foreground dependence of the 20 gev galactic halo gamma ray excess and its proposed connection to the lux zeplin event the authors test the proposed common dark matter origin of a 20 gev galactic gamma ray halo excess and the lz high recoil event finding that the inferred gamma ray component changes substantially across foreground models foreground mismodeling can imitate part of the halo like signal weakening a shared smooth halo annihilation explanation without excluding a dark matter contribution to the remaining gamma ray residual 2610 23713 kevork n abazajian youyou li oscar macias fermi lat gamma ray halo excess galactic foregrounds multi messenger test comparisons comparisons systematics comparisons sidebands halos nuclei"
     }
   }
 }
