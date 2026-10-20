@@ -2,8 +2,8 @@
   "schemaVersion": 2,
   "taxonomyRevision": "2026-10-08",
   "title": "LZ high-recoil literature landscape",
-  "updatedAt": "2026-10-19",
-  "lastSuccessfulScan": "2026-10-19T10:44:04Z",
+  "updatedAt": "2026-10-20",
+  "lastSuccessfulScan": "2026-10-20T09:13:50Z",
   "event": {
     "energyKev": 248,
     "statisticalUncertaintyKev": 23,
@@ -13,7 +13,7 @@
   },
   "citationData": {
     "source": "arXiv reference lists",
-    "checkedAt": "2026-10-19",
+    "checkedAt": "2026-10-20",
     "scope": "Citations between papers in this map",
     "note": "References to the official LZ preprint are normalized to arXiv:2609.02823."
   },
@@ -5991,6 +5991,81 @@
       "x": 43.0,
       "y": 58.0,
       "cites": ["2609.02823", "2609.02868"]
+    },
+    {
+      "id": "2610.25423",
+      "layoutRank": 134,
+      "arxivId": "2610.25423",
+      "arxivVersion": 1,
+      "title": "Exothermic Dark Matter with a Dark Higgs: The LZ 248 keV Event and the Galactic Center Excess",
+      "authors": ["Jinheung Kim", "Jongkuk Kim", "Pyungwon Ko"],
+      "published": "2026-10-18",
+      "updated": "2026-10-18",
+      "url": "https://arxiv.org/abs/2610.25423",
+      "role": "explanation",
+      "primaryIsland": "exothermic",
+      "islands": ["exothermic"],
+      "tags": [
+        "dark photon",
+        "dark Higgs",
+        "exothermic scattering",
+        "excited-state abundance",
+        "Galactic Center gamma rays"
+      ],
+      "summary": "The authors explain the LZ recoil with exothermic down-scattering in a dark $U(1)$ model whose dark Higgs generates both the dark-photon mass and the splitting between dark-matter states.",
+      "takeaway": "A computed excited-state fraction leaves two event-fitting branches; cosmic-microwave-background limits disfavor the lighter branch, while the heavier branch can also fit the southern-sky Galactic Center gamma-ray excess for a nearby dark-Higgs mass.",
+      "x": 89.1,
+      "y": 72.6,
+      "cites": [
+        "2609.01475", "2609.01504", "2609.01583", "2609.01590", "2609.01892",
+        "2609.02505", "2609.02608", "2609.02807", "2609.02823", "2609.02868",
+        "2609.02994", "2609.04144", "2609.04163", "2609.04175", "2609.04181",
+        "2609.04673", "2609.05204", "2609.06153", "2609.06171", "2609.06571",
+        "2609.06640", "2609.06750", "2609.06825", "2609.06909", "2609.07138",
+        "2609.07225", "2609.07451", "2609.07800", "2609.07811", "2609.08893",
+        "2609.09015", "2609.09107", "2609.09136", "2609.09138", "2609.09385",
+        "2609.10453", "2609.10491", "2609.10636", "2609.10827", "2609.11241",
+        "2609.13038", "2609.13130", "2609.14799", "2609.15027", "2609.15118",
+        "2609.15600", "2609.15714", "2609.15742", "2609.15782", "2609.15985",
+        "2609.17412", "2609.17935", "2609.18564", "2609.21011", "2609.22063",
+        "2609.22739", "2609.23096", "2609.23477", "2609.23691", "2609.24988",
+        "2609.26570", "2609.28129", "2609.28415", "2609.28616", "2609.28740",
+        "2609.28819", "2609.33869", "2609.33952", "2609.34230", "2609.35650",
+        "2609.36814", "2609.37561", "2609.38316", "2610.00226", "2610.00645",
+        "2610.01613", "2610.03692", "2610.05893", "2610.08648", "2610.09516",
+        "2610.09753", "2610.12443", "2610.13930", "2610.18974"
+      ]
+    },
+    {
+      "id": "2610.25925",
+      "layoutRank": 135,
+      "arxivId": "2610.25925",
+      "arxivVersion": 1,
+      "title": "Exploring a low-mass H dibaryon in light of the LZ event: A QCD sum rule study",
+      "authors": ["Wei-Han Tan", "Hua-Xing Chen"],
+      "published": "2026-10-19",
+      "updated": "2026-10-19",
+      "url": "https://arxiv.org/abs/2610.25925",
+      "role": "diagnostic",
+      "primaryIsland": "absorption",
+      "islands": ["absorption"],
+      "tags": [
+        "H dibaryon",
+        "neutron-pair annihilation",
+        "QCD sum rules",
+        "operator-product expansion"
+      ],
+      "summary": "The authors use QCD sum rules to test whether a $uuddss$ H dibaryon near 1.85 GeV could supply the invisible final state invoked by the neutron-pair-annihilation interpretation of the LZ recoil.",
+      "takeaway": "Only the flavor-singlet current built from three scalar diquarks yields the event-motivated low mass at the tested truncation, but higher-dimensional contributions make that result conditional rather than a controlled prediction.",
+      "x": 32.7,
+      "y": 43.4,
+      "cites": [
+        "2609.01475", "2609.01504", "2609.01583", "2609.01590", "2609.01892",
+        "2609.02608", "2609.02823", "2609.02868", "2609.04163", "2609.04175",
+        "2609.04181", "2609.04186", "2609.07807", "2609.07811", "2609.08893",
+        "2609.09037", "2609.09385", "2609.10491", "2609.11833", "2609.12045",
+        "2609.15933", "2609.17412", "2609.18564", "2609.26570", "2609.28415"
+      ]
     }
   ]
 }
