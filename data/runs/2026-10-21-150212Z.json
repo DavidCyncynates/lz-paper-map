@@ -1,0 +1,83 @@
+{
+  "schemaVersion": 1,
+  "runId": "9bb365bd-f008-4994-9e57-ee60a437ceb8",
+  "runAt": "2026-10-21T15:02:12Z",
+  "scanWindow": {
+    "previousSuccessfulScan": "2026-10-20T09:13:50Z",
+    "overlapStart": "2026-10-18",
+    "coverageEnd": "2026-10-21",
+    "coverageComplete": true,
+    "note": "All listing, search, rotating-author, citation-discovery, exact-version screening, and reference lanes completed before cursor promotion."
+  },
+  "discovery": {
+    "inspireDisplayedResults": 147,
+    "inspireNewIds": ["2610.28014", "2610.27105"],
+    "listingPages": 10,
+    "targetedSearches": 11,
+    "rotatingAuthorCatchups": 8,
+    "logicalRequests": 51,
+    "networkRequests": 51,
+    "notModifiedHits": 16,
+    "retries": 0,
+    "candidateCount": 6
+  },
+  "added": [
+    {
+      "id": "2610.27105",
+      "version": 1,
+      "title": "The Electron-Recoil Response Tail and the LZ High-Energy Event Background",
+      "reason": "Directly reconstructs the continuum electron-recoil background for the 248 keV event and quantifies its sensitivity to the assumed detector-response tail.",
+      "url": "https://arxiv.org/abs/2610.27105v1"
+    }
+  ],
+  "revised": [],
+  "ambiguous": [],
+  "excluded": {
+    "count": 5,
+    "ids": ["2411.01503", "2609.37601", "2609.38840", "2610.20828", "2610.28014"],
+    "reason": "Four exact-version records are unrelated computing or biomedical papers surfaced by same-name author searches; 2610.28014v1 uses the 2024 LUX-ZEPLIN exclusion result but does not analyze the 2026 high-recoil candidate."
+  },
+  "citationReconciliation": {
+    "coverageComplete": true,
+    "publicEdgeCount": 4225,
+    "ledgerMappedEdgeCount": 4231,
+    "missingSnapshotIds": [],
+    "staleSnapshotIds": [],
+    "evidence": [
+      {
+        "id": "2610.27105",
+        "version": 1,
+        "completeReferenceCount": 120,
+        "mappedCitationCount": 108,
+        "url": "https://arxiv.org/html/2610.27105v1"
+      }
+    ],
+    "pinnedReviewException": "The six-edge difference is confined to the pre-existing 2609.06640v2 human-review item; its public record and citation edges remain pinned to the accepted v1 snapshot."
+  },
+  "changes": {
+    "addedPaperIds": ["2610.27105"],
+    "revisedPaperIds": [],
+    "candidateLogIds": [],
+    "preserved": "All 136 established records retain their order, summaries, takeaways, roles, island memberships, tags, coordinates, and layout ranks. The addition uses contiguous rank 136."
+  },
+  "validation": {
+    "catalogValidator": "passed: 137 papers and 9 islands",
+    "generatedArtifacts": "passed: catalog index and both map layouts are current",
+    "maintenanceTests": "passed: 103",
+    "catalogIndexTests": "passed: 6",
+    "layoutTests": "passed: 16",
+    "layoutArtifactTests": "passed: 5",
+    "mapCameraTests": "passed: 12",
+    "typecheck": "passed",
+    "lint": "passed",
+    "productionBuild": "passed: 138 prerendered routes and sitemap for 137 papers"
+  },
+  "judgmentCalls": [
+    "2610.27105v1 was placed only in Comparisons & systematics because its central contribution is a mechanism-independent detector-response and background systematic for the event, not a new recoil mechanism.",
+    "The paper is marked diagnostic, uses semantic coordinates near the comparisons family, and receives the next contiguous layout rank 136; all established coordinates and ranks remain unchanged.",
+    "INSPIRE's displayed count rose from 145 to 147. Both new IDs in the refreshed top ten were staged, including 2610.27105 below the first prior-frontier hit, so the count and citation-neighbor delta reconcile without silently skipping a newly indexed paper.",
+    "2610.28014v1 was excluded because its LUX-ZEPLIN discussion is the 2024 exclusion result rather than the isolated 248 keV candidate.",
+    "Four same-name author-search collisions were excluded as unrelated to the isolated LZ recoil candidate.",
+    "The pre-existing 2609.06640v2 human-review item remains unchanged; its public catalog record and citation edges stay pinned to v1 pending editorial review."
+  ]
+}
