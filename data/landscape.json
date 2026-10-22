@@ -2,8 +2,8 @@
   "schemaVersion": 2,
   "taxonomyRevision": "2026-10-08",
   "title": "LZ high-recoil literature landscape",
-  "updatedAt": "2026-10-21",
-  "lastSuccessfulScan": "2026-10-21T15:02:12Z",
+  "updatedAt": "2026-10-22",
+  "lastSuccessfulScan": "2026-10-22T09:35:25Z",
   "event": {
     "energyKev": 248,
     "statisticalUncertaintyKev": 23,
@@ -13,7 +13,7 @@
   },
   "citationData": {
     "source": "arXiv reference lists",
-    "checkedAt": "2026-10-21",
+    "checkedAt": "2026-10-22",
     "scope": "Citations between papers in this map",
     "note": "References to the official LZ preprint are normalized to arXiv:2609.02823."
   },
@@ -6113,6 +6113,73 @@
         "2609.35737", "2609.36184", "2609.36814", "2609.37545", "2609.37561",
         "2609.39529", "2609.40234", "2610.00226", "2610.00645", "2610.01613",
         "2610.03692", "2610.06756", "2610.12443"
+      ]
+    },
+    {
+      "id": "2610.28731",
+      "layoutRank": 137,
+      "arxivId": "2610.28731",
+      "arxivVersion": 1,
+      "title": "Simulation-Informed High-Velocity Dark Matter in the Effective Theory of Direct Detection",
+      "authors": ["Xiuyuan Zhang", "Gonzalo Herrera", "Andreas Thoyas", "Lina Necib"],
+      "published": "2026-10-20",
+      "updated": "2026-10-20",
+      "url": "https://arxiv.org/abs/2610.28731",
+      "role": "diagnostic",
+      "primaryIsland": "comparisons",
+      "islands": ["comparisons"],
+      "tags": [
+        "high-velocity halo tail",
+        "Gaia reconstruction",
+        "Large Magellanic Cloud",
+        "nonrelativistic effective theory",
+        "LZ sidebands"
+      ],
+      "summary": "The authors compare simulation- and Gaia-informed local dark-matter velocity distributions and quantify how their high-speed tails change elastic and inelastic direct-detection interpretations of the LZ high-energy event.",
+      "takeaway": "The inferred inelastic mass splitting can shift by about 130 keV across the tested velocity models, making higher-resolution simulations of the fastest local dark matter important for robust event interpretation and limits.",
+      "x": 61.0,
+      "y": 77.0,
+      "cites": [
+        "2609.01504", "2609.02823", "2609.04144", "2609.09107", "2609.09136",
+        "2609.10453", "2609.15321", "2609.15742", "2609.15985", "2609.28616",
+        "2609.36184", "2609.36814", "2610.03692", "2610.14178"
+      ]
+    },
+    {
+      "id": "2610.29335",
+      "layoutRank": 138,
+      "arxivId": "2610.29335",
+      "arxivVersion": 1,
+      "title": "Heavy Pseudo-Dirac Doublet Dark Matter and Non-Thermal Leptogenesis in Light of the LZ Event",
+      "authors": ["Masahiro Ibe", "Jun Miyamoto"],
+      "published": "2026-10-21",
+      "updated": "2026-10-21",
+      "url": "https://arxiv.org/abs/2610.29335",
+      "role": "explanation",
+      "primaryIsland": "electroweak",
+      "islands": ["electroweak"],
+      "tags": [
+        "pseudo-Dirac dark matter",
+        "electroweak doublet",
+        "inflaton domination",
+        "nonthermal leptogenesis",
+        "entropy dilution"
+      ],
+      "summary": "The authors interpret the LZ recoil with very heavy pseudo-Dirac electroweak-doublet dark matter and use freeze-out during inflaton domination plus reheating dilution to reduce its thermal abundance.",
+      "takeaway": "The dark-matter and nonthermal-leptogenesis histories can coexist only when right-handed-neutrino decays cannot emit dark-matter pairs and cascade production is strongly suppressed, with enhanced CP violation then generally required.",
+      "x": 70.8,
+      "y": 25.2,
+      "cites": [
+        "2609.01504", "2609.01583", "2609.01590", "2609.01892", "2609.02505",
+        "2609.02608", "2609.02775", "2609.02807", "2609.02823", "2609.02994",
+        "2609.04144", "2609.04163", "2609.04175", "2609.06750", "2609.06760",
+        "2609.07138", "2609.07800", "2609.07807", "2609.07811", "2609.08712",
+        "2609.08993", "2609.09138", "2609.09385", "2609.11241", "2609.11833",
+        "2609.15321", "2609.15782", "2609.18564", "2609.19174", "2609.21823",
+        "2609.22063", "2609.23691", "2609.26870", "2609.28129", "2609.28218",
+        "2609.28740", "2609.28819", "2609.33869", "2609.36184", "2609.38316",
+        "2609.40234", "2610.00226", "2610.01613", "2610.03692", "2610.05893",
+        "2610.08648", "2610.09753", "2610.16156", "2610.21041"
       ]
     }
   ]
