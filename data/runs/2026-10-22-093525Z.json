@@ -1,0 +1,97 @@
+{
+  "schemaVersion": 1,
+  "runId": "9a43171a-5e9a-4d9a-8710-305e8d636845",
+  "runAt": "2026-10-22T09:35:25Z",
+  "scanWindow": {
+    "previousSuccessfulScan": "2026-10-21T15:02:12Z",
+    "overlapStart": "2026-10-19",
+    "coverageEnd": "2026-10-22",
+    "coverageComplete": true,
+    "note": "All listing, search, rotating-author, citation-discovery, exact-version screening, and reference lanes completed before cursor promotion."
+  },
+  "discovery": {
+    "inspireDisplayedResults": 150,
+    "inspireNewIds": ["2610.29335", "2610.28731", "2610.28758"],
+    "listingPages": 10,
+    "targetedSearches": 11,
+    "rotatingAuthorCatchups": 8,
+    "logicalRequests": 49,
+    "networkRequests": 49,
+    "notModifiedHits": 15,
+    "retries": 0,
+    "candidateCount": 6
+  },
+  "added": [
+    {
+      "id": "2610.28731",
+      "version": 1,
+      "title": "Simulation-Informed High-Velocity Dark Matter in the Effective Theory of Direct Detection",
+      "reason": "Directly quantifies how simulation- and Gaia-informed high-velocity distributions shift elastic and inelastic interpretations of the LZ high-energy event.",
+      "url": "https://arxiv.org/abs/2610.28731v1"
+    },
+    {
+      "id": "2610.29335",
+      "version": 1,
+      "title": "Heavy Pseudo-Dirac Doublet Dark Matter and Non-Thermal Leptogenesis in Light of the LZ Event",
+      "reason": "Directly models the LZ candidate with pseudo-Dirac electroweak-doublet dark matter in a nonthermal reheating and leptogenesis history.",
+      "url": "https://arxiv.org/abs/2610.29335v1"
+    }
+  ],
+  "revised": [],
+  "ambiguous": [],
+  "excluded": {
+    "count": 4,
+    "ids": ["2610.01825", "2610.07233", "2610.20940", "2610.28758"],
+    "reason": "Three exact-version records are unrelated dark-dimension or QCD/PDF papers surfaced by same-name author searches; 2610.28758v1 is a general anisotropic-halo software paper that does not analyze the isolated LZ recoil candidate."
+  },
+  "citationReconciliation": {
+    "coverageComplete": true,
+    "publicEdgeCount": 4288,
+    "ledgerMappedEdgeCount": 4294,
+    "missingSnapshotIds": [],
+    "staleSnapshotIds": [],
+    "evidence": [
+      {
+        "id": "2610.28731",
+        "version": 1,
+        "completeReferenceCount": 118,
+        "mappedCitationCount": 14,
+        "url": "https://arxiv.org/html/2610.28731v1"
+      },
+      {
+        "id": "2610.29335",
+        "version": 1,
+        "completeReferenceCount": 85,
+        "mappedCitationCount": 49,
+        "url": "https://arxiv.org/html/2610.29335v1"
+      }
+    ],
+    "pinnedReviewException": "The six-edge difference is confined to the pre-existing 2609.06640v2 human-review item; its public record and citation edges remain pinned to the accepted v1 snapshot."
+  },
+  "changes": {
+    "addedPaperIds": ["2610.28731", "2610.29335"],
+    "revisedPaperIds": [],
+    "candidateLogIds": [],
+    "preserved": "All 137 established records retain their order, summaries, takeaways, roles, island memberships, tags, coordinates, and layout ranks. The additions use contiguous ranks 137 and 138."
+  },
+  "validation": {
+    "catalogValidator": "passed: 139 papers and 9 islands",
+    "generatedArtifacts": "passed: catalog index and both map layouts are current",
+    "maintenanceTests": "passed: 103",
+    "catalogIndexTests": "passed: 6",
+    "layoutTests": "passed: 16",
+    "layoutArtifactTests": "passed: 5",
+    "mapCameraTests": "passed: 12",
+    "typecheck": "passed",
+    "lint": "passed",
+    "productionBuild": "passed: 140 prerendered routes and sitemap for 139 papers"
+  },
+  "judgmentCalls": [
+    "2610.28731v1 was placed only in Comparisons & systematics because its central result is a cross-mechanism velocity-distribution systematic covering elastic and inelastic operators, rather than a single recoil model.",
+    "2610.29335v1 was placed only in Electroweak inelastic DM because the pseudo-Dirac electroweak-doublet transition is central to its LZ interpretation; reheating and leptogenesis are secondary cosmological metadata.",
+    "The additions received semantic coordinates near their mechanism families and the next contiguous layout ranks 137 and 138; all established coordinates and ranks remain unchanged.",
+    "INSPIRE's displayed count rose from 147 to 150. All three newly indexed IDs in the refreshed newest results were staged, including 2610.28731 and 2610.28758 below the first prior-frontier hit, so the count and citation-neighbor delta reconcile without silently skipping late-indexed papers.",
+    "2610.28758v1 was excluded because its direct-detection discussion is generic and does not analyze the isolated 248 keV candidate; three same-name author-search collisions were also excluded.",
+    "The pre-existing 2609.06640v2 human-review item remains unchanged; its public catalog record and citation edges stay pinned to v1 pending editorial review."
+  ]
+}
