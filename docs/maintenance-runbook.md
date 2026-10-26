@@ -158,6 +158,14 @@ staged. This per-author migration keeps rotation bounded without dropping
 papers or revisions while later author shards wait for their first turn, and
 it never advances past the run's declared coverage window.
 
+For an ambiguous common name, the checked-in harvest configuration may define
+an `authorSearchOverrides` entry only when official arXiv and INSPIRE pages
+identify the mapped researcher and support the selected arXiv archive scope.
+The override must retain that identity evidence in the configuration, include
+cross-lists, and remain subject to exhaustive pagination. It may reduce
+homonym noise, but it must never skip a remaining results page or be used only
+to work around `maxPages`.
+
 If arXiv throttles, a page is malformed, a search cannot reach its frontier,
 or the candidate limit is exceeded, abort the run. Do not promote cursors or
 fall back to an incomplete result.

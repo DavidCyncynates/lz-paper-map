@@ -81,6 +81,14 @@ cursor is staged only after that catch-up succeeds, so a later author shard
 cannot be stranded, silently skip work published while it waited, or advance
 past the run's declared coverage window.
 
+Common author names may use a checked-in `authorSearchOverrides` entry. Each
+override keeps the catalog display name as the durable cursor key but supplies
+an explicit arXiv query name and physics archive, including cross-lists. Every
+override must carry identity evidence from official public pages so a narrow
+scope is reviewable rather than an unexplained way to evade a page cap. False
+positive homonyms inside that scope remain candidates for ordinary screening;
+the collector still requires complete pagination and never truncates them.
+
 Example no-change completion:
 
 ```sh

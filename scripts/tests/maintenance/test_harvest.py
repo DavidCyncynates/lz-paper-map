@@ -338,6 +338,88 @@ class IntegrationTests(unittest.TestCase):
                     },
                 )
 
+    def test_author_search_override_scopes_ambiguous_name_with_evidence(self) -> None:
+        catchup_url = _author_catchup_search_url(
+            "Lei Wang", "2026-09-28", "2026-10-01", physics_archive="hep-ph"
+        )
+        zero_results = b"""<!doctype html><html><body>
+        <h1>0 results for: Lei Wang</h1>
+        </body></html>"""
+        config = HarvestConfig.from_json(
+            {
+                "coverageThrough": "2026-10-01",
+                "listings": [],
+                "searches": [],
+                "includeDueAuthors": True,
+                "authorLimit": 1,
+                "authorSearchOverrides": [
+                    {
+                        "author": "Lei Wang",
+                        "query": "Lei Wang",
+                        "physicsArchive": "hep-ph",
+                        "identityEvidence": {
+                            "affiliation": "Yantai University",
+                            "inspireAuthorId": "1122094",
+                        },
+                    }
+                ],
+            }
+        )
+        with tempfile.TemporaryDirectory() as temporary:
+            state = Path(temporary) / "state.sqlite3"
+            landscape = Path(temporary) / "landscape.json"
+            landscape.write_text(
+                json.dumps(
+                    {
+                        "lastSuccessfulScan": "2026-09-30T09:46:25Z",
+                        "papers": [
+                            {
+                                "id": "2609.10001",
+                                "title": "Mapped paper",
+                                "authors": ["Lei Wang"],
+                                "published": "2026-09-15",
+                                "updated": "2026-09-15",
+                            }
+                        ],
+                    }
+                ),
+                encoding="utf-8",
+            )
+            with Ledger(state) as ledger:
+                ledger.initialize()
+                ledger.bootstrap_landscape(landscape)
+                plan = ledger.plan(through="2026-10-01", author_limit=1)
+                run = ledger.start_run(
+                    kind="test",
+                    required_lanes=("listings", "searches", "authors"),
+                    coverage_start=plan["coverage"]["start"],
+                    coverage_end=plan["coverage"]["end"],
+                )
+                opener = MappingOpener({catchup_url: zero_results})
+                bundle = harvest(
+                    config,
+                    client=CachedHttpClient(
+                        Path(temporary) / "cache",
+                        delay_seconds=0,
+                        opener=opener,
+                        sleep=lambda _seconds: None,
+                    ),
+                    ledger=ledger,
+                    run_id=run["runId"],
+                )
+                self.assertEqual(opener.requests[0][0].full_url, catchup_url)
+                self.assertEqual(
+                    bundle["searches"][0]["authorSearchOverride"],
+                    {
+                        "query": "Lei Wang",
+                        "physicsArchive": "hep-ph",
+                        "identityEvidence": {
+                            "affiliation": "Yantai University",
+                            "inspireAuthorId": "1122094",
+                        },
+                    },
+                )
+
     def test_new_author_catchup_must_exhaust_before_cursor_is_staged(self) -> None:
         catchup_url = _author_catchup_search_url(
             "Zed Newcomer", "2026-09-28", "2026-10-01"
