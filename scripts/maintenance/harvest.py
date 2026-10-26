@@ -35,7 +35,13 @@ import urllib.request
 from pathlib import Path
 from typing import Any, Callable, Iterable, Mapping, Sequence
 
-from .ledger import Ledger, canonical_json, normalize_arxiv_id, sha256_bytes
+from .ledger import (
+    Ledger,
+    canonical_json,
+    normalize_arxiv_id,
+    normalize_author,
+    sha256_bytes,
+)
 
 
 BUNDLE_SCHEMA_VERSION = 1
@@ -93,6 +99,7 @@ _VERSION_DATE = re.compile(
     r"(?:\s+\d{1,2}:\d{2}:\d{2}\s+(?:UTC|GMT))?)",
     re.I,
 )
+_ARXIV_ARCHIVE = re.compile(r"^[A-Za-z0-9]+(?:[.-][A-Za-z0-9]+)*$")
 
 
 class HarvestError(RuntimeError):
@@ -824,6 +831,21 @@ class SearchSource:
 
 
 @dataclasses.dataclass(frozen=True)
+class AuthorSearchOverride:
+    author_key: str
+    query: str
+    physics_archive: str
+    identity_evidence: tuple[tuple[str, str], ...]
+
+    def output(self) -> dict[str, Any]:
+        return {
+            "query": self.query,
+            "physicsArchive": self.physics_archive,
+            "identityEvidence": dict(self.identity_evidence),
+        }
+
+
+@dataclasses.dataclass(frozen=True)
 class HarvestConfig:
     listings: tuple[ListingSource, ...]
     searches: tuple[SearchSource, ...]
@@ -835,6 +857,7 @@ class HarvestConfig:
     overlap_days: int = 2
     coverage_through: str | None = None
     expected_latest_date: str | None = None
+    author_search_overrides: tuple[AuthorSearchOverride, ...] = ()
 
     @classmethod
     def from_json(cls, value: Mapping[str, Any]) -> "HarvestConfig":
@@ -877,6 +900,45 @@ class HarvestConfig:
         if expected_latest_date is not None:
             dt.date.fromisoformat(str(expected_latest_date))
             expected_latest_date = str(expected_latest_date)
+        author_search_overrides = []
+        author_keys: set[str] = set()
+        for item in value.get("authorSearchOverrides", []):
+            if not isinstance(item, Mapping):
+                raise ValueError("authorSearchOverrides entries must be objects")
+            author = _clean_text(str(item.get("author", "")))
+            query = _clean_text(str(item.get("query", "")))
+            physics_archive = _clean_text(str(item.get("physicsArchive", "")))
+            identity_evidence = item.get("identityEvidence")
+            if not author or not query:
+                raise ValueError("authorSearchOverrides require author and query")
+            if not physics_archive or not _ARXIV_ARCHIVE.fullmatch(physics_archive):
+                raise ValueError(
+                    "authorSearchOverrides physicsArchive must be an arXiv archive name"
+                )
+            if not isinstance(identity_evidence, Mapping) or not identity_evidence:
+                raise ValueError(
+                    "authorSearchOverrides require non-empty identityEvidence"
+                )
+            evidence = tuple(
+                sorted(
+                    (_clean_text(str(key)), _clean_text(str(raw)))
+                    for key, raw in identity_evidence.items()
+                )
+            )
+            if any(not key or not raw for key, raw in evidence):
+                raise ValueError("authorSearchOverrides identityEvidence cannot be blank")
+            author_key = normalize_author(author)
+            if author_key in author_keys:
+                raise ValueError(f"duplicate authorSearchOverride for {author!r}")
+            author_keys.add(author_key)
+            author_search_overrides.append(
+                AuthorSearchOverride(
+                    author_key=author_key,
+                    query=query,
+                    physics_archive=physics_archive,
+                    identity_evidence=evidence,
+                )
+            )
         if review_limit <= 0 or author_limit < 0 or overlap_days < 0:
             raise ValueError(
                 "reviewLimit must be positive; authorLimit/overlapDays must be non-negative"
@@ -892,6 +954,9 @@ class HarvestConfig:
             overlap_days=overlap_days,
             coverage_through=coverage_through,
             expected_latest_date=expected_latest_date,
+            author_search_overrides=tuple(
+                sorted(author_search_overrides, key=lambda item: item.author_key)
+            ),
         )
 
 
@@ -916,7 +981,22 @@ def _require_newest_first(url: str) -> None:
         )
 
 
-def _author_search_url(author: str) -> str:
+def _author_search_url(author: str, physics_archive: str | None = None) -> str:
+    if physics_archive is not None:
+        query = urllib.parse.urlencode(
+            {
+                "advanced": "",
+                "terms-0-operator": "AND",
+                "terms-0-term": author,
+                "terms-0-field": "author",
+                "classification-physics": physics_archive,
+                "classification-include_cross_list": "include",
+                "abstracts": "show",
+                "size": "50",
+                "order": "-announced_date_first",
+            }
+        )
+        return "https://arxiv.org/search/advanced?" + query
     query = urllib.parse.urlencode(
         {
             "query": author,
@@ -929,7 +1009,12 @@ def _author_search_url(author: str) -> str:
     return "https://arxiv.org/search/?" + query
 
 
-def _author_catchup_search_url(author: str, start: str, end: str) -> str:
+def _author_catchup_search_url(
+    author: str,
+    start: str,
+    end: str,
+    physics_archive: str | None = None,
+) -> str:
     """Build a bounded HTML search for a previously unmonitored author.
 
     The most-recent submission-date filter includes both new papers and later
@@ -942,23 +1027,25 @@ def _author_catchup_search_url(author: str, start: str, end: str) -> str:
     end_date = dt.date.fromisoformat(end)
     if start_date > end_date:
         raise ValueError("author catch-up start cannot be after its end")
-    query = urllib.parse.urlencode(
-        {
-            "advanced": "",
-            "terms-0-operator": "AND",
-            "terms-0-term": author,
-            "terms-0-field": "author",
-            "classification-physics_archives": "all",
-            "classification-include_cross_list": "include",
-            "date-filter_by": "date_range",
-            "date-from_date": start,
-            "date-to_date": end,
-            "date-date_type": "submitted_date",
-            "abstracts": "show",
-            "size": "50",
-            "order": "-announced_date_first",
-        }
-    )
+    parameters = {
+        "advanced": "",
+        "terms-0-operator": "AND",
+        "terms-0-term": author,
+        "terms-0-field": "author",
+        "classification-include_cross_list": "include",
+        "date-filter_by": "date_range",
+        "date-from_date": start,
+        "date-to_date": end,
+        "date-date_type": "submitted_date",
+        "abstracts": "show",
+        "size": "50",
+        "order": "-announced_date_first",
+    }
+    if physics_archive is None:
+        parameters["classification-physics_archives"] = "all"
+    else:
+        parameters["classification-physics"] = physics_archive
+    query = urllib.parse.urlencode(parameters)
     return "https://arxiv.org/search/advanced?" + query
 
 
@@ -969,6 +1056,7 @@ class EffectiveSearch:
     bootstrap_forward: bool = False
     catchup_window: tuple[str, str] | None = None
     staged_cursor: dict[str, Any] | None = None
+    author_search_override: AuthorSearchOverride | None = None
 
 
 def _author_covered_through(value: Any) -> str | None:
@@ -1308,6 +1396,9 @@ def harvest(
         if ledger is None:
             raise HarvestError("includeDueAuthors requires a maintenance ledger")
         assert ledger_plan is not None
+        author_search_overrides = {
+            item.author_key: item for item in config.author_search_overrides
+        }
         for item in ledger_plan["authorsDue"]:
             author = str(item["displayName"])
             if re.search(r"\bcollaboration\b", author, flags=re.I):
@@ -1315,6 +1406,15 @@ def harvest(
                     (author, {"frontier": [], "skipped": "collaboration_name"})
                 )
                 continue
+            author_search_override = author_search_overrides.get(normalize_author(author))
+            author_query = (
+                author_search_override.query if author_search_override else author
+            )
+            physics_archive = (
+                author_search_override.physics_archive
+                if author_search_override
+                else None
+            )
             frontier = _frontier_from_cursor(item.get("cursor"))
             covered_through = _author_covered_through(item.get("cursor"))
             bootstrap_forward = (
@@ -1326,7 +1426,7 @@ def harvest(
             staged_cursor = None
             source = SearchSource(
                 name=f"author:{author}",
-                url=_author_search_url(author),
+                url=_author_search_url(author_query, physics_archive),
                 frontier=frontier,
                 max_pages=2,
                 exhaustive=False,
@@ -1374,7 +1474,11 @@ def harvest(
                 )
                 source = SearchSource(
                     name=f"author-catchup:{author}",
-                    url=_author_catchup_search_url(author, *catchup_window),
+                    url=_author_catchup_search_url(
+                        author_query,
+                        *catchup_window,
+                        physics_archive=physics_archive,
+                    ),
                     frontier=(),
                     max_pages=4,
                     exhaustive=True,
@@ -1396,6 +1500,7 @@ def harvest(
                     bootstrap_forward=bootstrap_forward,
                     catchup_window=catchup_window,
                     staged_cursor=staged_cursor,
+                    author_search_override=author_search_override,
                 )
             )
 
@@ -1490,6 +1595,11 @@ def harvest(
                         "end": effective.catchup_window[1],
                     }
                     if effective.catchup_window is not None
+                    else None
+                ),
+                "authorSearchOverride": (
+                    effective.author_search_override.output()
+                    if effective.author_search_override is not None
                     else None
                 ),
             }

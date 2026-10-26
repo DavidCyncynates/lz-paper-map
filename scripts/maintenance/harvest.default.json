@@ -4,6 +4,20 @@
   "authorLimit": 8,
   "overlapDays": 2,
   "reviewLimit": 500,
+  "authorSearchOverrides": [
+    {
+      "author": "Lei Wang",
+      "query": "Lei Wang",
+      "physicsArchive": "hep-ph",
+      "identityEvidence": {
+        "affiliation": "Yantai University",
+        "arxivPaper": "2609.06571v1",
+        "inspireAuthorId": "1122094",
+        "inspireBai": "Lei.Wang.2",
+        "orcid": "0000-0001-8639-4917"
+      }
+    }
+  ],
   "listings": [
     {
       "name": "astro-ph.CO:recent",
