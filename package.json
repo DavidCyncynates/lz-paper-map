@@ -25,6 +25,7 @@
     "test:map-camera": "node --experimental-strip-types --test scripts/test-map-camera.mjs",
     "test:maintenance": "python3 -m unittest discover -s scripts/tests/maintenance -p 'test_*.py'",
     "test:date-range": "node --experimental-strip-types --test scripts/test-paper-date-range.mjs",
+    "test:paper-filters": "node --experimental-strip-types --test scripts/test-paper-filters.mjs",
     "test:citation-size": "node --experimental-strip-types --test scripts/test-paper-citation-size.mjs",
     "test:theme": "node --experimental-strip-types --test scripts/test-color-theme.mjs",
     "test:seo": "node --test scripts/test-search-discovery.mjs",

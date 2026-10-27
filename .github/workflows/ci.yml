@@ -66,6 +66,9 @@ jobs:
       - name: Test publication date filtering
         run: pnpm test:date-range
 
+      - name: Test combined paper filters
+        run: pnpm test:paper-filters
+
       - name: Test citation sizing
         run: pnpm test:citation-size
 

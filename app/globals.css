@@ -804,16 +804,71 @@ a {
 
 .contribution-legend ul {
   display: grid;
-  gap: 7px;
+  gap: 3px;
   margin: 10px 0;
   padding: 0;
   list-style: none;
 }
 
-.contribution-legend li {
+.legend-heading {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 8px;
+}
+
+.legend-heading .nav-label {
+  margin: 0;
+}
+
+.legend-reset,
+.legend-filter {
+  border: 1px solid transparent;
+  border-radius: 6px;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+
+.legend-reset {
+  min-height: 28px;
+  padding: 3px 6px;
+  font-size: 9px;
+}
+
+.legend-filter {
+  display: grid;
+  grid-template-columns: 20px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 7px;
+  width: 100%;
+  min-height: 32px;
+  padding: 4px;
+  text-align: left;
+}
+
+.legend-filter small {
+  font-size: 9px;
+  font-variant-numeric: tabular-nums;
+}
+
+.legend-reset:hover,
+.legend-filter:hover {
+  background: var(--accent);
+}
+
+.legend-reset[aria-pressed='true'],
+.legend-filter.is-active {
+  border-color: var(--ring);
+  background: var(--accent);
+  color: var(--accent-foreground);
+}
+
+.legend-reset:focus-visible,
+.legend-filter:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
 }
 
 .contribution-legend > p:last-child {
@@ -1940,6 +1995,10 @@ a {
 
   .contribution-legend ul {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .legend-filter {
+    min-height: 36px;
   }
 
   .map-panel {

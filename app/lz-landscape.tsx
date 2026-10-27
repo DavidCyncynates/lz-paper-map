@@ -30,6 +30,7 @@ import { Input } from '@/components/ui/input';
 import { ThemeToggle } from '@/components/theme-toggle';
 import { CiteMapButton } from '@/components/cite-map-button';
 import { PaperMark } from '@/components/paper-mark';
+import { filterCatalogPapers, normalizeSearchText } from '@/lib/paper-filters';
 import {
   PAPER_CONTRIBUTIONS,
   paperContributionLabel,
@@ -264,31 +265,17 @@ function tooltipAuthorLabel(authors: readonly string[]) {
   return `${names[0]} et al.`;
 }
 
-function normalizeSearchText(value: string) {
-  return value
-    .normalize('NFKD')
-    .replace(/\p{Mark}+/gu, '')
-    .toLocaleLowerCase('en')
-    .replace(/[^\p{Letter}\p{Number}]+/gu, ' ')
-    .trim()
-    .replace(/\s+/g, ' ');
-}
-
 function filterPapers(
   query: string,
   islandId: string,
   dateRange: PaperDateRange = CATALOG_DATE_BOUNDS,
+  contribution: string = 'all',
 ) {
-  const normalized = normalizeSearchText(query);
-  return landscape.papers.filter((paper) => {
-    const inIsland = islandId === 'all' || paper.primaryIsland === islandId;
-    return (
-      inIsland &&
-      paperInDateRange(paper, dateRange) &&
-      (!normalized ||
-        NORMALIZED_SEARCH_TEXT_BY_ID.get(paper.id)?.includes(normalized))
-    );
-  });
+  return filterCatalogPapers(
+    landscape.papers,
+    { query, islandId, dateRange, contribution },
+    NORMALIZED_SEARCH_TEXT_BY_ID,
+  );
 }
 
 type CitationGroupProps = {
@@ -395,6 +382,7 @@ function CitationGroup({
 export function LzLandscape() {
   const [query, setQuery] = useState('');
   const [activeIsland, setActiveIsland] = useState('all');
+  const [activeContribution, setActiveContribution] = useState('all');
   const [dateRange, setDateRange] =
     useState<PaperDateRange>(CATALOG_DATE_BOUNDS);
   const [dateRangeHydrated, setDateRangeHydrated] = useState(false);
@@ -424,6 +412,7 @@ export function LzLandscape() {
   const dateFilterButtonRef = useRef<HTMLButtonElement>(null);
   const fromDateInputRef = useRef<HTMLInputElement>(null);
   const dateRangeRef = useRef(dateRange);
+  const activeContributionRef = useRef(activeContribution);
   const panGestureRef = useRef<PanGesture | null>(null);
   const touchPointersRef = useRef(new Map<number, MapPoint>());
   const pinchGestureRef = useRef<PinchGesture | null>(null);
@@ -447,6 +436,7 @@ export function LzLandscape() {
   const detailTitleRef = useRef<HTMLHeadingElement>(null);
   const focusDetailAfterCitation = useRef(false);
   dateRangeRef.current = dateRange;
+  activeContributionRef.current = activeContribution;
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -584,6 +574,7 @@ export function LzLandscape() {
               nextQuery,
               nextIsland,
               dateRangeRef.current,
+              activeContributionRef.current,
             );
             setQuery(nextQuery);
             setActiveIsland(nextIsland);
@@ -638,6 +629,7 @@ export function LzLandscape() {
             setQuery('');
             setSelectedId(paper.id);
             setActiveIsland('all');
+            setActiveContribution('all');
             const url = new URL(window.location.href);
             url.searchParams.set('paper', paper.id);
             replaceBrowserLocation(`${url.pathname}${url.search}${url.hash}`);
@@ -659,10 +651,26 @@ export function LzLandscape() {
     return () => lifecycle.abort();
   }, []);
 
-  const visiblePapers = useMemo(
+  const contributionContextPapers = useMemo(
     () => filterPapers(query, activeIsland, dateRange),
     [activeIsland, dateRange, query],
   );
+  const visiblePapers = useMemo(
+    () =>
+      contributionContextPapers.filter(
+        (paper) =>
+          activeContribution === 'all' ||
+          paper.contribution === activeContribution,
+      ),
+    [activeContribution, contributionContextPapers],
+  );
+  const contributionCounts = useMemo(() => {
+    const counts = new Map<string, number>();
+    for (const paper of contributionContextPapers) {
+      counts.set(paper.contribution, (counts.get(paper.contribution) ?? 0) + 1);
+    }
+    return counts;
+  }, [contributionContextPapers]);
   const dateRangeActive = !isFullDateRange(dateRange, CATALOG_DATE_BOUNDS);
   const dateRangeFromDay = isoDateToDayIndex(dateRange.from);
   const dateRangeToDay = isoDateToDayIndex(dateRange.to);
@@ -939,14 +947,37 @@ export function LzLandscape() {
 
   function chooseIsland(id: string) {
     setActiveIsland(id);
-    const firstMatch = filterPapers(query, id, dateRange)[0];
+    const firstMatch = filterPapers(
+      query,
+      id,
+      dateRange,
+      activeContribution,
+    )[0];
     if (firstMatch) selectPaper(firstMatch.id);
+  }
+
+  function chooseContribution(id: string) {
+    const nextContribution = id === activeContribution ? 'all' : id;
+    setActiveContribution(nextContribution);
+    const matches = filterPapers(
+      query,
+      activeIsland,
+      dateRange,
+      nextContribution,
+    );
+    if (
+      matches.length > 0 &&
+      !matches.some((paper) => paper.id === selectedId)
+    ) {
+      selectPaper(matches[0].id);
+    }
   }
 
   function selectCitationPaper(id: string) {
     focusDetailAfterCitation.current = true;
     setQuery('');
     setActiveIsland('all');
+    setActiveContribution('all');
     const paper = paperById.get(id);
     if (paper && !paperInDateRange(paper, dateRange)) {
       resetDateRange();
@@ -956,7 +987,12 @@ export function LzLandscape() {
 
   function setPublicationDateRange(nextRange: PaperDateRange) {
     setDateRange(nextRange);
-    const nextVisiblePapers = filterPapers(query, activeIsland, nextRange);
+    const nextVisiblePapers = filterPapers(
+      query,
+      activeIsland,
+      nextRange,
+      activeContribution,
+    );
     if (
       nextVisiblePapers.length > 0 &&
       !nextVisiblePapers.some((paper) => paper.id === selectedId)
@@ -1691,23 +1727,45 @@ export function LzLandscape() {
             className="contribution-legend"
             aria-labelledby="circle-styles-heading"
           >
-            <p className="nav-label" id="circle-styles-heading">
-              Circle styles
-            </p>
+            <div className="legend-heading">
+              <p className="nav-label" id="circle-styles-heading">
+                Circle styles
+              </p>
+              <button
+                type="button"
+                className="legend-reset"
+                aria-pressed={activeContribution === 'all'}
+                onClick={() => chooseContribution('all')}
+              >
+                All types
+              </button>
+            </div>
             <ul>
               {PAPER_CONTRIBUTIONS.map((item) => (
-                <li key={item.id} title={item.description}>
-                  <span className={`legend-mark legend-mark--${item.id}`}>
-                    <PaperMark contribution={item.id} />
-                  </span>
-                  <span>{item.label}</span>
+                <li key={item.id}>
+                  <button
+                    type="button"
+                    className={`legend-filter ${activeContribution === item.id ? 'is-active' : ''}`}
+                    aria-pressed={activeContribution === item.id}
+                    title={item.description}
+                    onClick={() => chooseContribution(item.id)}
+                  >
+                    <span className={`legend-mark legend-mark--${item.id}`}>
+                      <PaperMark contribution={item.id} />
+                    </span>
+                    <span>{item.label}</span>
+                    <small>
+                      {contributionCounts.get(item.id) ?? 0}
+                      <span className="sr-only"> papers</span>
+                    </small>
+                  </button>
                 </li>
               ))}
             </ul>
             <p>
-              Interior: main contribution. Colour: physics category. Size:
-              citations when enabled. Reassessments critique or refine an
-              earlier bound.
+              Select a style to filter by main contribution. Colour: physics
+              category. Size: citations when enabled. Reassessments critique or
+              refine an earlier bound.
             </p>
           </section>
 
@@ -2286,7 +2344,7 @@ export function LzLandscape() {
                       <span>
                         {dateRangeActive
                           ? 'Try widening the dates or changing another filter.'
-                          : 'Try a mechanism, author, or arXiv ID.'}
+                          : 'Try another search or clear the contribution and idea filters.'}
                       </span>
                     </div>
                   )}
@@ -2368,7 +2426,7 @@ export function LzLandscape() {
                   <span>
                     {dateRangeActive
                       ? 'Try widening the dates or changing another filter.'
-                      : 'Try a mechanism, author, or arXiv ID.'}
+                      : 'Try another search or clear the contribution and idea filters.'}
                   </span>
                 </div>
               )}
@@ -2393,91 +2451,98 @@ export function LzLandscape() {
           </footer>
         </section>
 
-        <aside className="paper-detail" aria-live="polite">
-          <div className="detail-topline">
-            <span
-              className="detail-island-dot"
-              style={{ backgroundColor: selectedIsland?.color }}
-            />
-            <span>{selectedIsland?.label}</span>
-            <span className="paper-kind">
-              {paperContributionLabel(selectedPaper.contribution)}
-            </span>
-          </div>
-
-          <h2 ref={detailTitleRef} tabIndex={-1}>
-            {selectedPaper.title}
-          </h2>
-          <p className="authors">{selectedPaper.authors.join(', ')}</p>
-
-          <div className="paper-facts">
-            <span>
-              <CalendarDays aria-hidden="true" />
-              {dateLabel(selectedPaper.published)}
-            </span>
-            <span>
-              <BookOpenText aria-hidden="true" />
-              arXiv:{selectedPaper.arxivId}
-            </span>
-          </div>
-
-          <a
-            className="paper-link"
-            href={selectedPaper.url}
-            target="_blank"
-            rel="noreferrer"
-          >
-            Read on arXiv
-            <ExternalLink aria-hidden="true" />
-          </a>
-
-          <div className="takeaway-card">
-            <Sparkles aria-hidden="true" />
-            <div>
-              <small>Why it is here</small>
-              <p>{selectedPaper.takeaway}</p>
+        {visiblePapers.length === 0 ? (
+          <aside className="paper-detail" aria-live="polite">
+            <p className="nav-label">No matching paper</p>
+            <p>Change the filters to view a paper and its citation lineage.</p>
+          </aside>
+        ) : (
+          <aside className="paper-detail" aria-live="polite">
+            <div className="detail-topline">
+              <span
+                className="detail-island-dot"
+                style={{ backgroundColor: selectedIsland?.color }}
+              />
+              <span>{selectedIsland?.label}</span>
+              <span className="paper-kind">
+                {paperContributionLabel(selectedPaper.contribution)}
+              </span>
             </div>
-          </div>
 
-          <div className="summary-block">
-            <p className="nav-label">Machine-assisted summary</p>
-            <p>{selectedPaper.summary}</p>
-          </div>
+            <h2 ref={detailTitleRef} tabIndex={-1}>
+              {selectedPaper.title}
+            </h2>
+            <p className="authors">{selectedPaper.authors.join(', ')}</p>
 
-          <div className="tag-list" aria-label="Paper concepts">
-            {selectedPaper.tags.map((tag) => (
-              <span key={tag}>{tag}</span>
-            ))}
-          </div>
+            <div className="paper-facts">
+              <span>
+                <CalendarDays aria-hidden="true" />
+                {dateLabel(selectedPaper.published)}
+              </span>
+              <span>
+                <BookOpenText aria-hidden="true" />
+                arXiv:{selectedPaper.arxivId}
+              </span>
+            </div>
 
-          <section
-            className="citation-lineage"
-            aria-labelledby="citation-lineage-title"
-          >
-            <h3 id="citation-lineage-title">Citation lineage</h3>
-            <CitationGroup
-              title="Cites on this map"
-              papers={selectedCites}
-              relationship="cites"
-              dateRange={dateRange}
-              dateRangeActive={dateRangeActive}
-              onSelect={selectCitationPaper}
-            />
-            <CitationGroup
-              title="Cited by on this map"
-              papers={selectedCitedBy}
-              relationship="cited-by"
-              dateRange={dateRange}
-              dateRangeActive={dateRangeActive}
-              onSelect={selectCitationPaper}
-            />
-          </section>
+            <a
+              className="paper-link"
+              href={selectedPaper.url}
+              target="_blank"
+              rel="noreferrer"
+            >
+              Read on arXiv
+              <ExternalLink aria-hidden="true" />
+            </a>
 
-          <p className="screening-note">
-            Metadata comes from arXiv. Summaries and placement are
-            machine-assisted; inclusion is not endorsement or peer review.
-          </p>
-        </aside>
+            <div className="takeaway-card">
+              <Sparkles aria-hidden="true" />
+              <div>
+                <small>Why it is here</small>
+                <p>{selectedPaper.takeaway}</p>
+              </div>
+            </div>
+
+            <div className="summary-block">
+              <p className="nav-label">Machine-assisted summary</p>
+              <p>{selectedPaper.summary}</p>
+            </div>
+
+            <div className="tag-list" aria-label="Paper concepts">
+              {selectedPaper.tags.map((tag) => (
+                <span key={tag}>{tag}</span>
+              ))}
+            </div>
+
+            <section
+              className="citation-lineage"
+              aria-labelledby="citation-lineage-title"
+            >
+              <h3 id="citation-lineage-title">Citation lineage</h3>
+              <CitationGroup
+                title="Cites on this map"
+                papers={selectedCites}
+                relationship="cites"
+                dateRange={dateRange}
+                dateRangeActive={dateRangeActive}
+                onSelect={selectCitationPaper}
+              />
+              <CitationGroup
+                title="Cited by on this map"
+                papers={selectedCitedBy}
+                relationship="cited-by"
+                dateRange={dateRange}
+                dateRangeActive={dateRangeActive}
+                onSelect={selectCitationPaper}
+              />
+            </section>
+
+            <p className="screening-note">
+              Metadata comes from arXiv. Summaries and placement are
+              machine-assisted; inclusion is not endorsement or peer review.
+            </p>
+          </aside>
+        )}
       </section>
     </main>
   );
