@@ -7,11 +7,25 @@ recoil candidate announced on 1 September 2026.
 
 ## Citation and archival releases
 
-Citation metadata is provided in [CITATION.cff](CITATION.cff). Tagged GitHub
-releases are archived through the repository's Zenodo integration. Each
-archive identifies a specific code and catalogue snapshot; the live website
-continues to update between releases. Daily catalogue updates do not create
-new archival releases automatically.
+To cite the evolving map, use its concept DOI:
+[10.5281/zenodo.23688061](https://doi.org/10.5281/zenodo.23688061).
+The **Cite this map** button copies a BibTeX entry with that DOI, and
+[CITATION.cff](CITATION.cff) supplies the same preferred citation on GitHub.
+
+The first archive, v1.0.0, has the version DOI
+[10.5281/zenodo.23688062](https://doi.org/10.5281/zenodo.23688062). Use that DOI
+when referring specifically to the archived code and catalogue snapshot.
+The live website continues to update between releases; daily catalogue updates
+do not create new archival releases automatically.
+
+For future archival releases, update the version and release date in
+`.zenodo.json` and `CITATION.cff` before tagging a release. Do not put the
+concept DOI into `.zenodo.json`'s `doi` field, which denotes an existing DOI
+for that specific upload. Remove the previous version-specific top-level
+`doi` from `CITATION.cff` before tagging the next release. After Zenodo
+registers a new archive, update the
+version DOI in `CITATION.cff` and `lib/map-citation.ts`. The concept DOI and
+the map button's general citation stay the same.
 
 Original software is licensed under [MIT](LICENSE). Original summaries and
 documentation are licensed under [CC BY 4.0](LICENSE-CONTENT.md); third-party

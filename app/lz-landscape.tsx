@@ -28,6 +28,7 @@ import {
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { ThemeToggle } from '@/components/theme-toggle';
+import { CiteMapButton } from '@/components/cite-map-button';
 import generatedMapLayouts from '@/data/generated/map-layouts.json';
 import landscape from '@/data/landscape.json';
 import {
@@ -1465,6 +1466,7 @@ export function LzLandscape() {
           >
             Method
           </a>
+          <CiteMapButton />
           <a
             href="https://arxiv.org/abs/2609.02823"
             target="_blank"
