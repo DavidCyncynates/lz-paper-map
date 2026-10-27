@@ -1,0 +1,29 @@
+cff-version: 1.2.0
+message: "If this map is useful in your research, please cite it using this record."
+type: software
+title: "LZ Paper Map: literature on the 248 keV nuclear-recoil candidate"
+authors:
+  - family-names: Cyncynates
+    given-names: David
+    orcid: "https://orcid.org/0000-0002-2660-8407"
+    affiliation: "Abdus Salam International Centre for Theoretical Physics"
+version: 1.0.0
+date-released: 2026-10-27
+url: "https://davidcyncynates.github.io/lz-paper-map/"
+repository-code: "https://github.com/DavidCyncynates/lz-paper-map"
+license: MIT
+abstract: >-
+  A searchable, interactive literature map of papers responding to the
+  LUX-ZEPLIN 248 keV nuclear-recoil candidate announced on 1 September 2026.
+  The archive contains the website source, reviewed paper catalogue,
+  machine-assisted summaries, physics taxonomy, citation relationships,
+  and reproducible map layouts. The software is licensed under MIT;
+  original summaries and documentation are licensed under CC BY 4.0.
+  Third-party material retains its existing rights; see LICENSE-CONTENT.md.
+keywords:
+  - LUX-ZEPLIN
+  - LZ
+  - dark matter
+  - nuclear recoil
+  - literature map
+  - research software

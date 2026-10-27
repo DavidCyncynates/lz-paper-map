@@ -5,6 +5,21 @@ recoil candidate announced on 1 September 2026.
 
 **Live site:** [davidcyncynates.github.io/lz-paper-map](https://davidcyncynates.github.io/lz-paper-map/)
 
+## Citation and archival releases
+
+Citation metadata is provided in [CITATION.cff](CITATION.cff). Tagged GitHub
+releases are archived through the repository's Zenodo integration. Each
+archive identifies a specific code and catalogue snapshot; the live website
+continues to update between releases. Daily catalogue updates do not create
+new archival releases automatically.
+
+Original software is licensed under [MIT](LICENSE). Original summaries and
+documentation are licensed under [CC BY 4.0](LICENSE-CONTENT.md); third-party
+material retains its existing rights. See the content license for the scope
+and attribution terms.
+
+## About the map
+
 The atlas contains the LZ experimental paper and the response literature found
 through the latest reviewed arXiv scan. Nearby dots share mechanisms or
 phenomenology; the islands name the main families of ideas. Search, filters,
