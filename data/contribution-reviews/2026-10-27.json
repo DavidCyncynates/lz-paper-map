@@ -1,0 +1,1086 @@
+{
+  "reviewedAt": "2026-10-27",
+  "basis": "Machine-assisted review of catalog titles, summaries and takeaways; official arXiv abstracts or paper text checked for selected edge cases. Labels describe the main contribution of the accepted version, not a claim of priority, validity or completeness.",
+  "counts": {
+    "bound-reassessment": 3,
+    "candidate": 93,
+    "candidate-and-bound": 8,
+    "new-bound": 15,
+    "observation": 1,
+    "other": 20
+  },
+  "papers": [
+    {
+      "id": "2609.02823",
+      "arxivVersion": 1,
+      "contribution": "observation",
+      "reason": "The source experimental search reports the isolated recoil candidate.",
+      "confidence": 1
+    },
+    {
+      "id": "2609.01475",
+      "arxivVersion": 1,
+      "contribution": "candidate",
+      "reason": "Develops a generic endothermic interpretation; CRESST discussion is a future test rather than a new bound.",
+      "confidence": 0.97
+    },
+    {
+      "id": "2609.01504",
+      "arxivVersion": 3,
+      "contribution": "candidate",
+      "reason": "Develops the thermal-Higgsino interpretation and its halo-tail dependence.",
+      "confidence": 0.97
+    },
+    {
+      "id": "2609.01583",
+      "arxivVersion": 2,
+      "contribution": "candidate",
+      "reason": "Develops a predictive off-diagonal-Z Higgsino explanation of the recoil.",
+      "confidence": 0.97
+    },
+    {
+      "id": "2609.01590",
+      "arxivVersion": 2,
+      "contribution": "candidate",
+      "reason": "Connects a Higgsino explanation to gamma-ray observations and future tests, without evidence here of a new exclusion analysis.",
+      "confidence": 0.91
+    },
+    {
+      "id": "2609.01592",
+      "arxivVersion": 2,
+      "contribution": "candidate-and-bound",
+      "reason": "Proposes fermionic absorption and performs a KamLAND neutron-emission recast excluding its benchmark; verified in the accepted v2 abstract.",
+      "confidence": 0.99,
+      "sources": [
+        "https://arxiv.org/abs/2609.01592v2"
+      ]
+    },
+    {
+      "id": "2609.01892",
+      "arxivVersion": 1,
+      "contribution": "candidate",
+      "reason": "Constructs a high-scale supersymmetric and Peccei-Quinn realization of the inelastic Higgsino explanation.",
+      "confidence": 0.96
+    },
+    {
+      "id": "2609.02505",
+      "arxivVersion": 2,
+      "contribution": "candidate",
+      "reason": "Develops an electroweak scalar-doublet explanation with a future annual-modulation test.",
+      "confidence": 0.96
+    },
+    {
+      "id": "2609.02608",
+      "arxivVersion": 2,
+      "contribution": "candidate",
+      "reason": "Develops pseudo-Dirac and Higgsino benchmarks while assessing existing consistency requirements; the accepted v2 abstract does not establish a distinct new exclusion result.",
+      "confidence": 0.93,
+      "sources": [
+        "https://arxiv.org/abs/2609.02608v2"
+      ]
+    },
+    {
+      "id": "2609.02775",
+      "arxivVersion": 1,
+      "contribution": "new-bound",
+      "reason": "Derives a solar-capture and IceCube lower bound on the Higgsino splitting that challenges the proposed interpretation.",
+      "confidence": 0.98
+    },
+    {
+      "id": "2609.02807",
+      "arxivVersion": 3,
+      "contribution": "candidate",
+      "reason": "Constructs a mixed axion and electroweak-doublet explanation with a Peccei-Quinn origin for the splitting.",
+      "confidence": 0.96
+    },
+    {
+      "id": "2609.02868",
+      "arxivVersion": 2,
+      "contribution": "candidate",
+      "reason": "Develops an inelastic dark-photon explanation linked to a gamma-ray anomaly.",
+      "confidence": 0.96
+    },
+    {
+      "id": "2609.02994",
+      "arxivVersion": 2,
+      "contribution": "candidate",
+      "reason": "The accepted v2 abstract explicitly develops a singlino with a nearly degenerate Higgsino as an LZ-compatible inelastic candidate, though its main analysis concerns gamma-ray detectability rather than a quantitative recoil fit.",
+      "confidence": 0.78,
+      "sources": [
+        "https://arxiv.org/abs/2609.02994v2"
+      ]
+    },
+    {
+      "id": "2609.04144",
+      "arxivVersion": 2,
+      "contribution": "candidate",
+      "reason": "Develops coupled electroweak multiplets as recoil explanations and derives correlated signals.",
+      "confidence": 0.96
+    },
+    {
+      "id": "2609.04163",
+      "arxivVersion": 1,
+      "contribution": "candidate",
+      "reason": "Provides a gaugino-sector realization of the required Higgsino splitting; discussion of existing solar bounds is not itself a new bound.",
+      "confidence": 0.96
+    },
+    {
+      "id": "2609.04175",
+      "arxivVersion": 1,
+      "contribution": "new-bound",
+      "reason": "Introduces the empty LZ high-energy sideband as a constraint on thermal Higgsinos; identifying a surviving nonthermal mass is secondary to the new constraint.",
+      "confidence": 0.91,
+      "sources": [
+        "https://arxiv.org/abs/2609.04175v1"
+      ]
+    },
+    {
+      "id": "2609.04181",
+      "arxivVersion": 1,
+      "contribution": "candidate",
+      "reason": "Fits a generic endothermic explanation and derives a future seasonal discriminator.",
+      "confidence": 0.95
+    },
+    {
+      "id": "2609.04185",
+      "arxivVersion": 2,
+      "contribution": "candidate",
+      "reason": "Proposes atmospheric-neutrino upscattering as the process generating the recoil.",
+      "confidence": 0.98
+    },
+    {
+      "id": "2609.04186",
+      "arxivVersion": 2,
+      "contribution": "candidate",
+      "reason": "Constructs a momentum-dependent elastic axion-portal interpretation.",
+      "confidence": 0.97
+    },
+    {
+      "id": "2609.04673",
+      "arxivVersion": 1,
+      "contribution": "candidate-and-bound",
+      "reason": "Develops an exothermic fit and derives a sideband restriction against broad recoil spectra; both are explicit in the accepted v1 abstract.",
+      "confidence": 0.98,
+      "sources": [
+        "https://arxiv.org/abs/2609.04673v1"
+      ]
+    },
+    {
+      "id": "2609.05204",
+      "arxivVersion": 2,
+      "contribution": "candidate",
+      "reason": "Constructs exothermic dark-photon dark matter and predicts signals in other targets.",
+      "confidence": 0.96
+    },
+    {
+      "id": "2609.05291",
+      "arxivVersion": 1,
+      "contribution": "other",
+      "reason": "Calculates future xenon-excitation discriminants of existing interpretations, without proposing a separate cause or reporting a new bound.",
+      "confidence": 0.96
+    },
+    {
+      "id": "2609.06153",
+      "arxivVersion": 2,
+      "contribution": "candidate",
+      "reason": "Develops a pseudo-Dirac exothermic explanation and forecasts an argon signature.",
+      "confidence": 0.96
+    },
+    {
+      "id": "2609.06171",
+      "arxivVersion": 2,
+      "contribution": "candidate",
+      "reason": "Constructs a baryon-flavor inelastic model and checks it against existing collider and indirect limits.",
+      "confidence": 0.95
+    },
+    {
+      "id": "2609.06571",
+      "arxivVersion": 1,
+      "contribution": "candidate",
+      "reason": "Fits the inert-doublet model to the event and identifies a viable high-mass region.",
+      "confidence": 0.97
+    },
+    {
+      "id": "2609.06640",
+      "arxivVersion": 1,
+      "contribution": "candidate",
+      "reason": "The accepted v1 develops a leptophobic inelastic explanation; its gamma-ray and IceCube discussion checks consistency and its paleo-detector analysis forecasts a test, rather than establishing a new bound.",
+      "confidence": 0.96,
+      "sources": [
+        "https://arxiv.org/abs/2609.06640v1"
+      ]
+    },
+    {
+      "id": "2609.06750",
+      "arxivVersion": 1,
+      "contribution": "candidate",
+      "reason": "The accepted v1 develops a specific SU(6) realization of pseudo-Dirac dark matter and its collider signature; forecast collider reach is not a present bound.",
+      "confidence": 0.88,
+      "sources": [
+        "https://arxiv.org/abs/2609.06750v1"
+      ]
+    },
+    {
+      "id": "2609.06756",
+      "arxivVersion": 1,
+      "contribution": "candidate",
+      "reason": "Proposes boosted light dark matter with magnetic dipole scattering as the recoil explanation.",
+      "confidence": 0.97
+    },
+    {
+      "id": "2609.06760",
+      "arxivVersion": 2,
+      "contribution": "new-bound",
+      "reason": "Independently calculates solar-capture exclusions and applies them to three models, deriving the Higgsino restriction and its limited applicability rather than merely quoting an existing bound.",
+      "confidence": 0.86,
+      "sources": [
+        "https://arxiv.org/abs/2609.06760v2"
+      ]
+    },
+    {
+      "id": "2609.06825",
+      "arxivVersion": 1,
+      "contribution": "candidate",
+      "reason": "Constructs an inverse-seesaw realization of inelastic self-interacting dark matter.",
+      "confidence": 0.96
+    },
+    {
+      "id": "2609.06890",
+      "arxivVersion": 1,
+      "contribution": "candidate",
+      "reason": "Proposes a boosted dark-sector flux with sharply delimited recoil endpoints.",
+      "confidence": 0.97
+    },
+    {
+      "id": "2609.06909",
+      "arxivVersion": 1,
+      "contribution": "candidate",
+      "reason": "Develops a resonant inelastic B-L scalar explanation and a correlated collider target.",
+      "confidence": 0.97
+    },
+    {
+      "id": "2609.07138",
+      "arxivVersion": 1,
+      "contribution": "candidate",
+      "reason": "Constructs an extra-dimensional origin of the inelastic splitting and predicts target dependence.",
+      "confidence": 0.96
+    },
+    {
+      "id": "2609.07225",
+      "arxivVersion": 1,
+      "contribution": "candidate",
+      "reason": "Constructs a leptophobic baryon-number model and checks its benchmarks against existing or projected dijet reach.",
+      "confidence": 0.94
+    },
+    {
+      "id": "2609.07451",
+      "arxivVersion": 2,
+      "contribution": "candidate",
+      "reason": "Fits mixed singlet-doublet scalar dark matter while imposing existing relic and elastic-scattering constraints.",
+      "confidence": 0.96
+    },
+    {
+      "id": "2609.07742",
+      "arxivVersion": 1,
+      "contribution": "candidate",
+      "reason": "Develops a boosted elastic dark-particle interpretation and target/modulation predictions.",
+      "confidence": 0.96
+    },
+    {
+      "id": "2609.07800",
+      "arxivVersion": 1,
+      "contribution": "candidate",
+      "reason": "Constructs a singlet-doublet fermion explanation linked to a Type-II seesaw.",
+      "confidence": 0.97
+    },
+    {
+      "id": "2609.07807",
+      "arxivVersion": 1,
+      "contribution": "new-bound",
+      "reason": "Derives independent Super-Kamiokande and IceCube solar-neutrino limits on Higgsino splitting.",
+      "confidence": 0.98
+    },
+    {
+      "id": "2609.07811",
+      "arxivVersion": 2,
+      "contribution": "candidate",
+      "reason": "Develops GNMSSM Higgsino-singlino mixing benchmarks fitting the recoil with lower gaugino scales.",
+      "confidence": 0.96
+    },
+    {
+      "id": "2609.08712",
+      "arxivVersion": 1,
+      "contribution": "other",
+      "reason": "Studies collider signatures and future tracklet reach of the established Higgsino interpretation; current searches are found insensitive.",
+      "confidence": 0.91
+    },
+    {
+      "id": "2609.08893",
+      "arxivVersion": 1,
+      "contribution": "candidate",
+      "reason": "Constructs an axionlike-mediator endothermic model and identifies an event-compatible spectrum.",
+      "confidence": 0.97
+    },
+    {
+      "id": "2609.08993",
+      "arxivVersion": 2,
+      "contribution": "candidate",
+      "reason": "Develops elastic spin-dependent singlet-doublet Majorana dark matter as an explanation.",
+      "confidence": 0.96
+    },
+    {
+      "id": "2609.09015",
+      "arxivVersion": 2,
+      "contribution": "candidate",
+      "reason": "Fits a light-dark-photon endothermic explanation and discusses existing excited-state consistency requirements.",
+      "confidence": 0.94
+    },
+    {
+      "id": "2609.09037",
+      "arxivVersion": 1,
+      "contribution": "candidate-and-bound",
+      "reason": "Proposes bound-neutron disappearance and derives a new LZ lifetime limit explicitly marked as this work in Table 1 of the accepted v1.",
+      "confidence": 0.98,
+      "sources": [
+        "https://arxiv.org/abs/2609.09037v1",
+        "https://arxiv.org/html/2609.09037v1"
+      ]
+    },
+    {
+      "id": "2609.09107",
+      "arxivVersion": 1,
+      "contribution": "candidate",
+      "reason": "Constructs composite dark baryons with a magnetic inelastic transition and a possible accompanying photon signal.",
+      "confidence": 0.97
+    },
+    {
+      "id": "2609.09136",
+      "arxivVersion": 1,
+      "contribution": "candidate",
+      "reason": "Constructs a warped-extra-dimensional pseudo-Dirac candidate with geometric splitting suppression.",
+      "confidence": 0.96
+    },
+    {
+      "id": "2609.09138",
+      "arxivVersion": 2,
+      "contribution": "candidate-and-bound",
+      "reason": "The accepted v2 constructs a mixing-suppressed singlet-doublet model and derives quantitative IceCube limits for thermalized and nonthermal captured populations.",
+      "confidence": 0.94,
+      "sources": [
+        "https://arxiv.org/abs/2609.09138v2"
+      ]
+    },
+    {
+      "id": "2609.09230",
+      "arxivVersion": 1,
+      "contribution": "other",
+      "reason": "Compares nuclear-response and dark-excitation explanations through target and modulation discriminants; does not establish a new bound.",
+      "confidence": 0.95
+    },
+    {
+      "id": "2609.09385",
+      "arxivVersion": 1,
+      "contribution": "candidate-and-bound",
+      "reason": "Develops an ultraheavy nonthermal Higgsino interpretation and independently recomputes solar-capture bounds across its mass range, alongside the high-energy sideband fit (arXiv abstract checked).",
+      "confidence": 0.96,
+      "sources": [
+        "https://arxiv.org/abs/2609.09385"
+      ]
+    },
+    {
+      "id": "2609.10453",
+      "arxivVersion": 1,
+      "contribution": "candidate",
+      "reason": "Develops a transition-dipole interpretation and delayed-photon test; comparing its fit to existing indirect limits alone is not a new bound.",
+      "confidence": 0.92
+    },
+    {
+      "id": "2609.10491",
+      "arxivVersion": 2,
+      "contribution": "candidate",
+      "reason": "Develops endothermic and exothermic two-component interpretations rather than an independent exclusion analysis.",
+      "confidence": 0.96
+    },
+    {
+      "id": "2609.10504",
+      "arxivVersion": 1,
+      "contribution": "new-bound",
+      "reason": "Tests and excludes the examined elastic-neutrino interpretations using kinematic and low-recoil requirements with existing external limits (arXiv abstract checked).",
+      "confidence": 0.86,
+      "sources": [
+        "https://arxiv.org/abs/2609.10504"
+      ]
+    },
+    {
+      "id": "2609.10636",
+      "arxivVersion": 3,
+      "contribution": "candidate",
+      "reason": "Constructs a scalar benchmark explaining the recoil with suppressed solar annihilation. Its detailed revision of capture-to-annihilation assumptions is also a bound reassessment, but no new exclusion is claimed (v3 abstract checked).",
+      "confidence": 0.8,
+      "sources": [
+        "https://arxiv.org/abs/2609.10636"
+      ]
+    },
+    {
+      "id": "2609.10662",
+      "arxivVersion": 1,
+      "contribution": "other",
+      "reason": "Studies the dark-star consequences of event-motivated inelastic benchmarks rather than a new explanation or exclusion of the LZ event.",
+      "confidence": 0.95
+    },
+    {
+      "id": "2609.10827",
+      "arxivVersion": 1,
+      "contribution": "candidate",
+      "reason": "Constructs a chiral gauge realization of the endothermic scalar explanation; existing relic/collider constraints are consistency checks.",
+      "confidence": 0.96
+    },
+    {
+      "id": "2609.11241",
+      "arxivVersion": 1,
+      "contribution": "candidate",
+      "reason": "Builds an event-motivated Higgsino spectrum in a supergravity realization while acknowledging the existing solar-capture problem; classification does not imply viability.",
+      "confidence": 0.79
+    },
+    {
+      "id": "2609.11600",
+      "arxivVersion": 1,
+      "contribution": "candidate",
+      "reason": "Proposes cosmic-ray-boosted momentum-dependent scattering to produce the candidate recoil spectrum.",
+      "confidence": 0.97
+    },
+    {
+      "id": "2609.11833",
+      "arxivVersion": 1,
+      "contribution": "new-bound",
+      "reason": "Extends solar-neutrino exclusion calculations to a broader inelastic parameter space beyond the original Higgsino test (arXiv abstract checked).",
+      "confidence": 0.94,
+      "sources": [
+        "https://arxiv.org/abs/2609.11833"
+      ]
+    },
+    {
+      "id": "2609.12045",
+      "arxivVersion": 2,
+      "contribution": "candidate",
+      "reason": "Proposes neutron-pair annihilation as the recoil source and predicts companion signals; forecasts are not new bounds.",
+      "confidence": 0.96
+    },
+    {
+      "id": "2609.13038",
+      "arxivVersion": 1,
+      "contribution": "candidate",
+      "reason": "Develops a radiative-seesaw endothermic interpretation with coannihilation and suppressed solar capture.",
+      "confidence": 0.96
+    },
+    {
+      "id": "2609.13130",
+      "arxivVersion": 2,
+      "contribution": "candidate",
+      "reason": "Develops a freeze-in/low-reheating endothermic explanation and its viable parameter space.",
+      "confidence": 0.96
+    },
+    {
+      "id": "2609.14799",
+      "arxivVersion": 1,
+      "contribution": "other",
+      "reason": "Compares boosted and inelastic spectra as a discriminator rather than proposing a distinct model or independent exclusion.",
+      "confidence": 0.94
+    },
+    {
+      "id": "2609.15027",
+      "arxivVersion": 2,
+      "contribution": "candidate",
+      "reason": "Develops an inelastic scalar realization linked to radiative Dirac neutrino masses.",
+      "confidence": 0.97
+    },
+    {
+      "id": "2609.15118",
+      "arxivVersion": 1,
+      "contribution": "candidate",
+      "reason": "Develops an event interpretation in modified pre-BBN expansion histories; applying existing bounds is not itself a new bound.",
+      "confidence": 0.94
+    },
+    {
+      "id": "2609.15321",
+      "arxivVersion": 1,
+      "contribution": "bound-reassessment",
+      "reason": "Tests whether halo uncertainties can weaken the established Higgsino solar-capture exclusion and finds that they cannot (arXiv abstract checked).",
+      "confidence": 0.98,
+      "sources": [
+        "https://arxiv.org/abs/2609.15321"
+      ]
+    },
+    {
+      "id": "2609.15413",
+      "arxivVersion": 1,
+      "contribution": "candidate",
+      "reason": "Proposes a speculative spin-2 multi-messenger interpretation linking the LZ and gamma-ray mass scales, despite not providing a quantitative recoil fit.",
+      "confidence": 0.83
+    },
+    {
+      "id": "2609.15600",
+      "arxivVersion": 2,
+      "contribution": "candidate",
+      "reason": "Constructs a hidden-U(1) scalar explanation and checks existing beam-dump/collider constraints.",
+      "confidence": 0.96
+    },
+    {
+      "id": "2609.15634",
+      "arxivVersion": 1,
+      "contribution": "other",
+      "reason": "Refines nuclear-isotope predictions near the kinematic threshold without directly recalculating an exclusion bound.",
+      "confidence": 0.89
+    },
+    {
+      "id": "2609.15714",
+      "arxivVersion": 1,
+      "contribution": "candidate",
+      "reason": "Develops exothermic hadrophilic freeze-in dark matter as the explanation and checks its consistency with existing limits.",
+      "confidence": 0.97
+    },
+    {
+      "id": "2609.15742",
+      "arxivVersion": 2,
+      "contribution": "candidate",
+      "reason": "Constructs supersymmetric sneutrino explanations and checks their consistency with existing searches.",
+      "confidence": 0.96
+    },
+    {
+      "id": "2609.15782",
+      "arxivVersion": 2,
+      "contribution": "other",
+      "reason": "Forecasts an argon discriminator between already-proposed exothermic and Higgsino explanations; a future test is not a new bound.",
+      "confidence": 0.97
+    },
+    {
+      "id": "2609.15933",
+      "arxivVersion": 1,
+      "contribution": "candidate-and-bound",
+      "reason": "Proposes DM-induced neutron disappearance and independently recasts Borexino data into bounds on accompanying de-excitation signals (arXiv abstract checked).",
+      "confidence": 0.98,
+      "sources": [
+        "https://arxiv.org/abs/2609.15933"
+      ]
+    },
+    {
+      "id": "2609.15985",
+      "arxivVersion": 2,
+      "contribution": "other",
+      "reason": "Performs cross-model parameter inference and sideband-consistency analysis rather than proposing a specific explanation or a standalone exclusion; boundary with new-bound is interpretive (v2 abstract checked).",
+      "confidence": 0.77,
+      "sources": [
+        "https://arxiv.org/abs/2609.15985"
+      ]
+    },
+    {
+      "id": "2609.16529",
+      "arxivVersion": 2,
+      "contribution": "other",
+      "reason": "Recomputes nuclear responses and critiques rate predictions, but the recorded result is not a direct reassessment of an exclusion bound.",
+      "confidence": 0.85
+    },
+    {
+      "id": "2609.17196",
+      "arxivVersion": 1,
+      "contribution": "candidate",
+      "reason": "Constructs a complete elastic fermion/pseudoscalar interpretation and imposes existing phenomenological constraints.",
+      "confidence": 0.96
+    },
+    {
+      "id": "2609.17412",
+      "arxivVersion": 1,
+      "contribution": "candidate",
+      "reason": "Develops cosmologically consistent axion-portal interpretations and predicted scattering directions; no independent bound is explicit in the record.",
+      "confidence": 0.93
+    },
+    {
+      "id": "2609.17935",
+      "arxivVersion": 2,
+      "contribution": "candidate",
+      "reason": "Proposes a Galactic production mechanism for the excited dark component followed by exothermic detection.",
+      "confidence": 0.97
+    },
+    {
+      "id": "2609.18564",
+      "arxivVersion": 1,
+      "contribution": "candidate",
+      "reason": "Proposes asymmetric electroweak dark matter that evades the solar-annihilation tension through a depleted antiparticle population.",
+      "confidence": 0.97
+    },
+    {
+      "id": "2609.19174",
+      "arxivVersion": 1,
+      "contribution": "new-bound",
+      "reason": "Computes solar-neutrino exclusions for Higgs-coupled minimal-DM representations with improved capture/evolution and a high-mass response treatment; also refines the solar method (abstract and paper checked).",
+      "confidence": 0.85,
+      "sources": [
+        "https://arxiv.org/abs/2609.19174",
+        "https://arxiv.org/html/2609.19174v1"
+      ]
+    },
+    {
+      "id": "2609.21011",
+      "arxivVersion": 2,
+      "contribution": "candidate",
+      "reason": "Builds a Z-prime portal interpretation and combines relic requirements with existing LHC resonance limits; the abstract does not establish a separate new recast (v2 checked).",
+      "confidence": 0.88,
+      "sources": [
+        "https://arxiv.org/abs/2609.21011"
+      ]
+    },
+    {
+      "id": "2609.21444",
+      "arxivVersion": 1,
+      "contribution": "other",
+      "reason": "Studies halo-speed uncertainty and its effect on fits rather than directly deriving or revising an exclusion bound.",
+      "confidence": 0.94
+    },
+    {
+      "id": "2609.21823",
+      "arxivVersion": 2,
+      "contribution": "new-bound",
+      "reason": "Derives solar-neutrino exclusions for event-favored momentum-dependent elastic operators using IceCube and Super-Kamiokande data.",
+      "confidence": 0.98
+    },
+    {
+      "id": "2609.22063",
+      "arxivVersion": 1,
+      "contribution": "candidate",
+      "reason": "Develops a type-II-seesaw electroweak explanation with heavier relic-compatible masses and weaker solar tension.",
+      "confidence": 0.96
+    },
+    {
+      "id": "2609.22739",
+      "arxivVersion": 1,
+      "contribution": "candidate",
+      "reason": "Develops an extra-dimensional dark-photon mediator realization of endothermic scattering.",
+      "confidence": 0.97
+    },
+    {
+      "id": "2609.23096",
+      "arxivVersion": 2,
+      "contribution": "candidate",
+      "reason": "Constructs a scalar-portal inelastic interpretation involving nonstandard quark Yukawa couplings.",
+      "confidence": 0.97
+    },
+    {
+      "id": "2609.23477",
+      "arxivVersion": 1,
+      "contribution": "candidate",
+      "reason": "Proposes composite-dark-hadron hyperfine excitation as the origin of the recoil.",
+      "confidence": 0.98
+    },
+    {
+      "id": "2609.23691",
+      "arxivVersion": 1,
+      "contribution": "candidate",
+      "reason": "Constructs a unified supersymmetric realization of the event-motivated pseudo-Dirac Higgsino splitting.",
+      "confidence": 0.93
+    },
+    {
+      "id": "2609.24982",
+      "arxivVersion": 1,
+      "contribution": "candidate",
+      "reason": "Develops a cosmic-ray-boosted explanation using a finite-mass pseudoscalar mediator and relativistic propagation.",
+      "confidence": 0.97
+    },
+    {
+      "id": "2609.24988",
+      "arxivVersion": 1,
+      "contribution": "candidate",
+      "reason": "Constructs a composite dark-baryon endothermic explanation and checks existing solar/dijet bounds.",
+      "confidence": 0.97
+    },
+    {
+      "id": "2609.25114",
+      "arxivVersion": 1,
+      "contribution": "candidate",
+      "reason": "Proposes elastic toroidal vector dark matter and a dark-photon realization; companion predictions are forecasts rather than bounds.",
+      "confidence": 0.97
+    },
+    {
+      "id": "2609.25723",
+      "arxivVersion": 1,
+      "contribution": "candidate",
+      "reason": "Proposes a screened neutral composite baryon with an elastic band-pass recoil spectrum.",
+      "confidence": 0.98
+    },
+    {
+      "id": "2609.26570",
+      "arxivVersion": 1,
+      "contribution": "candidate",
+      "reason": "Proposes exothermic pseudo-Dirac dark matter linking the recoil to the Galactic Center excess.",
+      "confidence": 0.97
+    },
+    {
+      "id": "2609.26698",
+      "arxivVersion": 1,
+      "contribution": "new-bound",
+      "reason": "Derives a model-independent sideband-count-ratio constraint and quantified tension across coherent endothermic parameter space; also proposes a future upper-sideband test (arXiv abstract checked).",
+      "confidence": 0.92,
+      "sources": [
+        "https://arxiv.org/abs/2609.26698"
+      ]
+    },
+    {
+      "id": "2609.26870",
+      "arxivVersion": 1,
+      "contribution": "other",
+      "reason": "Forecasts future collider reach for event-motivated electroweak multiplets; future sensitivity is not an existing exclusion bound.",
+      "confidence": 0.97
+    },
+    {
+      "id": "2609.28129",
+      "arxivVersion": 1,
+      "contribution": "candidate",
+      "reason": "Develops an environment-dependent splitting mechanism to reconcile the terrestrial event with solar capture; applying the existing solar constraint is not itself a new bound.",
+      "confidence": 0.96
+    },
+    {
+      "id": "2609.28218",
+      "arxivVersion": 1,
+      "contribution": "other",
+      "reason": "Compares solar signals of recoil-matched doublets, explicitly leaving detector-level exclusions for later work.",
+      "confidence": 0.97
+    },
+    {
+      "id": "2609.28415",
+      "arxivVersion": 1,
+      "contribution": "candidate",
+      "reason": "Builds a naturally split scalar dark-photon model and uses its exothermic scattering to explain the recoil.",
+      "confidence": 0.95
+    },
+    {
+      "id": "2609.28616",
+      "arxivVersion": 1,
+      "contribution": "candidate",
+      "reason": "Develops a mixed-sneutrino explanation with a technically natural splitting and suppressed solar capture.",
+      "confidence": 0.96
+    },
+    {
+      "id": "2609.28740",
+      "arxivVersion": 1,
+      "contribution": "candidate",
+      "reason": "Embeds a very heavy nonthermal Higgsino explanation in a high-scale supersymmetry construction.",
+      "confidence": 0.94
+    },
+    {
+      "id": "2609.28819",
+      "arxivVersion": 1,
+      "contribution": "candidate",
+      "reason": "Develops a heavy inert-doublet explanation that satisfies the existing IceCube constraint.",
+      "confidence": 0.94
+    },
+    {
+      "id": "2609.29462",
+      "arxivVersion": 2,
+      "contribution": "new-bound",
+      "reason": "Derives limits on primordial-black-hole abundance from low-energy LZ recoils and rules out the tested evaporation explanation.",
+      "confidence": 0.98
+    },
+    {
+      "id": "2609.30255",
+      "arxivVersion": 1,
+      "contribution": "candidate",
+      "reason": "Proposes a two-step neutrino conversion and scattering mechanism with a narrow xenon recoil window.",
+      "confidence": 0.98
+    },
+    {
+      "id": "2609.32435",
+      "arxivVersion": 1,
+      "contribution": "candidate",
+      "reason": "Develops a Majoron-mediated elastic explanation whose momentum dependence suppresses lower-energy recoils and solar capture.",
+      "confidence": 0.97
+    },
+    {
+      "id": "2609.33869",
+      "arxivVersion": 2,
+      "contribution": "candidate",
+      "reason": "Provides a low-reheating cosmology for the heavy-Higgsino explanation rather than a new observational exclusion.",
+      "confidence": 0.94
+    },
+    {
+      "id": "2609.33952",
+      "arxivVersion": 1,
+      "contribution": "other",
+      "reason": "Predicts a future gamma-ray test of an endothermic interpretation; a projected sensitivity is not a new bound.",
+      "confidence": 0.92
+    },
+    {
+      "id": "2609.34230",
+      "arxivVersion": 1,
+      "contribution": "candidate-and-bound",
+      "reason": "Develops an exothermic freeze-in candidate and computes its three-photon decay spectrum to constrain the model using NuSTAR and INTEGRAL/SPI data.",
+      "confidence": 0.84,
+      "sources": [
+        "https://arxiv.org/abs/2609.34230"
+      ]
+    },
+    {
+      "id": "2609.35650",
+      "arxivVersion": 1,
+      "contribution": "bound-reassessment",
+      "reason": "Rebuilds the published LZ inference for a two-state halo and shows that a previously accepted benchmark exceeds the revised upper limit.",
+      "confidence": 0.98,
+      "sources": [
+        "https://arxiv.org/abs/2609.35650"
+      ]
+    },
+    {
+      "id": "2609.35737",
+      "arxivVersion": 1,
+      "contribution": "other",
+      "reason": "Reassesses event-fit parameters under Gaia-informed halo velocities; the abstract centers on interpretation rather than deriving or correcting a specific exclusion bound.",
+      "confidence": 0.89,
+      "sources": [
+        "https://arxiv.org/abs/2609.35737"
+      ]
+    },
+    {
+      "id": "2609.36184",
+      "arxivVersion": 1,
+      "contribution": "other",
+      "reason": "Studies how LMC-induced velocities reshape several interpretations, with no new exclusion identified as the main result in the abstract.",
+      "confidence": 0.88,
+      "sources": [
+        "https://arxiv.org/abs/2609.36184"
+      ]
+    },
+    {
+      "id": "2609.36814",
+      "arxivVersion": 2,
+      "contribution": "candidate",
+      "reason": "Develops hyperfine excitation of atomic dark matter as an explanation and predicts target and modulation signatures.",
+      "confidence": 0.96
+    },
+    {
+      "id": "2609.37545",
+      "arxivVersion": 1,
+      "contribution": "candidate",
+      "reason": "Introduces a decaying-parent source of boosted particles that can explain the event through endothermic scattering.",
+      "confidence": 0.97
+    },
+    {
+      "id": "2609.37561",
+      "arxivVersion": 1,
+      "contribution": "candidate",
+      "reason": "Develops a decay-replenished excited-state explanation; the catalog describes consistency with radiative limits rather than a new bound.",
+      "confidence": 0.94
+    },
+    {
+      "id": "2609.38316",
+      "arxivVersion": 1,
+      "contribution": "new-bound",
+      "reason": "Extends solar capture and annihilation exclusions to scalar and fermionic electroweak multiplets beyond the Higgsino case.",
+      "confidence": 0.97
+    },
+    {
+      "id": "2609.39529",
+      "arxivVersion": 1,
+      "contribution": "candidate",
+      "reason": "Proposes an ultraheavy fractionally charged gravitino explanation and identifies a correlated multi-recoil signature.",
+      "confidence": 0.98
+    },
+    {
+      "id": "2609.40234",
+      "arxivVersion": 1,
+      "contribution": "candidate",
+      "reason": "Develops two supersymmetric recoil explanations and their distinguishing spectra while accounting for existing solar constraints.",
+      "confidence": 0.92
+    },
+    {
+      "id": "2610.00226",
+      "arxivVersion": 1,
+      "contribution": "candidate",
+      "reason": "Embeds the event-compatible Higgsino splitting in GmSUGRA and evaluates it against existing solar-capture reinterpretations.",
+      "confidence": 0.94
+    },
+    {
+      "id": "2610.00645",
+      "arxivVersion": 1,
+      "contribution": "candidate",
+      "reason": "Builds a dimension-six-operator dark-sector explanation with an associated thermal relic abundance.",
+      "confidence": 0.97
+    },
+    {
+      "id": "2610.01613",
+      "arxivVersion": 1,
+      "contribution": "candidate",
+      "reason": "Develops a heavy-Higgsino explanation inside supersymmetric SU(5) and predicts future proton-decay tests.",
+      "confidence": 0.95
+    },
+    {
+      "id": "2610.03692",
+      "arxivVersion": 1,
+      "contribution": "bound-reassessment",
+      "reason": "Recalculates Higgsino compatibility under four IceCube cooling assumptions plus alternative halo and LZ-sideband treatments.",
+      "confidence": 0.98,
+      "sources": [
+        "https://arxiv.org/abs/2610.03692"
+      ]
+    },
+    {
+      "id": "2610.05893",
+      "arxivVersion": 1,
+      "contribution": "candidate",
+      "reason": "Proposes environment-dependent annihilation through an axion-like mediator to reconcile a Higgsino recoil explanation with solar limits.",
+      "confidence": 0.96
+    },
+    {
+      "id": "2610.06756",
+      "arxivVersion": 1,
+      "contribution": "new-bound",
+      "reason": "Recasts ATLAS monojet data into exclusions of elastic operators capable of fitting the LZ recoil.",
+      "confidence": 0.98
+    },
+    {
+      "id": "2610.08648",
+      "arxivVersion": 1,
+      "contribution": "candidate",
+      "reason": "Develops an endothermic singlet-doublet explanation tied to conversion-driven freeze-out.",
+      "confidence": 0.94
+    },
+    {
+      "id": "2610.09516",
+      "arxivVersion": 1,
+      "contribution": "candidate",
+      "reason": "Develops a thermal two-component quasi-pNGB explanation with a surviving excited state and exothermic recoils.",
+      "confidence": 0.95
+    },
+    {
+      "id": "2610.09753",
+      "arxivVersion": 1,
+      "contribution": "new-bound",
+      "reason": "Computes solar signals for recoil-compatible singlino-Higgsino compositions and excludes the studied Higgsino-pair fits while identifying surviving alternatives.",
+      "confidence": 0.84,
+      "sources": [
+        "https://arxiv.org/abs/2610.09753"
+      ]
+    },
+    {
+      "id": "2610.12443",
+      "arxivVersion": 2,
+      "contribution": "candidate",
+      "reason": "Develops an endothermic scalar explanation within a gauged lepton-flavor model and checks existing phenomenological constraints.",
+      "confidence": 0.96
+    },
+    {
+      "id": "2610.13930",
+      "arxivVersion": 1,
+      "contribution": "candidate",
+      "reason": "Develops an MRSSM pseudo-Dirac explanation and links its splitting to anomaly mediation rather than deriving a new experimental bound.",
+      "confidence": 0.95
+    },
+    {
+      "id": "2610.14178",
+      "arxivVersion": 1,
+      "contribution": "candidate-and-bound",
+      "reason": "Identifies a compressed asymmetric inert-doublet candidate and explicitly derives new limits by recasting LHC compressed-Higgsino searches.",
+      "confidence": 0.98,
+      "sources": [
+        "https://arxiv.org/abs/2610.14178"
+      ]
+    },
+    {
+      "id": "2610.14188",
+      "arxivVersion": 1,
+      "contribution": "candidate",
+      "reason": "Develops a gauged-baryon-number endothermic explanation and its future tests while checking relic and collider constraints.",
+      "confidence": 0.93
+    },
+    {
+      "id": "2610.15557",
+      "arxivVersion": 1,
+      "contribution": "candidate",
+      "reason": "Develops a modular-flavor construction linked to a pseudo-Dirac dark-sector explanation of the recoil.",
+      "confidence": 0.96
+    },
+    {
+      "id": "2610.16156",
+      "arxivVersion": 1,
+      "contribution": "new-bound",
+      "reason": "Derives current Run-2 exclusions for heavier sparticles in the event-motivated Higgsino scenario as well as future reach projections.",
+      "confidence": 0.97,
+      "sources": [
+        "https://arxiv.org/abs/2610.16156"
+      ]
+    },
+    {
+      "id": "2610.18234",
+      "arxivVersion": 1,
+      "contribution": "candidate",
+      "reason": "Develops an endothermic pseudo-Dirac explanation whose symmetry-breaking history also predicts a gravitational-wave signal.",
+      "confidence": 0.97
+    },
+    {
+      "id": "2610.18974",
+      "arxivVersion": 1,
+      "contribution": "candidate",
+      "reason": "Develops an exothermic freeze-in explanation through alternative reheating histories; the existing BBN cutoff is a consistency requirement.",
+      "confidence": 0.91
+    },
+    {
+      "id": "2610.21041",
+      "arxivVersion": 1,
+      "contribution": "other",
+      "reason": "Studies halo-dependent event inference and forecasts complementary heavy-target tests without a new observed exclusion in the catalog evidence.",
+      "confidence": 0.9
+    },
+    {
+      "id": "2610.23713",
+      "arxivVersion": 1,
+      "contribution": "other",
+      "reason": "Critiques a proposed correlated gamma-ray signal through foreground modeling, rather than a previously derived bound.",
+      "confidence": 0.96
+    },
+    {
+      "id": "2610.25423",
+      "arxivVersion": 1,
+      "contribution": "candidate",
+      "reason": "Develops a dark-Higgs exothermic explanation with two branches and compares them with the existing CMB constraint and gamma-ray signal.",
+      "confidence": 0.93
+    },
+    {
+      "id": "2610.25925",
+      "arxivVersion": 2,
+      "contribution": "other",
+      "reason": "Tests the hadronic mass assumption behind an existing neutron-disappearance explanation using QCD sum rules; it is not a bound calculation.",
+      "confidence": 0.95
+    },
+    {
+      "id": "2610.27105",
+      "arxivVersion": 1,
+      "contribution": "other",
+      "reason": "Examines uncertainty in the LZ electron-recoil background tail, rather than proposing a particle candidate or revising an exclusion bound.",
+      "confidence": 0.98
+    },
+    {
+      "id": "2610.28731",
+      "arxivVersion": 1,
+      "contribution": "other",
+      "reason": "Quantifies how halo-velocity choices shift recoil interpretation while enforcing sideband consistency; its abstract does not identify a new or corrected exclusion as the central result.",
+      "confidence": 0.88,
+      "sources": [
+        "https://arxiv.org/abs/2610.28731"
+      ]
+    },
+    {
+      "id": "2610.29335",
+      "arxivVersion": 1,
+      "contribution": "candidate",
+      "reason": "Develops a heavy pseudo-Dirac-doublet explanation with a reheating history compatible with nonthermal leptogenesis.",
+      "confidence": 0.95
+    },
+    {
+      "id": "2610.32747",
+      "arxivVersion": 1,
+      "contribution": "new-bound",
+      "reason": "Explicitly identifies new atmospheric-neutrino up-scattering bounds as its main result and judges the attempted recoil explanation unconvincing.",
+      "confidence": 0.99,
+      "sources": [
+        "https://arxiv.org/abs/2610.32747"
+      ]
+    }
+  ]
+}

@@ -29,6 +29,11 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { ThemeToggle } from '@/components/theme-toggle';
 import { CiteMapButton } from '@/components/cite-map-button';
+import { PaperMark } from '@/components/paper-mark';
+import {
+  PAPER_CONTRIBUTIONS,
+  paperContributionLabel,
+} from '@/lib/paper-contribution';
 import generatedMapLayouts from '@/data/generated/map-layouts.json';
 import landscape from '@/data/landscape.json';
 import {
@@ -207,17 +212,6 @@ function dateLabel(value: string) {
     month: 'short',
     year: 'numeric',
   }).format(new Date(`${value}T12:00:00Z`));
-}
-
-function roleLabel(role: Paper['role']) {
-  const labels: Record<Paper['role'], string> = {
-    observation: 'Source result',
-    explanation: 'Interpretation',
-    constraint: 'Constraint',
-    diagnostic: 'Discriminant',
-    adjacent: 'Adjacent work',
-  };
-  return labels[role];
 }
 
 const MAX_TOOLTIP_AUTHORS = 4;
@@ -601,6 +595,7 @@ export function LzLandscape() {
                 arxiv_id: paper.id,
                 title: paper.title,
                 role: paper.role,
+                contribution: paper.contribution,
               })),
             };
           },
@@ -1690,15 +1685,31 @@ export function LzLandscape() {
               particles, or phenomenology; select one for a concise summary and
               citation lineage.
             </p>
-            <div>
-              <span className="key-node key-node--source" />
-              <span>Experimental result</span>
-            </div>
-            <div>
-              <span className="key-node" />
-              <span>Interpretation or follow-up</span>
-            </div>
           </div>
+
+          <section
+            className="contribution-legend"
+            aria-labelledby="circle-styles-heading"
+          >
+            <p className="nav-label" id="circle-styles-heading">
+              Circle styles
+            </p>
+            <ul>
+              {PAPER_CONTRIBUTIONS.map((item) => (
+                <li key={item.id} title={item.description}>
+                  <span className={`legend-mark legend-mark--${item.id}`}>
+                    <PaperMark contribution={item.id} />
+                  </span>
+                  <span>{item.label}</span>
+                </li>
+              ))}
+            </ul>
+            <p>
+              Interior: main contribution. Colour: physics category. Size:
+              citations when enabled. Reassessments critique or refine an
+              earlier bound.
+            </p>
+          </section>
 
           <details className="method-summary" id="method">
             <summary>Method &amp; caveats</summary>
@@ -1716,7 +1727,9 @@ export function LzLandscape() {
               arXiv. Papers are grouped by the physics they study, including
               work that constrains an explanation. Ambiguous cases are flagged
               for human review, and proposed updates require human approval
-              before publication.
+              before publication. A new-bound label requires a derived limit or
+              recast; applying a published limit or forecasting a future test is
+              not sufficient.
             </p>
             <p>
               <strong>Checking citations.</strong> Citation links are extracted
@@ -2212,7 +2225,7 @@ export function LzLandscape() {
                       <a
                         href={`papers/${encodeURIComponent(paper.id)}/`}
                         key={paper.id}
-                        className={`paper-node paper-node--${paper.role} ${tooltipEdgeClass} ${tooltipVerticalClass} ${isSelected ? 'is-selected' : ''} ${isVisible ? '' : 'is-hidden'}`}
+                        className={`paper-node ${paper.role === 'observation' ? 'paper-node--observation' : ''} ${tooltipEdgeClass} ${tooltipVerticalClass} ${isSelected ? 'is-selected' : ''} ${isVisible ? '' : 'is-hidden'}`}
                         style={
                           {
                             '--node-color': island.color,
@@ -2240,19 +2253,20 @@ export function LzLandscape() {
                           positionTooltip(paper.id, event.currentTarget)
                         }
                         data-paper-node={paper.id}
-                        aria-label={`Open ${paper.title}`}
+                        aria-label={`Open ${paper.title} — ${paperContributionLabel(paper.contribution)}`}
                         aria-describedby={`${authorLabel ? `${tooltipAuthorId} ` : ''}${tooltipCitationId}`}
                         aria-current={isSelected ? 'true' : undefined}
                         tabIndex={mapLayoutReady ? 0 : -1}
                       >
-                        {paper.role === 'observation' && (
-                          <span className="paper-node-monogram">LZ</span>
-                        )}
+                        <PaperMark contribution={paper.contribution} />
                         <span className="node-tooltip">
                           <strong>{paper.title}</strong>
                           {authorLabel && (
                             <small id={tooltipAuthorId}>{authorLabel}</small>
                           )}
+                          <small>
+                            {paperContributionLabel(paper.contribution)}
+                          </small>
                           <small id={tooltipCitationId}>
                             {mappedCitationCount}{' '}
                             {mappedCitationCount === 1
@@ -2326,12 +2340,19 @@ export function LzLandscape() {
                       }
                     >
                       <span
-                        className="list-dot"
-                        style={{ backgroundColor: island?.color }}
-                      />
+                        className="list-mark"
+                        style={
+                          {
+                            '--node-color': island?.color,
+                          } as React.CSSProperties
+                        }
+                      >
+                        <PaperMark contribution={paper.contribution} />
+                      </span>
                       <span className="list-copy">
                         <small>
-                          {dateLabel(paper.published)} · arXiv:{paper.arxivId}
+                          {dateLabel(paper.published)} · arXiv:{paper.arxivId} ·{' '}
+                          {paperContributionLabel(paper.contribution)}
                         </small>
                         <strong>{paper.title}</strong>
                         <span>{paper.authors.join(', ')}</span>
@@ -2379,7 +2400,9 @@ export function LzLandscape() {
               style={{ backgroundColor: selectedIsland?.color }}
             />
             <span>{selectedIsland?.label}</span>
-            <span className="paper-kind">{roleLabel(selectedPaper.role)}</span>
+            <span className="paper-kind">
+              {paperContributionLabel(selectedPaper.contribution)}
+            </span>
           </div>
 
           <h2 ref={detailTitleRef} tabIndex={-1}>

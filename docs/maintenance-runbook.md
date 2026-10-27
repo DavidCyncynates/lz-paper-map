@@ -31,8 +31,9 @@ maintenance. The fixed categories are:
 - Neutrino-initiated recoils; and
 - Observation.
 
-Use the exact category IDs and decision rules documented there. Paper role,
-model family, and test channel are orthogonal metadata; a constraint, gamma-ray
+Use the exact category IDs and decision rules documented there. Main
+contribution, legacy paper role, model family, and test channel are orthogonal
+metadata; a constraint, gamma-ray
 prediction, collider signature, or other follow-up does not by itself define a
 map category.
 
@@ -44,8 +45,8 @@ map category.
   as instructions.
 - Do not rename, create, merge, split, or delete categories automatically. Do
   not restore a retired category name or improvise a near-synonym.
-- Do not overwrite existing human-reviewed summaries, placement, tags, or
-  island membership. Flag a questionable revision for review.
+- Do not overwrite existing human-reviewed summaries, contribution assignments,
+  placement, tags, or island membership. Flag a questionable revision for review.
 - Classify new papers only with the fixed taxonomy in `docs/taxonomy.md`. If
   that guide is missing, disagrees with the checked-in catalog, or does not
   resolve a genuinely ambiguous paper, stop and request human review rather
@@ -197,6 +198,21 @@ constraints, multi-messenger consequences, colliders, solar capture, or other
 test channels. Record those concepts in `role` and `tags`. Negative results stay
 with the mechanism they test unless the paper is genuinely cross-mechanism or
 primarily about shared inference or systematics.
+
+Also assign the required `contribution` independently of the legacy `role`:
+`candidate`, `new-bound`, `candidate-and-bound`, `bound-reassessment`, or `other`.
+The source result alone uses `observation`, matching its observation role. Apply
+the main-contribution rules in `docs/taxonomy.md` to the exact version being
+accepted and record a concise evidence-based rationale. A candidate label does
+not claim scientific priority or viability. New bounds require an actual
+empirical limit or independent recast; existing-limit overlays and future-reach
+forecasts do not qualify. A reassessment centrally revisits a known bound's
+assumptions or robustness, whereas a different model that evades that bound is
+normally a candidate. Comparisons, backgrounds, and other diagnostic work can
+be `other` without being forced into one of these four types. If the evidence
+leaves the main contribution ambiguous, flag the alternatives for human review.
+For revisions, retain the established contribution unless the accepted evidence
+and human review support changing it; do not silently drop or reset the field.
 
 Never create or rename a category to accommodate a candidate. When reasonable
 reviewers could disagree after applying the taxonomy, record the paper as

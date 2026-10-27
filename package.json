@@ -29,7 +29,7 @@
     "test:theme": "node --experimental-strip-types --test scripts/test-color-theme.mjs",
     "test:seo": "node --test scripts/test-search-discovery.mjs",
     "check:seo": "node scripts/check-search-artifact.mjs",
-    "lint": "oxlint app lib scripts/generate-catalog-index.mjs scripts/generate-layout-artifact.mjs scripts/prepare-pages.mjs scripts/search-discovery.mjs scripts/check-search-artifact.mjs scripts/test-catalog-index.mjs scripts/test-color-theme.mjs scripts/test-hierarchical-layout.mjs scripts/test-map-camera.mjs scripts/test-map-layout-artifact.mjs scripts/test-paper-date-range.mjs scripts/test-paper-citation-size.mjs scripts/test-search-discovery.mjs components/theme-toggle.tsx components/cite-map-button.tsx components/ui/button.tsx components/ui/input.tsx",
+    "lint": "oxlint app lib scripts/generate-catalog-index.mjs scripts/generate-layout-artifact.mjs scripts/prepare-pages.mjs scripts/search-discovery.mjs scripts/check-search-artifact.mjs scripts/test-catalog-index.mjs scripts/test-color-theme.mjs scripts/test-hierarchical-layout.mjs scripts/test-map-camera.mjs scripts/test-map-layout-artifact.mjs scripts/test-paper-date-range.mjs scripts/test-paper-citation-size.mjs scripts/test-search-discovery.mjs components/theme-toggle.tsx components/cite-map-button.tsx components/paper-mark.tsx components/ui/button.tsx components/ui/input.tsx",
     "format": "oxfmt"
   },
   "dependencies": {
