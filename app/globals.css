@@ -250,22 +250,28 @@ a {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 4px;
-  min-height: 28px;
-  padding: 3px 0;
+  gap: 6px;
+  min-width: 120px;
+  min-height: 34px;
+  padding: 5px 10px;
   margin-left: 4px;
-  border: 0;
-  border-radius: 3px;
-  background: transparent;
-  color: var(--primary);
+  border: 1px solid var(--ring);
+  border-radius: 7px;
+  background: var(--accent);
+  color: var(--accent-foreground);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
   font-weight: 650;
   white-space: nowrap;
   cursor: pointer;
 }
 
-.cite-map-button:hover .cite-map-label {
-  text-decoration: underline;
-  text-underline-offset: 3px;
+.cite-map-button:hover {
+  border-color: var(--primary);
+  background: var(--secondary);
+}
+
+.cite-map-button:active {
+  box-shadow: none;
 }
 
 .cite-map-button:focus-visible,
@@ -1882,7 +1888,10 @@ a {
   }
 
   .cite-map-button {
-    width: 28px;
+    width: 36px;
+    min-width: 36px;
+    min-height: 36px;
+    padding: 0;
   }
 
   .cite-map-label {
@@ -2425,10 +2434,6 @@ a {
 @media (max-width: 460px) {
   .topbar {
     gap: 10px;
-  }
-
-  .topbar-meta > a:first-of-type {
-    display: none;
   }
 
   .topbar-meta {

@@ -1456,16 +1456,6 @@ export function LzLandscape() {
           <span>{landscape.papers.length} papers</span>
           <span className="meta-divider" aria-hidden="true" />
           <span>Updated {dateLabel(landscape.updatedAt)}</span>
-          <a
-            href="#method"
-            onClick={() => {
-              const method =
-                document.querySelector<HTMLDetailsElement>('#method');
-              if (method) method.open = true;
-            }}
-          >
-            Method
-          </a>
           <CiteMapButton />
           <a
             href="https://arxiv.org/abs/2609.02823"
@@ -1713,23 +1703,33 @@ export function LzLandscape() {
           <details className="method-summary" id="method">
             <summary>Method &amp; caveats</summary>
             <p>
-              The source result is one isolated 248 keV candidate (LZ230616),
-              also discussed as the LZ high-recoil event or LZ excess; it is not
-              a discovery.
+              <strong>Finding papers.</strong> Scheduled daily searches combine
+              new and revised arXiv listings, title and abstract keywords, and
+              rotating searches for authors already on the map. INSPIRE supplies
+              additional leads from papers citing the original LZ result. A
+              paper need not mention LZ in its title to be included.
             </p>
             <p>
-              A scheduled review scans arXiv listings, abstracts, paper text,
-              and reference trails for work about this specific event. Metadata
-              and citation lineage are checked against arXiv; every proposed
-              addition is reviewed before publication.
+              <strong>Screening and grouping.</strong> Machine-assisted review
+              checks new papers and revisions for a substantive connection to
+              the 248 keV candidate, using metadata and source evidence from
+              arXiv. Papers are grouped by the physics they study, including
+              work that constrains an explanation. Ambiguous cases are flagged
+              for human review, and proposed updates require human approval
+              before publication.
             </p>
             <p>
-              Each idea family settles into a compact group, then an exact
-              padded circle encloses its dots and label. Those circles repel one
-              another while weak attraction keeps the full atlas compact. LZ
-              participates in that packing without a visible blob, and the final
-              layout remains still. Distance expresses shared ideas, not
-              evidence or consensus.
+              <strong>Checking citations.</strong> Citation links are extracted
+              from the reference lists of the recorded arXiv versions and
+              refreshed when revisions are accepted. Counts include only
+              citations between papers on this map, not their total citations
+              across the literature.
+            </p>
+            <p>
+              <strong>Limits.</strong> Coverage and summaries may be incomplete
+              or contain errors; consult the original papers. Inclusion and
+              proximity do not imply endorsement, peer review, or scientific
+              consensus. The isolated LZ candidate is not a discovery.
             </p>
           </details>
         </aside>
