@@ -1,0 +1,99 @@
+{
+  "schemaVersion": 1,
+  "runId": "89461636-ec52-4edb-97fa-096db166c52a",
+  "runAt": "2026-10-27T10:28:29Z",
+  "scanWindow": {
+    "previousSuccessfulScan": "2026-10-22T09:35:25Z",
+    "overlapStart": "2026-10-21",
+    "coverageEnd": "2026-10-27",
+    "coverageComplete": true,
+    "note": "All listing, search, rotating-author, citation-discovery, exact-version screening, reference, artifact-generation, and validation steps completed before cursor promotion."
+  },
+  "discovery": {
+    "inspireDisplayedResults": 151,
+    "inspireNewIds": ["2610.32747"],
+    "listingPages": 10,
+    "targetedSearches": 11,
+    "rotatingAuthorCatchups": 8,
+    "logicalRequests": 228,
+    "networkRequests": 228,
+    "notModifiedHits": 169,
+    "retries": 0,
+    "candidateCount": 160
+  },
+  "added": [
+    {
+      "id": "2610.32747",
+      "version": 1,
+      "title": "Heavy Sterile Fermions from the Atmosphere: LZ Limits on Neutrino Up-Scattering",
+      "reason": "Directly constrains atmospheric-neutrino up-scattering with the LZ high-recoil dataset and explicitly tests the 248 keV event as a heavy-sterile-fermion explanation.",
+      "url": "https://arxiv.org/abs/2610.32747v1"
+    }
+  ],
+  "revised": [
+    {
+      "id": "2610.12443",
+      "fromVersion": 1,
+      "toVersion": 2,
+      "assessment": "The exact revision remains directly relevant and preserves the established title, authors, abstract, role, placement, tags, summary, takeaway, coordinates, and layout rank; exact-version metadata and verified citations were refreshed.",
+      "url": "https://arxiv.org/abs/2610.12443v2"
+    }
+  ],
+  "ambiguous": [],
+  "excluded": {
+    "count": 158,
+    "targetedSearchFalsePositiveIds": ["2610.32818"],
+    "reason": "The exact-version titles and abstracts do not interpret, constrain, diagnose, or materially contextualize the isolated LZ 248 keV recoil; the remaining exclusions are unrelated same-name-author catch-up results."
+  },
+  "citationReconciliation": {
+    "coverageComplete": true,
+    "publicEdgeCount": 4356,
+    "ledgerMappedEdgeCount": 4362,
+    "missingSnapshotIds": [],
+    "staleSnapshotIds": [],
+    "evidence": [
+      {
+        "id": "2610.12443",
+        "version": 2,
+        "completeReferenceCount": 139,
+        "mappedCitationCount": 59,
+        "refsSha256": "2d46a288b48c4fb10e7174dc41e1c7f5925b18b2c81d188243d2d25dd02f520c",
+        "url": "https://arxiv.org/html/2610.12443v2"
+      },
+      {
+        "id": "2610.32747",
+        "version": 1,
+        "completeReferenceCount": 73,
+        "mappedCitationCount": 29,
+        "refsSha256": "84bf2213a834b1e0b68b63bccdf513503f914d5e3fd0f6f7e7f9413966a5e2be",
+        "url": "https://arxiv.org/html/2610.32747v1"
+      }
+    ],
+    "pinnedReviewException": "The six-edge difference is confined to the pre-existing 2609.06640v2 human-review item; its public record and citation edges remain pinned to the accepted v1 snapshot."
+  },
+  "changes": {
+    "addedPaperIds": ["2610.32747"],
+    "revisedPaperIds": ["2610.12443"],
+    "candidateLogIds": [],
+    "preserved": "All 139 established records retain their order, summaries, takeaways, roles, island memberships, tags, coordinates, and layout ranks. The accepted revision changes only exact arXiv metadata and verified citations; the addition uses contiguous rank 139."
+  },
+  "validation": {
+    "catalogValidator": "passed: 140 papers and 9 islands",
+    "generatedArtifacts": "passed: catalog index and both map layouts are current",
+    "maintenanceTests": "passed: 104",
+    "catalogIndexTests": "passed: 6",
+    "layoutTests": "passed: 16",
+    "layoutArtifactTests": "passed: 5",
+    "mapCameraTests": "passed: 12",
+    "typecheck": "passed",
+    "lint": "passed",
+    "productionBuild": "passed: 141 prerendered routes and sitemap for 140 papers"
+  },
+  "judgmentCalls": [
+    "2610.32747v1 was placed only in Neutrino-initiated recoils because an atmospheric neutrino is the incident particle; its main result is a set of sterile-fermion up-scattering limits, so its role is constraint.",
+    "The new record received a semantic coordinate near the existing atmospheric-neutrino papers and the next contiguous layout rank, 139; no established coordinate or rank changed.",
+    "2610.12443v2 remains in Other endothermic DM with all human-reviewed editorial fields preserved because its normalized title, authors, and abstract are unchanged from v1.",
+    "Citation edges were copied only from complete exact-version arXiv HTML bibliographies; no edge was inferred from prose, dates, or conceptual proximity.",
+    "The pre-existing 2609.06640v2 human-review item remains unchanged; its public catalog record and citation edges stay pinned to v1 pending editorial review."
+  ]
+}

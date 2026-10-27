@@ -2,8 +2,8 @@
   "schemaVersion": 2,
   "taxonomyRevision": "2026-10-08",
   "title": "LZ high-recoil literature landscape",
-  "updatedAt": "2026-10-22",
-  "lastSuccessfulScan": "2026-10-22T09:35:25Z",
+  "updatedAt": "2026-10-27",
+  "lastSuccessfulScan": "2026-10-27T10:28:29Z",
   "event": {
     "energyKev": 248,
     "statisticalUncertaintyKev": 23,
@@ -13,7 +13,7 @@
   },
   "citationData": {
     "source": "arXiv reference lists",
-    "checkedAt": "2026-10-22",
+    "checkedAt": "2026-10-27",
     "scope": "Citations between papers in this map",
     "note": "References to the official LZ preprint are normalized to arXiv:2609.02823."
   },
@@ -5642,11 +5642,11 @@
       "id": "2610.12443",
       "layoutRank": 124,
       "arxivId": "2610.12443",
-      "arxivVersion": 1,
+      "arxivVersion": 2,
       "title": "A scalar-extended ${\\rm U(1)_{L_{\\mu}-L_{\\tau}}}$ explanation of the LUX-ZEPLIN 248 keV excess",
       "authors": ["Dipankar Pradhan", "Abhik Sarkar"],
       "published": "2026-10-08",
-      "updated": "2026-10-08",
+      "updated": "2026-10-26",
       "url": "https://arxiv.org/abs/2610.12443",
       "role": "explanation",
       "primaryIsland": "endothermic",
@@ -5662,14 +5662,18 @@
       "x": 63.8,
       "y": 54.2,
       "cites": [
-        "2609.01583", "2609.02505", "2609.02608", "2609.02823", "2609.02994",
-        "2609.04673", "2609.06153", "2609.06571", "2609.06909", "2609.07138",
-        "2609.07225", "2609.07811", "2609.09015", "2609.09107", "2609.09138",
-        "2609.09385", "2609.10453", "2609.10827", "2609.13038", "2609.13130",
-        "2609.14799", "2609.15027", "2609.15118", "2609.15600", "2609.15782",
-        "2609.15985", "2609.17196", "2609.18564", "2609.21011", "2609.21823",
-        "2609.22063", "2609.26570", "2609.26870", "2609.28129", "2609.37561",
-        "2610.00645", "2610.06756", "2610.09516"
+        "2609.01583", "2609.01592", "2609.01892", "2609.02505", "2609.02608",
+        "2609.02775", "2609.02807", "2609.02823", "2609.02994", "2609.04185",
+        "2609.04186", "2609.04673", "2609.06153", "2609.06571", "2609.06750",
+        "2609.06825", "2609.06909", "2609.07138", "2609.07225", "2609.07451",
+        "2609.07807", "2609.07811", "2609.09015", "2609.09107", "2609.09138",
+        "2609.09385", "2609.10453", "2609.10827", "2609.11833", "2609.13038",
+        "2609.13130", "2609.14799", "2609.15027", "2609.15118", "2609.15600",
+        "2609.15714", "2609.15742", "2609.15782", "2609.15985", "2609.17196",
+        "2609.18564", "2609.21011", "2609.21823", "2609.22063", "2609.23096",
+        "2609.26570", "2609.26870", "2609.28129", "2609.28218", "2609.28740",
+        "2609.29462", "2609.32435", "2609.35737", "2609.37561", "2610.00645",
+        "2610.06756", "2610.08648", "2610.09516", "2610.09753"
       ]
     },
     {
@@ -6184,6 +6188,43 @@
         "2609.28740", "2609.28819", "2609.33869", "2609.36184", "2609.38316",
         "2609.40234", "2610.00226", "2610.01613", "2610.03692", "2610.05893",
         "2610.08648", "2610.09753", "2610.16156", "2610.21041"
+      ]
+    },
+    {
+      "id": "2610.32747",
+      "layoutRank": 139,
+      "arxivId": "2610.32747",
+      "arxivVersion": 1,
+      "title": "Heavy Sterile Fermions from the Atmosphere: LZ Limits on Neutrino Up-Scattering",
+      "authors": [
+        "D. Aristizabal Sierra",
+        "V. De Romeri",
+        "D. K. Papoulias",
+        "I. M. Shoemaker"
+      ],
+      "published": "2026-10-23",
+      "updated": "2026-10-23",
+      "url": "https://arxiv.org/abs/2610.32747",
+      "role": "constraint",
+      "primaryIsland": "neutrino",
+      "islands": ["neutrino"],
+      "tags": [
+        "atmospheric neutrinos",
+        "heavy sterile fermions",
+        "neutrino up-scattering",
+        "mediator constraints"
+      ],
+      "summary": "Using the released high-recoil LZ spectrum, the authors derive limits on atmospheric-neutrino up-scattering into a heavy sterile fermion for vector, axial-vector, scalar, and dipole interactions, and test whether the 248 keV event can be accommodated.",
+      "takeaway": "The lower-energy null region yields new constraints above roughly 50 MeV; fitting the isolated event requires near-nonperturbative scalar, vector, or axial couplings, while the dipole case fits poorly.",
+      "x": 24.4,
+      "y": 79.4,
+      "cites": [
+        "2609.01504", "2609.02807", "2609.02823", "2609.04144", "2609.04175",
+        "2609.04181", "2609.04185", "2609.04186", "2609.04673", "2609.05204",
+        "2609.05291", "2609.06171", "2609.06571", "2609.06640", "2609.06750",
+        "2609.06756", "2609.06760", "2609.06825", "2609.06890", "2609.06909",
+        "2609.07138", "2609.07225", "2609.07451", "2609.07742", "2609.07800",
+        "2609.07807", "2609.07811", "2609.10504", "2609.30255"
       ]
     }
   ]
