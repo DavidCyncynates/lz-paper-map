@@ -241,6 +241,109 @@ a {
   height: 13px;
 }
 
+.cite-map {
+  display: inline-flex;
+  flex: none;
+}
+
+.cite-map-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  min-height: 28px;
+  padding: 3px 0;
+  margin-left: 4px;
+  border: 0;
+  border-radius: 3px;
+  background: transparent;
+  color: var(--primary);
+  font-weight: 650;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.cite-map-button:hover .cite-map-label {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.cite-map-button:focus-visible,
+.cite-map-dialog button:focus-visible,
+.cite-map-dialog textarea:focus-visible,
+.cite-map-download:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 3px;
+}
+
+.cite-map-dialog {
+  width: 620px;
+  max-width: calc(100vw - 32px);
+  max-height: calc(100dvh - 32px);
+  margin: auto;
+  padding: 22px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--popover);
+  color: var(--foreground);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+  font-size: 14px;
+}
+
+.cite-map-dialog::backdrop {
+  background: rgba(0, 0, 0, 0.35);
+}
+
+.cite-map-dialog-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+
+.cite-map-dialog h2 {
+  margin: 0;
+  font-family: var(--font-serif-display);
+  font-size: 22px;
+}
+
+.cite-map-dialog-heading button {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border: 0;
+  border-radius: 4px;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+}
+
+.cite-map-dialog p {
+  margin: 12px 0;
+  color: var(--muted-foreground);
+  line-height: 1.5;
+}
+
+.cite-map-dialog textarea {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-mono-ui);
+  font-size: 12px;
+  line-height: 1.6;
+  resize: vertical;
+}
+
+.topbar-meta .cite-map-download {
+  margin: 14px 0 0;
+  color: var(--primary);
+}
+
 .theme-toggle {
   position: relative;
   flex: none;
@@ -1736,6 +1839,15 @@ a {
 }
 
 @media (max-width: 960px) {
+  .topbar {
+    flex-wrap: wrap;
+    gap: 6px 12px;
+  }
+
+  .topbar-meta {
+    margin-left: auto;
+  }
+
   .workspace {
     grid-template-columns: 210px minmax(0, 1fr);
   }
@@ -1763,6 +1875,18 @@ a {
   .topbar {
     min-height: 62px;
     padding-inline: 15px;
+  }
+
+  .topbar-meta {
+    gap: 10px;
+  }
+
+  .cite-map-button {
+    width: 28px;
+  }
+
+  .cite-map-label {
+    display: none;
   }
 
   .topbar-meta > span,
@@ -2303,7 +2427,7 @@ a {
     gap: 10px;
   }
 
-  .topbar-meta a:first-of-type {
+  .topbar-meta > a:first-of-type {
     display: none;
   }
 

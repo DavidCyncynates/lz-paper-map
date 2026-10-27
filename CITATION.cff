@@ -9,6 +9,21 @@ authors:
     affiliation: "Abdus Salam International Centre for Theoretical Physics"
 version: 1.0.0
 date-released: 2026-10-27
+doi: "10.5281/zenodo.23688062"
+identifiers:
+  - type: doi
+    value: "10.5281/zenodo.23688061"
+    description: "The evolving map across all archived versions."
+preferred-citation:
+  type: generic
+  title: "LZ Paper Map: literature on the 248 keV nuclear-recoil candidate"
+  authors:
+    - family-names: Cyncynates
+      given-names: David
+      orcid: "https://orcid.org/0000-0002-2660-8407"
+  year: 2026
+  doi: "10.5281/zenodo.23688061"
+  url: "https://davidcyncynates.github.io/lz-paper-map/"
 url: "https://davidcyncynates.github.io/lz-paper-map/"
 repository-code: "https://github.com/DavidCyncynates/lz-paper-map"
 license: MIT

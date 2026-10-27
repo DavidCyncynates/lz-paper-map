@@ -1,5 +1,6 @@
 import landscape from '@/data/landscape.json';
 import { serializeJsonLd } from '@/lib/json-ld';
+import { MAP_CITATION } from '@/lib/map-citation';
 import { paperDetailUrl, SITE_URL } from '@/lib/site-url';
 import { LzLandscape } from './lz-landscape';
 
@@ -12,6 +13,12 @@ export default function Home() {
     description:
       'A searchable map of LZ papers about the 248 keV LUX-ZEPLIN high-recoil candidate, with concise summaries, physics categories and citation lineage.',
     url: SITE_URL,
+    identifier: {
+      '@type': 'PropertyValue',
+      propertyID: 'DOI',
+      value: MAP_CITATION.conceptDoi,
+      url: `https://doi.org/${MAP_CITATION.conceptDoi}`,
+    },
     dateModified: landscape.updatedAt,
     inLanguage: 'en',
     creator: {
