@@ -6,11 +6,11 @@ import {
   islandById,
   landscape,
   paperById,
-  paperRoleLabel,
   papersCitedBy,
   papersCitedByPaper,
 } from '@/lib/paper-catalog';
 import { absoluteSiteUrl, paperDetailUrl, SITE_URL } from '@/lib/site-url';
+import { paperContributionLabel } from '@/lib/paper-contribution';
 
 import { CatalogHeader } from '../catalog-header';
 import styles from '../papers.module.css';
@@ -183,7 +183,7 @@ export default async function PaperPage({ params }: PaperPageProps) {
       <main className={styles.paperMain}>
         <article className={styles.paperArticle}>
           <p className={styles.eyebrow}>
-            {island?.label} · {paperRoleLabel(paper.role)}
+            {island?.label} · {paperContributionLabel(paper.contribution)}
           </p>
           <h1>{paper.title}</h1>
           <p className={styles.authors}>{paper.authors.join(', ')}</p>

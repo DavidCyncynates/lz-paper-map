@@ -54,14 +54,3 @@ export function papersCitedByPaper(paper: CatalogPaper) {
     return citedPaper ? [citedPaper] : [];
   });
 }
-
-export function paperRoleLabel(role: CatalogPaper['role']) {
-  const labels: Record<CatalogPaper['role'], string> = {
-    observation: 'Source result',
-    explanation: 'Interpretation',
-    constraint: 'Constraint',
-    diagnostic: 'Discriminant',
-    adjacent: 'Adjacent work',
-  };
-  return labels[role];
-}

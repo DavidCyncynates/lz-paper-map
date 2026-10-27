@@ -22,6 +22,11 @@ python3 -m scripts.maintenance --pretty plan --through 2026-10-01
 ```
 
 Every public catalog paper must carry its exact positive `arxivVersion`.
+It must also carry a reviewed `contribution` from the fixed main-contribution
+values in `docs/taxonomy.md`, independently of the retained legacy `role`.
+Classify the accepted version's main result; do not mistake existing-limit
+overlays or future forecasts for new bounds. Revisions preserve this field
+unless an evidence-based, human-reviewed correction is accepted.
 Dates are never used to guess version identity: a same-day revision is still a
 new review unit. `initialize` also imports `data/candidates.json`; every entry
 there must have `status: "ambiguous"`, an exact `arxivId` and positive

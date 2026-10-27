@@ -138,6 +138,7 @@
       "published": "2026-09-02",
       "updated": "2026-09-02",
       "role": "observation",
+      "contribution": "observation",
       "primaryIsland": "observation",
       "islands": ["observation"],
       "tags": ["experiment", "xenon", "nuclear recoil", "EFT operators"],
@@ -158,6 +159,7 @@
       "published": "2026-09-01",
       "updated": "2026-09-01",
       "role": "explanation",
+      "contribution": "candidate",
       "primaryIsland": "endothermic",
       "islands": ["endothermic"],
       "tags": [
@@ -183,6 +185,7 @@
       "published": "2026-09-01",
       "updated": "2026-10-07",
       "role": "explanation",
+      "contribution": "candidate",
       "primaryIsland": "electroweak",
       "islands": ["electroweak"],
       "tags": ["thermal Higgsino", "halo tail", "high-scale SUSY", "gauginos"],
@@ -206,6 +209,7 @@
       "published": "2026-09-01",
       "updated": "2026-09-24",
       "role": "explanation",
+      "contribution": "candidate",
       "primaryIsland": "electroweak",
       "islands": ["electroweak"],
       "tags": [
@@ -231,6 +235,7 @@
       "published": "2026-09-01",
       "updated": "2026-09-17",
       "role": "explanation",
+      "contribution": "candidate",
       "primaryIsland": "electroweak",
       "islands": ["electroweak"],
       "tags": ["Higgsino", "Fermi-LAT", "gamma rays", "H.E.S.S.", "CTAO"],
@@ -251,6 +256,7 @@
       "published": "2026-09-01",
       "updated": "2026-09-02",
       "role": "explanation",
+      "contribution": "candidate-and-bound",
       "primaryIsland": "absorption",
       "islands": ["absorption"],
       "tags": [
@@ -276,6 +282,7 @@
       "published": "2026-09-01",
       "updated": "2026-09-01",
       "role": "explanation",
+      "contribution": "candidate",
       "primaryIsland": "electroweak",
       "islands": ["electroweak"],
       "tags": ["Peccei–Quinn", "high-scale SUSY", "Higgsino", "axion"],
@@ -296,6 +303,7 @@
       "published": "2026-09-02",
       "updated": "2026-09-05",
       "role": "explanation",
+      "contribution": "candidate",
       "primaryIsland": "electroweak",
       "islands": ["electroweak"],
       "tags": [
@@ -329,6 +337,7 @@
       "published": "2026-09-02",
       "updated": "2026-09-03",
       "role": "explanation",
+      "contribution": "candidate",
       "primaryIsland": "endothermic",
       "islands": ["endothermic"],
       "tags": [
@@ -360,6 +369,7 @@
       "published": "2026-09-02",
       "updated": "2026-09-02",
       "role": "constraint",
+      "contribution": "new-bound",
       "primaryIsland": "electroweak",
       "islands": ["electroweak"],
       "tags": ["solar capture", "IceCube", "Higgsino tension", "inelastic DM"],
@@ -387,6 +397,7 @@
       "published": "2026-09-02",
       "updated": "2026-09-18",
       "role": "explanation",
+      "contribution": "candidate",
       "primaryIsland": "electroweak",
       "islands": ["electroweak"],
       "tags": ["Peccei–Quinn", "electroweak doublet", "axion", "luminous DM"],
@@ -427,6 +438,7 @@
       "published": "2026-09-02",
       "updated": "2026-09-03",
       "role": "explanation",
+      "contribution": "candidate",
       "primaryIsland": "endothermic",
       "islands": ["endothermic"],
       "tags": [
@@ -463,6 +475,7 @@
       "published": "2026-09-02",
       "updated": "2026-09-25",
       "role": "adjacent",
+      "contribution": "candidate",
       "primaryIsland": "comparisons",
       "islands": ["comparisons"],
       "tags": ["singlino", "NMSSM", "Sagittarius A*", "gamma rays"],
@@ -521,6 +534,7 @@
       "published": "2026-09-03",
       "updated": "2026-09-08",
       "role": "explanation",
+      "contribution": "candidate",
       "primaryIsland": "electroweak",
       "islands": ["electroweak"],
       "tags": [
@@ -567,6 +581,7 @@
       "published": "2026-09-03",
       "updated": "2026-09-03",
       "role": "explanation",
+      "contribution": "candidate",
       "primaryIsland": "electroweak",
       "islands": ["electroweak"],
       "tags": [
@@ -609,6 +624,7 @@
       "published": "2026-09-03",
       "updated": "2026-09-03",
       "role": "constraint",
+      "contribution": "new-bound",
       "primaryIsland": "electroweak",
       "islands": ["electroweak"],
       "tags": [
@@ -647,6 +663,7 @@
       "published": "2026-09-03",
       "updated": "2026-09-03",
       "role": "explanation",
+      "contribution": "candidate",
       "primaryIsland": "endothermic",
       "islands": ["endothermic"],
       "tags": [
@@ -681,6 +698,7 @@
       "published": "2026-09-03",
       "updated": "2026-10-14",
       "role": "explanation",
+      "contribution": "candidate",
       "primaryIsland": "neutrino",
       "islands": ["neutrino"],
       "tags": [
@@ -726,6 +744,7 @@
       "published": "2026-09-03",
       "updated": "2026-09-10",
       "role": "explanation",
+      "contribution": "candidate",
       "primaryIsland": "elastic",
       "islands": ["elastic"],
       "tags": [
@@ -767,6 +786,7 @@
       "published": "2026-09-04",
       "updated": "2026-09-04",
       "role": "explanation",
+      "contribution": "candidate-and-bound",
       "primaryIsland": "comparisons",
       "islands": ["comparisons"],
       "tags": ["exothermic DM", "endothermic DM", "sideband", "spectral shape"],
@@ -799,6 +819,7 @@
       "published": "2026-09-04",
       "updated": "2026-09-08",
       "role": "explanation",
+      "contribution": "candidate",
       "primaryIsland": "exothermic",
       "islands": ["exothermic"],
       "tags": [
@@ -841,6 +862,7 @@
       "published": "2026-09-04",
       "updated": "2026-09-04",
       "role": "diagnostic",
+      "contribution": "other",
       "primaryIsland": "comparisons",
       "islands": ["comparisons"],
       "tags": [
@@ -889,6 +911,7 @@
       "updated": "2026-09-10",
       "url": "https://arxiv.org/abs/2609.06153",
       "role": "explanation",
+      "contribution": "candidate",
       "primaryIsland": "exothermic",
       "islands": ["exothermic"],
       "tags": [
@@ -963,6 +986,7 @@
       "updated": "2026-09-13",
       "url": "https://arxiv.org/abs/2609.06171",
       "role": "explanation",
+      "contribution": "candidate",
       "primaryIsland": "endothermic",
       "islands": ["endothermic"],
       "tags": [
@@ -1016,6 +1040,7 @@
       "updated": "2026-09-06",
       "url": "https://arxiv.org/abs/2609.06571",
       "role": "explanation",
+      "contribution": "candidate",
       "primaryIsland": "electroweak",
       "islands": ["electroweak"],
       "tags": [
@@ -1065,6 +1090,7 @@
       "updated": "2026-09-06",
       "url": "https://arxiv.org/abs/2609.06640",
       "role": "diagnostic",
+      "contribution": "candidate",
       "primaryIsland": "endothermic",
       "islands": ["endothermic"],
       "tags": [
@@ -1114,6 +1140,7 @@
       "updated": "2026-09-06",
       "url": "https://arxiv.org/abs/2609.06750",
       "role": "diagnostic",
+      "contribution": "candidate",
       "primaryIsland": "endothermic",
       "islands": ["endothermic"],
       "tags": [
@@ -1163,6 +1190,7 @@
       "updated": "2026-09-06",
       "url": "https://arxiv.org/abs/2609.06756",
       "role": "explanation",
+      "contribution": "candidate",
       "primaryIsland": "boosted",
       "islands": ["boosted"],
       "tags": [
@@ -1210,6 +1238,7 @@
       "updated": "2026-09-10",
       "url": "https://arxiv.org/abs/2609.06760",
       "role": "constraint",
+      "contribution": "new-bound",
       "primaryIsland": "comparisons",
       "islands": ["comparisons"],
       "tags": [
@@ -1256,6 +1285,7 @@
       "updated": "2026-09-06",
       "url": "https://arxiv.org/abs/2609.06825",
       "role": "explanation",
+      "contribution": "candidate",
       "primaryIsland": "endothermic",
       "islands": ["endothermic"],
       "tags": [
@@ -1303,6 +1333,7 @@
       "updated": "2026-09-07",
       "url": "https://arxiv.org/abs/2609.06890",
       "role": "explanation",
+      "contribution": "candidate",
       "primaryIsland": "boosted",
       "islands": ["boosted"],
       "tags": [
@@ -1348,6 +1379,7 @@
       "updated": "2026-09-07",
       "url": "https://arxiv.org/abs/2609.06909",
       "role": "explanation",
+      "contribution": "candidate",
       "primaryIsland": "endothermic",
       "islands": ["endothermic"],
       "tags": [
@@ -1395,6 +1427,7 @@
       "updated": "2026-09-07",
       "url": "https://arxiv.org/abs/2609.07138",
       "role": "explanation",
+      "contribution": "candidate",
       "primaryIsland": "electroweak",
       "islands": ["electroweak"],
       "tags": [
@@ -1431,6 +1464,7 @@
       "updated": "2026-09-07",
       "url": "https://arxiv.org/abs/2609.07225",
       "role": "explanation",
+      "contribution": "candidate",
       "primaryIsland": "endothermic",
       "islands": ["endothermic"],
       "tags": [
@@ -1480,6 +1514,7 @@
       "updated": "2026-09-24",
       "url": "https://arxiv.org/abs/2609.07451",
       "role": "explanation",
+      "contribution": "candidate",
       "primaryIsland": "electroweak",
       "islands": ["electroweak"],
       "tags": [
@@ -1537,6 +1572,7 @@
       "updated": "2026-09-07",
       "url": "https://arxiv.org/abs/2609.07742",
       "role": "explanation",
+      "contribution": "candidate",
       "primaryIsland": "boosted",
       "islands": ["boosted"],
       "tags": [
@@ -1590,6 +1626,7 @@
       "updated": "2026-09-07",
       "url": "https://arxiv.org/abs/2609.07800",
       "role": "explanation",
+      "contribution": "candidate",
       "primaryIsland": "electroweak",
       "islands": ["electroweak"],
       "tags": [
@@ -1650,6 +1687,7 @@
       "updated": "2026-09-07",
       "url": "https://arxiv.org/abs/2609.07807",
       "role": "constraint",
+      "contribution": "new-bound",
       "primaryIsland": "electroweak",
       "islands": ["electroweak"],
       "tags": [
@@ -1701,6 +1739,7 @@
       "updated": "2026-09-22",
       "url": "https://arxiv.org/abs/2609.07811",
       "role": "explanation",
+      "contribution": "candidate",
       "primaryIsland": "electroweak",
       "islands": ["electroweak"],
       "tags": [
@@ -1769,6 +1808,7 @@
       "updated": "2026-09-08",
       "url": "https://arxiv.org/abs/2609.08712",
       "role": "diagnostic",
+      "contribution": "other",
       "primaryIsland": "electroweak",
       "islands": ["electroweak"],
       "tags": [
@@ -1822,6 +1862,7 @@
       "updated": "2026-09-08",
       "url": "https://arxiv.org/abs/2609.08893",
       "role": "explanation",
+      "contribution": "candidate",
       "primaryIsland": "endothermic",
       "islands": ["endothermic"],
       "tags": [
@@ -1871,6 +1912,7 @@
       "updated": "2026-10-02",
       "url": "https://arxiv.org/abs/2609.08993",
       "role": "explanation",
+      "contribution": "candidate",
       "primaryIsland": "elastic",
       "islands": ["elastic"],
       "tags": [
@@ -1925,6 +1967,7 @@
       "updated": "2026-10-04",
       "url": "https://arxiv.org/abs/2609.09015",
       "role": "explanation",
+      "contribution": "candidate",
       "primaryIsland": "endothermic",
       "islands": ["endothermic"],
       "tags": [
@@ -1962,6 +2005,7 @@
       "updated": "2026-09-08",
       "url": "https://arxiv.org/abs/2609.09037",
       "role": "explanation",
+      "contribution": "candidate-and-bound",
       "primaryIsland": "absorption",
       "islands": ["absorption"],
       "tags": [
@@ -2001,6 +2045,7 @@
       "updated": "2026-09-08",
       "url": "https://arxiv.org/abs/2609.09107",
       "role": "explanation",
+      "contribution": "candidate",
       "primaryIsland": "endothermic",
       "islands": ["endothermic"],
       "tags": [
@@ -2052,6 +2097,7 @@
       "updated": "2026-09-08",
       "url": "https://arxiv.org/abs/2609.09136",
       "role": "explanation",
+      "contribution": "candidate",
       "primaryIsland": "endothermic",
       "islands": ["endothermic"],
       "tags": [
@@ -2095,6 +2141,7 @@
       "updated": "2026-09-15",
       "url": "https://arxiv.org/abs/2609.09138",
       "role": "explanation",
+      "contribution": "candidate-and-bound",
       "primaryIsland": "electroweak",
       "islands": ["electroweak"],
       "tags": [
@@ -2166,6 +2213,7 @@
       "updated": "2026-09-07",
       "url": "https://arxiv.org/abs/2609.09230",
       "role": "diagnostic",
+      "contribution": "other",
       "primaryIsland": "comparisons",
       "islands": ["comparisons"],
       "tags": [
@@ -2211,6 +2259,7 @@
       "updated": "2026-09-08",
       "url": "https://arxiv.org/abs/2609.09385",
       "role": "explanation",
+      "contribution": "candidate-and-bound",
       "primaryIsland": "electroweak",
       "islands": ["electroweak"],
       "tags": [
@@ -2248,6 +2297,7 @@
       "updated": "2026-09-09",
       "url": "https://arxiv.org/abs/2609.10453",
       "role": "explanation",
+      "contribution": "candidate",
       "primaryIsland": "endothermic",
       "islands": ["endothermic"],
       "tags": [
@@ -2326,6 +2376,7 @@
       "updated": "2026-09-22",
       "url": "https://arxiv.org/abs/2609.10491",
       "role": "explanation",
+      "contribution": "candidate",
       "primaryIsland": "exothermic",
       "islands": ["exothermic"],
       "tags": [
@@ -2404,6 +2455,7 @@
       "updated": "2026-09-09",
       "url": "https://arxiv.org/abs/2609.10504",
       "role": "constraint",
+      "contribution": "new-bound",
       "primaryIsland": "neutrino",
       "islands": ["neutrino"],
       "tags": [
@@ -2446,6 +2498,7 @@
       "updated": "2026-10-07",
       "url": "https://arxiv.org/abs/2609.10636",
       "role": "explanation",
+      "contribution": "candidate",
       "primaryIsland": "endothermic",
       "islands": ["endothermic"],
       "tags": [
@@ -2487,6 +2540,7 @@
       "updated": "2026-09-09",
       "url": "https://arxiv.org/abs/2609.10662",
       "role": "adjacent",
+      "contribution": "other",
       "primaryIsland": "comparisons",
       "islands": ["comparisons"],
       "tags": [
@@ -2521,6 +2575,7 @@
       "updated": "2026-09-09",
       "url": "https://arxiv.org/abs/2609.10827",
       "role": "explanation",
+      "contribution": "candidate",
       "primaryIsland": "endothermic",
       "islands": ["endothermic"],
       "tags": [
@@ -2575,6 +2630,7 @@
       "updated": "2026-09-10",
       "url": "https://arxiv.org/abs/2609.11241",
       "role": "adjacent",
+      "contribution": "candidate",
       "primaryIsland": "electroweak",
       "islands": ["electroweak"],
       "tags": [
@@ -2606,6 +2662,7 @@
       "updated": "2026-09-10",
       "url": "https://arxiv.org/abs/2609.11600",
       "role": "explanation",
+      "contribution": "candidate",
       "primaryIsland": "boosted",
       "islands": ["boosted"],
       "tags": [
@@ -2659,6 +2716,7 @@
       "updated": "2026-09-10",
       "url": "https://arxiv.org/abs/2609.11833",
       "role": "constraint",
+      "contribution": "new-bound",
       "primaryIsland": "comparisons",
       "islands": ["comparisons"],
       "tags": [
@@ -2707,6 +2765,7 @@
       "updated": "2026-09-29",
       "url": "https://arxiv.org/abs/2609.12045",
       "role": "explanation",
+      "contribution": "candidate",
       "primaryIsland": "absorption",
       "islands": ["absorption"],
       "tags": [
@@ -2743,6 +2802,7 @@
       "updated": "2026-09-11",
       "url": "https://arxiv.org/abs/2609.13038",
       "role": "explanation",
+      "contribution": "candidate",
       "primaryIsland": "electroweak",
       "islands": ["electroweak"],
       "tags": [
@@ -2827,6 +2887,7 @@
       "updated": "2026-10-02",
       "url": "https://arxiv.org/abs/2609.13130",
       "role": "explanation",
+      "contribution": "candidate",
       "primaryIsland": "endothermic",
       "islands": ["endothermic"],
       "tags": [
@@ -2863,6 +2924,7 @@
       "updated": "2026-09-14",
       "url": "https://arxiv.org/abs/2609.14799",
       "role": "diagnostic",
+      "contribution": "other",
       "primaryIsland": "comparisons",
       "islands": ["comparisons"],
       "tags": [
@@ -2924,6 +2986,7 @@
       "updated": "2026-09-22",
       "url": "https://arxiv.org/abs/2609.15027",
       "role": "explanation",
+      "contribution": "candidate",
       "primaryIsland": "endothermic",
       "islands": ["endothermic"],
       "tags": [
@@ -2992,6 +3055,7 @@
       "updated": "2026-09-14",
       "url": "https://arxiv.org/abs/2609.15118",
       "role": "explanation",
+      "contribution": "candidate",
       "primaryIsland": "endothermic",
       "islands": ["endothermic"],
       "tags": [
@@ -3049,6 +3113,7 @@
       "updated": "2026-09-14",
       "url": "https://arxiv.org/abs/2609.15321",
       "role": "constraint",
+      "contribution": "bound-reassessment",
       "primaryIsland": "comparisons",
       "islands": ["comparisons"],
       "tags": [
@@ -3094,6 +3159,7 @@
       "updated": "2026-09-14",
       "url": "https://arxiv.org/abs/2609.15413",
       "role": "adjacent",
+      "contribution": "candidate",
       "primaryIsland": "comparisons",
       "islands": ["comparisons"],
       "tags": [
@@ -3126,6 +3192,7 @@
       "updated": "2026-09-18",
       "url": "https://arxiv.org/abs/2609.15600",
       "role": "explanation",
+      "contribution": "candidate",
       "primaryIsland": "endothermic",
       "islands": ["endothermic"],
       "tags": [
@@ -3213,6 +3280,7 @@
       "updated": "2026-09-14",
       "url": "https://arxiv.org/abs/2609.15634",
       "role": "diagnostic",
+      "contribution": "other",
       "primaryIsland": "comparisons",
       "islands": ["comparisons"],
       "tags": [
@@ -3284,6 +3352,7 @@
       "updated": "2026-09-14",
       "url": "https://arxiv.org/abs/2609.15714",
       "role": "explanation",
+      "contribution": "candidate",
       "primaryIsland": "exothermic",
       "islands": ["exothermic"],
       "tags": [
@@ -3358,6 +3427,7 @@
       "updated": "2026-10-05",
       "url": "https://arxiv.org/abs/2609.15742",
       "role": "explanation",
+      "contribution": "candidate",
       "primaryIsland": "endothermic",
       "islands": ["endothermic"],
       "tags": [
@@ -3394,6 +3464,7 @@
       "updated": "2026-09-18",
       "url": "https://arxiv.org/abs/2609.15782",
       "role": "diagnostic",
+      "contribution": "other",
       "primaryIsland": "comparisons",
       "islands": ["comparisons"],
       "tags": [
@@ -3446,6 +3517,7 @@
       "updated": "2026-09-14",
       "url": "https://arxiv.org/abs/2609.15933",
       "role": "explanation",
+      "contribution": "candidate-and-bound",
       "primaryIsland": "absorption",
       "islands": ["absorption"],
       "tags": [
@@ -3525,6 +3597,7 @@
       "updated": "2026-09-18",
       "url": "https://arxiv.org/abs/2609.15985",
       "role": "diagnostic",
+      "contribution": "other",
       "primaryIsland": "comparisons",
       "islands": ["comparisons"],
       "tags": [
@@ -3600,6 +3673,7 @@
       "updated": "2026-09-17",
       "url": "https://arxiv.org/abs/2609.16529",
       "role": "diagnostic",
+      "contribution": "other",
       "primaryIsland": "comparisons",
       "islands": ["comparisons"],
       "tags": [
@@ -3632,6 +3706,7 @@
       "updated": "2026-09-16",
       "url": "https://arxiv.org/abs/2609.17196",
       "role": "explanation",
+      "contribution": "candidate",
       "primaryIsland": "elastic",
       "islands": ["elastic"],
       "tags": [
@@ -3691,6 +3766,7 @@
       "updated": "2026-09-16",
       "url": "https://arxiv.org/abs/2609.17412",
       "role": "explanation",
+      "contribution": "candidate",
       "primaryIsland": "endothermic",
       "islands": ["endothermic"],
       "tags": [
@@ -3777,6 +3853,7 @@
       "updated": "2026-10-12",
       "url": "https://arxiv.org/abs/2609.17935",
       "role": "explanation",
+      "contribution": "candidate",
       "primaryIsland": "exothermic",
       "islands": ["exothermic"],
       "tags": [
@@ -3860,6 +3937,7 @@
       "updated": "2026-09-16",
       "url": "https://arxiv.org/abs/2609.18564",
       "role": "explanation",
+      "contribution": "candidate",
       "primaryIsland": "electroweak",
       "islands": ["electroweak"],
       "tags": [
@@ -3905,6 +3983,7 @@
       "updated": "2026-09-14",
       "url": "https://arxiv.org/abs/2609.19174",
       "role": "constraint",
+      "contribution": "new-bound",
       "primaryIsland": "electroweak",
       "islands": ["electroweak"],
       "tags": [
@@ -3949,6 +4028,7 @@
       "updated": "2026-09-24",
       "url": "https://arxiv.org/abs/2609.21011",
       "role": "explanation",
+      "contribution": "candidate",
       "primaryIsland": "endothermic",
       "islands": ["endothermic"],
       "tags": [
@@ -4037,6 +4117,7 @@
       "updated": "2026-09-18",
       "url": "https://arxiv.org/abs/2609.21444",
       "role": "diagnostic",
+      "contribution": "other",
       "primaryIsland": "comparisons",
       "islands": ["comparisons"],
       "tags": [
@@ -4101,6 +4182,7 @@
       "updated": "2026-10-05",
       "url": "https://arxiv.org/abs/2609.21823",
       "role": "constraint",
+      "contribution": "new-bound",
       "primaryIsland": "elastic",
       "islands": ["elastic"],
       "tags": [
@@ -4151,6 +4233,7 @@
       "updated": "2026-09-18",
       "url": "https://arxiv.org/abs/2609.22063",
       "role": "explanation",
+      "contribution": "candidate",
       "primaryIsland": "electroweak",
       "islands": ["electroweak"],
       "tags": [
@@ -4218,6 +4301,7 @@
       "updated": "2026-09-19",
       "url": "https://arxiv.org/abs/2609.22739",
       "role": "explanation",
+      "contribution": "candidate",
       "primaryIsland": "endothermic",
       "islands": ["endothermic"],
       "tags": [
@@ -4250,6 +4334,7 @@
       "updated": "2026-09-22",
       "url": "https://arxiv.org/abs/2609.23096",
       "role": "explanation",
+      "contribution": "candidate",
       "primaryIsland": "endothermic",
       "islands": ["endothermic"],
       "tags": [
@@ -4289,6 +4374,7 @@
       "updated": "2026-09-20",
       "url": "https://arxiv.org/abs/2609.23477",
       "role": "explanation",
+      "contribution": "candidate",
       "primaryIsland": "endothermic",
       "islands": ["endothermic"],
       "tags": [
@@ -4328,6 +4414,7 @@
       "updated": "2026-09-20",
       "url": "https://arxiv.org/abs/2609.23691",
       "role": "explanation",
+      "contribution": "candidate",
       "primaryIsland": "electroweak",
       "islands": ["electroweak"],
       "tags": [
@@ -4359,6 +4446,7 @@
       "updated": "2026-09-21",
       "url": "https://arxiv.org/abs/2609.24982",
       "role": "explanation",
+      "contribution": "candidate",
       "primaryIsland": "boosted",
       "islands": ["boosted"],
       "tags": [
@@ -4400,6 +4488,7 @@
       "updated": "2026-09-21",
       "url": "https://arxiv.org/abs/2609.24988",
       "role": "explanation",
+      "contribution": "candidate",
       "primaryIsland": "endothermic",
       "islands": ["endothermic"],
       "tags": [
@@ -4429,6 +4518,7 @@
       "updated": "2026-09-20",
       "url": "https://arxiv.org/abs/2609.25114",
       "role": "explanation",
+      "contribution": "candidate",
       "primaryIsland": "elastic",
       "islands": ["elastic"],
       "tags": [
@@ -4462,6 +4552,7 @@
       "updated": "2026-09-22",
       "url": "https://arxiv.org/abs/2609.25723",
       "role": "explanation",
+      "contribution": "candidate",
       "primaryIsland": "elastic",
       "islands": ["elastic"],
       "tags": [
@@ -4493,6 +4584,7 @@
       "updated": "2026-09-22",
       "url": "https://arxiv.org/abs/2609.26570",
       "role": "explanation",
+      "contribution": "candidate",
       "primaryIsland": "exothermic",
       "islands": ["exothermic"],
       "tags": [
@@ -4523,6 +4615,7 @@
       "updated": "2026-09-22",
       "url": "https://arxiv.org/abs/2609.26698",
       "role": "constraint",
+      "contribution": "new-bound",
       "primaryIsland": "comparisons",
       "islands": ["comparisons"],
       "tags": [
@@ -4555,6 +4648,7 @@
       "updated": "2026-09-22",
       "url": "https://arxiv.org/abs/2609.26870",
       "role": "diagnostic",
+      "contribution": "other",
       "primaryIsland": "electroweak",
       "islands": ["electroweak"],
       "tags": [
@@ -4594,6 +4688,7 @@
       "updated": "2026-09-23",
       "url": "https://arxiv.org/abs/2609.28129",
       "role": "explanation",
+      "contribution": "candidate",
       "primaryIsland": "electroweak",
       "islands": ["electroweak"],
       "tags": [
@@ -4638,6 +4733,7 @@
       "updated": "2026-09-23",
       "url": "https://arxiv.org/abs/2609.28218",
       "role": "diagnostic",
+      "contribution": "other",
       "primaryIsland": "electroweak",
       "islands": ["electroweak"],
       "tags": [
@@ -4667,6 +4763,7 @@
       "updated": "2026-09-23",
       "url": "https://arxiv.org/abs/2609.28415",
       "role": "explanation",
+      "contribution": "candidate",
       "primaryIsland": "exothermic",
       "islands": ["exothermic"],
       "tags": [
@@ -4708,6 +4805,7 @@
       "updated": "2026-09-23",
       "url": "https://arxiv.org/abs/2609.28616",
       "role": "explanation",
+      "contribution": "candidate",
       "primaryIsland": "endothermic",
       "islands": ["endothermic"],
       "tags": [
@@ -4744,6 +4842,7 @@
       "updated": "2026-09-23",
       "url": "https://arxiv.org/abs/2609.28740",
       "role": "explanation",
+      "contribution": "candidate",
       "primaryIsland": "electroweak",
       "islands": ["electroweak"],
       "tags": [
@@ -4773,6 +4872,7 @@
       "updated": "2026-09-23",
       "url": "https://arxiv.org/abs/2609.28819",
       "role": "explanation",
+      "contribution": "candidate",
       "primaryIsland": "electroweak",
       "islands": ["electroweak"],
       "tags": [
@@ -4803,6 +4903,7 @@
       "updated": "2026-10-01",
       "url": "https://arxiv.org/abs/2609.29462",
       "role": "constraint",
+      "contribution": "new-bound",
       "primaryIsland": "boosted",
       "islands": ["boosted"],
       "tags": [
@@ -4833,6 +4934,7 @@
       "updated": "2026-09-24",
       "url": "https://arxiv.org/abs/2609.30255",
       "role": "explanation",
+      "contribution": "candidate",
       "primaryIsland": "neutrino",
       "islands": ["neutrino"],
       "tags": [
@@ -4863,6 +4965,7 @@
       "updated": "2026-09-26",
       "url": "https://arxiv.org/abs/2609.32435",
       "role": "explanation",
+      "contribution": "candidate",
       "primaryIsland": "elastic",
       "islands": ["elastic"],
       "tags": [
@@ -4898,6 +5001,7 @@
       "updated": "2026-10-07",
       "url": "https://arxiv.org/abs/2609.33869",
       "role": "explanation",
+      "contribution": "candidate",
       "primaryIsland": "electroweak",
       "islands": ["electroweak"],
       "tags": [
@@ -4937,6 +5041,7 @@
       "updated": "2026-09-27",
       "url": "https://arxiv.org/abs/2609.33952",
       "role": "diagnostic",
+      "contribution": "other",
       "primaryIsland": "endothermic",
       "islands": ["endothermic"],
       "tags": [
@@ -4970,6 +5075,7 @@
       "updated": "2026-09-28",
       "url": "https://arxiv.org/abs/2609.34230",
       "role": "explanation",
+      "contribution": "candidate-and-bound",
       "primaryIsland": "exothermic",
       "islands": ["exothermic"],
       "tags": [
@@ -4995,6 +5101,7 @@
       "updated": "2026-09-28",
       "url": "https://arxiv.org/abs/2609.35650",
       "role": "diagnostic",
+      "contribution": "bound-reassessment",
       "primaryIsland": "comparisons",
       "islands": ["comparisons"],
       "tags": [
@@ -5031,6 +5138,7 @@
       "updated": "2026-09-28",
       "url": "https://arxiv.org/abs/2609.35737",
       "role": "diagnostic",
+      "contribution": "other",
       "primaryIsland": "comparisons",
       "islands": ["comparisons"],
       "tags": [
@@ -5072,6 +5180,7 @@
       "updated": "2026-09-28",
       "url": "https://arxiv.org/abs/2609.36184",
       "role": "diagnostic",
+      "contribution": "other",
       "primaryIsland": "comparisons",
       "islands": ["comparisons"],
       "tags": [
@@ -5105,6 +5214,7 @@
       "updated": "2026-10-03",
       "url": "https://arxiv.org/abs/2609.36814",
       "role": "explanation",
+      "contribution": "candidate",
       "primaryIsland": "endothermic",
       "islands": ["endothermic"],
       "tags": [
@@ -5148,6 +5258,7 @@
       "updated": "2026-09-29",
       "url": "https://arxiv.org/abs/2609.37545",
       "role": "explanation",
+      "contribution": "candidate",
       "primaryIsland": "boosted",
       "islands": ["boosted"],
       "tags": [
@@ -5192,6 +5303,7 @@
       "updated": "2026-09-29",
       "url": "https://arxiv.org/abs/2609.37561",
       "role": "explanation",
+      "contribution": "candidate",
       "primaryIsland": "exothermic",
       "islands": ["exothermic"],
       "tags": [
@@ -5236,6 +5348,7 @@
       "updated": "2026-09-29",
       "url": "https://arxiv.org/abs/2609.38316",
       "role": "constraint",
+      "contribution": "new-bound",
       "primaryIsland": "electroweak",
       "islands": ["electroweak"],
       "tags": [
@@ -5282,6 +5395,7 @@
       "updated": "2026-09-30",
       "url": "https://arxiv.org/abs/2609.39529",
       "role": "explanation",
+      "contribution": "candidate",
       "primaryIsland": "elastic",
       "islands": ["elastic"],
       "tags": [
@@ -5307,6 +5421,7 @@
       "updated": "2026-09-30",
       "url": "https://arxiv.org/abs/2609.40234",
       "role": "explanation",
+      "contribution": "candidate",
       "primaryIsland": "comparisons",
       "islands": ["comparisons"],
       "tags": [
@@ -5337,6 +5452,7 @@
       "updated": "2026-09-22",
       "url": "https://arxiv.org/abs/2610.00226",
       "role": "explanation",
+      "contribution": "candidate",
       "primaryIsland": "electroweak",
       "islands": ["electroweak"],
       "tags": [
@@ -5368,6 +5484,7 @@
       "updated": "2026-09-30",
       "url": "https://arxiv.org/abs/2610.00645",
       "role": "explanation",
+      "contribution": "candidate",
       "primaryIsland": "endothermic",
       "islands": ["endothermic"],
       "tags": [
@@ -5396,6 +5513,7 @@
       "updated": "2026-10-01",
       "url": "https://arxiv.org/abs/2610.01613",
       "role": "explanation",
+      "contribution": "candidate",
       "primaryIsland": "electroweak",
       "islands": ["electroweak"],
       "tags": [
@@ -5426,6 +5544,7 @@
       "updated": "2026-10-02",
       "url": "https://arxiv.org/abs/2610.03692",
       "role": "explanation",
+      "contribution": "bound-reassessment",
       "primaryIsland": "electroweak",
       "islands": ["electroweak"],
       "tags": [
@@ -5454,6 +5573,7 @@
       "updated": "2026-10-05",
       "url": "https://arxiv.org/abs/2610.05893",
       "role": "explanation",
+      "contribution": "candidate",
       "primaryIsland": "electroweak",
       "islands": ["electroweak"],
       "tags": [
@@ -5486,6 +5606,7 @@
       "updated": "2026-10-05",
       "url": "https://arxiv.org/abs/2610.06756",
       "role": "constraint",
+      "contribution": "new-bound",
       "primaryIsland": "elastic",
       "islands": ["elastic"],
       "tags": [
@@ -5527,6 +5648,7 @@
       "updated": "2026-10-06",
       "url": "https://arxiv.org/abs/2610.08648",
       "role": "explanation",
+      "contribution": "candidate",
       "primaryIsland": "endothermic",
       "islands": ["endothermic"],
       "tags": [
@@ -5562,6 +5684,7 @@
       "updated": "2026-10-07",
       "url": "https://arxiv.org/abs/2610.09516",
       "role": "explanation",
+      "contribution": "candidate",
       "primaryIsland": "exothermic",
       "islands": ["exothermic"],
       "tags": [
@@ -5600,6 +5723,7 @@
       "updated": "2026-10-07",
       "url": "https://arxiv.org/abs/2610.09753",
       "role": "constraint",
+      "contribution": "new-bound",
       "primaryIsland": "electroweak",
       "islands": ["electroweak"],
       "tags": [
@@ -5649,6 +5773,7 @@
       "updated": "2026-10-26",
       "url": "https://arxiv.org/abs/2610.12443",
       "role": "explanation",
+      "contribution": "candidate",
       "primaryIsland": "endothermic",
       "islands": ["endothermic"],
       "tags": [
@@ -5687,6 +5812,7 @@
       "updated": "2026-10-09",
       "url": "https://arxiv.org/abs/2610.13930",
       "role": "explanation",
+      "contribution": "candidate",
       "primaryIsland": "electroweak",
       "islands": ["electroweak"],
       "tags": [
@@ -5729,6 +5855,7 @@
       "updated": "2026-10-09",
       "url": "https://arxiv.org/abs/2610.14178",
       "role": "adjacent",
+      "contribution": "candidate-and-bound",
       "primaryIsland": "electroweak",
       "islands": ["electroweak"],
       "tags": [
@@ -5759,6 +5886,7 @@
       "updated": "2026-10-09",
       "url": "https://arxiv.org/abs/2610.14188",
       "role": "explanation",
+      "contribution": "candidate",
       "primaryIsland": "endothermic",
       "islands": ["endothermic"],
       "tags": [
@@ -5792,6 +5920,7 @@
       "updated": "2026-10-11",
       "url": "https://arxiv.org/abs/2610.15557",
       "role": "explanation",
+      "contribution": "candidate",
       "primaryIsland": "endothermic",
       "islands": ["endothermic"],
       "tags": [
@@ -5825,6 +5954,7 @@
       "updated": "2026-10-12",
       "url": "https://arxiv.org/abs/2610.16156",
       "role": "constraint",
+      "contribution": "new-bound",
       "primaryIsland": "electroweak",
       "islands": ["electroweak"],
       "tags": [
@@ -5866,6 +5996,7 @@
       "updated": "2026-10-13",
       "url": "https://arxiv.org/abs/2610.18234",
       "role": "explanation",
+      "contribution": "candidate",
       "primaryIsland": "endothermic",
       "islands": ["endothermic"],
       "tags": [
@@ -5904,6 +6035,7 @@
       "updated": "2026-10-13",
       "url": "https://arxiv.org/abs/2610.18974",
       "role": "explanation",
+      "contribution": "candidate",
       "primaryIsland": "exothermic",
       "islands": ["exothermic"],
       "tags": [
@@ -5941,6 +6073,7 @@
       "updated": "2026-10-15",
       "url": "https://arxiv.org/abs/2610.21041",
       "role": "diagnostic",
+      "contribution": "other",
       "primaryIsland": "endothermic",
       "islands": ["endothermic"],
       "tags": [
@@ -5982,6 +6115,7 @@
       "updated": "2026-10-16",
       "url": "https://arxiv.org/abs/2610.23713",
       "role": "diagnostic",
+      "contribution": "other",
       "primaryIsland": "comparisons",
       "islands": ["comparisons"],
       "tags": [
@@ -6007,6 +6141,7 @@
       "updated": "2026-10-18",
       "url": "https://arxiv.org/abs/2610.25423",
       "role": "explanation",
+      "contribution": "candidate",
       "primaryIsland": "exothermic",
       "islands": ["exothermic"],
       "tags": [
@@ -6051,6 +6186,7 @@
       "updated": "2026-10-22",
       "url": "https://arxiv.org/abs/2610.25925",
       "role": "diagnostic",
+      "contribution": "other",
       "primaryIsland": "absorption",
       "islands": ["absorption"],
       "tags": [
@@ -6086,6 +6222,7 @@
       "updated": "2026-10-19",
       "url": "https://arxiv.org/abs/2610.27105",
       "role": "diagnostic",
+      "contribution": "other",
       "primaryIsland": "comparisons",
       "islands": ["comparisons"],
       "tags": [
@@ -6134,6 +6271,7 @@
       "updated": "2026-10-20",
       "url": "https://arxiv.org/abs/2610.28731",
       "role": "diagnostic",
+      "contribution": "other",
       "primaryIsland": "comparisons",
       "islands": ["comparisons"],
       "tags": [
@@ -6164,6 +6302,7 @@
       "updated": "2026-10-21",
       "url": "https://arxiv.org/abs/2610.29335",
       "role": "explanation",
+      "contribution": "candidate",
       "primaryIsland": "electroweak",
       "islands": ["electroweak"],
       "tags": [
@@ -6206,6 +6345,7 @@
       "updated": "2026-10-23",
       "url": "https://arxiv.org/abs/2610.32747",
       "role": "constraint",
+      "contribution": "new-bound",
       "primaryIsland": "neutrino",
       "islands": ["neutrino"],
       "tags": [

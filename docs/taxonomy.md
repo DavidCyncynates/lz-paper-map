@@ -88,7 +88,10 @@ Apply these rules in order.
 Primary categories should remain stable as the literature grows. Preserve
 cross-cutting information through normalized secondary facets:
 
-- **Paper role:** proposal, constraint, comparison, systematic, or contextual.
+- **Main contribution (`contribution`):** the paper's reviewed contribution,
+  encoded by its circle interior using the rules below. This is separate from
+  the legacy `role` field (`observation`, `explanation`, `constraint`,
+  `diagnostic`, or `adjacent`), which is retained for compatibility.
 - **Model family:** Higgsino, inert doublet, singlet-doublet, dark photon,
   composite dark matter, supersymmetry, axion portal, and so on.
 - **Test channel:** LZ sidebands, solar capture or neutrinos, colliders, gamma
@@ -103,11 +106,47 @@ A secondary signal never changes the primary island by itself. For example, an
 endothermic model predicting a gamma-ray line remains `endothermic`, with a
 gamma-ray test-channel facet.
 
+### Main contribution
+
+Every catalog paper requires exactly one `contribution` from this table. It
+describes the **main contribution of the accepted exact arXiv version**, not
+every result mentioned in the paper or a judgment of its scientific strength.
+Reassess this field when an accepted revision materially changes that main
+contribution; preserve established human-reviewed assignments unless a human
+approves a correction.
+
+| Value | Use when |
+| --- | --- |
+| `observation` | The source experimental result; this value and legacy `role: observation` must occur together. |
+| `candidate` | The paper proposes or develops a physical explanation of the event. This label makes no claim that the candidate or mechanism is new to the literature or viable. |
+| `new-bound` | A central result derives an empirical limit, exclusion, or independent recast, including a genuinely new channel or target of an existing search. |
+| `candidate-and-bound` | Both a candidate explanation and an independently derived new bound are substantive contributions. |
+| `bound-reassessment` | The central result critiques, refines, or checks the assumptions or robustness of an already proposed bound. The reassessment may strengthen or weaken it. |
+| `other` | The main result is a comparison, background study, diagnostic, forecast, or contextual analysis outside the preceding groups. |
+
+Applying published limits to a proposed model, overlaying an existing exclusion
+curve, or forecasting a future experiment's reach is **not** enough to assign
+`new-bound` or `candidate-and-bound`. A new physical scenario that evades a known
+bound is normally `candidate`; this is different from challenging that bound's
+validity for its original scenario. Recalculating a signal or nuclear response
+does not by itself establish a `bound-reassessment` unless revisiting an actual
+bound is central to the result.
+
+Use the title, abstract, and relevant source evidence for the recorded version
+to distinguish these cases. Do not infer the contribution from the legacy role,
+island, citation count, or the presence of words such as “constraint.” Keep a
+concise evidence-based rationale in the review record. If the evidence does not
+support a clear main contribution, flag the competing choices for human review;
+do not force an uncertain paper into a stronger label. `other` is a substantive
+classification for work outside the four main types, not a substitute for an
+unreviewed assignment.
+
 ## Future additions and reassessments
 
 - Assign new papers using this document before choosing coordinates.
 - Record one primary category and as many normalized secondary facets as the
   paper warrants.
+- Record its reviewed main `contribution` independently of the legacy `role`.
 - Reassess a primary category when a new version changes the central mechanism,
   not merely when it adds a constraint or prediction.
 - Review category health when an island becomes either very small or too broad.
