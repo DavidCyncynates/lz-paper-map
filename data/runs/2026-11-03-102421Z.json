@@ -1,0 +1,109 @@
+{
+  "schemaVersion": 1,
+  "runId": "a8ac9acb-fcc7-41fa-9157-77e3e9361162",
+  "runAt": "2026-11-03T10:24:21Z",
+  "scanWindow": {
+    "previousSuccessfulScan": "2026-11-02T10:08:01Z",
+    "overlapStart": "2026-10-31",
+    "coverageEnd": "2026-11-03",
+    "coverageComplete": true,
+    "note": "All listing, search, rotating-author, citation-discovery, exact-version screening, reference, artifact-generation, and validation steps completed before cursor promotion."
+  },
+  "discovery": {
+    "inspireDisplayedResults": 158,
+    "inspireNewIds": ["2611.01158", "2611.00306"],
+    "listingPages": 10,
+    "targetedSearches": 11,
+    "rotatingAuthorCatchups": 8,
+    "logicalRequests": 50,
+    "networkRequests": 50,
+    "notModifiedHits": 12,
+    "retries": 0,
+    "candidateCount": 10
+  },
+  "added": [
+    {
+      "id": "2611.01158",
+      "version": 1,
+      "title": "Exothermic Higgs portal: from LUX-ZEPLIN recoil to Gamma Rays",
+      "reason": "Directly develops a thermal exothermic Higgs-portal explanation of the LZ 248 keV nuclear recoil. Its main contribution is the candidate mechanism; the external gamma-ray and CMB limits are applied tests rather than a newly derived empirical bound.",
+      "url": "https://arxiv.org/abs/2611.01158v1"
+    }
+  ],
+  "revised": [
+    {
+      "id": "2610.13930",
+      "fromVersion": 1,
+      "toVersion": 2,
+      "assessment": "The exact revision remains directly relevant and preserves the established title, authors, role, contribution, placement, tags, summary, takeaway, coordinates, and layout rank; exact-version metadata and verified citations were refreshed.",
+      "url": "https://arxiv.org/abs/2610.13930v2"
+    }
+  ],
+  "ambiguous": [],
+  "excluded": {
+    "count": 8,
+    "ids": [
+      "2510.05198v2",
+      "2512.17712v5",
+      "2603.15734v2",
+      "2605.24121v2",
+      "2608.10104v2",
+      "2610.30250v1",
+      "2611.00010v1",
+      "2611.00306v1"
+    ],
+    "reason": "Seven exact versions are unrelated author or broad-search results. Paper 2611.00306v1 centrally addresses the DAMA depth discrepancy and only speculates about the LZ event without a substantive event calculation, so it does not meet the map's relevance threshold."
+  },
+  "citationReconciliation": {
+    "coverageComplete": true,
+    "publicEdgeCount": 4471,
+    "ledgerMappedEdgeCount": 4477,
+    "missingSnapshotIds": [],
+    "staleSnapshotIds": [],
+    "evidence": [
+      {
+        "id": "2610.13930",
+        "version": 2,
+        "completeReferenceCount": 108,
+        "mappedCitationCount": 57,
+        "refsSha256": "d2c3217c9594fda8258f4dd25d75a7e4993601e00f190cef227ce18ccdcbc16c",
+        "url": "https://arxiv.org/html/2610.13930v2"
+      },
+      {
+        "id": "2611.01158",
+        "version": 1,
+        "completeReferenceCount": 149,
+        "mappedCitationCount": 95,
+        "refsSha256": "0450ac8c427bd0e9b14d12fa4be1de484a37afecf50c643523396f70fc9c2f94",
+        "url": "https://arxiv.org/html/2611.01158v1"
+      }
+    ],
+    "pinnedReviewException": "The six-edge difference is confined to the pre-existing 2609.06640v2 human-review item; its public record and citation edges remain pinned to the accepted v1 snapshot."
+  },
+  "changes": {
+    "addedPaperIds": ["2611.01158"],
+    "revisedPaperIds": ["2610.13930"],
+    "candidateLogIds": [],
+    "preserved": "All 140 established records retain their order, summaries, takeaways, roles, contribution assignments, island memberships, tags, coordinates, and layout ranks. The accepted revision changes only exact arXiv metadata and verified citations; the addition uses contiguous rank 140."
+  },
+  "validation": {
+    "catalogValidator": "passed: 141 papers and 9 islands",
+    "generatedArtifacts": "passed: catalog index and both map layouts are current",
+    "maintenanceTests": "passed: 109",
+    "catalogIndexTests": "passed: 6",
+    "layoutTests": "passed: 16",
+    "layoutArtifactTests": "passed: 5",
+    "mapCameraTests": "passed: 12",
+    "typecheck": "passed",
+    "lint": "passed",
+    "productionBuild": "passed: 142 prerendered routes and sitemap for 141 papers"
+  },
+  "judgmentCalls": [
+    "2611.01158v1 belongs only in Exothermic DM because the excited scalar's mass splitting supplies the recoil energy through down-scattering.",
+    "Its contribution is candidate rather than candidate-and-bound: the paper proposes the LZ explanation and applies existing gamma-ray, CMB, and dwarf-galaxy constraints without centrally deriving an independent new empirical limit.",
+    "The new record received semantic coordinate (80.8, 68.6) near established exothermic Higgs-portal papers and contiguous layout rank 140; no established coordinate or rank changed.",
+    "2610.13930v2 remains Electroweak inelastic DM with candidate contribution because its central MRSSM pseudo-Dirac transition mechanism is unchanged from v1.",
+    "2611.00306v1 was excluded because the LZ sentence is speculative support for a DAMA-focused scenario rather than a substantial interpretation, calculation, constraint, or diagnostic of the isolated 248 keV recoil.",
+    "Citation edges were copied only from complete exact-version arXiv HTML bibliographies; no edge was inferred from prose, dates, or conceptual proximity."
+  ]
+}
