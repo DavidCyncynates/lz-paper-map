@@ -1,0 +1,90 @@
+{
+  "schemaVersion": 1,
+  "runId": "b24632f4-1ea9-4ebc-a5cc-fb4df76a46d4",
+  "runAt": "2026-11-05T10:52:15Z",
+  "scanWindow": {
+    "previousSuccessfulScan": "2026-11-04T10:36:45Z",
+    "overlapStart": "2026-11-02",
+    "coverageEnd": "2026-11-05",
+    "coverageComplete": true,
+    "note": "All listing, search, rotating-author, citation-discovery, exact-version screening, reference, artifact-generation, and validation steps completed before cursor promotion."
+  },
+  "discovery": {
+    "inspireDisplayedResults": 160,
+    "inspireNewIds": ["2611.04890", "2611.05518"],
+    "listingPages": 10,
+    "targetedSearches": 11,
+    "rotatingAuthorCatchups": 8,
+    "logicalRequests": 51,
+    "networkRequests": 51,
+    "notModifiedHits": 14,
+    "retries": 0,
+    "candidateCount": 8
+  },
+  "added": [],
+  "revised": [
+    {
+      "id": "2609.10491",
+      "fromVersion": 2,
+      "toVersion": 3,
+      "assessment": "The exact revision remains directly relevant and preserves the established title, authors, role, contribution, placement, tags, summary, takeaway, coordinates, and layout rank; exact-version metadata and verified citations were refreshed.",
+      "url": "https://arxiv.org/abs/2609.10491v3"
+    }
+  ],
+  "ambiguous": [],
+  "excluded": {
+    "count": 7,
+    "ids": [
+      "2605.21477v2",
+      "2609.13438v2",
+      "2610.12284v1",
+      "2610.38734v1",
+      "2611.00135v2",
+      "2611.05518v1",
+      "2611.06182v1"
+    ],
+    "reason": "The seven exact versions are unrelated rotating-author, listing, citation-neighbor, or broad-search results; none interprets or materially contextualizes the isolated 248 keV LZ nuclear-recoil candidate."
+  },
+  "citationReconciliation": {
+    "coverageComplete": true,
+    "publicEdgeCount": 4473,
+    "ledgerMappedEdgeCount": 4479,
+    "missingSnapshotIds": [],
+    "staleSnapshotIds": [],
+    "evidence": [
+      {
+        "id": "2609.10491",
+        "version": 3,
+        "completeReferenceCount": 62,
+        "mappedCitationCount": 49,
+        "refsSha256": "410a25a9cf3060f302757df61b9e621096a63e3cd56a3f9646b865c370749329",
+        "url": "https://arxiv.org/html/2609.10491v3"
+      }
+    ],
+    "pinnedReviewException": "The six-edge difference is confined to the pre-existing 2609.06640v2 human-review item; its public record and citation edges remain pinned to the accepted v1 snapshot."
+  },
+  "changes": {
+    "addedPaperIds": [],
+    "revisedPaperIds": ["2609.10491"],
+    "candidateLogIds": [],
+    "preserved": "All 141 established records retain their order, summaries, takeaways, roles, contribution assignments, island memberships, tags, coordinates, and layout ranks. The accepted revision changes only exact arXiv metadata and verified citations."
+  },
+  "validation": {
+    "catalogValidator": "passed: 141 papers and 9 islands",
+    "generatedArtifacts": "passed: catalog index and both map layouts are current",
+    "maintenanceTests": "passed: 109",
+    "catalogIndexTests": "passed: 6",
+    "layoutTests": "passed: 16",
+    "layoutArtifactTests": "passed: 5",
+    "mapCameraTests": "passed: 12",
+    "typecheck": "passed",
+    "lint": "passed",
+    "productionBuild": "passed: 142 prerendered routes and sitemap for 141 papers"
+  },
+  "judgmentCalls": [
+    "2609.10491v3 remains Exothermic DM with candidate contribution because its central two-component inelastic explanation and emphasis on down-scattering are unchanged from the accepted v2 record.",
+    "The revision adds verified mapped references to 2609.15742 and 2610.09753; both edges come from the complete exact-version arXiv HTML bibliography.",
+    "No established human-reviewed summary, takeaway, role, contribution, island membership, tags, coordinates, or layout rank changed.",
+    "Citation edges were copied only from a complete exact-version reference snapshot; no edge was inferred from prose, dates, or conceptual proximity."
+  ]
+}
