@@ -2364,7 +2364,7 @@
       "id": "2609.10491",
       "layoutRank": 50,
       "arxivId": "2609.10491",
-      "arxivVersion": 2,
+      "arxivVersion": 3,
       "title": "Inelastic Dark Matter and High-Energy Recoil Signatures in LZ",
       "authors": [
         "Zi-Tong Fan",
@@ -2373,7 +2373,7 @@
         "Yue Zhao"
       ],
       "published": "2026-09-09",
-      "updated": "2026-09-22",
+      "updated": "2026-11-04",
       "url": "https://arxiv.org/abs/2609.10491",
       "role": "explanation",
       "contribution": "candidate",
@@ -2436,7 +2436,9 @@
         "2609.09136",
         "2609.09138",
         "2609.09385",
-        "2609.11833"
+        "2609.11833",
+        "2609.15742",
+        "2610.09753"
       ]
     },
     {

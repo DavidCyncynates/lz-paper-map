@@ -1,9 +1,9 @@
 {
   "schemaVersion": 2,
   "taxonomyRevision": "2026-10-08",
-  "catalogDigest": "sha256:0ab535360cb2d2264e97b42a1806cadc36c5ba3a08704f9331914ba85d7afac0",
+  "catalogDigest": "sha256:7c74393b74da8b66ee4639531d882ac00e34c549846a185e046283c99c7953fc",
   "paperCount": 141,
-  "edgeCount": 4471,
+  "edgeCount": 4473,
   "papers": {
     "2609.02823": {
       "citedBy": [
@@ -4156,6 +4156,7 @@
     "2609.15742": {
       "citedBy": [
         "2609.02994",
+        "2609.10491",
         "2609.17935",
         "2609.21444",
         "2609.21823",
@@ -4188,7 +4189,7 @@
         "2610.28731",
         "2611.01158"
       ],
-      "incomingCitationCount": 32,
+      "incomingCitationCount": 33,
       "searchText": "explaining the lz high energy recoil event with inelastic sneutrino dark matter in supersymmetry the authors fit the event with inelastic sneutrino dark matter in an inverse seesaw supersymmetric model and identify annihilation or coannihilation mechanisms that retain the thermal relic abundance while weakening solar neutrino signals provides supersymmetric benchmarks that survive the combined recoil solar neutrino gamma ray higgs and flavor tests considered 2609 15742 jingwei lian jin min yang sneutrino dark matter inverse seesaw solar neutrinos supersymmetry endothermic other endothermic dm endothermic dm up scattering"
     },
     "2609.15782": {
@@ -5189,13 +5190,14 @@
     },
     "2610.09753": {
       "citedBy": [
+        "2609.10491",
         "2610.12443",
         "2610.13930",
         "2610.25423",
         "2610.25925",
         "2610.29335"
       ],
-      "incomingCitationCount": 5,
+      "incomingCitationCount": 6,
       "searchText": "can nuclear recoils and solar neutrinos resolve the composition of singlino higgsino dark matter the authors compare singlino and higgsino dominated states that can reproduce the lz recoil using solar capture and annihilation to distinguish compositions that nuclear scattering alone leaves degenerate solar neutrino signals exclude the studied higgsino pair inelastic fits while leaving singlino ground state and weak transition alternatives subject to halo and annihilation assumptions 2610 09753 jingwei lian jin min yang singlino higgsino dark matter solar neutrinos inelastic scattering nmssm electroweak electroweak inelastic dm electroweak dm split states weak currents"
     },
     "2610.12443": {
