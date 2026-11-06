@@ -2,8 +2,8 @@
   "schemaVersion": 2,
   "taxonomyRevision": "2026-10-08",
   "title": "LZ high-recoil literature landscape",
-  "updatedAt": "2026-10-27",
-  "lastSuccessfulScan": "2026-10-27T10:28:29Z",
+  "updatedAt": "2026-11-05",
+  "lastSuccessfulScan": "2026-11-05T10:52:15Z",
   "event": {
     "energyKev": 248,
     "statisticalUncertaintyKev": 23,
@@ -13,7 +13,7 @@
   },
   "citationData": {
     "source": "arXiv reference lists",
-    "checkedAt": "2026-10-27",
+    "checkedAt": "2026-11-05",
     "scope": "Citations between papers in this map",
     "note": "References to the official LZ preprint are normalized to arXiv:2609.02823."
   },
