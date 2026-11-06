@@ -719,6 +719,60 @@ def validate(landscape: dict[str, Any], candidates: dict[str, Any] | None = None
         raise ValueError("Data validation failed:\n- " + "\n- ".join(errors))
 
 
+def validate_refresh_metadata(
+    landscape: dict[str, Any], manifests: list[dict[str, Any]]
+) -> None:
+    """Reject stale public dates using only explicitly completed run evidence."""
+
+    def timestamp(value: Any, label: str) -> datetime:
+        try:
+            parsed = datetime.fromisoformat(value.replace("Z", "+00:00"))
+            if parsed.tzinfo is None:
+                raise ValueError("timezone required")
+            return parsed.astimezone(timezone.utc)
+        except (AttributeError, TypeError, ValueError) as error:
+            raise ValueError(f"{label} must be an ISO timestamp with a timezone") from error
+
+    def date(value: Any, label: str):
+        try:
+            if not isinstance(value, str) or not re.fullmatch(r"\d{4}-\d{2}-\d{2}", value):
+                raise ValueError("ISO date required")
+            return datetime.strptime(value, "%Y-%m-%d").date()
+        except ValueError as error:
+            raise ValueError(f"{label} must be an ISO date (YYYY-MM-DD)") from error
+
+    scans: list[datetime] = []
+    citations: list[datetime] = []
+    for manifest in manifests:
+        scan = manifest.get("scanWindow")
+        citation = manifest.get("citationReconciliation")
+        scan_complete = isinstance(scan, dict) and scan.get("coverageComplete") is True
+        citation_complete = (
+            isinstance(citation, dict) and citation.get("coverageComplete") is True
+        )
+        if not scan_complete:
+            continue
+        run_at = timestamp(manifest.get("runAt"), "Completed run manifest runAt")
+        scans.append(run_at)
+        if citation_complete:
+            citations.append(run_at)
+
+    if scans:
+        latest = max(scans)
+        if date(landscape.get("updatedAt"), "updatedAt") < latest.date():
+            raise ValueError(f"updatedAt predates the latest completed scan ({latest.isoformat()})")
+        if timestamp(landscape.get("lastSuccessfulScan"), "lastSuccessfulScan") < latest:
+            raise ValueError(
+                f"lastSuccessfulScan predates the latest completed scan ({latest.isoformat()})"
+            )
+    if citations:
+        latest = max(citations)
+        if date(landscape.get("citationData", {}).get("checkedAt"), "citationData.checkedAt") < latest.date():
+            raise ValueError(
+                f"citationData.checkedAt predates the latest completed citation reconciliation ({latest.isoformat()})"
+            )
+
+
 def append_step_summary(lines: list[str]) -> None:
     target = os.environ.get("GITHUB_STEP_SUMMARY")
     if not target:
@@ -744,6 +798,9 @@ def main() -> int:
     candidate_store = load_json(CANDIDATES_PATH, {"schemaVersion": 1, "items": []})
     validate(landscape, candidate_store)
     if args.validate_only:
+        validate_refresh_metadata(
+            landscape, [load_json(path) for path in sorted(RUNS_PATH.glob("*.json"))]
+        )
         print(f"Validated {len(landscape['papers'])} papers and {len(landscape['islands'])} islands.")
         return 0
 

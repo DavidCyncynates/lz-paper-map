@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "kind": "metadata-correction",
+  "runAt": "2026-11-06T00:17:19Z",
+  "scanWindow": {
+    "coverageComplete": false,
+    "note": "No new literature scan was performed for this correction."
+  },
+  "restoredFrom": "2026-11-05-105215Z.json",
+  "reason": "The complete November 3 and November 5 scans were published without advancing the public freshness metadata. Restore the dates supported by the latest completed scan; retain every paper, citation edge, and layout coordinate.",
+  "changes": {
+    "updatedAt": "2026-11-05",
+    "lastSuccessfulScan": "2026-11-05T10:52:15Z",
+    "citationData.checkedAt": "2026-11-05"
+  },
+  "validation": {
+    "maintenanceTests": "passed: 116",
+    "catalogValidator": "passed: 141 papers and 9 islands",
+    "generatedArtifacts": "passed; both coordinate sets unchanged",
+    "searchTests": "passed: 3",
+    "productionBuild": "passed: 142 prerendered routes",
+    "searchArtifacts": "passed: 141 paper pages; header and sitemap use November 5"
+  }
+}

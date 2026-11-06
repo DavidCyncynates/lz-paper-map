@@ -9,6 +9,7 @@ from scripts.update_papers import (
     annotation_schema,
     reannotate_revisions,
     validate,
+    validate_refresh_metadata,
 )
 
 
@@ -137,6 +138,76 @@ class CatalogTaxonomyValidationTests(unittest.TestCase):
         )
         with self.assertRaisesRegex(ValueError, "orphan: no paper has this primary island"):
             validate(landscape)
+
+
+class CatalogRefreshMetadataTests(unittest.TestCase):
+    def setUp(self) -> None:
+        self.landscape = {
+            "updatedAt": "2026-11-05",
+            "lastSuccessfulScan": "2026-11-05T10:52:15Z",
+            "citationData": {"checkedAt": "2026-11-05"},
+        }
+        self.complete_run = {
+            "runAt": "2026-11-05T10:52:15Z",
+            "scanWindow": {"coverageComplete": True},
+            "citationReconciliation": {"coverageComplete": True},
+        }
+
+    def test_accepts_matching_completed_run_dates(self) -> None:
+        validate_refresh_metadata(self.landscape, [self.complete_run])
+
+    def test_rejects_each_stale_public_date(self) -> None:
+        for field in ("updatedAt", "lastSuccessfulScan", "citationData.checkedAt"):
+            with self.subTest(field=field):
+                landscape = copy.deepcopy(self.landscape)
+                if field == "citationData.checkedAt":
+                    landscape["citationData"]["checkedAt"] = "2026-10-27"
+                elif field == "lastSuccessfulScan":
+                    landscape[field] = "2026-11-05T10:52:14Z"
+                else:
+                    landscape[field] = "2026-10-27"
+                with self.assertRaisesRegex(ValueError, f"{field} predates"):
+                    validate_refresh_metadata(landscape, [self.complete_run])
+
+    def test_later_partial_or_unattested_runs_do_not_advance_dates(self) -> None:
+        for completion in (False, None, "true", 1):
+            with self.subTest(completion=completion):
+                later_run = {
+                    "runAt": "2026-11-06T10:00:00Z",
+                    "scanWindow": {"coverageComplete": completion},
+                    "citationReconciliation": {"coverageComplete": completion},
+                }
+                validate_refresh_metadata(self.landscape, [later_run, self.complete_run])
+        validate_refresh_metadata(
+            self.landscape, [self.complete_run, {"runAt": "2026-11-07T10:00:00Z"}]
+        )
+
+    def test_partial_discovery_with_complete_citations_does_not_advance_dates(self) -> None:
+        partial_run = {
+            "runAt": "2026-11-06T10:00:00Z",
+            "scanWindow": {"coverageComplete": False},
+            "citationReconciliation": {"coverageComplete": True},
+        }
+        validate_refresh_metadata(self.landscape, [self.complete_run, partial_run])
+
+    def test_uses_latest_completed_run_regardless_of_manifest_order(self) -> None:
+        older_run = {**self.complete_run, "runAt": "2026-10-27T10:28:29Z"}
+        landscape = {**self.landscape, "updatedAt": "2026-10-27"}
+        for manifests in ([self.complete_run, older_run], [older_run, self.complete_run]):
+            with self.assertRaisesRegex(ValueError, "updatedAt predates"):
+                validate_refresh_metadata(landscape, manifests)
+
+    def test_compares_timestamp_instants_in_utc(self) -> None:
+        self.landscape["lastSuccessfulScan"] = "2026-11-05T11:52:15+01:00"
+        validate_refresh_metadata(self.landscape, [self.complete_run])
+
+    def test_requires_usable_timestamps_for_explicit_completion(self) -> None:
+        for run_at in (None, "2026-11-05T10:52:15", "not-a-date"):
+            with self.subTest(run_at=run_at):
+                with self.assertRaisesRegex(ValueError, "Completed run manifest runAt"):
+                    validate_refresh_metadata(
+                        self.landscape, [{**self.complete_run, "runAt": run_at}]
+                    )
 
 
 class ContributionAnnotationTests(unittest.TestCase):

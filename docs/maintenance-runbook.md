@@ -284,6 +284,16 @@ it separately.
 
 ## 6. Generate and validate
 
+For a substantive public update after all required discovery lanes succeed,
+refresh the catalog timestamps from the same actual `runAt` recorded in its
+public run manifest: set `updatedAt` to its ISO date and `lastSuccessfulScan`
+to the full UTC timestamp. When citation reconciliation is complete, also set
+`citationData.checkedAt` to that date. Do this before generating artifacts; the
+header, search metadata, sitemap, and generated layouts depend on these fields.
+Use the completed scan's time, not a paper's publication date or deployment time.
+Targeted corrections, incomplete scans, and no-change runs must not advance
+these public timestamps merely because work ran.
+
 Regenerate deterministic derived artifacts after any catalog edit:
 
 ```sh
@@ -309,7 +319,10 @@ or out of bounds.
 
 After every required lane and validation succeeds, finish the external work
 before promoting cursors. For a substantive public change, first write the
-concise delta record under `data/runs/`, commit only the intended files on a
+concise delta record under `data/runs/` and rerun
+`python3 scripts/update_papers.py --validate-only` with that manifest present.
+Validation rejects catalog timestamps older than an explicitly completed public
+scan. Then commit only the intended files on a
 `codex/arxiv-daily-*` branch, push it, and successfully open one pull request.
 Only then complete the ledger run with the planned coverage dates. This is the
 only operation that promotes staged search and author cursors:
