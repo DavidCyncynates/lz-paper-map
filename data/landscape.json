@@ -2,8 +2,8 @@
   "schemaVersion": 2,
   "taxonomyRevision": "2026-10-08",
   "title": "LZ high-recoil literature landscape",
-  "updatedAt": "2026-11-05",
-  "lastSuccessfulScan": "2026-11-05T10:52:15Z",
+  "updatedAt": "2026-11-06",
+  "lastSuccessfulScan": "2026-11-06T10:07:39Z",
   "event": {
     "energyKev": 248,
     "statisticalUncertaintyKev": 23,
@@ -13,7 +13,7 @@
   },
   "citationData": {
     "source": "arXiv reference lists",
-    "checkedAt": "2026-11-05",
+    "checkedAt": "2026-11-06",
     "scope": "Citations between papers in this map",
     "note": "References to the official LZ preprint are normalized to arXiv:2609.02823."
   },
@@ -4406,14 +4406,14 @@
       "id": "2609.23691",
       "layoutRank": 86,
       "arxivId": "2609.23691",
-      "arxivVersion": 1,
+      "arxivVersion": 2,
       "title": "LZ-Motivated Pseudo-Dirac Higgsinos in the Supersymmetric 331 Model from the Supersymmetric \\texorpdfstring{$SU(6)$}{SU(6)} GUT Model",
       "authors": [
         "Imtiaz Khan", "Ali Muhammad", "G. Mustafa", "Farruh Atamurotov",
         "Ahmadjon Abdujabbarov", "Mussawir Khan"
       ],
       "published": "2026-09-20",
-      "updated": "2026-09-20",
+      "updated": "2026-11-05",
       "url": "https://arxiv.org/abs/2609.23691",
       "role": "explanation",
       "contribution": "candidate",
