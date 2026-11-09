@@ -1,0 +1,89 @@
+{
+  "schemaVersion": 1,
+  "runId": "a1b7b0ac-aecc-4810-b9ac-fd8f23e37e99",
+  "runAt": "2026-11-06T10:07:39Z",
+  "scanWindow": {
+    "previousSuccessfulScan": "2026-11-05T10:52:15Z",
+    "overlapStart": "2026-11-03",
+    "coverageEnd": "2026-11-06",
+    "coverageComplete": true,
+    "note": "All listing, search, rotating-author, citation-discovery, exact-version screening, reference, artifact-generation, and validation steps completed before cursor promotion."
+  },
+  "discovery": {
+    "inspireDisplayedResults": 160,
+    "inspireNewIds": [],
+    "listingPages": 10,
+    "targetedSearches": 11,
+    "rotatingAuthorCatchups": 8,
+    "logicalRequests": 47,
+    "networkRequests": 48,
+    "notModifiedHits": 13,
+    "retries": 1,
+    "candidateCount": 6
+  },
+  "added": [],
+  "revised": [
+    {
+      "id": "2609.23691",
+      "fromVersion": 1,
+      "toVersion": 2,
+      "assessment": "The exact revision remains directly relevant and preserves the established title, authors, role, contribution, placement, tags, summary, takeaway, coordinates, and layout rank; exact-version metadata and reference evidence were refreshed.",
+      "url": "https://arxiv.org/abs/2609.23691v2"
+    }
+  ],
+  "ambiguous": [],
+  "excluded": {
+    "count": 5,
+    "ids": [
+      "2512.12023v2",
+      "2610.25053v1",
+      "2610.27991v1",
+      "2611.04600v2",
+      "2611.07385v1"
+    ],
+    "reason": "The five exact versions are unrelated rotating-author, revision, or broad-search results; none interprets or materially contextualizes the isolated 248 keV LZ nuclear-recoil candidate."
+  },
+  "citationReconciliation": {
+    "coverageComplete": true,
+    "publicEdgeCount": 4473,
+    "ledgerMappedEdgeCount": 4479,
+    "missingSnapshotIds": [],
+    "staleSnapshotIds": [],
+    "evidence": [
+      {
+        "id": "2609.23691",
+        "version": 2,
+        "completeReferenceCount": 45,
+        "mappedCitationCount": 24,
+        "refsSha256": "e3ea1f45547b6d425b64f5db486bb9dba76cd639abfbf2eac9a4478aa461dbc1",
+        "url": "https://arxiv.org/html/2609.23691v2"
+      }
+    ],
+    "pinnedReviewException": "The six-edge difference is confined to the pre-existing 2609.06640v2 human-review item; its public record and citation edges remain pinned to the accepted v1 snapshot."
+  },
+  "changes": {
+    "addedPaperIds": [],
+    "revisedPaperIds": ["2609.23691"],
+    "candidateLogIds": [],
+    "preserved": "All 141 established records retain their order, summaries, takeaways, roles, contribution assignments, island memberships, tags, coordinates, layout ranks, and verified mapped citation edges. The accepted revision changes only its exact arXiv version and update date."
+  },
+  "validation": {
+    "catalogValidator": "passed: 141 papers and 9 islands",
+    "generatedArtifacts": "passed: catalog index and both map layouts are current",
+    "maintenanceTests": "passed: 116",
+    "catalogIndexTests": "passed: 6",
+    "layoutTests": "passed: 16",
+    "layoutArtifactTests": "passed: 5",
+    "mapCameraTests": "passed: 12",
+    "typecheck": "passed",
+    "lint": "passed",
+    "productionBuild": "passed: 142 prerendered routes and sitemap for 141 papers"
+  },
+  "judgmentCalls": [
+    "2609.23691v2 remains Electroweak inelastic DM with candidate contribution because its central pseudo-Dirac Higgsino explanation and electroweak transition mechanism are unchanged from the accepted v1 record.",
+    "The complete v2 bibliography preserves the same 24 mapped outgoing citations, so the public citation graph does not change.",
+    "2611.04600v2 discusses general low-threshold light-mediator complementarity and the neutrino fog, but not the isolated 248 keV LZ candidate; it remains excluded.",
+    "No established human-reviewed summary, takeaway, role, contribution, island membership, tags, coordinates, or layout rank changed.",
+    "Citation edges were checked only against a complete exact-version reference snapshot; no edge was inferred from prose, dates, or conceptual proximity."
+  ]
+}
