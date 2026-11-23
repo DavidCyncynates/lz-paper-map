@@ -70,6 +70,60 @@ class MappingOpener:
 
 
 class ParserTests(unittest.TestCase):
+    def test_listing_backfill_requires_exact_category_and_date_query(self) -> None:
+        url = (
+            "https://arxiv.org/search/advanced?advanced=&terms-0-operator=AND"
+            "&terms-0-term=astro-ph.CO&terms-0-field=cross_list_category"
+            "&classification-include_cross_list=include&date-filter_by=date_range"
+            "&date-from_date=2026-11-07&date-to_date=2026-11-16"
+            "&date-date_type=submitted_date&abstracts=hide&size=200"
+            "&order=-announced_date_first"
+        )
+        config = HarvestConfig.from_json(
+            {
+                "listingBackfills": [
+                    {
+                        "name": "astro-ph.CO:backfill",
+                        "url": url,
+                        "category": "astro-ph.CO",
+                        "coverageStart": "2026-11-07",
+                        "coverageEnd": "2026-11-16",
+                    }
+                ]
+            }
+        )
+        self.assertEqual(config.listing_backfills[0].coverage_start, "2026-11-07")
+
+        with self.assertRaisesRegex(ValueError, "date-to_date"):
+            HarvestConfig.from_json(
+                {
+                    "listingBackfills": [
+                        {
+                            "name": "astro-ph.CO:backfill",
+                            "url": url,
+                            "category": "astro-ph.CO",
+                            "coverageStart": "2026-11-07",
+                            "coverageEnd": "2026-11-17",
+                        }
+                    ]
+                }
+            )
+
+        with self.assertRaisesRegex(ValueError, "unsupported query parameters"):
+            HarvestConfig.from_json(
+                {
+                    "listingBackfills": [
+                        {
+                            "name": "astro-ph.CO:backfill",
+                            "url": url + "&start=200",
+                            "category": "astro-ph.CO",
+                            "coverageStart": "2026-11-07",
+                            "coverageEnd": "2026-11-16",
+                        }
+                    ]
+                }
+            )
+
     def test_complete_new_listing_is_split_into_immutable_sections(self) -> None:
         batches = parse_listing_page(
             fixture("harvest_listing_complete.html"), source="hep-ph:new"
@@ -980,6 +1034,90 @@ class IntegrationTests(unittest.TestCase):
                     "SELECT COUNT(*) FROM run_lanes WHERE run_id = ?", (run["runId"],)
                 ).fetchone()[0]
                 self.assertEqual(lanes, 0)
+
+    def test_exhaustive_listing_backfill_closes_retention_gap_without_discovery(self) -> None:
+        recent_url = "https://arxiv.org/list/hep-ph/recent?skip=0&show=2000"
+        with tempfile.TemporaryDirectory() as temporary:
+            state = Path(temporary) / "state.sqlite3"
+            with Ledger(state) as ledger:
+                ledger.initialize()
+                ledger.set_metadata(
+                    "last_completed_coverage",
+                    {
+                        "coverageStart": "2026-09-27",
+                        "coverageEnd": "2026-09-28",
+                    },
+                )
+                plan = ledger.plan(through="2026-09-30", overlap_days=2)
+                self.assertEqual(
+                    plan["coverage"],
+                    {"start": "2026-09-26", "end": "2026-09-30"},
+                )
+                backfill_url = (
+                    "https://arxiv.org/search/advanced?advanced="
+                    "&terms-0-operator=AND&terms-0-term=hep-ph"
+                    "&terms-0-field=cross_list_category"
+                    "&classification-include_cross_list=include"
+                    "&date-filter_by=date_range&date-from_date=2026-09-26"
+                    "&date-to_date=2026-09-28&date-date_type=submitted_date"
+                    "&abstracts=hide&size=200&order=-announced_date_first"
+                )
+                config = HarvestConfig.from_json(
+                    {
+                        "coverageThrough": "2026-09-30",
+                        "overlapDays": 2,
+                        "listings": [{"name": "hep-ph:recent", "url": recent_url}],
+                        "listingBackfills": [
+                            {
+                                "name": "hep-ph:backfill:2026-09-26..2026-09-28",
+                                "url": backfill_url,
+                                "category": "hep-ph",
+                                "coverageStart": "2026-09-26",
+                                "coverageEnd": "2026-09-28",
+                            }
+                        ],
+                        "searches": [],
+                    }
+                )
+                run = ledger.start_run(
+                    kind="test",
+                    required_lanes=("listings", "searches"),
+                    coverage_start=plan["coverage"]["start"],
+                    coverage_end=plan["coverage"]["end"],
+                )
+                zero_results = b"""<!doctype html><html><body>
+                <h1>0 results for: hep-ph</h1>
+                </body></html>"""
+                bundle = harvest(
+                    config,
+                    client=CachedHttpClient(
+                        Path(temporary) / "cache",
+                        delay_seconds=0,
+                        opener=MappingOpener(
+                            {
+                                recent_url: fixture("harvest_recent_complete.html").encode(),
+                                backfill_url: zero_results,
+                            }
+                        ),
+                        sleep=lambda _seconds: None,
+                    ),
+                    ledger=ledger,
+                    run_id=run["runId"],
+                )
+                self.assertEqual(
+                    bundle["coverage"]["evidence"]["hep-ph"],
+                    {
+                        "earliest": "2026-09-26",
+                        "latest": "2026-09-30",
+                        "modes": ["backfill", "recent"],
+                        "sources": [
+                            "hep-ph:backfill:2026-09-26..2026-09-28",
+                            "hep-ph:recent",
+                        ],
+                    },
+                )
+                self.assertEqual(bundle["candidateCount"], 0)
+                self.assertEqual(ledger.status()["counts"]["discoveries"], 0)
 
     def test_listing_that_has_not_reached_weekday_update_fails_closed(self) -> None:
         recent_url = "https://arxiv.org/list/hep-ph/recent?skip=0&show=2000"

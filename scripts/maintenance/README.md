@@ -78,6 +78,31 @@ rotating author-search frontiers, then compares their exact observed versions.
 Successful harvests mark the listing, search, and author lanes that provide this
 revision coverage.
 
+When a delayed run exceeds the retention window of an arXiv `recent` page, add
+a temporary `listingBackfills` entry to the run's harvest configuration. Each
+entry must use the public advanced-search HTML page, query exactly one category
+through the `cross_list_category` field, include cross-lists, select an exact
+`submitted_date` range, sort newest-first, and declare the same coverage dates.
+The collector exhausts and reconciles every result page before the range can
+close a listing gap. Backfill IDs are coverage-only and do not enter the review
+queue, although already-known IDs are still hydrated for revision detection.
+For example:
+
+```json
+{
+  "name": "astro-ph.CO:backfill:2026-11-07..2026-11-16",
+  "category": "astro-ph.CO",
+  "coverageStart": "2026-11-07",
+  "coverageEnd": "2026-11-16",
+  "maxPages": 20,
+  "url": "https://arxiv.org/search/advanced?advanced=&terms-0-operator=AND&terms-0-term=astro-ph.CO&terms-0-field=cross_list_category&classification-include_cross_list=include&date-filter_by=date_range&date-from_date=2026-11-07&date-to_date=2026-11-16&date-date_type=submitted_date&abstracts=hide&size=200&order=-announced_date_first"
+}
+```
+
+Keep the entry only for the run that needs it. The declared range must remain
+inside that run's bound coverage interval; a mismatch, incomplete pagination,
+changing result total, or page cap fails closed.
+
 Frontiers for rotating authors are initialized per author rather than by one
 global migration run. When a registered author first becomes due, the harvester
 exhaustively checks the bounded most-recent-submission date window since that

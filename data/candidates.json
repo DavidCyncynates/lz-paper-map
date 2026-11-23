@@ -9,6 +9,42 @@
       "title": "A Common $\\sim$55 GeV Inelastic Dark Matter Origin of the LZ, Fermi-LAT, and AMS-02 Excesses and Paleo-Detector Prospects",
       "reason": "Version 2 is clearly relevant but materially changes the title, author list, and scientific claims underlying the established human-reviewed summary; review the editorial fields before advancing the catalog version.",
       "sourceUrl": "https://arxiv.org/abs/2609.06640v2"
+    },
+    {
+      "arxivId": "2611.16553",
+      "version": 1,
+      "metadataSha256": "e597a68163ffb218d8402e3c1aa64fca8fe1b409aff2f604cabfe3b122a1a992",
+      "status": "ambiguous",
+      "title": "Inelastic Scalar Dark Matter in a Gauged $U(1)_{B-L}$ Model and its LZ Phenomenology",
+      "reason": "The paper directly fits both endothermic and exothermic scalar scenarios with comparable treatment; choosing one primary island requires human judgment.",
+      "sourceUrl": "https://arxiv.org/abs/2611.16553v1"
+    },
+    {
+      "arxivId": "2611.25359",
+      "version": 1,
+      "metadataSha256": "c87d86edde794dfc84a71674b324e59caefb9f3271b3b822198b9a1045905845",
+      "status": "ambiguous",
+      "title": "Dark Matter Model Implications of a Candidate Sub-halo Near the Sun, and the Data Needed to Discriminate Among Them",
+      "reason": "The subhalo analysis lists a possible connection to the LZ high-recoil candidate among many implications; review whether that connection is substantial enough for this focused map.",
+      "sourceUrl": "https://arxiv.org/abs/2611.25359v1"
+    },
+    {
+      "arxivId": "2611.25931",
+      "version": 1,
+      "metadataSha256": "587b3e9b3b6b1982d5f65431298f85ad2105b8e93a3bd4524a44a9edef1aa9e5",
+      "status": "ambiguous",
+      "title": "Interpretation of the LZ Event via Inelastic ALP-Dark Photon Transition with Photon Exchange",
+      "reason": "The paper gives both a virial-halo endothermic benchmark and a boosted-flux benchmark; choosing between the endothermic and boosted primary islands requires human judgment.",
+      "sourceUrl": "https://arxiv.org/abs/2611.25931v1"
+    },
+    {
+      "arxivId": "2611.26274",
+      "version": 1,
+      "metadataSha256": "9dd3ea320b919f9ac971bd3c7a9dd6377d8cc5f3d94f2affba45a727e1f6969a",
+      "status": "ambiguous",
+      "title": "Photon-Mediated Axino-Bino Scattering Process for the LZ High-Energy Recoil Event",
+      "reason": "The paper gives both a virial-halo endothermic benchmark and a boosted-flux benchmark; choosing between the endothermic and boosted primary islands requires human judgment.",
+      "sourceUrl": "https://arxiv.org/abs/2611.26274v1"
     }
   ]
 }

@@ -822,6 +822,16 @@ class ListingSource:
 
 
 @dataclasses.dataclass(frozen=True)
+class ListingBackfillSource:
+    name: str
+    url: str
+    category: str
+    coverage_start: str
+    coverage_end: str
+    max_pages: int = 20
+
+
+@dataclasses.dataclass(frozen=True)
 class SearchSource:
     name: str
     url: str
@@ -848,6 +858,7 @@ class AuthorSearchOverride:
 @dataclasses.dataclass(frozen=True)
 class HarvestConfig:
     listings: tuple[ListingSource, ...]
+    listing_backfills: tuple[ListingBackfillSource, ...]
     searches: tuple[SearchSource, ...]
     explicit_ids: tuple[str, ...] = ()
     known_versions: tuple[tuple[str, int], ...] = ()
@@ -867,6 +878,36 @@ class HarvestConfig:
             ListingSource(str(item["name"]), _validate_public_html_url(str(item["url"])))
             for item in value.get("listings", [])
         )
+        listing_backfills = []
+        for item in value.get("listingBackfills", []):
+            name = str(item["name"])
+            url = _validate_public_html_url(str(item["url"]))
+            category = str(item["category"])
+            coverage_start = dt.date.fromisoformat(str(item["coverageStart"])).isoformat()
+            coverage_end = dt.date.fromisoformat(str(item["coverageEnd"])).isoformat()
+            max_pages = int(item.get("maxPages", 20))
+            if not _ARXIV_ARCHIVE.fullmatch(category):
+                raise ValueError(f"invalid listing-backfill category: {category!r}")
+            if coverage_start > coverage_end:
+                raise ValueError("listing-backfill coverageStart cannot follow coverageEnd")
+            if max_pages <= 0:
+                raise ValueError("listing-backfill maxPages must be positive")
+            _validate_listing_backfill_url(
+                url,
+                category=category,
+                coverage_start=coverage_start,
+                coverage_end=coverage_end,
+            )
+            listing_backfills.append(
+                ListingBackfillSource(
+                    name=name,
+                    url=url,
+                    category=category,
+                    coverage_start=coverage_start,
+                    coverage_end=coverage_end,
+                    max_pages=max_pages,
+                )
+            )
         searches = tuple(
             SearchSource(
                 str(item["name"]),
@@ -945,6 +986,9 @@ class HarvestConfig:
             )
         return cls(
             listings=tuple(sorted(listings, key=lambda item: item.name)),
+            listing_backfills=tuple(
+                sorted(listing_backfills, key=lambda item: item.name)
+            ),
             searches=tuple(sorted(searches, key=lambda item: item.name)),
             explicit_ids=explicit,
             known_versions=tuple(sorted(known_versions)),
@@ -1196,6 +1240,61 @@ def _listing_category_and_mode(url: str) -> tuple[str, str] | None:
     return None if match is None else (match.group(1), match.group(2))
 
 
+def _validate_listing_backfill_url(
+    url: str,
+    *,
+    category: str,
+    coverage_start: str,
+    coverage_end: str,
+) -> None:
+    """Require an exact, exhaustive public-HTML category/date search.
+
+    Active-month arXiv category archives are not available, while ``recent``
+    retains only a bounded number of announcement days.  A manual backfill may
+    therefore use the public advanced-search page, but only when its visible
+    query is pinned to one category, includes cross-lists, and exactly matches
+    the declared submitted-date interval.
+    """
+
+    parsed = urllib.parse.urlsplit(url)
+    if parsed.path.rstrip("/") != "/search/advanced":
+        raise ValueError("listing backfills must use the public arXiv advanced-search page")
+    query = urllib.parse.parse_qs(parsed.query, keep_blank_values=True)
+    required = {
+        "terms-0-operator": ["AND"],
+        "terms-0-term": [category],
+        "terms-0-field": ["cross_list_category"],
+        "classification-include_cross_list": ["include"],
+        "date-filter_by": ["date_range"],
+        "date-from_date": [coverage_start],
+        "date-to_date": [coverage_end],
+        "date-date_type": ["submitted_date"],
+        "order": ["-announced_date_first"],
+    }
+    allowed_keys = {*required, "advanced", "abstracts", "size"}
+    unexpected = sorted(set(query) - allowed_keys)
+    if unexpected:
+        raise ValueError(
+            "listing-backfill URL contains unsupported query parameters: "
+            + ", ".join(unexpected)
+        )
+    for key, expected in required.items():
+        if query.get(key) != expected:
+            raise ValueError(
+                f"listing-backfill URL must set {key}={expected[0]!r} exactly"
+            )
+    if query.get("advanced") != [""] or query.get("abstracts") != ["hide"]:
+        raise ValueError(
+            "listing-backfill URL must set advanced='' and abstracts='hide' exactly"
+        )
+    try:
+        page_size = int(query.get("size", [""])[0])
+    except ValueError as error:
+        raise ValueError("listing-backfill URL requires a positive integer size") from error
+    if page_size <= 0:
+        raise ValueError("listing-backfill URL requires a positive integer size")
+
+
 def _latest_expected_weekday(raw: str) -> str:
     value = dt.date.fromisoformat(raw)
     while value.weekday() >= 5:
@@ -1322,6 +1421,104 @@ def harvest(
                 "mode": category_mode[1] if category_mode else None,
                 "contentSha256": fetched.content_sha256,
                 "cacheStatus": fetched.cache_status,
+                "batches": rendered_batches,
+            }
+        )
+
+    for source in config.listing_backfills:
+        if ledger_plan is not None:
+            planned = ledger_plan["coverage"]
+            if (
+                source.coverage_start < planned["start"]
+                or source.coverage_end > planned["end"]
+            ):
+                raise HarvestError(
+                    f"listing backfill {source.name!r} lies outside the bound coverage "
+                    f"interval {planned['start']}..{planned['end']}"
+                )
+        pages, _ids, _frontier_reached, exhausted = _search_pages(
+            SearchSource(
+                name=source.name,
+                url=source.url,
+                frontier=(),
+                max_pages=source.max_pages,
+                exhaustive=True,
+            ),
+            client,
+        )
+        if not exhausted:
+            raise HarvestError(
+                f"listing backfill {source.name!r} did not exhaust its result set"
+            )
+        evidence = listing_evidence.setdefault(
+            source.category, {"dates": set(), "sources": set(), "modes": set()}
+        )
+        coverage_day = dt.date.fromisoformat(source.coverage_start)
+        coverage_end = dt.date.fromisoformat(source.coverage_end)
+        while coverage_day <= coverage_end:
+            evidence["dates"].add(coverage_day.isoformat())
+            coverage_day += dt.timedelta(days=1)
+        evidence["sources"].add(source.name)
+        evidence["modes"].add("backfill")
+
+        rendered_batches = []
+        for page in pages:
+            batch_evidence = {
+                "source": source.name,
+                "batchKey": (
+                    f"{source.coverage_start}..{source.coverage_end}:"
+                    f"page:{page['page']}"
+                ),
+                "coverageStart": source.coverage_start,
+                "coverageEnd": source.coverage_end,
+                "page": page["page"],
+                "url": page["url"],
+                "contentSha256": page["contentSha256"],
+                "totalResults": page["totalResults"],
+                "idCount": page["idCount"],
+            }
+            rendered = {
+                **batch_evidence,
+                "idsSha256": sha256_bytes(
+                    canonical_json(page["ids"]).encode("utf-8")
+                ),
+            }
+            if ledger is not None and run_id is not None:
+                result = ledger.record_listing_batch(
+                    run_id=run_id,
+                    source=source.name,
+                    batch_key=batch_evidence["batchKey"],
+                    ids=page["ids"],
+                    payload=canonical_json(batch_evidence).encode("utf-8"),
+                    discover=False,
+                )
+                rendered["replayed"] = result["replayed"]
+            rendered_batches.append(rendered)
+            for identifier in page["ids"]:
+                known = known_papers.get(identifier, {})
+                if known.get("inCatalog") or identifier in known_versions:
+                    _candidate_reason_add(
+                        reasons,
+                        identifier,
+                        f"known-listing:{source.name}:backfill",
+                    )
+        listing_output.append(
+            {
+                "name": source.name,
+                "url": source.url,
+                "category": source.category,
+                "mode": "backfill",
+                "coverageStart": source.coverage_start,
+                "coverageEnd": source.coverage_end,
+                "contentSha256": sha256_bytes(
+                    canonical_json(
+                        [page["contentSha256"] for page in pages]
+                    ).encode("utf-8")
+                ),
+                "cacheStatus": (
+                    "cache" if all(page["cacheStatus"] == "cache" for page in pages)
+                    else "network"
+                ),
                 "batches": rendered_batches,
             }
         )

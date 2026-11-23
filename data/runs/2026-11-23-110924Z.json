@@ -1,0 +1,194 @@
+{
+  "schemaVersion": 1,
+  "runId": "ff429aeb-2a6b-484d-b3eb-0a787007ed2d",
+  "runAt": "2026-11-23T11:09:24Z",
+  "scanWindow": {
+    "previousSuccessfulScan": "2026-11-09T12:52:16Z",
+    "overlapStart": "2026-11-07",
+    "coverageEnd": "2026-11-23",
+    "coverageComplete": true,
+    "note": "A bounded public arXiv advanced-search backfill closed the 7-16 November listing-retention gap for astro-ph.CO, astro-ph.HE, hep-ex, hep-ph, and hep-th. All ordinary listing, targeted-search, rotating-author, citation-discovery, exact-version screening, reference, artifact-generation, and validation steps then completed before cursor promotion."
+  },
+  "discovery": {
+    "inspireDisplayedResults": 170,
+    "inspireNewIds": [
+      "2611.25359",
+      "2611.25931",
+      "2611.26274",
+      "2611.22890",
+      "2611.21052",
+      "2611.21737",
+      "2611.16553",
+      "2611.16689",
+      "2611.15957",
+      "2611.15861"
+    ],
+    "listingSources": 15,
+    "historicalBackfillSources": 5,
+    "targetedSearches": 11,
+    "rotatingAuthorCatchups": 8,
+    "logicalRequests": 64,
+    "networkRequests": 64,
+    "notModifiedHits": 5,
+    "retries": 0,
+    "candidateCount": 25
+  },
+  "added": [
+    {
+      "id": "2611.15957",
+      "version": 1,
+      "primaryIsland": "elastic",
+      "contribution": "candidate",
+      "assessment": "Momentum-dependent anapole scattering supplies a direct elastic explanation of the isolated high-recoil event; existing constraints and future-reach statements do not constitute a new bound.",
+      "url": "https://arxiv.org/abs/2611.15957v1"
+    },
+    {
+      "id": "2611.16689",
+      "version": 1,
+      "primaryIsland": "electroweak",
+      "contribution": "new-bound",
+      "assessment": "A Boltzmann transport calculation derives a strengthened solar-capture mass-splitting constraint for the inelastic-Higgsino interpretation.",
+      "url": "https://arxiv.org/abs/2611.16689v1"
+    },
+    {
+      "id": "2611.21737",
+      "version": 1,
+      "primaryIsland": "electroweak",
+      "contribution": "candidate",
+      "assessment": "Split composite-Higgs neutral states explain the recoil through an off-diagonal Z transition; the paper applies existing solar, sideband, and gamma-ray tests.",
+      "url": "https://arxiv.org/abs/2611.21737v1"
+    },
+    {
+      "id": "2611.22890",
+      "version": 1,
+      "primaryIsland": "endothermic",
+      "contribution": "candidate",
+      "assessment": "A radion-mediated scalar transition supplies a direct endothermic pseudo-Majorana explanation; collider and neutrino results are existing constraints or forecasts.",
+      "url": "https://arxiv.org/abs/2611.22890v1"
+    }
+  ],
+  "revised": [
+    {
+      "id": "2609.05291",
+      "fromVersion": 1,
+      "toVersion": 2,
+      "assessment": "The exact revision preserves the established cross-mechanism diagnostic assignment and contribution; only exact-version metadata, date, and citation evidence changed.",
+      "url": "https://arxiv.org/abs/2609.05291v2"
+    },
+    {
+      "id": "2609.17412",
+      "fromVersion": 1,
+      "toVersion": 2,
+      "assessment": "The exact revision preserves the established axion-portal inelastic candidate assignment; only exact-version metadata, date, and citation evidence changed.",
+      "url": "https://arxiv.org/abs/2609.17412v2"
+    },
+    {
+      "id": "2609.33952",
+      "fromVersion": 1,
+      "toVersion": 2,
+      "assessment": "The exact revision preserves the established endothermic gamma-line diagnostic assignment; only exact-version metadata, date, and citation evidence changed.",
+      "url": "https://arxiv.org/abs/2609.33952v2"
+    },
+    {
+      "id": "2609.38316",
+      "fromVersion": 1,
+      "toVersion": 2,
+      "assessment": "The exact revision preserves the established electroweak solar-capture new-bound assignment; only exact-version metadata and date changed.",
+      "url": "https://arxiv.org/abs/2609.38316v2"
+    },
+    {
+      "id": "2610.25423",
+      "fromVersion": 1,
+      "toVersion": 2,
+      "assessment": "The exact revision preserves the established exothermic dark-Higgs candidate assignment; only exact-version metadata, date, and citation evidence changed.",
+      "url": "https://arxiv.org/abs/2610.25423v2"
+    }
+  ],
+  "ambiguous": [
+    {
+      "id": "2611.16553",
+      "version": 1,
+      "reason": "The paper directly fits endothermic and exothermic scalar scenarios with comparable treatment; the required single primary island needs human judgment.",
+      "url": "https://arxiv.org/abs/2611.16553v1"
+    },
+    {
+      "id": "2611.25359",
+      "version": 1,
+      "reason": "The subhalo analysis mentions a possible LZ connection among many implications; material relevance to this focused map needs human judgment.",
+      "url": "https://arxiv.org/abs/2611.25359v1"
+    },
+    {
+      "id": "2611.25931",
+      "version": 1,
+      "reason": "Both virial-halo endothermic and boosted-flux benchmarks are substantive, leaving the primary island uncertain.",
+      "url": "https://arxiv.org/abs/2611.25931v1"
+    },
+    {
+      "id": "2611.26274",
+      "version": 1,
+      "reason": "Both virial-halo endothermic and boosted-flux benchmarks are substantive, leaving the primary island uncertain.",
+      "url": "https://arxiv.org/abs/2611.26274v1"
+    }
+  ],
+  "excluded": {
+    "count": 12,
+    "ids": [
+      "2503.14741v2",
+      "2510.26848v3",
+      "2608.11620v2",
+      "2610.40081v1",
+      "2610.40268v1",
+      "2611.05826v1",
+      "2611.12808v1",
+      "2611.13842v1",
+      "2611.14360v1",
+      "2611.15861v1",
+      "2611.16191v2",
+      "2611.21052v1"
+    ],
+    "reason": "The exact versions are unrelated rotating-author or broad-search results, general detector or kinematics papers, or a broad review without a substantive analysis of the isolated 248 keV LZ candidate."
+  },
+  "citationReconciliation": {
+    "coverageComplete": true,
+    "publicEdgeCount": 4653,
+    "ledgerMappedEdgeCount": 4653,
+    "missingSnapshotIds": [],
+    "staleSnapshotIds": [],
+    "evidence": [
+      {"id": "2609.05291", "version": 2, "completeReferenceCount": 67, "mappedCitationCount": 18, "refsSha256": "30f6518ea825fb872758efd65bd93b5cd5fa177a791fe908e54f01d268817039", "url": "https://arxiv.org/html/2609.05291v2"},
+      {"id": "2609.17412", "version": 2, "completeReferenceCount": 58, "mappedCitationCount": 35, "refsSha256": "7d4dce934efe5f4b8a69d7a81c7a4b5c9f51085c1a773c8cd921ebfd4cd785aa", "url": "https://arxiv.org/html/2609.17412v2"},
+      {"id": "2609.33952", "version": 2, "completeReferenceCount": 82, "mappedCitationCount": 52, "refsSha256": "ed51bc90f8d849ba4e082714a45fdb4829900fe4c8aa2d6f7152aab09eca7b53", "url": "https://arxiv.org/html/2609.33952v2"},
+      {"id": "2609.38316", "version": 2, "completeReferenceCount": 120, "mappedCitationCount": 98, "refsSha256": "64c6ab9de68c942e9b6cc6cf3a045ecce08d9d141d3ba7e37fe5d335e6433140", "url": "https://arxiv.org/html/2609.38316v2"},
+      {"id": "2610.25423", "version": 2, "completeReferenceCount": 142, "mappedCitationCount": 91, "refsSha256": "d0b399f20dcc1782bb9467fae00100b29eeb301d885c324c9ecfecd3cf92ccab", "url": "https://arxiv.org/html/2610.25423v2"},
+      {"id": "2611.15957", "version": 1, "completeReferenceCount": 181, "mappedCitationCount": 137, "refsSha256": "3102d583d1c5bd6b412f38f049f6526b9e9a1c2585b197e39257d1ffd3168f1e", "url": "https://arxiv.org/html/2611.15957v1"},
+      {"id": "2611.16689", "version": 1, "completeReferenceCount": 99, "mappedCitationCount": 11, "refsSha256": "2c4bd6d24720417dc9eb7d6fd48700ca5cfad641a4c60c9f518a1373cf5812b6", "url": "https://arxiv.org/html/2611.16689v1"},
+      {"id": "2611.21737", "version": 1, "completeReferenceCount": 56, "mappedCitationCount": 19, "refsSha256": "8dc0434b41ad18c0ed094ad6fbab23e967c52d6be6d7fd8623df7d34dcbfc262", "url": "https://arxiv.org/html/2611.21737v1"},
+      {"id": "2611.22890", "version": 1, "completeReferenceCount": 62, "mappedCitationCount": 4, "refsSha256": "3b40c99697a812f49bef11d51421c2615c1d0cc18684e5d5df51796a89d26aad", "url": "https://arxiv.org/html/2611.22890v1"}
+    ]
+  },
+  "changes": {
+    "addedPaperIds": ["2611.15957", "2611.16689", "2611.21737", "2611.22890"],
+    "revisedPaperIds": ["2609.05291", "2609.17412", "2609.33952", "2609.38316", "2610.25423"],
+    "candidateLogIds": ["2611.16553", "2611.25359", "2611.25931", "2611.26274"],
+    "preserved": "All established human-reviewed summaries, takeaways, roles, contribution assignments, island memberships, tags, coordinates, and layout ranks remain unchanged."
+  },
+  "validation": {
+    "catalogValidator": "passed: 145 papers and 9 islands",
+    "generatedArtifacts": "passed: catalog index and both map layouts are current",
+    "maintenanceTests": "passed: 118",
+    "catalogIndexTests": "passed: 6",
+    "layoutTests": "passed: 16",
+    "layoutArtifactTests": "passed: 5",
+    "mapCameraTests": "passed: 12",
+    "typecheck": "passed",
+    "lint": "passed",
+    "productionBuild": "passed: 146 prerendered routes and sitemap for 145 papers"
+  },
+  "judgmentCalls": [
+    "The four new catalog records use the next contiguous layout ranks 141-144 and exact accepted arXiv versions.",
+    "2611.16689v1 is assigned new-bound because it derives a strengthened solar-capture constraint; the other three additions propose candidate explanations and do not independently recast an empirical limit.",
+    "The four unresolved records remain outside the map and are logged with exact metadata digests for human review.",
+    "The five accepted revisions preserve every established human-reviewed editorial and taxonomy field.",
+    "Citation edges come only from complete exact-version reference snapshots; no edge was inferred from prose, dates, or conceptual proximity."
+  ]
+}
